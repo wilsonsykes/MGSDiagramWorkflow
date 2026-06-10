@@ -7,7 +7,6 @@ on:
       - workflow_content.json
       - workflow_control.json
       - workflow_generate.py
-      - scripts/check_index_policy.py
       - scripts/validate_index_html.py
   pull_request:
     paths:
@@ -15,7 +14,6 @@ on:
       - workflow_content.json
       - workflow_control.json
       - workflow_generate.py
-      - scripts/check_index_policy.py
       - scripts/validate_index_html.py
 
 permissions:
@@ -37,19 +35,65 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Block manual index edits
+      - name: Validate committed index.html
+        run: |
+          python scripts/validate_index_html.py index.html
+
+      - name: Detect source file changes
         env:
           GITHUB_EVENT_NAME: ${{ github.event_name }}
           GITHUB_EVENT_BEFORE: ${{ github.event.before }}
           GITHUB_BASE_SHA: ${{ github.event.pull_request.base.sha }}
           GITHUB_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          python scripts/check_index_policy.py
+          python - <<'PY'
+          import os
+          import subprocess
+
+          event_name = os.environ["GITHUB_EVENT_NAME"]
+          before = os.environ.get("GITHUB_EVENT_BEFORE", "")
+          base_sha = os.environ.get("GITHUB_BASE_SHA", "")
+          head_sha = os.environ.get("GITHUB_HEAD_SHA", "")
+          source_files = {
+              "workflow_content.json",
+              "workflow_control.json",
+              "workflow_generate.py",
+          }
+
+          if event_name == "pull_request":
+              compare_base = base_sha
+              compare_head = head_sha
+          else:
+              compare_base = before
+              compare_head = os.environ.get("GITHUB_SHA", "HEAD")
+
+          if not compare_base or compare_base == "0000000000000000000000000000000000000000":
+              changed = subprocess.check_output(
+                  ["git", "ls-files"],
+                  text=True,
+              ).splitlines()
+          else:
+              changed = subprocess.check_output(
+                  ["git", "diff", "--name-only", compare_base, compare_head],
+                  text=True,
+              ).splitlines()
+
+          should_generate = any(path in source_files for path in changed)
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env_file:
+              env_file.write(f"RUN_GENERATOR={'true' if should_generate else 'false'}\n")
+
+          if should_generate:
+              print("Source files changed; generator validation will run.")
+          else:
+              print("No source file changes detected; skipping generator validation.")
+          PY
 
       - name: Generate HTML from source JSON
+        if: env.RUN_GENERATOR == 'true'
         run: |
           python workflow_generate.py < /dev/null
 
       - name: Validate generated index.html
+        if: env.RUN_GENERATOR == 'true'
         run: |
           python scripts/validate_index_html.py index.html

@@ -25,8 +25,10 @@ This writes the generated site to `index.html`.
 
 - `.github/workflows/json-guard.yml`: validates JSON changes
 - `.github/workflows/publish-from-json.yml`: regenerates `index.html` on push
+- `.github/workflows/html-guard.yml`: validates committed `index.html`, and also validates generated HTML when the JSON source files change
 
 ## Notes
 
 - This template intentionally does not include the current repo's `CNAME` or old branded HTML snapshots.
 - If you publish this as a new repo, set your own Pages domain and branch rules there.
+- `index.html` can be edited directly by humans. If you also change the JSON source files later, the publish workflow will regenerate `index.html` from that source of truth.
