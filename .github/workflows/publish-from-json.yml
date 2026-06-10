@@ -9,6 +9,7 @@ on:
       - workflow_control.json
       - workflow_generate.py
       - scripts/validate_workflow_json.py
+      - scripts/validate_index_html.py
   workflow_dispatch:
 
 permissions:
@@ -58,6 +59,10 @@ jobs:
           with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as f:
             f.write(f"GENERATED_OUTPUT={output_name}\n")
           PY
+
+      - name: Validate generated HTML
+        run: |
+          python scripts/validate_index_html.py index.html
 
       - name: Commit and push if changed
         run: |

@@ -1,0 +1,55 @@
+name: HTML Guard
+
+on:
+  push:
+    paths:
+      - index.html
+      - workflow_content.json
+      - workflow_control.json
+      - workflow_generate.py
+      - scripts/check_index_policy.py
+      - scripts/validate_index_html.py
+  pull_request:
+    paths:
+      - index.html
+      - workflow_content.json
+      - workflow_control.json
+      - workflow_generate.py
+      - scripts/check_index_policy.py
+      - scripts/validate_index_html.py
+
+permissions:
+  contents: read
+
+jobs:
+  validate-index:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Block manual index edits
+        env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+          GITHUB_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          GITHUB_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          python scripts/check_index_policy.py
+
+      - name: Generate HTML from source JSON
+        run: |
+          python workflow_generate.py < /dev/null
+
+      - name: Validate generated index.html
+        run: |
+          python scripts/validate_index_html.py index.html
