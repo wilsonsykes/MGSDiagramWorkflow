@@ -48,8 +48,12 @@ jobs:
           output_path = root / output_name
           if not output_path.exists():
             raise SystemExit(f"Expected generated file not found: {output_name}")
-          shutil.copyfile(output_path, root / "index.html")
-          print(f"Synced {output_name} -> index.html")
+          index_path = root / "index.html"
+          if output_path.resolve() != index_path.resolve():
+            shutil.copyfile(output_path, index_path)
+            print(f"Synced {output_name} -> index.html")
+          else:
+            print("Generated output is already index.html")
           with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as f:
             f.write(f"GENERATED_OUTPUT={output_name}\n")
           PY
