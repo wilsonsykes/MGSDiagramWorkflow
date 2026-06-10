@@ -1,0 +1,74 @@
+{
+  "_README": "Template control center. Edit styles, labels, and output settings here.",
+  "output_file": "index.html",
+  "layout": {
+    "min_stage_width_px": 260,
+    "min_pipeline_width_px": 1380,
+    "stage_border_radius": "6px",
+    "card_border_radius": "6px"
+  },
+  "fonts": {
+    "family": "'Segoe UI', Calibri, Arial, sans-serif",
+    "google_font_url": ""
+  },
+  "colors": {
+    "accent": "#1E4E79",
+    "accent_light": "#DCEAF5",
+    "accent_dark": "#163A5A",
+    "green": "#2E6A3D",
+    "green_light": "#E3F0E6",
+    "orange": "#B96B13",
+    "orange_light": "#F9EEDC",
+    "red": "#B42318",
+    "red_light": "#FEE4E2",
+    "purple": "#6F3CC3",
+    "purple_light": "#EFE7FB",
+    "teal": "#0F766E",
+    "teal_light": "#DDF5F2",
+    "background": "#FFFFFF",
+    "background_alt": "#F6F8FB",
+    "border": "#D8DEE8",
+    "border_light": "#E8ECF2",
+    "text": "#142033",
+    "text_mid": "#445066",
+    "text_light": "#6B7484"
+  },
+  "chip_colors": {
+    "auto": { "bg": "{teal_light}", "text": "{teal}", "border": "#AADBD6" },
+    "owner": { "bg": "{accent_light}", "text": "{accent}", "border": "#BFD6EB" },
+    "review": { "bg": "{purple_light}", "text": "{purple}", "border": "#D8C7F4" },
+    "manager": { "bg": "{green_light}", "text": "{green}", "border": "#B9D7C0" }
+  },
+  "badge_styles": {
+    "active": { "bg": "{green_light}", "text": "{green}", "border": "#B7D8C4" },
+    "pending": { "bg": "{orange_light}", "text": "{orange}", "border": "#E9CDA8" },
+    "core": { "bg": "{accent_light}", "text": "{accent}", "border": "#BFD6EB" },
+    "cross": { "bg": "{purple_light}", "text": "{purple}", "border": "#D8C7F4" }
+  },
+  "legend_items": [
+    { "color": "{green}", "label": "Active" },
+    { "color": "{orange}", "label": "Planned / In Progress" },
+    { "color": "{purple}", "label": "Cross-Stage" },
+    { "color": "{accent}", "label": "Current / Manual" }
+  ],
+  "sections": {
+    "show_hoshi_pipeline": true,
+    "show_cross_stage": true,
+    "show_manual_pipeline": true,
+    "show_metrics_strip": true,
+    "show_legend": true
+  },
+  "detail_labels": {
+    "trigger": "Trigger",
+    "features": "System Features",
+    "approval": "Approval Matrix",
+    "data": "Data Outputs"
+  },
+  "manual_pain_title": "Pain Points",
+  "vs_label": "VS",
+  "expand_all_label": "Expand All",
+  "collapse_all_label": "Collapse All",
+  "print_label": "Print",
+  "print_page_size": "8.5in 13in",
+  "print_page_margin": "0.4in 0.5in"
+}

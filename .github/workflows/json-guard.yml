@@ -1,0 +1,35 @@
+name: JSON Guard
+
+on:
+  push:
+    paths:
+      - workflow_content.json
+      - workflow_control.json
+      - workflow_generate.py
+      - scripts/validate_workflow_json.py
+  pull_request:
+    paths:
+      - workflow_content.json
+      - workflow_control.json
+      - workflow_generate.py
+      - scripts/validate_workflow_json.py
+
+permissions:
+  contents: read
+
+jobs:
+  validate-json:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run JSON guard
+        run: |
+          python scripts/validate_workflow_json.py

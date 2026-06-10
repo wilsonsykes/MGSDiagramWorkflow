@@ -1,0 +1,67 @@
+name: Publish Site From JSON
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - workflow_content.json
+      - workflow_control.json
+      - workflow_generate.py
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-publish:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate JSON structure and content
+        run: |
+          python scripts/validate_workflow_json.py
+
+      - name: Generate HTML from JSON
+        run: |
+          python workflow_generate.py < /dev/null
+
+      - name: Sync generated output to index.html
+        run: |
+          python - <<'PY'
+          import pathlib
+          import shutil
+          import os
+          from workflow_generate import load_json
+          root = pathlib.Path(".")
+          control = load_json(root / "workflow_control.json")
+          output_name = control.get("output_file", "index.html")
+          output_path = root / output_name
+          if not output_path.exists():
+            raise SystemExit(f"Expected generated file not found: {output_name}")
+          shutil.copyfile(output_path, root / "index.html")
+          print(f"Synced {output_name} -> index.html")
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as f:
+            f.write(f"GENERATED_OUTPUT={output_name}\n")
+          PY
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html "$GENERATED_OUTPUT"
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+            exit 0
+          fi
+          git commit -m "Auto-generate HTML from JSON"
+          git push
