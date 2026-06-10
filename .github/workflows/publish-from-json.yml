@@ -8,6 +8,7 @@ on:
       - workflow_content.json
       - workflow_control.json
       - workflow_generate.py
+      - scripts/validate_workflow_json.py
   workflow_dispatch:
 
 permissions:
