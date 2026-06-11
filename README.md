@@ -26,6 +26,7 @@ This writes the generated site to `index.html`.
 - `.github/workflows/json-guard.yml`: validates JSON changes
 - `.github/workflows/publish-from-json.yml`: regenerates `index.html` on push
 - `.github/workflows/html-guard.yml`: runs on every push, validates committed `index.html`, and also validates generated HTML when the JSON source files change
+- [SMOKE_TEST.md](SMOKE_TEST.md): step-by-step checks for confirming the red-flag workflow behavior
 
 ## HTML editing policy
 
