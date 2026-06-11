@@ -2,19 +2,7 @@ name: HTML Guard
 
 on:
   push:
-    paths:
-      - index.html
-      - workflow_content.json
-      - workflow_control.json
-      - workflow_generate.py
-      - scripts/validate_index_html.py
   pull_request:
-    paths:
-      - index.html
-      - workflow_content.json
-      - workflow_control.json
-      - workflow_generate.py
-      - scripts/validate_index_html.py
 
 permissions:
   contents: read
