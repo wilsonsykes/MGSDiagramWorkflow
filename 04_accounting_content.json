@@ -1,9 +1,9 @@
 {
   "header": {
-    "logo": "Sales",
+    "logo": "Accounting",
     "kanji": "v1",
     "title": "Workflow Process Diagram",
-    "subtitle": "Sales workflow content driven from sales_content.json."
+    "subtitle": "Accounting workflow content driven from 04_accounting_content.json."
   },
   "hoshi_section": {
     "title": "Delivery Pipeline",
@@ -306,4 +306,5 @@
   ],
   "footer": "Replace this footer text with your project name, owner, or release note."
 }
+
 

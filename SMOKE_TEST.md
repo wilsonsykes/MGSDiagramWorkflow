@@ -6,7 +6,7 @@ Current note:
 
 - `index.html` is the tabbed shell
 - `main.html`, `inventory.html`, `sales.html`, and `accounting.html` are generated page files
-- `workflow_content.json`, `inventory_content.json`, `sales_content.json`, and `accounting_content.json` are the per-page JSON sources
+- `01_main_content.json`, `02_inventory_content.json`, `03_sales_content.json`, and `04_accounting_content.json` are the per-page JSON sources
 
 ## Goal
 
@@ -123,7 +123,7 @@ Expected result:
 
 If you also want to verify the generator path:
 
-1. Edit one page JSON file such as `sales_content.json`
+1. Edit one page JSON file such as `03_sales_content.json`
 2. Commit and push
 3. Check both `Publish Site From JSON` and `HTML Guard`
 
@@ -137,7 +137,7 @@ This proves both editing paths still work together.
 
 ## Optional Test 7: Per-page JSON source mapping works
 
-1. Edit `inventory_content.json`
+1. Edit `02_inventory_content.json`
 2. Change the visible header logo text
 3. Commit and push
 4. Open the `Inventory` tab on the live site

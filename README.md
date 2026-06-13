@@ -6,10 +6,10 @@ This folder is a reusable mirror of the current static workflow site structure, 
 
 - `index.html`: the live tabbed landing page that switches between the subpages
 - `workflow_pages.json`: page manifest that maps each JSON source file to its generated HTML file
-- `workflow_content.json`: Main tab source JSON
-- `inventory_content.json`: Inventory tab source JSON
-- `sales_content.json`: Sales tab source JSON
-- `accounting_content.json`: Accounting tab source JSON
+- `01_main_content.json`: Main tab source JSON
+- `02_inventory_content.json`: Inventory tab source JSON
+- `03_sales_content.json`: Sales tab source JSON
+- `04_accounting_content.json`: Accounting tab source JSON
 - `workflow_control.json`: shared generator settings for all generated tab pages
 - `workflow_generate.py`: shared generator for all tab pages
 - `main.html`: generated Main tab page

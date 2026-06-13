@@ -4,25 +4,25 @@
     {
       "key": "main",
       "label": "Main",
-      "content_file": "workflow_content.json",
+      "content_file": "01_main_content.json",
       "output_file": "main.html"
     },
     {
       "key": "inventory",
       "label": "Inventory",
-      "content_file": "inventory_content.json",
+      "content_file": "02_inventory_content.json",
       "output_file": "inventory.html"
     },
     {
       "key": "sales",
       "label": "Sales",
-      "content_file": "sales_content.json",
+      "content_file": "03_sales_content.json",
       "output_file": "sales.html"
     },
     {
       "key": "accounting",
       "label": "Accounting",
-      "content_file": "accounting_content.json",
+      "content_file": "04_accounting_content.json",
       "output_file": "accounting.html"
     }
   ]

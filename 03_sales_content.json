@@ -1,9 +1,9 @@
 {
   "header": {
-    "logo": "MGC Inventory DF",
+    "logo": "Sales",
     "kanji": "v1",
     "title": "Workflow Process Diagram",
-    "subtitle": "Inventory workflow content driven from inventory_content.json."
+    "subtitle": "Sales workflow content driven from 03_sales_content.json."
   },
   "hoshi_section": {
     "title": "Delivery Pipeline",
@@ -306,4 +306,5 @@
   ],
   "footer": "Replace this footer text with your project name, owner, or release note."
 }
+
 

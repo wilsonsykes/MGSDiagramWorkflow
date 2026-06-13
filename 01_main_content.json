@@ -1,9 +1,9 @@
 {
   "header": {
-    "logo": "Accounting",
-    "kanji": "v1",
+    "logo": "PROJECT NAME",
+    "kanji": "Replace Me",
     "title": "Workflow Process Diagram",
-    "subtitle": "Accounting workflow content driven from accounting_content.json."
+    "subtitle": "Replace the labels, stages, and card content with your own project data. Source: 01_main_content.json."
   },
   "hoshi_section": {
     "title": "Delivery Pipeline",

@@ -1,9 +1,9 @@
 {
   "header": {
-    "logo": "PROJECT NAME",
-    "kanji": "Replace Me",
+    "logo": "MGC Inventory DF",
+    "kanji": "v1",
     "title": "Workflow Process Diagram",
-    "subtitle": "Replace the labels, stages, and card content with your own project data."
+    "subtitle": "Inventory workflow content driven from 02_inventory_content.json."
   },
   "hoshi_section": {
     "title": "Delivery Pipeline",
@@ -306,3 +306,5 @@
   ],
   "footer": "Replace this footer text with your project name, owner, or release note."
 }
+
+
