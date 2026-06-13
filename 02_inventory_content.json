@@ -13,7 +13,7 @@
   "stages": [
     {
       "kanji": "",
-      "romaji": "Discovery",
+      "romaji": "Commercial",
       "english": "Intake | Validation | Prioritization",
       "cards": [
         {
@@ -67,7 +67,7 @@
     },
     {
       "kanji": "",
-      "romaji": "Planning",
+      "romaji": "Bulk",
       "english": "Scope | Owners | Schedule",
       "cards": [
         {
@@ -97,7 +97,7 @@
     },
     {
       "kanji": "",
-      "romaji": "Execution",
+      "romaji": "Dealer",
       "english": "Build | Review | Readiness",
       "cards": [
         {
@@ -170,7 +170,7 @@
     },
     {
       "kanji": "",
-      "romaji": "Launch",
+      "romaji": "Retail",
       "english": "Approval | Publish | Support",
       "cards": [
         {
