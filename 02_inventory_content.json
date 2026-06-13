@@ -253,20 +253,31 @@
     ]
   },
   "manual_section": {
-    "title": "Current Processes",
-    "tag": "Manual workflow placeholders"
+    "title": "Current Workflows",
+    "tag": "MANUAL"
   },
   "manual_stages": [
     {
-      "english": "Discovery pain points",
+      "english": "Commercial pain points",
       "kanji": "",
       "pain_points": [
-        "Requests arrive in multiple channels",
-        "Important context is often missing"
+        "Fulfil Order
+        "C1.1.1 Using Sales Order, XX (Delivery Head) schedules delivery [vehicle, capacity, route]
+         C1.1.2 Warehouse generates ~Picklist and picks LPG/products.
+         C1.1.3 Warehouse generates Delivery Receipt (2 DRs and 2 CRs).
+         C1.1.4.1 Warehouse submits DR to Acctg to make General Ledger and Inventory.
+                C1.1.4.2 Driver gets Delivery Receipt (DR) from Warehouse XXX? for multiple clients. Driver and Pahinante drive to client locations.",
+                C1.1.4.3 No Delivery/For Pick up. Warehouse XX gives DR to customer for signature.
+         C1.1.5.1 Pahinante weighs and delivers the cylinders. He retrieves the empties cylinder/s and weighs it in the vehicle."
+        "      C1.1.5.2 Client signs DR and picks up the items and returns empty cylinder. Client leaves. 
+         C1.1.6 P gives XX memo to client, containing credit gain (kg) and acknowledges receipt (via sign)." 
+        "C1.1.7 Driver returns to Plant. Driver and Warehouse Staff weigh empty cylinders in Plant. Driver writes the weights." 
+        "C1.1.8 Driver submits record and signed DR and AR to Acctg."
+        "C1.1.9 Acctg Staff reconciles open General Ledger with signed DR and AR. Acctg Staff reconciles inventor in Gsheet."
       ]
     },
     {
-      "english": "Planning pain points",
+      "english": "Bulk pain points",
       "kanji": "",
       "pain_points": [
         "Scope changes are hard to track",
@@ -274,7 +285,7 @@
       ]
     },
     {
-      "english": "Execution pain points",
+      "english": "Dealer pain points",
       "kanji": "",
       "pain_points": [
         "Checklists are scattered across files",
@@ -282,7 +293,7 @@
       ]
     },
     {
-      "english": "Launch pain points",
+      "english": "Retail pain points",
       "kanji": "",
       "pain_points": [
         "Approvals happen over chat",
