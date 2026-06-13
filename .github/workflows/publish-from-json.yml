@@ -37,38 +37,31 @@ jobs:
         run: |
           python workflow_generate.py < /dev/null
 
-      - name: Sync generated output to index.html
+      - name: Resolve generated output file
         run: |
           python - <<'PY'
           import pathlib
-          import shutil
           import os
           from workflow_generate import load_json
           root = pathlib.Path(".")
           control = load_json(root / "workflow_control.json")
-          output_name = control.get("output_file", "index.html")
+          output_name = control.get("output_file", "main.html")
           output_path = root / output_name
           if not output_path.exists():
             raise SystemExit(f"Expected generated file not found: {output_name}")
-          index_path = root / "index.html"
-          if output_path.resolve() != index_path.resolve():
-            shutil.copyfile(output_path, index_path)
-            print(f"Synced {output_name} -> index.html")
-          else:
-            print("Generated output is already index.html")
           with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as f:
             f.write(f"GENERATED_OUTPUT={output_name}\n")
           PY
 
       - name: Validate generated HTML
         run: |
-          python scripts/validate_index_html.py index.html
+          python scripts/validate_index_html.py "$GENERATED_OUTPUT"
 
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html "$GENERATED_OUTPUT"
+          git add "$GENERATED_OUTPUT"
           if git diff --cached --quiet; then
             echo "No generated changes to commit."
             exit 0

@@ -1,6 +1,6 @@
 {
   "_README": "Template control center. Edit styles, labels, and output settings here.",
-  "output_file": "index.html",
+  "output_file": "main.html",
   "layout": {
     "min_stage_width_px": 260,
     "min_pipeline_width_px": 1380,

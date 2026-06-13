@@ -26,6 +26,10 @@ jobs:
       - name: Validate committed index.html
         run: |
           python scripts/validate_index_html.py index.html
+          python scripts/validate_index_html.py main.html
+          python scripts/validate_index_html.py inventory.html
+          python scripts/validate_index_html.py sales.html
+          python scripts/validate_index_html.py accounting.html
 
       - name: Detect source file changes
         env:
@@ -80,8 +84,21 @@ jobs:
         if: env.RUN_GENERATOR == 'true'
         run: |
           python workflow_generate.py < /dev/null
+          python - <<'PY'
+          import pathlib
+          import os
+          from workflow_generate import load_json
+          root = pathlib.Path(".")
+          control = load_json(root / "workflow_control.json")
+          output_name = control.get("output_file", "main.html")
+          output_path = root / output_name
+          if not output_path.exists():
+            raise SystemExit(f"Expected generated file not found: {output_name}")
+          with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env_file:
+            env_file.write(f"GENERATED_OUTPUT={output_name}\n")
+          PY
 
       - name: Validate generated index.html
         if: env.RUN_GENERATOR == 'true'
         run: |
-          python scripts/validate_index_html.py index.html
+          python scripts/validate_index_html.py "$GENERATED_OUTPUT"

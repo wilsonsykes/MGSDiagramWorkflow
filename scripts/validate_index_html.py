@@ -62,11 +62,17 @@ class StructureParser(HTMLParser):
 
 def emit_error(message: str) -> None:
     safe = message.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
-    print(f"::error file=index.html,title=HTML Guard::{safe}")
+    target_name = CURRENT_TARGET.name if CURRENT_TARGET else "index.html"
+    print(f"::error file={target_name},title=HTML Guard::{safe}")
+
+
+CURRENT_TARGET: Path | None = None
 
 
 def main() -> int:
     target = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("index.html")
+    global CURRENT_TARGET
+    CURRENT_TARGET = target
     if not target.exists():
         emit_error(f"{target} does not exist")
         return 1
@@ -97,11 +103,9 @@ def main() -> int:
         failures.append("Expected an inline <script> block")
 
     stage_matches = re.findall(r'id="stage-\d+"', html)
-    if not stage_matches:
-        failures.append("Expected at least one stage section in the generated HTML")
-
-    if "Workflow Process Diagram" not in html and "Workflow Template" not in html:
-        failures.append("Expected recognizable workflow page title text in the HTML output")
+    is_tabbed_hub = 'id="page-frame"' in html and "data-page=" in html
+    if not stage_matches and not is_tabbed_hub:
+        failures.append("Expected either at least one stage section or a tabbed page hub frame")
 
     if failures:
         for failure in failures:
