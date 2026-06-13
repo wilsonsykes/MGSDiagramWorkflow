@@ -18,7 +18,7 @@ if str(ROOT) not in sys.path:
 from workflow_generate import load_json
 
 
-CONTENT_FILE = ROOT / "workflow_content.json"
+PAGES_FILE = ROOT / "workflow_pages.json"
 CONTROL_FILE = ROOT / "workflow_control.json"
 
 
@@ -50,7 +50,7 @@ def parse_with_location(path: Path, label: str) -> tuple[Any | None, list[Valida
     errors: list[ValidationError] = []
     try:
         return load_json(path), errors
-    except Exception as exc:  # noqa: BLE001 - show precise parsing failure
+    except Exception as exc:  # noqa: BLE001
         text = str(exc)
         line = None
         col = None
@@ -62,53 +62,31 @@ def parse_with_location(path: Path, label: str) -> tuple[Any | None, list[Valida
         return None, errors
 
 
-def expect_type(
-    errors: list[ValidationError],
-    value: Any,
-    expected: type,
-    path: str,
-    file: Path,
-) -> bool:
+def expect_type(errors: list[ValidationError], value: Any, expected: type, path: str, file: Path) -> bool:
     if isinstance(value, expected):
         return True
-    errors.append(
-        ValidationError(
-            f"{path} expected {expected.__name__}, got {type(value).__name__}",
-            file,
-        )
-    )
+    errors.append(ValidationError(f"{path} expected {expected.__name__}, got {type(value).__name__}", file))
     return False
 
 
-def ensure_str(errors: list[ValidationError], value: Any, path: str, file: Path) -> bool:
-    if isinstance(value, str):
-        return True
-    errors.append(ValidationError(f"{path} must be a string", file))
-    return False
-
-
-def ensure_non_empty_str(
-    errors: list[ValidationError], value: Any, path: str, file: Path
-) -> bool:
+def ensure_non_empty_str(errors: list[ValidationError], value: Any, path: str, file: Path) -> bool:
     if isinstance(value, str) and value.strip():
         return True
     errors.append(ValidationError(f"{path} must be a non-empty string", file))
     return False
+
 
 def is_section_block(entry: Any) -> bool:
     return isinstance(entry, dict) and ("section" in entry and "phases" in entry)
 
 
 def looks_like_card(entry: Any) -> bool:
-    return isinstance(entry, dict) and any(
-        key in entry for key in ("id", "status", "name", "trigger")
-    )
+    return isinstance(entry, dict) and any(key in entry for key in ("id", "status", "name", "trigger"))
 
 
 def validate_card(card: Any, path: str, errors: list[ValidationError], file: Path) -> None:
     if not expect_type(errors, card, dict, path, file):
         return
-
     for key in ("id", "status", "name", "trigger"):
         ensure_non_empty_str(errors, card.get(key), f"{path}.{key}", file)
 
@@ -143,17 +121,15 @@ def validate_card(card: Any, path: str, errors: list[ValidationError], file: Pat
                 continue
             missing = [k for k in ("text", "bg", "color") if k not in tag]
             if missing:
-                errors.append(
-                    ValidationError(f"{tp} missing keys: {', '.join(missing)}", file)
-                )
+                errors.append(ValidationError(f"{tp} missing keys: {', '.join(missing)}", file))
                 continue
             for key in ("text", "bg", "color"):
                 ensure_non_empty_str(errors, tag.get(key), f"{tp}.{key}", file)
 
+
 def validate_section_block(block: Any, path: str, errors: list[ValidationError], file: Path) -> None:
     if not expect_type(errors, block, dict, path, file):
         return
-
     ensure_non_empty_str(errors, block.get("section"), f"{path}.section", file)
     if "version" in block:
         ensure_non_empty_str(errors, block.get("version"), f"{path}.version", file)
@@ -175,7 +151,6 @@ def validate_section_block(block: Any, path: str, errors: list[ValidationError],
             errors.append(ValidationError(f"{pp}.phase must be int or string", file))
         if "color" in phase:
             ensure_non_empty_str(errors, phase.get("color"), f"{pp}.color", file)
-
         if not expect_type(errors, phase.get("groups"), list, f"{pp}.groups", file):
             continue
         if not phase["groups"]:
@@ -197,9 +172,8 @@ def validate_section_block(block: Any, path: str, errors: list[ValidationError],
                 ensure_non_empty_str(errors, doc.get("name"), f"{dp}.name", file)
 
 
-def validate_content(content: Any) -> list[ValidationError]:
+def validate_content(content: Any, file: Path) -> list[ValidationError]:
     errors: list[ValidationError] = []
-    file = CONTENT_FILE
     if not expect_type(errors, content, dict, "$", file):
         return errors
 
@@ -226,21 +200,11 @@ def validate_content(content: Any) -> list[ValidationError]:
                     elif looks_like_card(card):
                         validate_card(card, cp, errors, file)
                     else:
-                        errors.append(
-                            ValidationError(
-                                f"{cp} must be either a standard card block or a checklist section block",
-                                file,
-                            )
-                        )
+                        errors.append(ValidationError(f"{cp} must be either a standard card block or a checklist section block", file))
 
     if expect_type(errors, content.get("manual_stages"), list, "$.manual_stages", file):
         if len(content["manual_stages"]) != len(content.get("stages", [])):
-            errors.append(
-                ValidationError(
-                    "$.manual_stages count must match $.stages count",
-                    file,
-                )
-            )
+            errors.append(ValidationError("$.manual_stages count must match $.stages count", file))
         for mi, stage in enumerate(content["manual_stages"]):
             mp = f"$.manual_stages[{mi}]"
             if not expect_type(errors, stage, dict, mp, file):
@@ -250,8 +214,51 @@ def validate_content(content: Any) -> list[ValidationError]:
                     errors.append(ValidationError(f"{mp}.pain_points must not be empty", file))
                 for pi, point in enumerate(stage["pain_points"]):
                     ensure_non_empty_str(errors, point, f"{mp}.pain_points[{pi}]", file)
-
     return errors
+
+
+def validate_pages_config(config: Any) -> tuple[list[ValidationError], list[dict[str, Any]]]:
+    errors: list[ValidationError] = []
+    pages: list[dict[str, Any]] = []
+    file = PAGES_FILE
+    if not expect_type(errors, config, dict, "$", file):
+        return errors, pages
+    if not expect_type(errors, config.get("pages"), list, "$.pages", file):
+        return errors, pages
+    if not config["pages"]:
+        errors.append(ValidationError("$.pages must not be empty", file))
+        return errors, pages
+
+    seen_keys: set[str] = set()
+    seen_outputs: set[str] = set()
+    for i, page in enumerate(config["pages"]):
+        pp = f"$.pages[{i}]"
+        if not expect_type(errors, page, dict, pp, file):
+            continue
+        for key in ("key", "label", "content_file", "output_file"):
+            ensure_non_empty_str(errors, page.get(key), f"{pp}.{key}", file)
+        page_key = page.get("key")
+        output_file = page.get("output_file")
+        content_file = page.get("content_file")
+        if isinstance(page_key, str):
+            if page_key in seen_keys:
+                errors.append(ValidationError(f"{pp}.key must be unique; duplicate '{page_key}'", file))
+            seen_keys.add(page_key)
+        if isinstance(output_file, str):
+            if not output_file.endswith('.html'):
+                errors.append(ValidationError(f"{pp}.output_file must end with .html", file))
+            if output_file == 'index.html':
+                errors.append(ValidationError(f"{pp}.output_file must not be index.html because index.html is the tabbed shell", file))
+            if output_file in seen_outputs:
+                errors.append(ValidationError(f"{pp}.output_file must be unique; duplicate '{output_file}'", file))
+            seen_outputs.add(output_file)
+        if isinstance(content_file, str):
+            if not content_file.endswith('.json'):
+                errors.append(ValidationError(f"{pp}.content_file must end with .json", file))
+            if not (ROOT / content_file).exists():
+                errors.append(ValidationError(f"{pp}.content_file does not exist: {content_file}", file))
+        pages.append(page)
+    return errors, pages
 
 
 def validate_control(control: Any) -> list[ValidationError]:
@@ -259,34 +266,41 @@ def validate_control(control: Any) -> list[ValidationError]:
     file = CONTROL_FILE
     if not expect_type(errors, control, dict, "$", file):
         return errors
-
     ensure_non_empty_str(errors, control.get("output_file"), "$.output_file", file)
-    if isinstance(control.get("output_file"), str) and not control["output_file"].endswith(".html"):
-        errors.append(ValidationError("$.output_file must end with .html", file))
+    if isinstance(control.get("output_file"), str):
+        if not control["output_file"].endswith('.html'):
+            errors.append(ValidationError("$.output_file must end with .html", file))
+        if control["output_file"] == 'index.html':
+            errors.append(ValidationError("$.output_file must not be index.html because index.html is the tabbed shell", file))
     if expect_type(errors, control.get("colors"), dict, "$.colors", file):
         if not control["colors"]:
             errors.append(ValidationError("$.colors must not be empty", file))
     if expect_type(errors, control.get("sections"), dict, "$.sections", file):
         for key, value in control["sections"].items():
             if not isinstance(value, bool):
-                errors.append(
-                    ValidationError(
-                        f"$.sections.{key} expected bool, got {type(value).__name__}",
-                        file,
-                    )
-                )
+                errors.append(ValidationError(f"$.sections.{key} expected bool, got {type(value).__name__}", file))
     return errors
 
 
 def main() -> int:
-    content, parse_errors = parse_with_location(CONTENT_FILE, "workflow_content.json")
+    pages_config, pages_parse_errors = parse_with_location(PAGES_FILE, "workflow_pages.json")
     control, control_parse_errors = parse_with_location(CONTROL_FILE, "workflow_control.json")
-    errors = parse_errors + control_parse_errors
+    errors = pages_parse_errors + control_parse_errors
+    pages: list[dict[str, Any]] = []
 
-    if content is not None:
-        errors.extend(validate_content(content))
+    if pages_config is not None:
+        page_errors, pages = validate_pages_config(pages_config)
+        errors.extend(page_errors)
+
     if control is not None:
         errors.extend(validate_control(control))
+
+    for page in pages:
+        content_file = ROOT / page["content_file"]
+        content, parse_errors = parse_with_location(content_file, page["content_file"])
+        errors.extend(parse_errors)
+        if content is not None:
+            errors.extend(validate_content(content, content_file))
 
     if errors:
         for error in errors:
@@ -294,7 +308,7 @@ def main() -> int:
         print(f"Validation failed with {len(errors)} error(s).")
         return 1
 
-    print("Validation passed: workflow_content.json and workflow_control.json")
+    print("Validation passed: workflow_pages.json, workflow_control.json, and all page content JSON files")
     return 0
 
 

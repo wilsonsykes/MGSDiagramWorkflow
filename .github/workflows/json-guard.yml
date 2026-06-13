@@ -3,13 +3,15 @@ name: JSON Guard
 on:
   push:
     paths:
-      - workflow_content.json
+      - workflow_pages.json
+      - "*_content.json"
       - workflow_control.json
       - workflow_generate.py
       - scripts/validate_workflow_json.py
   pull_request:
     paths:
-      - workflow_content.json
+      - workflow_pages.json
+      - "*_content.json"
       - workflow_control.json
       - workflow_generate.py
       - scripts/validate_workflow_json.py

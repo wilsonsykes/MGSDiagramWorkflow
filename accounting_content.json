@@ -1,0 +1,309 @@
+{
+  "header": {
+    "logo": "Accounting",
+    "kanji": "v1",
+    "title": "Workflow Process Diagram",
+    "subtitle": "Accounting workflow content driven from accounting_content.json."
+  },
+  "hoshi_section": {
+    "title": "Delivery Pipeline",
+    "tag": "Platforms: Replace with your stack",
+    "subtitle": "Reusable static workflow layout with JSON-driven content"
+  },
+  "stages": [
+    {
+      "kanji": "",
+      "romaji": "Discovery",
+      "english": "Intake | Validation | Prioritization",
+      "cards": [
+        {
+          "id": "ACTIVE",
+          "status": "active",
+          "name": "D1 Intake Form",
+          "trigger": "A request arrives through your chosen intake channel.",
+          "features": [
+            "Collect project scope and owner details",
+            "Assign a request reference number",
+            "Save progress before final submission"
+          ],
+          "approval": [
+            { "role": "auto", "label": "Create request" },
+            { "role": "owner", "label": "Fill intake details" },
+            { "role": "review", "label": "Validate completeness" }
+          ],
+          "data_outputs": [
+            "Request summary",
+            "Open intake queue"
+          ],
+          "tags": [
+            { "text": "Live", "bg": "#E3F0E6", "color": "#2E6A3D" },
+            { "text": "Editable", "bg": "#F9EEDC", "color": "#B96B13" }
+          ]
+        },
+        {
+          "id": "PLANNED",
+          "status": "pending",
+          "name": "D2 Qualification Review",
+          "trigger": "The team reviews fit, effort, and delivery timing.",
+          "features": [
+            "Record qualification notes",
+            "Highlight blockers and dependencies",
+            "Route to the next owner"
+          ],
+          "approval": [
+            { "role": "owner", "label": "Prepare context" },
+            { "role": "manager", "label": "Approve direction" }
+          ],
+          "data_outputs": [
+            "Qualified request list",
+            "Decision notes"
+          ],
+          "tags": [
+            { "text": "Template", "bg": "#DCEAF5", "color": "#1E4E79" },
+            { "text": "Replace Me", "bg": "#F9EEDC", "color": "#B96B13" }
+          ]
+        }
+      ]
+    },
+    {
+      "kanji": "",
+      "romaji": "Planning",
+      "english": "Scope | Owners | Schedule",
+      "cards": [
+        {
+          "id": "ACTIVE",
+          "status": "core",
+          "name": "P1 Delivery Plan",
+          "trigger": "A qualified item moves into planning.",
+          "features": [
+            "Define milestones",
+            "Assign owners",
+            "Outline acceptance criteria"
+          ],
+          "approval": [
+            { "role": "owner", "label": "Draft plan" },
+            { "role": "manager", "label": "Approve scope" }
+          ],
+          "data_outputs": [
+            "Planning tracker",
+            "Milestone summary"
+          ],
+          "tags": [
+            { "text": "Core", "bg": "#DCEAF5", "color": "#1E4E79" },
+            { "text": "Reusable", "bg": "#E3F0E6", "color": "#2E6A3D" }
+          ]
+        }
+      ]
+    },
+    {
+      "kanji": "",
+      "romaji": "Execution",
+      "english": "Build | Review | Readiness",
+      "cards": [
+        {
+          "section": "Execution Checklist",
+          "stage": 3,
+          "version": "1.0",
+          "phases": [
+            {
+              "phase": 1,
+              "title": "Pre-Launch Inputs",
+              "color": "orange",
+              "groups": [
+                {
+                  "name": "Content Requirements",
+                  "documents": [
+                    { "code": "C1.1", "name": "Business summary" },
+                    { "code": "C1.2", "name": "Approved copy blocks" }
+                  ]
+                },
+                {
+                  "name": "Design Inputs",
+                  "documents": [
+                    { "code": "C2.1", "name": "Brand palette" },
+                    { "code": "C2.2", "name": "Typography direction" }
+                  ]
+                }
+              ]
+            },
+            {
+              "phase": 2,
+              "title": "Release Readiness",
+              "color": "green",
+              "groups": [
+                {
+                  "name": "QA",
+                  "documents": [
+                    { "code": "Q1.1", "name": "Checklist signoff" },
+                    { "code": "Q1.2", "name": "Final approval notes" }
+                  ]
+                }
+              ]
+            }
+          ],
+          "note": "This section block is optional. Use it when you want a detailed checklist inside the same stage layout."
+        },
+        {
+          "id": "ACTIVE",
+          "status": "pending",
+          "name": "E1 Build Workstream",
+          "trigger": "Planning is approved and work begins.",
+          "features": [
+            "Track progress by milestone",
+            "Log implementation notes",
+            "Surface dependencies early"
+          ],
+          "approval": [
+            { "role": "owner", "label": "Build and update" },
+            { "role": "review", "label": "Review output" }
+          ],
+          "data_outputs": [
+            "Build status board",
+            "Readiness summary"
+          ],
+          "tags": [
+            { "text": "Checklist Compatible", "bg": "#EFE7FB", "color": "#6F3CC3" },
+            { "text": "Sample", "bg": "#F9EEDC", "color": "#B96B13" }
+          ]
+        }
+      ]
+    },
+    {
+      "kanji": "",
+      "romaji": "Launch",
+      "english": "Approval | Publish | Support",
+      "cards": [
+        {
+          "id": "PLANNED",
+          "status": "pending",
+          "name": "L1 Release Approval",
+          "trigger": "The team completes execution and requests release approval.",
+          "features": [
+            "Capture release notes",
+            "Confirm handoff status",
+            "Log go-live decision"
+          ],
+          "approval": [
+            { "role": "review", "label": "Check release" },
+            { "role": "manager", "label": "Approve launch" }
+          ],
+          "data_outputs": [
+            "Release history",
+            "Launch approval log"
+          ],
+          "tags": [
+            { "text": "Pending", "bg": "#F9EEDC", "color": "#B96B13" },
+            { "text": "Replace Me", "bg": "#DCEAF5", "color": "#1E4E79" }
+          ]
+        }
+      ]
+    },
+    {
+      "kanji": "",
+      "romaji": "Optimization",
+      "english": "Feedback | Enhancements | Next Iteration",
+      "cards": [
+        {
+          "id": "ACTIVE",
+          "status": "core",
+          "name": "O1 Improvement Loop",
+          "trigger": "Feedback arrives after launch.",
+          "features": [
+            "Track enhancements",
+            "Measure impact",
+            "Feed new items into discovery"
+          ],
+          "approval": [
+            { "role": "owner", "label": "Log findings" },
+            { "role": "manager", "label": "Prioritize follow-up" }
+          ],
+          "data_outputs": [
+            "Improvement backlog",
+            "Outcome summary"
+          ],
+          "tags": [
+            { "text": "Iterative", "bg": "#E3F0E6", "color": "#2E6A3D" },
+            { "text": "Reusable", "bg": "#DCEAF5", "color": "#1E4E79" }
+          ]
+        }
+      ]
+    }
+  ],
+  "cross_stage": {
+    "id": "X1",
+    "name": "Cross-Stage Governance",
+    "description": "Use this area for controls that affect all stages.",
+    "features": [
+      "Track blockers across the full workflow",
+      "Maintain a shared audit trail",
+      "Standardize notifications and approvals"
+    ],
+    "approval": [
+      { "role": "auto", "label": "System watch" },
+      { "role": "review", "label": "Review updates" },
+      { "role": "manager", "label": "Approve escalations" }
+    ],
+    "data_outputs": [
+      "Cross-stage status report",
+      "Escalation dashboard"
+    ],
+    "tags": [
+      { "text": "Shared", "bg": "#EFE7FB", "color": "#6F3CC3" },
+      { "text": "Optional", "bg": "#DCEAF5", "color": "#1E4E79" }
+    ]
+  },
+  "manual_section": {
+    "title": "Current Processes",
+    "tag": "Manual workflow placeholders"
+  },
+  "manual_stages": [
+    {
+      "english": "Discovery pain points",
+      "kanji": "",
+      "pain_points": [
+        "Requests arrive in multiple channels",
+        "Important context is often missing"
+      ]
+    },
+    {
+      "english": "Planning pain points",
+      "kanji": "",
+      "pain_points": [
+        "Scope changes are hard to track",
+        "Owners are assigned too late"
+      ]
+    },
+    {
+      "english": "Execution pain points",
+      "kanji": "",
+      "pain_points": [
+        "Checklists are scattered across files",
+        "Readiness criteria are inconsistent"
+      ]
+    },
+    {
+      "english": "Launch pain points",
+      "kanji": "",
+      "pain_points": [
+        "Approvals happen over chat",
+        "Release notes are not centralized"
+      ]
+    },
+    {
+      "english": "Optimization pain points",
+      "kanji": "",
+      "pain_points": [
+        "Feedback is not captured consistently",
+        "Next-step ownership is unclear"
+      ]
+    }
+  ],
+  "metrics": [
+    { "value": "5", "label": "Stages", "detail": "Editable sample structure" },
+    { "value": "1", "label": "Checklist Block", "detail": "Supported sectional format" },
+    { "value": "JSON", "label": "Content Source", "detail": "Easy to replace" },
+    { "value": "Pages", "label": "Deployment", "detail": "GitHub Pages ready" }
+  ],
+  "footer": "Replace this footer text with your project name, owner, or release note."
+}
+

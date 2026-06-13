@@ -5,7 +5,8 @@ on:
     branches:
       - main
     paths:
-      - workflow_content.json
+      - workflow_pages.json
+      - "*_content.json"
       - workflow_control.json
       - workflow_generate.py
       - scripts/validate_workflow_json.py
@@ -37,31 +38,36 @@ jobs:
         run: |
           python workflow_generate.py < /dev/null
 
-      - name: Resolve generated output file
+      - name: Resolve generated output files
         run: |
           python - <<'PY'
           import pathlib
           import os
           from workflow_generate import load_json
           root = pathlib.Path(".")
-          control = load_json(root / "workflow_control.json")
-          output_name = control.get("output_file", "main.html")
-          output_path = root / output_name
-          if not output_path.exists():
-            raise SystemExit(f"Expected generated file not found: {output_name}")
+          pages = load_json(root / "workflow_pages.json").get("pages", [])
+          outputs = []
+          for page in pages:
+            output_name = page.get("output_file")
+            output_path = root / output_name
+            if not output_path.exists():
+              raise SystemExit(f"Expected generated file not found: {output_name}")
+            outputs.append(output_name)
           with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as f:
-            f.write(f"GENERATED_OUTPUT={output_name}\n")
+            f.write(f"GENERATED_OUTPUTS={' '.join(outputs)}\n")
           PY
 
-      - name: Validate generated HTML
+      - name: Validate generated HTML files
         run: |
-          python scripts/validate_index_html.py "$GENERATED_OUTPUT"
+          for file in $GENERATED_OUTPUTS; do
+            python scripts/validate_index_html.py "$file"
+          done
 
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "$GENERATED_OUTPUT"
+          git add $GENERATED_OUTPUTS
           if git diff --cached --quiet; then
             echo "No generated changes to commit."
             exit 0

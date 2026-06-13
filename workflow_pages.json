@@ -1,0 +1,29 @@
+{
+  "_README": "Per-page source map for the tabbed workflow site. Each entry links one editable JSON source file to one generated HTML page.",
+  "pages": [
+    {
+      "key": "main",
+      "label": "Main",
+      "content_file": "workflow_content.json",
+      "output_file": "main.html"
+    },
+    {
+      "key": "inventory",
+      "label": "Inventory",
+      "content_file": "inventory_content.json",
+      "output_file": "inventory.html"
+    },
+    {
+      "key": "sales",
+      "label": "Sales",
+      "content_file": "sales_content.json",
+      "output_file": "sales.html"
+    },
+    {
+      "key": "accounting",
+      "label": "Accounting",
+      "content_file": "accounting_content.json",
+      "output_file": "accounting.html"
+    }
+  ]
+}

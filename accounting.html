@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Accounting</title>
+<title>Workflow Process Diagram</title>
 <style>
 :root{--accent:#1E4E79;--accent-light:#DCEAF5;--accent-dark:#163A5A;--green:#2E6A3D;--green-light:#E3F0E6;--orange:#B96B13;--orange-light:#F9EEDC;--red:#B42318;--red-light:#FEE4E2;--purple:#6F3CC3;--purple-light:#EFE7FB;--teal:#0F766E;--teal-light:#DDF5F2;--bg:#FFFFFF;--bg-alt:#F6F8FB;--border:#D8DEE8;--border-light:#E8ECF2;--text:#142033;--text-mid:#445066;--text-light:#6B7484;--radius:10px;--shadow:0 1px 3px rgba(15,23,42,.06),0 1px 2px rgba(15,23,42,.04);--shadow-open:0 6px 20px rgba(15,23,42,.10)}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -87,12 +87,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .d-label{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:4px;color:var(--text-light)}
 .d-label.lbl-trigger{color:var(--orange)}.d-label.lbl-features{color:var(--teal)}.d-label.lbl-approval{color:var(--purple)}.d-label.lbl-data{color:var(--green)}
 .d-item{font-size:11.5px;color:#374151;line-height:1.55;padding-left:14px;position:relative}
-.d-item::before{content:'\2022';position:absolute;left:2px;color:var(--text-light);font-size:11px}
+.d-item::before{content:'2';position:absolute;left:2px;color:var(--text-light);font-size:11px}
 .appr-flow{display:flex;gap:6px;flex-wrap:wrap;align-items:stretch;margin-top:6px}
 .appr-card{border:1px solid #cbd5e1;border-radius:6px;padding:6px 9px;background:#f8fafc;min-width:110px;flex:1;max-width:200px}
 .appr-role{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;margin-bottom:1px;color:#155e75}
 .appr-name{font-size:11.5px;font-weight:700;color:#1e293b;line-height:1.25;margin-bottom:2px}
-.appr-detail{font-size:10.5px;color:#64748b;line-height:1.35}
 .arrow-sep{display:flex;align-items:center;color:#94a3b8;font-weight:800;font-size:16px;margin:0 2px}
 .pain-row{font-size:12px;color:#4b5563;line-height:1.55;padding:6px 0;display:flex;gap:8px;align-items:flex-start;border-bottom:1px dashed #d1d5db}
 .pain-row:last-child{border-bottom:none}
@@ -125,7 +124,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <div class="header">
   <div class="header-top"><div class="header-logo">Accounting</div><span class="header-kanji">v1</span></div>
   <h1>Workflow Process Diagram</h1>
-  <p>Replace the labels, stages, and card content with your own project data.</p>
+  <p>Accounting workflow content driven from accounting_content.json.</p>
 </div>
 
 <div class="legend-bar">
@@ -480,4 +479,3 @@ document.querySelectorAll('.topnav a').forEach(function(link){link.addEventListe
 </script>
 </body>
 </html>
-

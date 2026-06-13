@@ -2,6 +2,12 @@
 
 This guide helps verify that `MGSDiagramWorkflow` is behaving correctly when humans edit `index.html` directly.
 
+Current note:
+
+- `index.html` is the tabbed shell
+- `main.html`, `inventory.html`, `sales.html`, and `accounting.html` are generated page files
+- `workflow_content.json`, `inventory_content.json`, `sales_content.json`, and `accounting_content.json` are the per-page JSON sources
+
 ## Goal
 
 Confirm these 4 behaviors:
@@ -117,17 +123,31 @@ Expected result:
 
 If you also want to verify the generator path:
 
-1. Edit `workflow_content.json`
+1. Edit one page JSON file such as `sales_content.json`
 2. Commit and push
 3. Check both `Publish Site From JSON` and `HTML Guard`
 
 Expected result:
 
 - `Publish Site From JSON` runs
-- generated `index.html` is validated
+- the matching generated HTML page is refreshed
 - `HTML Guard` also runs on that push
 
 This proves both editing paths still work together.
+
+## Optional Test 7: Per-page JSON source mapping works
+
+1. Edit `inventory_content.json`
+2. Change the visible header logo text
+3. Commit and push
+4. Open the `Inventory` tab on the live site
+
+Expected result:
+
+- only the `Inventory` tab page changes
+- `Main`, `Sales`, and `Accounting` stay as they were
+
+This proves editors can target one page without touching the others.
 
 ## Failure Recovery
 

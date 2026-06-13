@@ -46,11 +46,6 @@ jobs:
           before = os.environ.get("GITHUB_EVENT_BEFORE", "")
           base_sha = os.environ.get("GITHUB_BASE_SHA", "")
           head_sha = os.environ.get("GITHUB_HEAD_SHA", "")
-          source_files = {
-              "workflow_content.json",
-              "workflow_control.json",
-              "workflow_generate.py",
-          }
 
           if event_name == "pull_request":
               compare_base = base_sha
@@ -70,7 +65,11 @@ jobs:
                   text=True,
               ).splitlines()
 
-          should_generate = any(path in source_files for path in changed)
+          should_generate = any(
+              path in {"workflow_pages.json", "workflow_control.json", "workflow_generate.py"}
+              or path.endswith("_content.json")
+              for path in changed
+          )
           with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env_file:
               env_file.write(f"RUN_GENERATOR={'true' if should_generate else 'false'}\n")
 
@@ -89,16 +88,21 @@ jobs:
           import os
           from workflow_generate import load_json
           root = pathlib.Path(".")
-          control = load_json(root / "workflow_control.json")
-          output_name = control.get("output_file", "main.html")
-          output_path = root / output_name
-          if not output_path.exists():
-            raise SystemExit(f"Expected generated file not found: {output_name}")
+          pages = load_json(root / "workflow_pages.json").get("pages", [])
+          outputs = []
+          for page in pages:
+            output_name = page.get("output_file")
+            output_path = root / output_name
+            if not output_path.exists():
+              raise SystemExit(f"Expected generated file not found: {output_name}")
+            outputs.append(output_name)
           with open(os.environ["GITHUB_ENV"], "a", encoding="utf-8") as env_file:
-            env_file.write(f"GENERATED_OUTPUT={output_name}\n")
+            env_file.write(f"GENERATED_OUTPUTS={' '.join(outputs)}\n")
           PY
 
-      - name: Validate generated index.html
+      - name: Validate generated HTML files
         if: env.RUN_GENERATOR == 'true'
         run: |
-          python scripts/validate_index_html.py "$GENERATED_OUTPUT"
+          for file in $GENERATED_OUTPUTS; do
+            python scripts/validate_index_html.py "$file"
+          done

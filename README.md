@@ -5,13 +5,17 @@ This folder is a reusable mirror of the current static workflow site structure, 
 ## What to edit
 
 - `index.html`: the live tabbed landing page that switches between the subpages
-- `main.html`: the Main tab content page
-- `inventory.html`: the Inventory tab content page
-- `sales.html`: the Sales tab content page
-- `accounting.html`: the Accounting tab content page
-- `workflow_content.json`: optional source for regenerating `main.html`
-- `workflow_control.json`: optional generator settings for the Main tab page
-- `workflow_generate.py`: keep this unless you want to change how the generated Main tab renders
+- `workflow_pages.json`: page manifest that maps each JSON source file to its generated HTML file
+- `workflow_content.json`: Main tab source JSON
+- `inventory_content.json`: Inventory tab source JSON
+- `sales_content.json`: Sales tab source JSON
+- `accounting_content.json`: Accounting tab source JSON
+- `workflow_control.json`: shared generator settings for all generated tab pages
+- `workflow_generate.py`: shared generator for all tab pages
+- `main.html`: generated Main tab page
+- `inventory.html`: generated Inventory tab page
+- `sales.html`: generated Sales tab page
+- `accounting.html`: generated Accounting tab page
 
 ## Generate locally
 
@@ -19,11 +23,17 @@ This folder is a reusable mirror of the current static workflow site structure, 
 python workflow_generate.py
 ```
 
-This writes the generated Main tab page to `main.html`.
+This writes all generated tab pages:
+
+- `main.html`
+- `inventory.html`
+- `sales.html`
+- `accounting.html`
 
 Current setup:
 
-- the generator now writes to `main.html`
+- the generator reads `workflow_pages.json`
+- each tab page can have its own editable JSON source file
 - `index.html` stays as the tabbed shell and should not be overwritten by the generator
 
 ## Supported content blocks
@@ -34,14 +44,15 @@ Current setup:
 ## GitHub automation
 
 - `.github/workflows/json-guard.yml`: validates JSON changes
-- `.github/workflows/publish-from-json.yml`: regenerates `main.html` on push when JSON source files change
+- `.github/workflows/publish-from-json.yml`: regenerates all generated tab pages on push when page JSON source files change
 - `.github/workflows/html-guard.yml`: runs on every push and validates `index.html`, `main.html`, `inventory.html`, `sales.html`, and `accounting.html`
 - [SMOKE_TEST.md](SMOKE_TEST.md): step-by-step checks for confirming the red-flag workflow behavior
 
 ## HTML editing policy
 
 - `index.html` can be edited directly by humans.
-- the multi-page website is easier to maintain if each tab page is edited in its own HTML file instead of packing everything into `index.html`
+- the multi-page website is easier to maintain if each tab page is edited in its own JSON file and regenerated, rather than packing everything into one large HTML file
+- if you edit `main.html`, `inventory.html`, `sales.html`, or `accounting.html` directly, those edits can be overwritten the next time the JSON publish workflow runs
 - Broken HTML should still fail the `HTML Guard` GitHub Action after commit or on pull request.
 - If you want GitHub to truly block bad HTML from landing on `main`, enable branch protection and require the `HTML Guard / validate-index` status check before merge.
 

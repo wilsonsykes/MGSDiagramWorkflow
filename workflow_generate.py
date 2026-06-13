@@ -1,15 +1,21 @@
 #!/usr/bin/env python3
 """
 Static workflow HTML generator.
-Reads workflow_content.json + workflow_control.json and produces the HTML page.
+Reads workflow_pages.json + workflow_control.json and produces one HTML page per content JSON.
 Run with: python workflow_generate.py
+Optional: python workflow_generate.py <page-key>
 """
-import json, re, os, sys, html as htmlmod
+import html as htmlmod
+import json
+import os
+import re
+import sys
 from datetime import datetime
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-CONTENT_FILE = os.path.join(SCRIPT_DIR, "workflow_content.json")
+PAGES_FILE = os.path.join(SCRIPT_DIR, "workflow_pages.json")
 CONTROL_FILE = os.path.join(SCRIPT_DIR, "workflow_control.json")
+
 
 def load_json(path):
     with open(path, 'r', encoding='utf-8', errors='replace') as f:
@@ -18,36 +24,47 @@ def load_json(path):
     raw = re.sub(r',(\s*[\]}])', r'\1', raw)
     raw = raw.rstrip()
     last = raw.rfind('}')
-    if last != -1: raw = raw[:last+1]
+    if last != -1:
+        raw = raw[:last + 1]
     return json.loads(raw, strict=False)
 
-def esc(s): return htmlmod.escape(str(s))
+
+def esc(s):
+    return htmlmod.escape(str(s))
+
 
 def resolve_color(val, colors):
-    if val.startswith('{') and val.endswith('}'): return colors.get(val[1:-1], val)
+    if isinstance(val, str) and val.startswith('{') and val.endswith('}'):
+        return colors.get(val[1:-1], val)
     return val
+
 
 def get_badge_style(status, badge_styles, colors):
     bs = badge_styles.get(status, badge_styles.get('core', {}))
-    bg = resolve_color(bs.get('bg','#eee'), colors)
-    text = resolve_color(bs.get('text','#333'), colors)
-    border = resolve_color(bs.get('border','#ccc'), colors)
+    bg = resolve_color(bs.get('bg', '#eee'), colors)
+    text = resolve_color(bs.get('text', '#333'), colors)
+    border = resolve_color(bs.get('border', '#ccc'), colors)
     return f'background:{bg};color:{text};border:1px solid {border}'
 
+
 def get_chip_style(role, chip_colors, colors):
+    role_lower = str(role).lower().strip()
     for key, val in chip_colors.items():
-        if key in role.lower().strip():
+        if key in role_lower:
             return f'color:{resolve_color(val["text"], colors)}'
-    return f'color:{colors.get("teal","#0B7285")}'
+    return f'color:{colors.get("teal", "#0B7285")}'
+
 
 def render_tags(tags):
-    if not tags: return ''
+    if not tags:
+        return ''
     h = '<span class="card-tags">'
-    for t in tags:
-        bg = t.get('bg','#E8E9ED')
-        color = t.get('color','#444B5A')
-        h += f'<span class="card-tag" style="background:{bg};color:{color};border:1px solid {color}22">{esc(t.get("text",""))}</span>'
+    for tag in tags:
+        bg = tag.get('bg', '#E8E9ED')
+        color = tag.get('color', '#444B5A')
+        h += f'<span class="card-tag" style="background:{bg};color:{color};border:1px solid {color}22">{esc(tag.get("text", ""))}</span>'
     return h + '</span>'
+
 
 def render_card(card, badge_styles, chip_colors, colors):
     h = '    <div class="pcard" onclick="toggleP(this)">\n      <div class="pcard-bar">\n'
@@ -61,91 +78,66 @@ def render_card(card, badge_styles, chip_colors, colors):
         h += f'        {render_tags(card["tags"])}\n'
     h += '        <span class="pcard-arrow">&#9662;</span>\n      </div>\n'
     h += '      <div class="pcard-body"><div class="pcard-inner">\n      <div class="det-grid">\n'
-    h += f'        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">{esc(card.get("trigger",""))}</div></div>\n'
+    h += f'        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">{esc(card.get("trigger", ""))}</div></div>\n'
     h += '        <div class="d-group"><div class="d-label lbl-features">System Features</div>'
     for feat in card.get('features', []):
         h += f'<div class="d-item">{esc(feat)}</div>\n'
     h += '</div>\n      </div>\n'
     h += '      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow">'
     for i, appr in enumerate(card.get('approval', [])):
-        if i > 0: h += '<span class="arrow-sep">&rarr;</span>\n'
-        style = get_chip_style(appr.get('role',''), chip_colors, colors)
-        h += f'<div class="appr-card"><div class="appr-role" style="{style}">{esc(appr.get("role","").upper())}</div><div class="appr-name">{esc(appr.get("label",""))}</div></div>\n'
+        if i > 0:
+            h += '<span class="arrow-sep">&rarr;</span>\n'
+        style = get_chip_style(appr.get('role', ''), chip_colors, colors)
+        h += f'<div class="appr-card"><div class="appr-role" style="{style}">{esc(appr.get("role", "").upper())}</div><div class="appr-name">{esc(appr.get("label", ""))}</div></div>\n'
     h += '</div></div>\n'
     h += '      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div>'
-    for d in card.get('data_outputs', []):
-        h += f'<div class="d-item">{esc(d)}</div>\n'
+    for item in card.get('data_outputs', []):
+        h += f'<div class="d-item">{esc(item)}</div>\n'
     h += '</div>\n      </div></div>\n    </div>\n'
     return h
 
+
 def is_section_block(entry):
-    return isinstance(entry, dict) and ("section" in entry and "phases" in entry)
+    return isinstance(entry, dict) and ('section' in entry and 'phases' in entry)
+
 
 def render_section_block(block):
     h = '    <div class="pcard checklist-card" onclick="toggleP(this)">\n      <div class="pcard-bar">\n'
     h += '        <span class="badge checklist-badge">SECTION</span>\n'
-    h += f'        <span class="pcard-name">{esc(block.get("section","Checklist"))}</span>\n'
+    h += f'        <span class="pcard-name">{esc(block.get("section", "Checklist"))}</span>\n'
     tags = []
-    if block.get("version"):
+    if block.get('version'):
         tags.append(f'v{esc(block.get("version"))}')
-    if block.get("stage") is not None:
+    if block.get('stage') is not None:
         tags.append(f'Stage {esc(block.get("stage"))}')
     if tags:
         h += '        <span class="card-tags">'
-        for t in tags:
-            h += f'<span class="card-tag checklist-tag">{t}</span>'
+        for tag in tags:
+            h += f'<span class="card-tag checklist-tag">{tag}</span>'
         h += '</span>\n'
     h += '        <span class="pcard-arrow">&#9662;</span>\n      </div>\n'
     h += '      <div class="pcard-body"><div class="pcard-inner checklist-inner">\n'
-    if block.get("note"):
+    if block.get('note'):
         h += f'        <div class="check-note">{esc(block.get("note"))}</div>\n'
-    for phase in block.get("phases", []):
+    for phase in block.get('phases', []):
         h += '        <div class="check-phase">\n'
-        h += f'          <div class="check-phase-title">PHASE {esc(phase.get("phase",""))}: {esc(phase.get("title",""))}</div>\n'
-        for group in phase.get("groups", []):
+        h += f'          <div class="check-phase-title">PHASE {esc(phase.get("phase", ""))}: {esc(phase.get("title", ""))}</div>\n'
+        for group in phase.get('groups', []):
             h += '          <div class="check-group">\n'
-            h += f'            <div class="check-group-name">{esc(group.get("name",""))}</div>\n'
-            docs = group.get("documents", [])
+            h += f'            <div class="check-group-name">{esc(group.get("name", ""))}</div>\n'
+            docs = group.get('documents', [])
             if docs:
                 h += '            <div class="check-docs">\n'
                 for doc in docs:
-                    code = esc(doc.get("code", ""))
-                    name = esc(doc.get("name", ""))
-                    h += f'              <div class="check-doc-row"><span class="check-doc-code">{code}</span><span class="check-doc-name">{name}</span></div>\n'
+                    h += f'              <div class="check-doc-row"><span class="check-doc-code">{esc(doc.get("code", ""))}</span><span class="check-doc-name">{esc(doc.get("name", ""))}</span></div>\n'
                 h += '            </div>\n'
             h += '          </div>\n'
         h += '        </div>\n'
     h += '      </div></div>\n    </div>\n'
     return h
 
-def generate():
-    print("\n" + "="*60)
-    print("  Static Workflow HTML Generator")
-    print("="*60)
-    print(f"  Reading from: {SCRIPT_DIR}\n")
 
-    try:
-        content = load_json(CONTENT_FILE)
-        print(f"  [OK] workflow_content.json loaded")
-    except Exception as e:
-        print(f"  [ERROR] workflow_content.json: {e}")
-        try:
-            input("\nPress Enter to close...")
-        except EOFError:
-            pass
-        return 1
-
-    try:
-        control = load_json(CONTROL_FILE)
-        print(f"  [OK] workflow_control.json loaded")
-    except Exception as e:
-        print(f"  [ERROR] workflow_control.json: {e}")
-        try:
-            input("\nPress Enter to close...")
-        except EOFError:
-            pass
-        return 1
-
+def render_html(content, control):
     colors = control.get('colors', {})
     chip_colors = control.get('chip_colors', {})
     badge_styles = control.get('badge_styles', {})
@@ -153,21 +145,23 @@ def generate():
     manual_stages = content.get('manual_stages', [])
     cross = content.get('cross_stage', {})
     metrics = content.get('metrics', [])
+    hoshi = content.get('hoshi_section', {})
+    manual_sec = content.get('manual_section', {})
+    header = content.get('header', {})
 
     print_size = control.get('print_page_size', '8.5in 13in')
     print_margin = control.get('print_page_margin', '0.4in 0.5in')
-
-    # ─── CSS ───
     shadow = '0 1px 3px rgba(15,23,42,.06),0 1px 2px rgba(15,23,42,.04)'
     shadow_open = '0 6px 20px rgba(15,23,42,.10)'
+
     out = f'''<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{esc(content.get("header",{}).get("title","Workflow Template"))}</title>
+<title>{esc(header.get("title", "Workflow Template"))}</title>
 <style>
-:root{{--accent:{colors.get("accent","#2B579A")};--accent-light:{colors.get("accent_light","#D6E4F0")};--accent-dark:{colors.get("accent_dark","#1B3A65")};--green:{colors.get("green","#217346")};--green-light:{colors.get("green_light","#E2F0E8")};--orange:{colors.get("orange","#C45911")};--orange-light:{colors.get("orange_light","#FDF0E6")};--red:{colors.get("red","#C00000")};--red-light:{colors.get("red_light","#FCE8E8")};--purple:{colors.get("purple","#7030A0")};--purple-light:{colors.get("purple_light","#F0E6F6")};--teal:{colors.get("teal","#0B7285")};--teal-light:{colors.get("teal_light","#E6F4F7")};--bg:{colors.get("background","#FFFFFF")};--bg-alt:{colors.get("background_alt","#F7F8FA")};--border:{colors.get("border","#D9DDE4")};--border-light:{colors.get("border_light","#EBEDF0")};--text:{colors.get("text","#1A1A2E")};--text-mid:{colors.get("text_mid","#444B5A")};--text-light:{colors.get("text_light","#727A8C")};--radius:10px;--shadow:{shadow};--shadow-open:{shadow_open}}}
+:root{{--accent:{colors.get("accent", "#2B579A")};--accent-light:{colors.get("accent_light", "#D6E4F0")};--accent-dark:{colors.get("accent_dark", "#1B3A65")};--green:{colors.get("green", "#217346")};--green-light:{colors.get("green_light", "#E2F0E8")};--orange:{colors.get("orange", "#C45911")};--orange-light:{colors.get("orange_light", "#FDF0E6")};--red:{colors.get("red", "#C00000")};--red-light:{colors.get("red_light", "#FCE8E8")};--purple:{colors.get("purple", "#7030A0")};--purple-light:{colors.get("purple_light", "#F0E6F6")};--teal:{colors.get("teal", "#0B7285")};--teal-light:{colors.get("teal_light", "#E6F4F7")};--bg:{colors.get("background", "#FFFFFF")};--bg-alt:{colors.get("background_alt", "#F7F8FA")};--border:{colors.get("border", "#D9DDE4")};--border-light:{colors.get("border_light", "#EBEDF0")};--text:{colors.get("text", "#1A1A2E")};--text-mid:{colors.get("text_mid", "#444B5A")};--text-light:{colors.get("text_light", "#727A8C")};--radius:10px;--shadow:{shadow};--shadow-open:{shadow_open}}}
 *{{margin:0;padding:0;box-sizing:border-box}}
 html,body{{scroll-behavior:smooth}}
 body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}}
@@ -249,12 +243,11 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica 
 .d-label{{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:4px;color:var(--text-light)}}
 .d-label.lbl-trigger{{color:var(--orange)}}.d-label.lbl-features{{color:var(--teal)}}.d-label.lbl-approval{{color:var(--purple)}}.d-label.lbl-data{{color:var(--green)}}
 .d-item{{font-size:11.5px;color:#374151;line-height:1.55;padding-left:14px;position:relative}}
-.d-item::before{{content:'\\2022';position:absolute;left:2px;color:var(--text-light);font-size:11px}}
+.d-item::before{{content:'\2022';position:absolute;left:2px;color:var(--text-light);font-size:11px}}
 .appr-flow{{display:flex;gap:6px;flex-wrap:wrap;align-items:stretch;margin-top:6px}}
 .appr-card{{border:1px solid #cbd5e1;border-radius:6px;padding:6px 9px;background:#f8fafc;min-width:110px;flex:1;max-width:200px}}
 .appr-role{{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;margin-bottom:1px;color:#155e75}}
 .appr-name{{font-size:11.5px;font-weight:700;color:#1e293b;line-height:1.25;margin-bottom:2px}}
-.appr-detail{{font-size:10.5px;color:#64748b;line-height:1.35}}
 .arrow-sep{{display:flex;align-items:center;color:#94a3b8;font-weight:800;font-size:16px;margin:0 2px}}
 .pain-row{{font-size:12px;color:#4b5563;line-height:1.55;padding:6px 0;display:flex;gap:8px;align-items:flex-start;border-bottom:1px dashed #d1d5db}}
 .pain-row:last-child{{border-bottom:none}}
@@ -276,75 +269,61 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica 
 <body>
 '''
 
-    # ─── NAV ───
-    header = content.get('header', {})
     out += '<nav class="topnav">\n'
-    out += f'  <div class="nav-logo">{esc(header.get("logo","WORKFLOW"))}</div>\n'
+    out += f'  <div class="nav-logo">{esc(header.get("logo", "WORKFLOW"))}</div>\n'
     for i, stage in enumerate(stages, 1):
-        out += f'  <a href="#stage-{i}" class="nav-link">{i} &middot; {esc(stage.get("romaji",""))}</a>\n'
+        out += f'  <a href="#stage-{i}" class="nav-link">{i} &middot; {esc(stage.get("romaji", ""))}</a>\n'
     out += '  <a href="#cross-stage" class="nav-link">Cross-Stage</a>\n</nav>\n\n'
 
-    # ─── HEADER ───
-    out += f'<div class="header">\n  <div class="header-top"><div class="header-logo">{esc(header.get("logo",""))}</div><span class="header-kanji">{header.get("kanji","")}</span></div>\n'
-    out += f'  <h1>{esc(header.get("title",""))}</h1>\n  <p>{esc(header.get("subtitle",""))}</p>\n</div>\n\n'
+    out += f'<div class="header">\n  <div class="header-top"><div class="header-logo">{esc(header.get("logo", ""))}</div><span class="header-kanji">{esc(header.get("kanji", ""))}</span></div>\n'
+    out += f'  <h1>{esc(header.get("title", ""))}</h1>\n  <p>{esc(header.get("subtitle", ""))}</p>\n</div>\n\n'
 
-    # ─── LEGEND ───
     out += '<div class="legend-bar">\n'
     for item in control.get('legend_items', []):
-        c = resolve_color(item.get('color','#999'), colors)
-        out += f'  <div class="legend-item"><div class="legend-dot" style="background:{c}"></div> {esc(item.get("label",""))}</div>\n'
+        color = resolve_color(item.get('color', '#999'), colors)
+        out += f'  <div class="legend-item"><div class="legend-dot" style="background:{color}"></div> {esc(item.get("label", ""))}</div>\n'
     out += '  <div class="ctrl-btns">\n    <button class="ctrl-btn" onclick="expandAll()">Expand All</button>\n    <button class="ctrl-btn" onclick="collapseAll()">Collapse All</button>\n'
     out += '    <button class="ctrl-btn" onclick="printShortBond()">&#128424; Print (Short Bond)</button>\n  </div>\n</div>\n\n'
 
-    # ─── STAGES ───
-    hoshi = content.get('hoshi_section', {})
-    manual_sec = content.get('manual_section', {})
     for i, stage in enumerate(stages, 1):
         out += f'<section class="stage-section" id="stage-{i}">\n  <div class="stage-banner" onclick="toggleStage(this)">\n'
         out += f'    <div class="stage-num"><span class="num-big">{i}</span><span class="num-sub">OF {len(stages)}</span></div>\n'
-        out += f'    <div class="stage-info"><div class="stage-title">{esc(stage.get("romaji","").upper())}</div><div class="stage-sub">{esc(stage.get("english",""))}</div></div>\n'
-        out += f'    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>\n  </div>\n  <div class="stage-body"><div class="two-col">\n'
-        # Future col
-        out += f'      <div class="future-col">\n        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">{esc(hoshi.get("tag",""))}</span></div>\n        <div class="cards-list">\n'
+        out += f'    <div class="stage-info"><div class="stage-title">{esc(stage.get("romaji", "").upper())}</div><div class="stage-sub">{esc(stage.get("english", ""))}</div></div>\n'
+        out += '    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>\n  </div>\n  <div class="stage-body"><div class="two-col">\n'
+        out += f'      <div class="future-col">\n        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">{esc(hoshi.get("tag", ""))}</span></div>\n        <div class="cards-list">\n'
         for card in stage.get('cards', []):
-            if is_section_block(card):
-                out += render_section_block(card)
-            else:
-                out += render_card(card, badge_styles, chip_colors, colors)
+            out += render_section_block(card) if is_section_block(card) else render_card(card, badge_styles, chip_colors, colors)
         out += '        </div>\n      </div>\n'
-        # Manual col
-        out += f'      <div class="manual-col">\n        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">{esc(manual_sec.get("tag",""))}</span></div>\n        <div class="pain-list">\n'
-        if i-1 < len(manual_stages):
-            for pp in manual_stages[i-1].get('pain_points', []):
+        out += f'      <div class="manual-col">\n        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">{esc(manual_sec.get("tag", ""))}</span></div>\n        <div class="pain-list">\n'
+        if i - 1 < len(manual_stages):
+            for pp in manual_stages[i - 1].get('pain_points', []):
                 out += f'          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>{esc(pp)}</span></div>\n'
         out += '        </div>\n      </div>\n    </div></div>\n</section>\n\n'
 
-    # ─── CROSS-STAGE ───
     if cross:
         out += '<section class="cross-section" id="cross-stage">\n  <div class="cross-banner" onclick="toggleStage(this)">\n'
-        out += f'    <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>\n    <div class="stage-info"><div class="stage-title" style="color:#7030A0">{esc(cross.get("name","").upper())}</div><div class="stage-sub" style="color:#7c3aed">{esc(cross.get("description",""))}</div></div>\n    <span class="stage-arrow" style="color:#7030A0">&#9662;</span>\n  </div>\n  <div class="stage-body"><div class="cross-inner">\n'
+        out += f'    <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>\n    <div class="stage-info"><div class="stage-title" style="color:#7030A0">{esc(cross.get("name", "").upper())}</div><div class="stage-sub" style="color:#7c3aed">{esc(cross.get("description", ""))}</div></div>\n    <span class="stage-arrow" style="color:#7030A0">&#9662;</span>\n  </div>\n  <div class="stage-body"><div class="cross-inner">\n'
         out += '      <div class="d-group"><div class="d-label lbl-features">System Features</div>'
-        for feat in cross.get('features', []): out += f'<div class="d-item">{esc(feat)}</div>\n'
+        for feat in cross.get('features', []):
+            out += f'<div class="d-item">{esc(feat)}</div>\n'
         out += '</div>\n      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow">'
         for i, appr in enumerate(cross.get('approval', [])):
-            if i > 0: out += '<span class="arrow-sep">&rarr;</span>\n'
-            style = get_chip_style(appr.get('role',''), chip_colors, colors)
-            out += f'<div class="appr-card"><div class="appr-role" style="{style}">{esc(appr.get("role","").upper())}</div><div class="appr-name">{esc(appr.get("label",""))}</div></div>\n'
+            if i > 0:
+                out += '<span class="arrow-sep">&rarr;</span>\n'
+            style = get_chip_style(appr.get('role', ''), chip_colors, colors)
+            out += f'<div class="appr-card"><div class="appr-role" style="{style}">{esc(appr.get("role", "").upper())}</div><div class="appr-name">{esc(appr.get("label", ""))}</div></div>\n'
         out += '</div></div>\n      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div>'
-        for d in cross.get('data_outputs', []): out += f'<div class="d-item">{esc(d)}</div>\n'
+        for item in cross.get('data_outputs', []):
+            out += f'<div class="d-item">{esc(item)}</div>\n'
         out += '</div>\n  </div></div>\n</section>\n\n'
 
-    # ─── METRICS ───
     if metrics:
         out += '<div class="metrics-strip">\n'
-        for m in metrics:
-            out += f'  <div class="metric"><div class="metric-val">{esc(m.get("value",""))}</div><div class="metric-lbl">{esc(m.get("label",""))}</div><div class="metric-sub">{esc(m.get("detail",""))}</div></div>\n'
+        for metric in metrics:
+            out += f'  <div class="metric"><div class="metric-val">{esc(metric.get("value", ""))}</div><div class="metric-lbl">{esc(metric.get("label", ""))}</div><div class="metric-sub">{esc(metric.get("detail", ""))}</div></div>\n'
         out += '</div>\n\n'
 
-    # ─── FOOTER ───
-    out += f'<div class="footer"><div>{esc(content.get("footer",""))}</div><button class="ctrl-btn" onclick="printShortBond()">&#128424; Print Short Bond</button></div>\n\n'
-
-    # ─── SCRIPT ───
+    out += f'<div class="footer"><div>{esc(content.get("footer", ""))}</div><button class="ctrl-btn" onclick="printShortBond()">&#128424; Print Short Bond</button></div>\n\n'
     out += f'''<script>
 function toggleStage(el){{var sec=el.closest('.stage-section')||el.closest('.cross-section');if(sec)sec.classList.toggle('open')}}
 function toggleP(el){{el.classList.toggle('open')}}
@@ -355,26 +334,87 @@ document.querySelectorAll('.topnav a').forEach(function(link){{link.addEventList
 </script>
 </body>
 </html>'''
+    return out
 
-    # ─── WRITE ───
-    output_name = control.get('output_file', 'index.html')
-    output_path = os.path.join(SCRIPT_DIR, output_name)
-    with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(out)
 
-    total_cards = sum(len(s.get('cards',[])) for s in stages)
-    print(f"\n  [OK] Generated: {output_name}")
-    print(f"       {len(stages)} stages, {total_cards} cards, {len(metrics)} metrics")
-    print(f"       Size: {len(out):,} chars")
-    print(f"       Print: {print_size} / {print_margin}")
-    now_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    print(f"       Time: {now_str}")
-    print("="*60 + "\n")
+def load_pages_config():
+    config = load_json(PAGES_FILE)
+    pages = config.get('pages', []) if isinstance(config, dict) else []
+    return config, pages
+
+
+def generate(selected_key=None):
+    print("\n" + "=" * 60)
+    print("  Static Workflow HTML Generator")
+    print("=" * 60)
+    print(f"  Reading from: {SCRIPT_DIR}\n")
+
+    try:
+        pages_config, pages = load_pages_config()
+        print("  [OK] workflow_pages.json loaded")
+    except Exception as e:
+        print(f"  [ERROR] workflow_pages.json: {e}")
+        try:
+            input("\nPress Enter to close...")
+        except EOFError:
+            pass
+        return 1
+
+    try:
+        control = load_json(CONTROL_FILE)
+        print("  [OK] workflow_control.json loaded")
+    except Exception as e:
+        print(f"  [ERROR] workflow_control.json: {e}")
+        try:
+            input("\nPress Enter to close...")
+        except EOFError:
+            pass
+        return 1
+
+    if selected_key:
+        pages = [page for page in pages if page.get('key') == selected_key]
+        if not pages:
+            print(f"  [ERROR] No page found for key: {selected_key}")
+            return 1
+
+    generated = []
+    for page in pages:
+        key = page.get('key', 'unknown')
+        content_file = page.get('content_file')
+        output_file = page.get('output_file')
+        if not content_file or not output_file:
+            print(f"  [ERROR] Page {key} missing content_file or output_file")
+            return 1
+        content_path = os.path.join(SCRIPT_DIR, content_file)
+        try:
+            content = load_json(content_path)
+            print(f"  [OK] {content_file} loaded")
+        except Exception as e:
+            print(f"  [ERROR] {content_file}: {e}")
+            return 1
+
+        html = render_html(content, control)
+        output_path = os.path.join(SCRIPT_DIR, output_file)
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(html)
+        stages = content.get('stages', [])
+        total_cards = sum(len(s.get('cards', [])) for s in stages)
+        generated.append((output_file, len(stages), total_cards, len(content.get('metrics', [])), len(html)))
+
+    print()
+    for output_file, stage_count, card_count, metric_count, size in generated:
+        print(f"  [OK] Generated: {output_file}")
+        print(f"       {stage_count} stages, {card_count} cards, {metric_count} metrics")
+        print(f"       Size: {size:,} chars")
+    print(f"       Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print("=" * 60 + "\n")
     try:
         input("Press Enter to close...")
     except EOFError:
         pass
     return 0
 
+
 if __name__ == '__main__':
-    sys.exit(generate())
+    selected = sys.argv[1] if len(sys.argv) > 1 else None
+    sys.exit(generate(selected))
