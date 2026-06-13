@@ -114,10 +114,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <nav class="topnav">
   <div class="nav-logo">MGC Inventory DF</div>
   <a href="#stage-1" class="nav-link">1 &middot; Commercial</a>
-  <a href="#stage-2" class="nav-link">2 &middot; Bulk</a>
+  <a href="#stage-2" class="nav-link">2 &middot; Industrial</a>
   <a href="#stage-3" class="nav-link">3 &middot; Dealer</a>
   <a href="#stage-4" class="nav-link">4 &middot; Retail</a>
-  <a href="#stage-5" class="nav-link">5 &middot; Optimization</a>
+  <a href="#stage-5" class="nav-link">5 &middot; Company-Wide</a>
   <a href="#cross-stage" class="nav-link">Cross-Stage</a>
 </nav>
 
@@ -204,10 +204,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
         </div>
       </div>
       <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
+        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">MANUAL</span></div>
         <div class="pain-list">
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Requests arrive in multiple channels</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Important context is often missing</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Process Order: C1.1.1 Client orders 22kg and 50kg cylinder variants. C1.1.2 C1.1.3</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Fulfil Order: C2.1.1 Using Sales Order, XX (Delivery Head) schedules delivery [vehicle, capacity, route]. C2.1.2 Warehouse generates ~Picklist and picks LPG/products. C2.1.3 Warehouse generates Delivery Receipt (2 DRs and 2 CRs). C2.1.4.1 Warehouse submits DR to Acctg to make General Ledger and Inventory. C1.1.4.2 Driver gets Delivery Receipt (DR) from Warehouse XXX? for multiple clients. Driver loads the cylinders. LUTXX. Delivery Data include tank serial number, customer type, LUT number, gross weight, body/tare weight, and content out. Driver and Pahinante drive to client locations. C1.1.4.3 No Delivery/For Pick up. Warehouse XX gives DR to customer for signature. C1.1.5.1 On client site, Pahinante weighs and records the cylinders, then delivers the cylinders. He retrieves the empties cylinder/s and weighs XX it in the vehicle. C1.1.5.2 Client signs DR and picks up the items and returns empty cylinder. Client leaves. C1.1.5.3 1-3kg, above and below, roundup/down, classification. Acctg charges client based on agreed weight, not actual weight. Company absorbs any gains. C1.1.6 P gives XX memo to client, containing credit gain (kg) and acknowledges receipt (via sign). C1.1.7 Driver returns to Plant. LUTXX Driver and Warehouse Staff weigh XX empty cylinders in Plant. Driver writes the weights. C1.1.8 Driver submits record and signed DR and AR to Acctg. C1.1.9 Acctg Staff reconciles open General Ledger with signed DR and AR. Acctg Staff reconciles inventor in Gsheet.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Compute Gains: C3.1.1 Gather the weight in and weigh out records at the Client and at the Plant. C3.1.2 Record in Gsheet. C3.1.3 Record in ACPAC. C3.1.4 Compute Commission and Distribute.</span></div>
         </div>
       </div>
     </div></div>
@@ -216,7 +217,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <section class="stage-section" id="stage-2">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">2</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">BULK</div><div class="stage-sub">Scope | Owners | Schedule</div></div>
+    <div class="stage-info"><div class="stage-title">INDUSTRIAL</div><div class="stage-sub">Scope | Owners | Schedule</div></div>
     <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body"><div class="two-col">
@@ -250,10 +251,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
         </div>
       </div>
       <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
+        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">MANUAL</span></div>
         <div class="pain-list">
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Scope changes are hard to track</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Owners are assigned too late</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Process Order: C2.1.1 Industrial clients orders selected cylinder tanks. C2.1.2 C2.1.3</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Fulfil Order: Order fulfillment procedures</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Compute Gains: Commission calculations</span></div>
         </div>
       </div>
     </div></div>
@@ -335,10 +337,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
         </div>
       </div>
       <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
+        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">MANUAL</span></div>
         <div class="pain-list">
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Checklists are scattered across files</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Readiness criteria are inconsistent</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Process Order: C3.1.1 Client orders 2.5kg and 11kg cylinder variants. C3.1.2 C3.1.3</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Fulfil Order: Order fulfillment procedures</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Compute Gains: Commission calculations</span></div>
         </div>
       </div>
     </div></div>
@@ -382,10 +385,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
         </div>
       </div>
       <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
+        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">MANUAL</span></div>
         <div class="pain-list">
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Approvals happen over chat</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Release notes are not centralized</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Process Order: C4.1.1 C4.1.2 C4.1.3</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Fulfil Order: Order fulfillment procedures</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Compute Gains: Commission calculations</span></div>
         </div>
       </div>
     </div></div>
@@ -394,7 +398,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <section class="stage-section" id="stage-5">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">5</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">OPTIMIZATION</div><div class="stage-sub">Feedback | Enhancements | Next Iteration</div></div>
+    <div class="stage-info"><div class="stage-title">COMPANY-WIDE</div><div class="stage-sub">Feedback | Enhancements | Next Iteration</div></div>
     <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body"><div class="two-col">
@@ -428,10 +432,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
         </div>
       </div>
       <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
+        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">MANUAL</span></div>
         <div class="pain-list">
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Feedback is not captured consistently</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.1.1 Plant Manager receives the Purchased Lorry Tanks XX and gets the DR and Invoice from delivery team.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.1.2 Plant Manager fills up Receiving Report (RR), and unloads contents to Storage Tank.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.1.3 Plant Staff measures content volume using gauge and takes photo of the gauge. Makes report.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.1.4 Gas content is refilled from Storage Tank to cylinders following FIFO process. Filled cylinders are located in the Floor Stock.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.1.5 Use Google apps for refilling cylinders.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>2 Storage Locations: Tank 1 and Tank2</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>2 Types of Residue: Regular and WIWO. Regular Residue affects inventory count but not billing. WIWO affects inventory count and billing (as credits).</span></div>
           <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Next-step ownership is unclear</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Schedule and follow Pull-out Calendar and Pull-out Dates at client sites.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Cylinder Monitoring: C5.3.1 Cylinders are purchased annually. They have individual serial nos. (S/N). C5.3.2 Cylinders have lifespan of X years. Required to Repaint and testing XXX. Put batch no for commissioning</span></div>
         </div>
       </div>
     </div></div>
@@ -440,7 +452,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <section class="cross-section" id="cross-stage">
   <div class="cross-banner" onclick="toggleStage(this)">
     <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>
-    <div class="stage-info"><div class="stage-title" style="color:#7030A0">CROSS-STAGE GOVERNANCE</div><div class="stage-sub" style="color:#7c3aed">Use this area for controls that affect all stages.</div></div>
+    <div class="stage-info"><div class="stage-title" style="color:#7030A0">COMPANY-WIDE</div><div class="stage-sub" style="color:#7c3aed">Processes involving Company-wide operations.</div></div>
     <span class="stage-arrow" style="color:#7030A0">&#9662;</span>
   </div>
   <div class="stage-body"><div class="cross-inner">
@@ -467,7 +479,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
   <div class="metric"><div class="metric-val">Pages</div><div class="metric-lbl">Deployment</div><div class="metric-sub">GitHub Pages ready</div></div>
 </div>
 
-<div class="footer"><div>Replace this footer text with your project name, owner, or release note.</div><button class="ctrl-btn" onclick="printShortBond()">&#128424; Print Short Bond</button></div>
+<div class="footer"><div>Release Notes v 1.1.</div><button class="ctrl-btn" onclick="printShortBond()">&#128424; Print Short Bond</button></div>
 
 <script>
 function toggleStage(el){var sec=el.closest('.stage-section')||el.closest('.cross-section');if(sec)sec.classList.toggle('open')}
