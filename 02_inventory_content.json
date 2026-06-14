@@ -264,66 +264,73 @@
         "Process Order:", 
         "C1.1.1 Client orders 22kg and 50kg cylinder variants. C1.1.2 C1.1.3",
         "Fulfil Order:", 
-        "C2.1.1 Using Sales Order, XX (Delivery Head) 💻schedules delivery [vehicle, capacity, route].", 
-        "C2.1.2 Warehouse generates 📜Picklist and picks LPG/products.", 
-        "C2.1.3 Warehouse generates 📜Delivery Receipt (2 DRs and 2 CRs).", 
-        "C2.1.4.1 Warehouse submits 📜DR to Acctg to make General Ledger and Inventory.",
+        "C1.2.1 Using Sales Order, XX (Delivery Head) 💻schedules delivery [vehicle, capacity, route].", 
+        "C1.1.2 Warehouse generates 📜Picklist and picks LPG/products.", 
+        "C1.1.3 Warehouse generates 📜Delivery Receipt (2 DRs and 2 CRs).", 
+        "C1.1.4.1 Warehouse submits 📜DR to Acctg to make General Ledger and Inventory.",
         "C1.1.4.2 Driver gets 📜Delivery Receipt (DR) from Warehouse XXX? for multiple clients. Driver loads the cylinders. LUTXX.", 
         "       📜Delivery Data include tank serial number, customer type, LUT number, gross weight, body/tare weight, and content out.", 
         "        Driver and Pahinante drive to client locations.", 
         "C1.1.4.3 No Delivery/For Pick up. Warehouse XX gives 📜DR to customer for signature.", 
         "C1.1.5.1 On client site, Pahinante weighs and records the cylinders, then delivers the cylinders. He retrieves the empties cylinder/s and weighs XX it in the vehicle.",
         "      C1.1.5.2 Client signs 📜DR and picks up the items and returns empty cylinder. Client leaves.", 
-        "        C1.1.5.3 1-3kg, above and below, roundup/down, classification. Acctg charges client based on agreed weight, not actual weight. Company absorbs any gains.", 
-        "C1.1.6 P gives 📜Credit Memo to client, containing credit gain (kg) and 📜acknowledges receipt (via sign).", 
+        "        C1.1.5.3 Check threshold <>1-3kg, above and below, roundup/down, classification. Acctg charges client based on agreed weight, not actual weight. Company absorbs any gains.", 
+        "C1.1.6 P gives 📜Credit Notes to client, containing cylinder serial no, weight residue (kg), credit gain and 📜acknowledges receipt (via sign).", 
         "C1.1.7 Driver returns to Plant. LUTXX Driver and Warehouse Staff weigh XX empty cylinders in Plant. Driver writes the weights in 📜XX.", 
         "C1.1.8 Driver submits 📜record and signed 📜DR and 📜AR to Acctg.", 
         "C1.1.9 Acctg Staff reconciles open 💻General Ledger with signed 📜DR and 📜AR. Acctg Staff reconciles inventor in 💻Gsheet.",
-        "Compute Gains:", 
-        "C3.1.1 Gather the weight in and weigh out records at the Client and at the Plant.", 
-        "C3.1.2 Record in 💻Gsheet.", 
-        "C3.1.3 Record in 💻ACPAC.", 
-        "C3.1.4 Compute Commission and Distribute."
+        "Compute Commercial Gains:", 
+        "C1.3.1 Gather the weight in and weigh out records at the Client and at the Plant from the backload.", 
+        "C1.3.2 Record in 💻Gsheet.", 
+        "C1.3.3 Record in 💻ACPAC.", 
+        "C1.3.4 Compute Commission and Distribute."
       ]
     },
     {
       "english": "Industrial pain points",
       "kanji": "",
       "pain_points": [
-        "Process Order:",
+        "C2.1 Process Order:",
         "C2.1.1 Industrial clients orders selected cylinder tanks. C2.1.2 C2.1.3",
-        "Fulfil Order:",
-        "Order fulfillment procedures",
-        "Compute Gains:", 
-        "Commission calculations"
+        "C2.2 Fulfil Order:",
+        "Check Industrial gains",
+        "C2.3 Compute Gains:", 
+        "C2.3.5 Commission calculations"
       ]
     },
     {
       "english": "Dealer pain points",
       "kanji": "",
       "pain_points": [
-        "Process Order:", 
-        "C3.1.1 Client orders 2.5kg and 11kg cylinder variants. C3.1.2 C3.1.3",
-        "Fulfil Order:",
+        "C3.1 Process Order:", 
+        "C3.1.1 Client orders 2.5kg and 11kg cylinder variants.", 
+        "C3.1.2", 
+        "C3.1.3",
+        "C3.2 Fulfil Order:",
         "Order fulfillment procedures",
-        "Compute Gains:",
-        "Commission calculations"
+        "C3.3 Compute Operational Gains:",
+        "
+        "Commission calculations",
+        "ALERT: Cylinder brand switching"
       ]
     },
     {
       "english": "Retail pain points",
       "kanji": "",
       "pain_points": [
-        "Process Order: C4.1.1 C4.1.2 C4.1.3",
-        "Fulfil Order: Order fulfillment procedures",
-        "Compute Gains: Commission calculations"
+        "C4.1 Process Order:", 
+        "C4.1.1 C4.1.2 C4.1.3",
+        "C4.2 Fulfil Order: Order fulfillment procedures",
+        "C4.3 Compute Gains: Commission calculations"
       ]
     },
     {
       "english": "Company-Wide pain points",
       "kanji": "",
       "pain_points": [
-        "C5.1.1 Plant Manager receives the Purchased Lorry Trucks XX and gets the 📜DR and 📜Invoice from delivery team.",
+        "C5.1.1 Purchaser forwards PO to RefinerySupplier. Purchaser schedules and informs Plant Manager on scheduled delivery of Lorry Truck",
+        "xxxx",
+        "Plant Manager receives the Purchased Lorry Trucks XX and gets the 📜DR and 📜Invoice from delivery team.",
         "C5.1.2 Plant Manager fills up 📜Receiving Report (RR), and unloads contents to Storage Tank.",
         "C5.1.3 Plant Staff measures content volume using gauge and takes photo of the gauge. Makes 📜report.",
          "  C5.1.3.1 Changes in the qty are reported after the 📜Receiving Report.",
