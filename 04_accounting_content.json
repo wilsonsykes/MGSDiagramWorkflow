@@ -13,7 +13,7 @@
   "stages": [
     {
       "kanji": "",
-      "romaji": "Discovery",
+      "romaji": "Commercial",
       "english": "Intake | Validation | Prioritization",
       "cards": [
         {
@@ -67,7 +67,7 @@
     },
     {
       "kanji": "",
-      "romaji": "Planning",
+      "romaji": "Industrial",
       "english": "Scope | Owners | Schedule",
       "cards": [
         {
@@ -97,7 +97,7 @@
     },
     {
       "kanji": "",
-      "romaji": "Execution",
+      "romaji": "Dealer",
       "english": "Build | Review | Readiness",
       "cards": [
         {
@@ -170,7 +170,7 @@
     },
     {
       "kanji": "",
-      "romaji": "Launch",
+      "romaji": "Retail",
       "english": "Approval | Publish | Support",
       "cards": [
         {
@@ -200,7 +200,7 @@
     },
     {
       "kanji": "",
-      "romaji": "Optimization",
+      "romaji": "Company-wide",
       "english": "Feedback | Enhancements | Next Iteration",
       "cards": [
         {
@@ -258,15 +258,20 @@
   },
   "manual_stages": [
     {
-      "english": "Discovery pain points",
+      "english": "Commercial pain points",
       "kanji": "",
       "pain_points": [
-        "Requests arrive in multiple channels",
-        "Important context is often missing"
+        "Receivables and rec
+        "C1.1.1 Collect DR and Sales Order and Invoice",
+        "Check monthly summary table of invoices for collection",
+        "Print summary of Aged Receivables",
+        "Check summary table of amounts for bank reconciliation",
+        "Resolve customer disputes",
+        "Check and print summary of Write-off/Loss Accounts"
       ]
     },
     {
-      "english": "Planning pain points",
+      "english": "Industrial pain points",
       "kanji": "",
       "pain_points": [
         "Scope changes are hard to track",
@@ -274,7 +279,7 @@
       ]
     },
     {
-      "english": "Execution pain points",
+      "english": "Dealer pain points",
       "kanji": "",
       "pain_points": [
         "Checklists are scattered across files",
@@ -282,7 +287,7 @@
       ]
     },
     {
-      "english": "Launch pain points",
+      "english": "Retail pain points",
       "kanji": "",
       "pain_points": [
         "Approvals happen over chat",
@@ -290,11 +295,25 @@
       ]
     },
     {
-      "english": "Optimization pain points",
+      "english": "Company-wide pain points",
       "kanji": "",
       "pain_points": [
-        "Feedback is not captured consistently",
-        "Next-step ownership is unclear"
+        "C5.1 Finacial Statements:",
+        "C5.1.1 Profit and Loss Statement:",
+        "C5.1.1.1 Ensure that all entries above are encoded",
+        "C5.1.1.2 Refresh the PNL Table to get the latest report. Print the monthly PNL Statement",
+        "C5.1.2 Cash Flow Statement:",
+        "C5.1.2.1 Ensure that all entries above are encoded",
+        "C5.1.2.2 Refresh the Cash Flow Table to get the latest report. Print the monthly CF Statement",
+        "C5.1.3 Balance Sheet",
+        "C5.1.3.1 Ensure that all entries above are encoded",
+        "C5.1.3.2 Refresh the Balance Sheet Table to get the latest report. Print the monthly BS Statement",
+        "C5.2 Payroll", 
+        "C5.2.1 xxx Payroll Summary",
+        "C5.3 Industrial Projects",
+        "C5.3.1 Budget PNL",
+        "C5.3.2 Actual PNL",
+        "C5.3.3 Timeline"
       ]
     }
   ],
