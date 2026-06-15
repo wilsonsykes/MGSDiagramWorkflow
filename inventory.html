@@ -142,7 +142,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <section class="stage-section" id="stage-1">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">1</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">COMMERCIAL</div><div class="stage-sub">Intake | Validation | Prioritization</div></div>
+    <div class="stage-info"><div class="stage-title">COMMERCIAL</div><div class="stage-sub">Process Order | Delivery | Return to Plant</div></div>
     <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body"><div class="two-col">
@@ -152,7 +152,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     <div class="pcard" onclick="toggleP(this)">
       <div class="pcard-bar">
         <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">D1 Intake Form</span>
+        <span class="pcard-name">Receive and Process Order</span>
         <span class="st-dot st-active" title="Active"></span>
         <span class="card-tags"><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Live</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Editable</span></span>
         <span class="pcard-arrow">&#9662;</span>
@@ -179,7 +179,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     <div class="pcard" onclick="toggleP(this)">
       <div class="pcard-bar">
         <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">PLANNED</span>
-        <span class="pcard-name">D2 Qualification Review</span>
+        <span class="pcard-name">Fulfil Order</span>
         <span class="st-dot st-pending" title="In Build"></span>
         <span class="card-tags"><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Template</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Replace Me</span></span>
         <span class="pcard-arrow">&#9662;</span>
@@ -201,34 +201,56 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 </div>
       </div></div>
     </div>
+    <div class="pcard" onclick="toggleP(this)">
+      <div class="pcard-bar">
+        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
+        <span class="pcard-name">Credit Notes and Compute Gains</span>
+        <span class="st-dot st-active" title="Active"></span>
+        <span class="card-tags"><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Live</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Editable</span></span>
+        <span class="pcard-arrow">&#9662;</span>
+      </div>
+      <div class="pcard-body"><div class="pcard-inner">
+      <div class="det-grid">
+        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">A request arrives through your chosen intake channel.</div></div>
+        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item">Collect project scope and owner details</div>
+<div class="d-item">Assign a request reference number</div>
+<div class="d-item">Save progress before final submission</div>
+</div>
+      </div>
+      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">AUTO</div><div class="appr-name">Create request</div></div>
+<span class="arrow-sep">&rarr;</span>
+<div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Fill intake details</div></div>
+<span class="arrow-sep">&rarr;</span>
+<div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Validate completeness</div></div>
+</div></div>
+      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Request summary</div>
+<div class="d-item">Open intake queue</div>
+</div>
+      </div></div>
+    </div>
         </div>
       </div>
       <div class="manual-col">
         <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">MANUAL</span></div>
         <div class="pain-list">
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Process Order:</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.1 Client orders 22kg and 50kg cylinder variants. C1.1.2 C1.1.3</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Fulfil Order:</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.2.1 Using Sales Order, XX (Delivery Head) 💻schedules delivery [vehicle, capacity, route].</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.2 Warehouse generates 📜Picklist and picks LPG/products.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.3 Warehouse generates 📜Delivery Receipt (2 DRs and 2 CRs).</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.4.1 Warehouse submits 📜DR to Acctg to make General Ledger and Inventory.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.4.2 Driver gets 📜Delivery Receipt (DR) from Warehouse XXX? for multiple clients. Driver loads the cylinders. LUTXX.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>       📜Delivery Data include tank serial number, customer type, LUT number, gross weight, body/tare weight, and content out.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>        Driver and Pahinante drive to client locations.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.4.3 No Delivery/For Pick up. Warehouse XX gives 📜DR to customer for signature.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.5.1 On client site, Pahinante weighs and records the cylinders, then delivers the cylinders. He retrieves the empties cylinder/s and weighs XX it in the vehicle.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>      C1.1.5.2 Client signs 📜DR and picks up the items and returns empty cylinder. Client leaves.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>        C1.1.5.3 Check threshold &lt;&gt;1-3kg, above and below, roundup/down, classification. Acctg charges client based on agreed weight, not actual weight. Company absorbs any gains.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.6 P gives 📜Credit Notes to client, containing cylinder serial no, weight residue (kg), credit gain and 📜acknowledges receipt (via sign).</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.7 Driver returns to Plant. LUTXX Driver and Warehouse Staff weigh XX empty cylinders in Plant. Driver writes the weights in 📜XX.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.8 Driver submits 📜record and signed 📜DR and 📜AR to Acctg.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.9 Acctg Staff reconciles open 💻General Ledger with signed 📜DR and 📜AR. Acctg Staff reconciles inventor in 💻Gsheet.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Compute Commercial Gains:</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.3.1 Gather the weight in and weigh out records at the Client and at the Plant from the backload.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.3.2 Record in 💻Gsheet.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.3.3 Record in 💻ACPAC.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.3.4 Compute Commission and Distribute.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Process Order: C1.1.1 Client orders 22kg and 50kg cylinder variants.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Fulfil Order: C1.2.1 Using Sales Order, Delivery Head schedules delivery [vehicle, capacity, route].</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.2 Warehouse generates Picklist and picks LPG/products.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.3 Warehouse generates Delivery Receipt (2 DRs and 2 CRs).</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.4.1 Warehouse submits DR to Acctg to make General Ledger and Inventory.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.4.2 Driver gets Delivery Receipt (DR) from Warehouse for multiple clients.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Driver and Pahinante drive to client locations.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.4.3 No Delivery/For Pick up. Warehouse gives DR to customer for signature.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.5.1 On client site, Pahinante weighs and records the cylinders, then delivers them.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.5.2 Client signs DR and picks up items and returns empty cylinder.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.5.3 Check threshold 1-3kg, above and below, roundup/down, classification.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.6 Provide Credit Notes to client with cylinder serial number and weight residue.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.7 Driver returns to Plant and weighs empty cylinders.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.8 Driver submits record and signed DR and AR to Acctg.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C1.1.9 Acctg Staff reconciles General Ledger with signed DR and AR.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Compute Commercial Gains: Gather weight in and weigh out records at Client and Plant.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Record in Gsheet and ACPAC.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Compute Commission and Distribute.</span></div>
         </div>
       </div>
     </div></div>
@@ -237,7 +259,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <section class="stage-section" id="stage-2">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">2</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">INDUSTRIAL</div><div class="stage-sub">Scope | Owners | Schedule</div></div>
+    <div class="stage-info"><div class="stage-title">INDUSTRIAL</div><div class="stage-sub">Process Order | Delivery | Return to Plant</div></div>
     <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body"><div class="two-col">
@@ -268,17 +290,66 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 </div>
       </div></div>
     </div>
+    <div class="pcard" onclick="toggleP(this)">
+      <div class="pcard-bar">
+        <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">PLANNED</span>
+        <span class="pcard-name">Fulfil Order</span>
+        <span class="st-dot st-pending" title="In Build"></span>
+        <span class="card-tags"><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Template</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Replace Me</span></span>
+        <span class="pcard-arrow">&#9662;</span>
+      </div>
+      <div class="pcard-body"><div class="pcard-inner">
+      <div class="det-grid">
+        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">The team reviews fit, effort, and delivery timing.</div></div>
+        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item">Record qualification notes</div>
+<div class="d-item">Highlight blockers and dependencies</div>
+<div class="d-item">Route to the next owner</div>
+</div>
+      </div>
+      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Prepare context</div></div>
+<span class="arrow-sep">&rarr;</span>
+<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve direction</div></div>
+</div></div>
+      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Qualified request list</div>
+<div class="d-item">Decision notes</div>
+</div>
+      </div></div>
+    </div>
+    <div class="pcard" onclick="toggleP(this)">
+      <div class="pcard-bar">
+        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
+        <span class="pcard-name">Credit Notes and Compute Gains</span>
+        <span class="st-dot st-active" title="Active"></span>
+        <span class="card-tags"><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Live</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Editable</span></span>
+        <span class="pcard-arrow">&#9662;</span>
+      </div>
+      <div class="pcard-body"><div class="pcard-inner">
+      <div class="det-grid">
+        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">A request arrives through your chosen intake channel.</div></div>
+        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item">Collect project scope and owner details</div>
+<div class="d-item">Assign a request reference number</div>
+<div class="d-item">Save progress before final submission</div>
+</div>
+      </div>
+      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">AUTO</div><div class="appr-name">Create request</div></div>
+<span class="arrow-sep">&rarr;</span>
+<div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Fill intake details</div></div>
+<span class="arrow-sep">&rarr;</span>
+<div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Validate completeness</div></div>
+</div></div>
+      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Request summary</div>
+<div class="d-item">Open intake queue</div>
+</div>
+      </div></div>
+    </div>
         </div>
       </div>
       <div class="manual-col">
         <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">MANUAL</span></div>
         <div class="pain-list">
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C2.1 Process Order:</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C2.1.1 Industrial clients orders selected cylinder tanks. C2.1.2 C2.1.3</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C2.2 Fulfil Order:</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Check Industrial gains</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C2.3 Compute Gains:</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C2.3.5 Commission calculations</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C2.1 Process Order: Industrial clients orders selected cylinder tanks.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C2.2 Fulfil Order: Check Industrial gains and order fulfillment procedures.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C2.3 Compute Gains: Commission calculations and distribution.</span></div>
         </div>
       </div>
     </div></div>
@@ -287,7 +358,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <section class="stage-section" id="stage-3">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">3</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">DEALER</div><div class="stage-sub">Build | Review | Readiness</div></div>
+    <div class="stage-info"><div class="stage-title">DEALER</div><div class="stage-sub">Process Order | Delivery/Pickup | Invoice</div></div>
     <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body"><div class="two-col">
@@ -362,15 +433,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <div class="manual-col">
         <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">MANUAL</span></div>
         <div class="pain-list">
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C3.1 Process Order:</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C3.1.1 Client orders 2.5kg and 11kg cylinder variants.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C3.1.2</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C3.1.3</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C3.2 Fulfil Order:</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Order fulfillment procedures</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C3.3 Compute Operational Gains:</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Commission calculations</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>ALERT: Cylinder brand switching</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C3.1 Process Order: Client orders 2.5kg and 11kg cylinder variants.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C3.1.2 Sales Rep creates a Sales Order form with delivery/pickup date.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C3.1.2.1 IF PICKUP and with TERMS: Client comes to pickup and signs the Sales Order Form.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C3.1.2.2 IF PICKUP and PAYMENT: Client comes to pickup and pays.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C3.1.2.3 IF DELIVERY and with TERMS: Driver checks schedule and delivers with DR.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C3.1.2.3.1 Driver gets empty cylinder, weighs and records with customer signature.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C3.2 Fulfil Order: Order fulfillment procedures and delivery logistics.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C3.3 Compute Operational Gains: Commission calculations and tracking.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>ALERT: Cylinder brand switching considerations.</span></div>
         </div>
       </div>
     </div></div>
@@ -379,7 +450,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <section class="stage-section" id="stage-4">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">4</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">RETAIL</div><div class="stage-sub">Approval | Publish | Support</div></div>
+    <div class="stage-info"><div class="stage-title">RETAIL</div><div class="stage-sub">Process Order | Delivery/Pickup | Collect Payment</div></div>
     <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body"><div class="two-col">
@@ -416,10 +487,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <div class="manual-col">
         <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">MANUAL</span></div>
         <div class="pain-list">
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C4.1 Process Order:</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C4.1.1 C4.1.2 C4.1.3</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C4.2 Fulfil Order: Order fulfillment procedures</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C4.3 Compute Gains: Commission calculations</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C4.1 Process Order: Client order processing and validation.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C4.2 Fulfil Order: Order fulfillment procedures and delivery.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C4.3 Compute Gains: Commission calculations and reconciliation.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Same as above Dealer steps</span></div>
         </div>
       </div>
     </div></div>
@@ -428,7 +499,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <section class="stage-section" id="stage-5">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">5</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">COMPANY-WIDE</div><div class="stage-sub">Feedback | Enhancements | Next Iteration</div></div>
+    <div class="stage-info"><div class="stage-title">COMPANY-WIDE</div><div class="stage-sub">Purchase Order | Stock Transfer | Refill | Floor Stock</div></div>
     <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body"><div class="two-col">
@@ -464,21 +535,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <div class="manual-col">
         <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">MANUAL</span></div>
         <div class="pain-list">
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.1.1 Purchaser forwards PO to RefinerySupplier. Purchaser schedules and informs Plant Manager on scheduled delivery of Lorry Truck</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>xxxx</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Plant Manager receives the Purchased Lorry Trucks XX and gets the 📜DR and 📜Invoice from delivery team.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.1.2 Plant Manager fills up 📜Receiving Report (RR), and unloads contents to Storage Tank.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.1.3 Plant Staff measures content volume using gauge and takes photo of the gauge. Makes 📜report.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.1.3.1 Changes in the qty are reported after the 📜Receiving Report.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.1.4 Stock Transfer: Gas content is refilled from Storage Tank to cylinders following FIFO process. Filled cylinders are located in the &#x27;Floor Stock&#x27;.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.1.5 Use 📱Google apps for refilling cylinders.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>2 Storage Locations: Tank 1 and Tank2</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>2 Types of Residue: Regular and WIWO. Regular Residue affects inventory count but not billing. WIWO affects inventory count and billing (as credits).</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Next-step ownership is unclear</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.1.1 Purchaser forwards PO to Refinery Supplier and schedules delivery.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Plant Manager receives the Purchased Lorry Trucks and gets the DR and Invoice from delivery team.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.1.2 Plant Manager fills Receiving Report (RR) and unloads contents to Storage Tank.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.1.3 Plant Staff measures content volume using gauge and documents.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.1.3.1 Changes in the qty are reported after the Receiving Report.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.1.4 Stock Transfer: Gas content is refilled from Storage Tank to cylinders following FIFO process.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.1.5 Use Google apps for refilling cylinders.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>2 Storage Locations: Tank 1 and Tank 2.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>2 Types of Residue: Regular and WIWO affecting inventory and billing.</span></div>
           <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Schedule and follow Pull-out Calendar and Pull-out Dates at client sites.</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>Cylinder Monitoring:</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.3.1 Cylinders are purchased annually. They have individual serial nos. (S/N).</span></div>
-          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.3.2 Cylinders have lifespan of X years. Required to Repaint and testing XXX. Put batch no for commissioning</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.3.1 Cylinders purchased annually with individual serial numbers.</span></div>
+          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>C5.3.2 Cylinders have lifespan requiring Repaint and testing with batch number.</span></div>
         </div>
       </div>
     </div></div>
