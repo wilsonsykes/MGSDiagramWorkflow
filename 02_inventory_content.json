@@ -14,12 +14,12 @@
     {
       "kanji": "",
       "romaji": "Commercial",
-      "english": "Intake | Validation | Prioritization",
+      "english": "Process Order | Delivery | Return to Plant",
       "cards": [
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "D1 Intake Form",
+          "name": "Receive and Process Order",
           "trigger": "A request arrives through your chosen intake channel.",
           "features": [
             "Collect project scope and owner details",
@@ -43,7 +43,7 @@
         {
           "id": "PLANNED",
           "status": "pending",
-          "name": "D2 Qualification Review",
+          "name": "Fulfil Order",
           "trigger": "The team reviews fit, effort, and delivery timing.",
           "features": [
             "Record qualification notes",
@@ -66,9 +66,33 @@
       ]
     },
     {
+          "id": "ACTIVE",
+          "status": "active",
+          "name": "Credit Notes and Compute Gains",
+          "trigger": "A request arrives through your chosen intake channel.",
+          "features": [
+            "Collect project scope and owner details",
+            "Assign a request reference number",
+            "Save progress before final submission"
+          ],
+          "approval": [
+            { "role": "auto", "label": "Create request" },
+            { "role": "owner", "label": "Fill intake details" },
+            { "role": "review", "label": "Validate completeness" }
+          ],
+          "data_outputs": [
+            "Request summary",
+            "Open intake queue"
+          ],
+          "tags": [
+            { "text": "Live", "bg": "#E3F0E6", "color": "#2E6A3D" },
+            { "text": "Editable", "bg": "#F9EEDC", "color": "#B96B13" }
+          ]
+        },
+    {
       "kanji": "",
       "romaji": "Industrial",
-      "english": "Scope | Owners | Schedule",
+      "english": "Process Order | Delivery | Return to Plant",
       "cards": [
         {
           "id": "ACTIVE",
@@ -92,13 +116,62 @@
             { "text": "Core", "bg": "#DCEAF5", "color": "#1E4E79" },
             { "text": "Reusable", "bg": "#E3F0E6", "color": "#2E6A3D" }
           ]
+        },
+        {
+          "id": "PLANNED",
+          "status": "pending",
+          "name": "Fulfil Order",
+          "trigger": "The team reviews fit, effort, and delivery timing.",
+          "features": [
+            "Record qualification notes",
+            "Highlight blockers and dependencies",
+            "Route to the next owner"
+          ],
+          "approval": [
+            { "role": "owner", "label": "Prepare context" },
+            { "role": "manager", "label": "Approve direction" }
+          ],
+          "data_outputs": [
+            "Qualified request list",
+            "Decision notes"
+          ],
+          "tags": [
+            { "text": "Template", "bg": "#DCEAF5", "color": "#1E4E79" },
+            { "text": "Replace Me", "bg": "#F9EEDC", "color": "#B96B13" }
+          ]
+        }
+      ]
+    },
+    {
+          "id": "ACTIVE",
+          "status": "active",
+          "name": "Credit Notes and Compute Gains",
+          "trigger": "A request arrives through your chosen intake channel.",
+          "features": [
+            "Collect project scope and owner details",
+            "Assign a request reference number",
+            "Save progress before final submission"
+          ],
+          "approval": [
+            { "role": "auto", "label": "Create request" },
+            { "role": "owner", "label": "Fill intake details" },
+            { "role": "review", "label": "Validate completeness" }
+          ],
+          "data_outputs": [
+            "Request summary",
+            "Open intake queue"
+          ],
+          "tags": [
+            { "text": "Live", "bg": "#E3F0E6", "color": "#2E6A3D" },
+            { "text": "Editable", "bg": "#F9EEDC", "color": "#B96B13" }
+          ]
         }
       ]
     },
     {
       "kanji": "",
       "romaji": "Dealer",
-      "english": "Build | Review | Readiness",
+      "english": "Process Order | Delivery/Pickup | Invoice",
       "cards": [
         {
           "section": "Execution Checklist",
@@ -171,7 +244,7 @@
     {
       "kanji": "",
       "romaji": "Retail",
-      "english": "Approval | Publish | Support",
+      "english": "Process Order | Delivery/Pickup | Collect Payment",
       "cards": [
         {
           "id": "PLANNED",
@@ -201,7 +274,7 @@
     {
       "kanji": "",
       "romaji": "Company-Wide",
-      "english": "Feedback | Enhancements | Next Iteration",
+      "english": "Purchase Order | Stock Transfer | Refill | Floor Stock",
       "cards": [
         {
           "id": "ACTIVE",
@@ -231,7 +304,7 @@
   ],
   "cross_stage": {
     "id": "X1",
-    "name": "Company-Wide",
+    "name": "Others",
     "description": "Processes involving Company-wide operations.",
     "features": [
       "Track blockers across the full workflow",
