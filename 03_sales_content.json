@@ -13,7 +13,7 @@
   "stages": [
     {
       "kanji": "",
-      "romaji": "Discovery",
+      "romaji": "Commercial",
       "english": "Intake | Validation | Prioritization",
       "cards": [
         {
@@ -41,7 +41,7 @@
           ]
         },
         {
-          "id": "PLANNED",
+          "id": "Industrial",
           "status": "pending",
           "name": "D2 Qualification Review",
           "trigger": "The team reviews fit, effort, and delivery timing.",
