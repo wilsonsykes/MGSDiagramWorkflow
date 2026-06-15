@@ -309,7 +309,6 @@
         "C3.2 Fulfil Order:",
         "Order fulfillment procedures",
         "C3.3 Compute Operational Gains:",
-        "
         "Commission calculations",
         "ALERT: Cylinder brand switching"
       ]
@@ -333,7 +332,7 @@
         "Plant Manager receives the Purchased Lorry Trucks XX and gets the 📜DR and 📜Invoice from delivery team.",
         "C5.1.2 Plant Manager fills up 📜Receiving Report (RR), and unloads contents to Storage Tank.",
         "C5.1.3 Plant Staff measures content volume using gauge and takes photo of the gauge. Makes 📜report.",
-         "  C5.1.3.1 Changes in the qty are reported after the 📜Receiving Report.",
+        "C5.1.3.1 Changes in the qty are reported after the 📜Receiving Report.",
         "C5.1.4 Stock Transfer: Gas content is refilled from Storage Tank to cylinders following FIFO process. Filled cylinders are located in the 'Floor Stock'.",
         "C5.1.5 Use 📱Google apps for refilling cylinders.",
         "2 Storage Locations: Tank 1 and Tank2",
