@@ -41,7 +41,7 @@
           ]
         },
         {
-          "id": "Industrial",
+          "id": "ACTIVE",
           "status": "pending",
           "name": "D2 Qualification Review",
           "trigger": "The team reviews fit, effort, and delivery timing.",
@@ -71,7 +71,7 @@
       "english": "Scope | Owners | Schedule",
       "cards": [
         {
-          "id": "Dealer",
+          "id": "ACTIVE",
           "status": "core",
           "name": "P1 Delivery Plan",
           "trigger": "A qualified item moves into planning.",
@@ -144,7 +144,7 @@
           "note": "This section block is optional. Use it when you want a detailed checklist inside the same stage layout."
         },
         {
-          "id": "Retail",
+          "id": "ACTIVE",
           "status": "pending",
           "name": "E1 Build Workstream",
           "trigger": "Planning is approved and work begins.",
@@ -174,7 +174,7 @@
       "english": "Approval | Publish | Support",
       "cards": [
         {
-          "id": "Company-Wide",
+          "id": "ACTIVE",
           "status": "pending",
           "name": "L1 Release Approval",
           "trigger": "The team completes execution and requests release approval.",
@@ -200,7 +200,7 @@
     },
     {
       "kanji": "",
-      "romaji": "Optimization",
+      "romaji": "Company-Wide",
       "english": "Feedback | Enhancements | Next Iteration",
       "cards": [
         {
