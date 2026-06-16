@@ -290,11 +290,19 @@
       ]
     },
     {
-      "english": "Optimization pain points",
+      "english": "Company-wide pain points",
       "kanji": "",
       "pain_points": [
-        "Feedback is not captured consistently",
-        "Next-step ownership is unclear"
+        "C5.1 Sales Reports:",
+        "C5.1.1 IT Head prints Sales Performance Report (SPR)- bi-weekly or monthly depending on inventory volume",
+        "C5.1.2 SPR fields: sales per kg, total sales, net sales, cost of sales. with formula. Gross Profit Margin per kg and total GPM.", 
+        "C5.2 Pricing Matrix:",
+        "C5.2.1 MGC LPG Pricing Matrix dashboard: Decide on the doneprices of gas for different sales avenues. 1-3x a month General Meeting",
+        "C5.2.2 Sales Price, MPL, Total Cost (Acq Cost + Hauling), kg. Avenues: Commercial to Retail and semi-dealers.",
+        "C5.2.4 MPL volume discounts for different radiuses",
+        "C5.2.5 End-User Pricing: SRP and competitors pricing comparison",
+        "C5.2.6 Price Cascade Process:,"
+        "C5.2.6.1 
       ]
     }
   ],
