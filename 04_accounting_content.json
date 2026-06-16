@@ -267,7 +267,10 @@
         "Print summary of Aged Receivables",
         "Check summary table of amounts for bank reconciliation",
         "Resolve customer disputes",
-        "Check and print summary of Write-off/Loss Accounts"
+        "Check and print summary of Write-off/Loss Accounts",
+        "C1.2.1 Prepare Incentive in Payroll (15th and 30th):",
+        "C1.2.1.1 Prepare Incentive template for Commercial and Retail. Use LUT forms, (check 2.7kg, 11kg, 50kg) to balance empty and field cylinders data.",
+        "NIL"
       ]
     },
     {
