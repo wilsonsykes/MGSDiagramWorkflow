@@ -15,6 +15,72 @@ from datetime import datetime
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 PAGES_FILE = os.path.join(SCRIPT_DIR, "workflow_pages.json")
 CONTROL_FILE = os.path.join(SCRIPT_DIR, "workflow_control.json")
+TERMS_FILE = os.path.join(SCRIPT_DIR, "cross_reference_terms.txt")
+
+# Maps category name in terms file → (tab key in index.html, target HTML page)
+_CAT_MAP = {
+    'subprocess': ('subprocess', 'subprocess.html'),
+    'form':       ('forms',      'forms.html'),
+    'personnel':  ('personnel',  'personnel.html'),
+}
+
+
+def load_cross_terms(path):
+    """Load cross-reference terms from cross_reference_terms.txt."""
+    terms = []
+    if not os.path.exists(path):
+        return terms
+    with open(path, 'r', encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            parts = [p.strip() for p in line.split('|')]
+            if len(parts) < 2:
+                continue
+            term = parts[0]
+            cat = parts[1].lower()
+            if cat not in _CAT_MAP:
+                continue
+            tab_key, page = _CAT_MAP[cat]
+            slug = re.sub(r'[^a-z0-9]+', '-', term.lower()).strip('-')
+            anchor_id = f'{cat}-{slug}'
+            terms.append({'term': term, 'category': cat, 'tab_key': tab_key,
+                          'page': page, 'slug': slug, 'anchor_id': anchor_id})
+    # Longest terms first so multi-word phrases match before shorter sub-phrases
+    terms.sort(key=lambda t: -len(t['term']))
+    return terms
+
+
+def link_and_esc(text, cross_terms):
+    """HTML-escape text then wrap matched cross-reference terms in hyperlinks."""
+    escaped = htmlmod.escape(str(text))
+    if not cross_terms:
+        return escaped
+    for t in cross_terms:
+        esc_term = htmlmod.escape(t['term'])
+        pattern = re.compile(
+            r'(?<![A-Za-z])(' + re.escape(esc_term) + r')(?![A-Za-z])',
+            re.IGNORECASE
+        )
+        tab_key   = t['tab_key']
+        anchor_id = t['anchor_id']
+        page      = t['page']
+        cat       = t['category']
+
+        def make_repl(page=page, anchor_id=anchor_id, tab_key=tab_key, cat=cat, esc_term=esc_term):
+            def repl(m):
+                return (
+                    f'<a href="{page}#{anchor_id}" class="xref xref-{cat}" '
+                    f'onclick="if(window.parent&amp;&amp;window.parent.activateTabById)'
+                    f'{{window.parent.activateTabById(&apos;{tab_key}&apos;,&apos;{anchor_id}&apos;);return false}}" '
+                    f'title="{cat.capitalize()}: {esc_term}">'
+                    f'{m.group(1)}</a>'
+                )
+            return repl
+
+        escaped = pattern.sub(make_repl(), escaped)
+    return escaped
 
 
 def load_json(path):
@@ -137,7 +203,7 @@ def render_section_block(block):
     return h
 
 
-def render_html(content, control):
+def render_html(content, control, cross_terms=None):
     colors = control.get('colors', {})
     chip_colors = control.get('chip_colors', {})
     badge_styles = control.get('badge_styles', {})
@@ -262,6 +328,11 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica 
 .metric-lbl{{font-size:12px;font-weight:600;color:var(--text-mid);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}}
 .metric-sub{{font-size:12px;color:var(--text-light);margin-top:1px}}
 .footer{{padding:18px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-light);background:var(--bg-alt);margin-top:20px}}
+.xref{{text-decoration:underline;text-decoration-style:dotted;font-weight:700;cursor:pointer;transition:opacity .15s}}
+.xref:hover{{opacity:.72;text-decoration-style:solid}}
+.xref-form{{color:#0F766E}}
+.xref-subprocess{{color:#1E4E79}}
+.xref-personnel{{color:#6F3CC3}}
 @media print{{.topnav,.ctrl-btns,.footer button{{display:none!important}}.stage-body,.pcard-body{{max-height:none!important}}.stage-section,.cross-section{{page-break-inside:avoid;box-shadow:none}}}}
 @media(max-width:900px){{.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}}.two-col{{flex-direction:column}}.future-col{{border-right:none;border-bottom:1px dashed var(--border-light)}}.det-grid{{grid-template-columns:1fr}}.topnav{{gap:12px}}.nav-link{{font-size:10.5px}}}}
 </style>
@@ -297,7 +368,7 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica 
         out += f'      <div class="manual-col">\n        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">{esc(manual_sec.get("tag", ""))}</span></div>\n        <div class="pain-list">\n'
         if i - 1 < len(manual_stages):
             for pp in manual_stages[i - 1].get('pain_points', []):
-                out += f'          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>{esc(pp)}</span></div>\n'
+                out += f'          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>{link_and_esc(pp, cross_terms)}</span></div>\n'
         out += '        </div>\n      </div>\n    </div></div>\n</section>\n\n'
 
     if cross:
@@ -371,6 +442,12 @@ def generate(selected_key=None):
             pass
         return 1
 
+    cross_terms = load_cross_terms(TERMS_FILE)
+    if cross_terms:
+        print(f"  [OK] cross_reference_terms.txt — {len(cross_terms)} terms loaded")
+    else:
+        print("  [INFO] cross_reference_terms.txt not found or empty — no cross-links applied")
+
     if selected_key:
         pages = [page for page in pages if page.get('key') == selected_key]
         if not pages:
@@ -393,7 +470,7 @@ def generate(selected_key=None):
             print(f"  [ERROR] {content_file}: {e}")
             return 1
 
-        html = render_html(content, control)
+        html = render_html(content, control, cross_terms)
         output_path = os.path.join(SCRIPT_DIR, output_file)
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(html)

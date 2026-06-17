@@ -106,6 +106,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .metric-lbl{font-size:12px;font-weight:600;color:var(--text-mid);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
 .metric-sub{font-size:12px;color:var(--text-light);margin-top:1px}
 .footer{padding:18px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--text-light);background:var(--bg-alt);margin-top:20px}
+.xref{text-decoration:underline;text-decoration-style:dotted;font-weight:700;cursor:pointer;transition:opacity .15s}
+.xref:hover{opacity:.72;text-decoration-style:solid}
+.xref-form{color:#0F766E}
+.xref-subprocess{color:#1E4E79}
+.xref-personnel{color:#6F3CC3}
 @media print{.topnav,.ctrl-btns,.footer button{display:none!important}.stage-body,.pcard-body{max-height:none!important}.stage-section,.cross-section{page-break-inside:avoid;box-shadow:none}}
 @media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.two-col{flex-direction:column}.future-col{border-right:none;border-bottom:1px dashed var(--border-light)}.det-grid{grid-template-columns:1fr}.topnav{gap:12px}.nav-link{font-size:10.5px}}
 </style>

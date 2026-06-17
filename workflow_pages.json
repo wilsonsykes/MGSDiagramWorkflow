@@ -1,5 +1,5 @@
 {
-  "_README": "Per-page source map for the tabbed workflow site. Each entry links one editable JSON source file to one generated HTML page.",
+  "_README": "Per-page source map for the tabbed workflow site. Each entry links one editable JSON source file to one generated HTML page. The subprocess/forms/personnel pages are standalone HTML files (not generated) — they have no content_file entry.",
   "pages": [
     {
       "key": "main",
@@ -25,5 +25,10 @@
       "content_file": "04_accounting_content.json",
       "output_file": "accounting.html"
     }
+  ],
+  "reference_tabs": [
+    { "key": "subprocess", "label": "Subprocess", "output_file": "subprocess.html", "note": "Standalone — edit subprocess.html directly." },
+    { "key": "forms",      "label": "Forms",      "output_file": "forms.html",      "note": "Standalone — edit forms.html directly." },
+    { "key": "personnel",  "label": "Personnel",  "output_file": "personnel.html",  "note": "Standalone — edit personnel.html directly." }
   ]
 }

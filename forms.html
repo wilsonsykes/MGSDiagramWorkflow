@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forms &amp; Documents Index</title>
+<style>
+:root{--accent:#1E4E79;--accent-light:#DCEAF5;--accent-dark:#163A5A;--green:#2E6A3D;--green-light:#E3F0E6;--orange:#B96B13;--orange-light:#F9EEDC;--purple:#6F3CC3;--purple-light:#EFE7FB;--teal:#0F766E;--teal-light:#DDF5F2;--bg:#FFFFFF;--bg-alt:#F6F8FB;--border:#D8DEE8;--border-light:#E8ECF2;--text:#142033;--text-mid:#445066;--text-light:#6B7484;--shadow:0 1px 3px rgba(20,32,51,.07),0 1px 2px rgba(20,32,51,.05)}
+*{margin:0;padding:0;box-sizing:border-box}html,body{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border-light);padding:10px 28px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.topbar-logo{font-size:13px;font-weight:900;color:var(--accent-dark);letter-spacing:.8px;text-transform:uppercase}
+.topbar-badge{font-size:10px;font-weight:800;padding:3px 10px;border-radius:999px;background:var(--green-light);color:var(--green);border:1px solid #B9D7C0;letter-spacing:.5px;text-transform:uppercase}
+.topbar-hint{margin-left:auto;font-size:11px;color:var(--text-light)}
+.search-bar{padding:12px 28px 0}
+.search-input{width:100%;max-width:520px;padding:8px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--text);background:var(--bg-alt);outline:none;transition:border-color .15s}
+.search-input:focus{border-color:var(--green)}
+.page-header{padding:22px 28px 14px}
+.page-header h1{font-size:20px;font-weight:800;color:var(--accent-dark);margin-bottom:4px}
+.page-header p{font-size:13px;color:var(--text-mid);max-width:720px;line-height:1.6}
+.how-to{margin:0 28px 16px;padding:10px 14px;background:var(--green-light);border:1px solid #B9D7C0;border-radius:8px;font-size:12px;color:var(--green);line-height:1.6}
+.how-to strong{font-weight:800}
+.terms-list{padding:0 28px 32px;display:flex;flex-direction:column;gap:8px}
+.term-card{border:1px solid var(--border);border-radius:8px;background:var(--bg);box-shadow:var(--shadow);overflow:hidden;transition:border-color .15s,box-shadow .15s;scroll-margin-top:90px}
+.term-card:hover{border-color:#b8c9de;box-shadow:0 3px 10px rgba(20,32,51,.09)}
+.term-card.open{border-color:var(--green);box-shadow:0 4px 16px rgba(46,106,61,.13)}
+.term-card.xref-highlight{outline:3px solid var(--green);background:var(--green-light)}
+:target{outline:3px solid var(--green);outline-offset:2px}
+.term-bar{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;user-select:none}
+.term-name{font-size:13px;font-weight:700;color:var(--text);flex:1}
+.term-tag{font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;background:var(--green-light);color:var(--green);border:1px solid #B9D7C0;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap}
+.term-refs-chips{display:flex;gap:5px;flex-shrink:0}
+.ref-chip{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.3px}
+.ref-inv{background:#DCEAF5;color:#1E4E79;border:1px solid #BFD6EB}
+.ref-sal{background:#E3F0E6;color:#2E6A3D;border:1px solid #B9D7C0}
+.ref-acg{background:#EFE7FB;color:#6F3CC3;border:1px solid #D8C7F4}
+.term-arrow{font-size:11px;color:#9ca3af;transition:transform .18s ease;flex-shrink:0}
+.term-card.open .term-arrow{transform:rotate(180deg);color:var(--green)}
+.term-body{max-height:0;overflow:hidden;transition:max-height .3s ease;border-top:0 solid transparent}
+.term-card.open .term-body{max-height:400px;border-top:1px dashed var(--border-light)}
+.term-inner{padding:12px 16px 14px;background:var(--bg-alt);display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.td-label{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.1px;color:var(--text-light);margin-bottom:4px}
+.td-value{font-size:12px;color:var(--text-mid);line-height:1.55}
+.hidden{display:none!important}
+@media(max-width:700px){.term-inner{grid-template-columns:1fr}.topbar-hint{display:none}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-logo">MGC Workflow</div>
+  <span class="topbar-badge">Forms &amp; Documents</span>
+  <span class="topbar-hint">Click any card to expand · Terms link back from Inventory / Sales / Accounting</span>
+</div>
+
+<div class="page-header">
+  <h1>Forms &amp; Documents Index</h1>
+  <p>All forms and documents referenced across the Inventory, Sales, and Accounting workflow tabs. Click a card to read the description, purpose, and which workflow tabs use that document. Terms highlighted in green in Inventory, Sales, and Accounting pages link directly here.</p>
+</div>
+
+<div class="how-to">
+  <strong>How cross-links work:</strong> When a form or document name is highlighted and underlined in an Inventory, Sales, or Accounting page, clicking it will switch to this tab and scroll to that entry. To add or remove a form from the link list, edit <code>cross_reference_terms.txt</code> then run <code>python workflow_generate.py</code>.
+</div>
+
+<div class="search-bar">
+  <input class="search-input" type="text" placeholder="Filter forms and documents…" oninput="filterCards(this.value)" />
+</div>
+
+<div class="terms-list" id="terms-list">
+
+  <div class="term-card" id="form-delivery-receipt">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Delivery Receipt (DR)</span>
+      <span class="term-tag">Form</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">The primary delivery document that accompanies each cylinder delivery. The Driver carries the DR for multiple clients. The client signs the DR on receipt. The signed DR is submitted to Accounting for General Ledger reconciliation.</div></div>
+      <div><div class="td-label">Usage</div><div class="td-value">Warehouse generates 2 DRs and 2 CRs per delivery · Driver carries DR to client · Client signs · Driver submits signed DR to Acctg · Acctg reconciles GL with signed DR and AR</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="form-sales-order-form">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Sales Order Form</span>
+      <span class="term-tag">Form</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Created by the Sales Rep for dealer and retail client orders. Includes the delivery or pickup date. Used by the Delivery Head to schedule routes. Signed by the client if pickup with terms.</div></div>
+      <div><div class="td-label">Usage</div><div class="td-value">Sales Rep creates Sales Order Form · Specifies delivery/pickup date · Delivery Head reads to schedule route · Client signs for pickup with terms</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="form-sales-order">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Sales Order</span>
+      <span class="term-tag">Form</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Primary commercial order document. The Delivery Head reads the Sales Order to schedule vehicle, capacity, and route. Also collected by Accounting together with the DR and Invoice for receivables reconciliation.</div></div>
+      <div><div class="td-label">Usage</div><div class="td-value">Delivery Head uses Sales Order to schedule delivery · Accounting collects Sales Order + DR + Invoice for reconciliation</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="form-picklist">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Picklist</span>
+      <span class="term-tag">Form</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Warehouse picking document generated per order. Lists the specific cylinders (type, size, quantity) to be picked from storage for a delivery. Generated before the Delivery Receipt.</div></div>
+      <div><div class="td-label">Usage</div><div class="td-value">Warehouse generates Picklist after order confirmation · Staff picks cylinders per Picklist · Feeds into DR generation</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="form-credit-notes">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Credit Notes (CR)</span>
+      <span class="term-tag">Form</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Document issued to the client recording the cylinder weight residue credits. Contains the cylinder serial number and weight residue. Warehouse generates 2 DRs and 2 CRs per delivery. Threshold: 1–3 kg residue triggers roundup/rounddown classification.</div></div>
+      <div><div class="td-label">Usage</div><div class="td-value">Pahinante records weight · Driver provides Credit Notes to client with cylinder serial # and weight residue · Submitted to Accounting</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="form-general-ledger">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">General Ledger</span>
+      <span class="term-tag">Form</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">The central accounting ledger entry updated for each delivery and financial transaction. Acctg Staff reconciles the General Ledger with the signed DR and AR after each delivery cycle.</div></div>
+      <div><div class="td-label">Usage</div><div class="td-value">Warehouse submits DR to Accounting to make General Ledger and Inventory entry · Acctg Staff reconciles GL with signed DR and AR</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="form-receiving-report">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Receiving Report (RR)</span>
+      <span class="term-tag">Form</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Document filled by the Plant Manager when a Lorry Truck delivery arrives from the Refinery Supplier. Records the volume unloaded to the Storage Tank. Any changes in quantity after the RR are reported separately.</div></div>
+      <div><div class="td-label">Usage</div><div class="td-value">Plant Manager fills RR on truck arrival · Documents volume unloaded · Post-RR changes reported separately · Feeds into inventory records</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="form-purchase-order">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Purchase Order (PO)</span>
+      <span class="term-tag">Form</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Procurement document forwarded by the Purchaser to the Refinery Supplier to order gas stock. Triggers the inbound delivery process at the plant, which generates the Receiving Report.</div></div>
+      <div><div class="td-label">Usage</div><div class="td-value">Purchaser forwards PO to Refinery Supplier · Supplier schedules Lorry Truck delivery · Plant Manager receives and logs in RR</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="form-invoice">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Invoice</span>
+      <span class="term-tag">Form</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Billing document issued to clients. Collected by Accounting together with the DR and Sales Order as a package for receivables reconciliation. Linked to the Accounts Receivable subprocess.</div></div>
+      <div><div class="td-label">Usage</div><div class="td-value">Issued on delivery · Accounting collects DR + Sales Order + Invoice · Used for monthly receivables summary and bank reconciliation</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="form-sales-performance-report">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Sales Performance Report (SPR)</span>
+      <span class="term-tag">Form</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Bi-weekly or monthly sales report printed by IT Head depending on inventory volume. Fields: sales per kg, total sales, net sales, cost of sales (with formula), Gross Profit Margin per kg and total GPM.</div></div>
+      <div><div class="td-label">Usage</div><div class="td-value">IT Head prints SPR · Shared with management · Informs Pricing Matrix decisions</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="form-lut-forms">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">LUT Forms</span>
+      <span class="term-tag">Form</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Look-Up Table forms used for incentive computation. Cover cylinder sizes 2.7 kg, 11 kg, and 50 kg. Used to balance empty and field cylinder data when preparing the Incentive template for payroll.</div></div>
+      <div><div class="td-label">Usage</div><div class="td-value">Accounting uses LUT forms (check 2.7kg, 11kg, 50kg) to balance empty and field cylinders · Feeds into Incentive template · Used for Commercial and Retail payroll</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="form-incentive-template">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Incentive Template</span>
+      <span class="term-tag">Form</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Template used for bi-monthly (15th and 30th) payroll incentive computation for Commercial and Retail channels. Populated using LUT forms and cylinder balance data.</div></div>
+      <div><div class="td-label">Usage</div><div class="td-value">Prepare Incentive template for Commercial and Retail · Use LUT forms to balance cylinder data · Encode in payroll on 15th and 30th</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="form-aged-receivables">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Aged Receivables</span>
+      <span class="term-tag">Form</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Summary report of outstanding client receivables organized by age and duration. Printed monthly as part of the Accounts Receivable subprocess to identify overdue accounts.</div></div>
+      <div><div class="td-label">Usage</div><div class="td-value">Print summary of Aged Receivables monthly · Review overdue accounts · Escalate for dispute resolution or write-off</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="form-payroll-summary">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Payroll Summary</span>
+      <span class="term-tag">Form</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Monthly payroll summary document for all staff. Consolidates all incentive computations and salary data. Used as the official payroll record for the period.</div></div>
+      <div><div class="td-label">Usage</div><div class="td-value">Prepared after Incentive template is finalized · Covers all staff · Released on the 15th and 30th of each month</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="form-budget-pnl">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Budget PNL</span>
+      <span class="term-tag">Form</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Budgeted Profit and Loss report for industrial projects. Sets the expected financial targets against which the Actual PNL is compared during project review.</div></div>
+      <div><div class="td-label">Usage</div><div class="td-value">Prepared at project start · Compared against Actual PNL during review · Part of Industrial Projects tracking subprocess</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="form-actual-pnl">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Actual PNL</span>
+      <span class="term-tag">Form</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Actual Profit and Loss performance report for industrial projects. Compared against the Budget PNL to measure project financial performance.</div></div>
+      <div><div class="td-label">Usage</div><div class="td-value">Updated as project progresses · Compared with Budget PNL · Part of Industrial Projects tracking subprocess</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="form-mgc-lpg-pricing-matrix">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">MGC LPG Pricing Matrix</span>
+      <span class="term-tag">Form</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Dashboard document for deciding gas prices across all sales avenues. Reviewed 1–3 times per month in a General Meeting. Covers Sales Price, MPL, Total Cost (Acq Cost + Hauling), kg per avenue, and volume discounts for different radii.</div></div>
+      <div><div class="td-label">Avenues</div><div class="td-value">Commercial to Retail and semi-dealers · MPL volume discounts by radius · End-user SRP vs. competitors</div></div>
+    </div></div>
+  </div>
+
+</div><!-- /terms-list -->
+
+<script>
+function toggle(bar){var card=bar.closest('.term-card');card.classList.toggle('open')}
+
+function filterCards(val){
+  var q=val.trim().toLowerCase();
+  document.querySelectorAll('.term-card').forEach(function(card){
+    var name=card.querySelector('.term-name').textContent.toLowerCase();
+    card.classList.toggle('hidden',q&&name.indexOf(q)===-1);
+  });
+}
+
+function scrollToAnchor(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  el.classList.add('open','xref-highlight');
+  el.scrollIntoView({behavior:'smooth',block:'center'});
+  setTimeout(function(){el.classList.remove('xref-highlight')},2200);
+}
+
+(function(){
+  var hash=window.location.hash.slice(1);
+  if(!hash)return;
+  var el=document.getElementById(hash);
+  if(el){el.classList.add('open');setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'})},120)}
+})();
+</script>
+</body>
+</html>

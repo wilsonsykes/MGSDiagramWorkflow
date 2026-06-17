@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subprocess Index</title>
+<style>
+:root{--accent:#1E4E79;--accent-light:#DCEAF5;--accent-dark:#163A5A;--green:#2E6A3D;--green-light:#E3F0E6;--orange:#B96B13;--orange-light:#F9EEDC;--purple:#6F3CC3;--purple-light:#EFE7FB;--teal:#0F766E;--teal-light:#DDF5F2;--bg:#FFFFFF;--bg-alt:#F6F8FB;--border:#D8DEE8;--border-light:#E8ECF2;--text:#142033;--text-mid:#445066;--text-light:#6B7484;--shadow:0 1px 3px rgba(20,32,51,.07),0 1px 2px rgba(20,32,51,.05)}
+*{margin:0;padding:0;box-sizing:border-box}html,body{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border-light);padding:10px 28px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.topbar-logo{font-size:13px;font-weight:900;color:var(--accent-dark);letter-spacing:.8px;text-transform:uppercase}
+.topbar-badge{font-size:10px;font-weight:800;padding:3px 10px;border-radius:999px;background:var(--teal-light);color:var(--teal);border:1px solid #AADBD6;letter-spacing:.5px;text-transform:uppercase}
+.topbar-hint{margin-left:auto;font-size:11px;color:var(--text-light)}
+.search-bar{padding:12px 28px 0}
+.search-input{width:100%;max-width:520px;padding:8px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--text);background:var(--bg-alt);outline:none;transition:border-color .15s}
+.search-input:focus{border-color:var(--accent)}
+.page-header{padding:22px 28px 14px}
+.page-header h1{font-size:20px;font-weight:800;color:var(--accent-dark);margin-bottom:4px}
+.page-header p{font-size:13px;color:var(--text-mid);max-width:720px;line-height:1.6}
+.how-to{margin:0 28px 16px;padding:10px 14px;background:var(--teal-light);border:1px solid #AADBD6;border-radius:8px;font-size:12px;color:var(--teal);line-height:1.6}
+.how-to strong{font-weight:800}
+.terms-list{padding:0 28px 32px;display:flex;flex-direction:column;gap:8px}
+.term-card{border:1px solid var(--border);border-radius:8px;background:var(--bg);box-shadow:var(--shadow);overflow:hidden;transition:border-color .15s,box-shadow .15s;scroll-margin-top:90px}
+.term-card:hover{border-color:#b8c9de;box-shadow:0 3px 10px rgba(20,32,51,.09)}
+.term-card.open{border-color:var(--accent);box-shadow:0 4px 16px rgba(30,78,121,.13)}
+.term-card.xref-highlight{outline:3px solid var(--accent);background:var(--accent-light)}
+:target{outline:3px solid var(--accent);outline-offset:2px}
+.term-bar{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;user-select:none}
+.term-name{font-size:13px;font-weight:700;color:var(--text);flex:1}
+.term-tag{font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;background:var(--teal-light);color:var(--teal);border:1px solid #AADBD6;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap}
+.term-refs-chips{display:flex;gap:5px;flex-shrink:0}
+.ref-chip{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.3px}
+.ref-inv{background:#DCEAF5;color:#1E4E79;border:1px solid #BFD6EB}
+.ref-sal{background:#E3F0E6;color:#2E6A3D;border:1px solid #B9D7C0}
+.ref-acg{background:#EFE7FB;color:#6F3CC3;border:1px solid #D8C7F4}
+.term-arrow{font-size:11px;color:#9ca3af;transition:transform .18s ease;flex-shrink:0}
+.term-card.open .term-arrow{transform:rotate(180deg);color:var(--accent)}
+.term-body{max-height:0;overflow:hidden;transition:max-height .3s ease;border-top:0 solid transparent}
+.term-card.open .term-body{max-height:400px;border-top:1px dashed var(--border-light)}
+.term-inner{padding:12px 16px 14px;background:var(--bg-alt);display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.td-label{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.1px;color:var(--text-light);margin-bottom:4px}
+.td-value{font-size:12px;color:var(--text-mid);line-height:1.55}
+.td-group{grid-column:1/-1}
+.hidden{display:none!important}
+@media(max-width:700px){.term-inner{grid-template-columns:1fr}.topbar-hint{display:none}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-logo">MGC Workflow</div>
+  <span class="topbar-badge">Subprocess Index</span>
+  <span class="topbar-hint">Click any card to expand · Terms link back from Inventory / Sales / Accounting</span>
+</div>
+
+<div class="page-header">
+  <h1>Subprocess Index</h1>
+  <p>All operational subprocesses referenced across the Inventory, Sales, and Accounting workflow tabs. Click a card to read the description and see which workflow tabs reference that subprocess. Terms highlighted in blue in Inventory, Sales, and Accounting pages link directly here.</p>
+</div>
+
+<div class="how-to">
+  <strong>How cross-links work:</strong> When a subprocess name is highlighted and underlined in an Inventory, Sales, or Accounting page, clicking it will switch to this tab and scroll to that entry. To add or remove a subprocess from the link list, edit <code>cross_reference_terms.txt</code> then run <code>python workflow_generate.py</code>.
+</div>
+
+<div class="search-bar">
+  <input class="search-input" type="text" placeholder="Filter subprocesses…" oninput="filterCards(this.value)" />
+</div>
+
+<div class="terms-list" id="terms-list">
+
+  <div class="term-card" id="subprocess-process-order">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Process Order</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span><span class="ref-chip ref-sal">SAL</span><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Order intake, scheduling, and validation workflow. Begins when a client order arrives through any sales channel and ends when the order is confirmed and queued for fulfilment.</div></div>
+      <div><div class="td-label">Key Steps</div><div class="td-value">Receive client order · Validate cylinder type and quantity · Schedule delivery or pickup · Assign reference number</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-fulfil-order">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Fulfil Order</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Order execution and physical delivery to the client. Covers warehouse picking, driver dispatch, on-site delivery or pickup, and client signature collection.</div></div>
+      <div><div class="td-label">Key Steps</div><div class="td-value">Generate Picklist · Pick cylinders · Dispatch Driver and Pahinante · Deliver/pickup · Collect signed DR · Return empty cylinders</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-invoicing">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Invoicing</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Billing and invoice issuance process. Covers generation of the Invoice document, pairing with the Delivery Receipt and Sales Order, and submission to Accounting for reconciliation.</div></div>
+      <div><div class="td-label">Key Steps</div><div class="td-value">Generate Invoice · Attach to DR and Sales Order · Submit to Accounting · Record in General Ledger</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-compute-commercial-gains">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Compute Commercial Gains</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Commercial sector commission and profit computation. Gathers weigh-in and weigh-out records at both the client site and plant, then records and distributes commissions.</div></div>
+      <div><div class="td-label">Key Steps</div><div class="td-value">Gather weight records · Record in Gsheet and ACPAC · Compute commission · Distribute commission</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-compute-operational-gains">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Compute Operational Gains</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Operational commission tracking and distribution for dealer channel orders. Includes cylinder weight reconciliation and sales commission calculations.</div></div>
+      <div><div class="td-label">Key Steps</div><div class="td-value">Track delivery weights · Calculate per-kg commissions · Distribute to Sales Rep</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-compute-gains">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Compute Gains</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">General commission and gains computation covering all sales channels. Used as a summary step for reconciling total gains per delivery cycle.</div></div>
+      <div><div class="td-label">Key Steps</div><div class="td-value">Aggregate delivery records · Apply commission formula · Generate gains summary</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-commission-distribution">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Commission Distribution</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Calculation and distribution of commissions to field staff and sales personnel. Follows the gains computation step and precedes payroll encoding.</div></div>
+      <div><div class="td-label">Key Steps</div><div class="td-value">Calculate per-person commission · Validate totals · Encode in payroll · Distribute</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-stock-transfer">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Stock Transfer</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Gas content refilling from the Storage Tank to individual cylinders following the FIFO (First-In-First-Out) process. Managed by Plant Staff using the gauge measurement system.</div></div>
+      <div><div class="td-label">Key Steps</div><div class="td-value">Measure tank volume · Refill cylinders FIFO · Document fill quantities · Update inventory records</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-fifo">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">FIFO</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">First-In-First-Out inventory management protocol applied during cylinder refilling. Ensures oldest gas stock is used first to maintain quality and accurate costing.</div></div>
+      <div><div class="td-label">Key Steps</div><div class="td-value">Identify oldest stock (Tank 1 vs Tank 2) · Refill in FIFO order · Track residue type (Regular vs WIWO)</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-pull-out-calendar">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Pull-out Calendar</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Scheduled cylinder retrieval dates at client sites. Coordinates the pull-out of empty or overdue cylinders based on an agreed calendar to maintain cylinder inventory balance.</div></div>
+      <div><div class="td-label">Key Steps</div><div class="td-value">Set pull-out schedule with client · Assign Driver and Pahinante · Retrieve and weigh cylinders · Update inventory</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-sales-reports">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Sales Reports</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Bi-weekly or monthly Sales Performance Report (SPR) generation. IT Head prints the report based on inventory volume; covers sales per kg, total sales, net sales, cost of sales, and Gross Profit Margin.</div></div>
+      <div><div class="td-label">Key Steps</div><div class="td-value">IT Head prints SPR · Review sales per kg and total sales · Compute net sales and GPM · Distribute to management</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-pricing-matrix">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Pricing Matrix</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">LPG price-setting process using the MGC LPG Pricing Matrix dashboard. Held 1–3 times per month in a General Meeting; covers Sales Price, MPL, Total Cost (Acq Cost + Hauling), and kg per avenue.</div></div>
+      <div><div class="td-label">Key Steps</div><div class="td-value">General Meeting · Review acquisition and hauling costs · Set price per avenue · Update Pricing Matrix dashboard</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-price-cascade-process">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Price Cascade Process</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Pricing change communication and rollout to all relevant contacts and channels. Mel emails the updates; Jabert logs audit records; each staff member cascades to their assigned client/channel.</div></div>
+      <div><div class="td-label">Contacts</div><div class="td-value">Mel → email update · Jabert → audit log · Jobert → contact centers/marketing · Mel &amp; Lou → Comm/Bulk · Claire → Retail · Jen → Makati</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-end-user-pricing">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">End-User Pricing</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">SRP and competitor pricing comparison process. Mel and Joebert regularly update competitor prices; the result informs End-User SRP decisions in the Pricing Matrix dashboard.</div></div>
+      <div><div class="td-label">Key Steps</div><div class="td-value">Mel and Joebert gather competitor prices · Update comparison dashboard · Feed into Pricing Matrix meeting</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-accounts-receivable">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Accounts Receivable</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Collection and reconciliation of outstanding client invoices. Includes reviewing monthly summary tables, printing Aged Receivables, bank reconciliation, and resolving customer disputes.</div></div>
+      <div><div class="td-label">Key Steps</div><div class="td-value">Collect DR + Sales Order + Invoice · Check monthly invoice summary · Print Aged Receivables · Bank reconciliation · Resolve disputes</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-financial-statements">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Financial Statements</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Monthly reporting cycle for Profit &amp; Loss Statement, Cash Flow Statement, and Balance Sheet. Each requires all prior entries to be encoded, then tables refreshed and statements printed.</div></div>
+      <div><div class="td-label">Statements</div><div class="td-value">Profit &amp; Loss (PNL) · Cash Flow · Balance Sheet — all refreshed and printed monthly</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-payroll">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Payroll</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Bi-monthly (15th and 30th) payroll and incentive computation. Uses the Incentive template and LUT forms to balance empty and field cylinder data for Commercial and Retail channels.</div></div>
+      <div><div class="td-label">Key Steps</div><div class="td-value">Prepare Incentive template · Apply LUT forms · Validate cylinder counts · Encode in payroll system · Release on 15th &amp; 30th</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-industrial-projects">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Industrial Projects</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Industrial project budget vs. actual PNL and timeline tracking. Produces Budget PNL, Actual PNL, and timeline documents for each industrial engagement.</div></div>
+      <div><div class="td-label">Outputs</div><div class="td-value">Budget PNL · Actual PNL · Timeline document</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="subprocess-bank-reconciliation">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Bank Reconciliation</span>
+      <span class="term-tag">Subprocess</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Description</div><div class="td-value">Matching bank statement records with internal general ledger amounts. Part of the Accounts Receivable workflow; resolved discrepancies are flagged as customer disputes or write-offs.</div></div>
+      <div><div class="td-label">Key Steps</div><div class="td-value">Print bank summary · Match against GL · Identify variances · Resolve disputes or write-off</div></div>
+    </div></div>
+  </div>
+
+</div><!-- /terms-list -->
+
+<script>
+function toggle(bar){var card=bar.closest('.term-card');card.classList.toggle('open')}
+
+function filterCards(val){
+  var q=val.trim().toLowerCase();
+  document.querySelectorAll('.term-card').forEach(function(card){
+    var name=card.querySelector('.term-name').textContent.toLowerCase();
+    card.classList.toggle('hidden',q&&name.indexOf(q)===-1);
+  });
+}
+
+function scrollToAnchor(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  el.classList.add('open','xref-highlight');
+  el.scrollIntoView({behavior:'smooth',block:'center'});
+  setTimeout(function(){el.classList.remove('xref-highlight')},2200);
+}
+
+(function(){
+  var hash=window.location.hash.slice(1);
+  if(!hash)return;
+  var el=document.getElementById(hash);
+  if(el){el.classList.add('open');setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'})},120)}
+})();
+</script>
+</body>
+</html>

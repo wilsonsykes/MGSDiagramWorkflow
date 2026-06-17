@@ -22,6 +22,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .page-tab:hover{transform:translateY(-1px);border-color:var(--accent-dark);background:#fff}
 .page-tab.active{background:var(--accent-dark);color:#fff;border-color:var(--accent-dark);box-shadow:0 8px 18px rgba(30,78,121,.2)}
 .page-tab.main-tab{font-weight:900;text-transform:uppercase;letter-spacing:1px}
+.page-tab.ref-tab{border-color:#b8c9de;font-style:italic}
 .tab-caption{padding:0 4px 14px;font-size:13px;color:var(--text-mid)}
 .frame-card{border:1px solid var(--border);border-radius:22px;background:rgba(255,255,255,.97);box-shadow:var(--shadow);overflow:hidden}
 #page-frame{display:block;width:100%;min-height:1200px;border:0;background:#fff}
@@ -37,11 +38,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
   <header class="shell-header">
     <div class="shell-kicker">Unified Workspace</div>
     <h1>Multi-Page Workflow Website</h1>
-    <p>The live site now opens as a tabbed workspace. The <strong>Main</strong> tab stays bold and emphasized, and each business page has its own editable HTML file so editors always know which page they are changing.</p>
+    <p>The live site now opens as a tabbed workspace. The <strong>Main</strong> tab stays bold and emphasized. The <strong>Subprocess</strong>, <strong>Forms</strong>, and <strong>Personnel</strong> tabs are reference indexes — terms highlighted in Inventory, Sales, and Accounting link directly back to entries in these tabs.</p>
   </header>
 
   <div class="page-tabs" role="tablist" aria-label="Workflow page tabs">
     <button class="page-tab main-tab active" type="button" data-page="main.html" data-key="main" data-caption="Main workflow page powered by <code>main.html</code>.">Main</button>
+    <button class="page-tab ref-tab" type="button" data-page="subprocess.html" data-key="subprocess" data-caption="Subprocess index — all operational subprocesses referenced in the workflow, powered by <code>subprocess.html</code>.">Subprocess</button>
+    <button class="page-tab ref-tab" type="button" data-page="forms.html" data-key="forms" data-caption="Forms &amp; Documents index — all forms and documents referenced in the workflow, powered by <code>forms.html</code>.">Forms</button>
+    <button class="page-tab ref-tab" type="button" data-page="personnel.html" data-key="personnel" data-caption="Personnel directory — all staff referenced in the workflow, powered by <code>personnel.html</code>.">Personnel</button>
     <button class="page-tab" type="button" data-page="inventory.html" data-key="inventory" data-caption="Inventory workflow page powered by <code>inventory.html</code>.">Inventory</button>
     <button class="page-tab" type="button" data-page="sales.html" data-key="sales" data-caption="Sales workflow page powered by <code>sales.html</code>.">Sales</button>
     <button class="page-tab" type="button" data-page="accounting.html" data-key="accounting" data-caption="Accounting workflow page powered by <code>accounting.html</code>.">Accounting</button>
@@ -76,6 +80,25 @@ function activateTab(tab,updateHash){
   pageFrame.src=tab.dataset.page;
   caption.innerHTML=tab.dataset.caption;
   if(updateHash!==false){window.location.hash=tab.dataset.key}
+}
+
+function activateTabById(tabKey,anchorId){
+  var tab=pageLookup[tabKey];
+  if(!tab)return;
+  activateTab(tab,true);
+  pageFrame.addEventListener('load',function handler(){
+    pageFrame.removeEventListener('load',handler);
+    setTimeout(function(){
+      try{
+        var cw=pageFrame.contentWindow;
+        if(cw&&cw.scrollToAnchor){cw.scrollToAnchor(anchorId)}
+        else{
+          var el=pageFrame.contentDocument.getElementById(anchorId);
+          if(el){el.scrollIntoView({behavior:'smooth',block:'center'})}
+        }
+      }catch(e){}
+    },250);
+  });
 }
 
 pageFrame.addEventListener('load',function(){resizeFrame();setTimeout(resizeFrame,150);setTimeout(resizeFrame,600)});

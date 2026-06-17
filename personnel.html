@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personnel Directory</title>
+<style>
+:root{--accent:#1E4E79;--accent-light:#DCEAF5;--accent-dark:#163A5A;--green:#2E6A3D;--green-light:#E3F0E6;--orange:#B96B13;--orange-light:#F9EEDC;--purple:#6F3CC3;--purple-light:#EFE7FB;--teal:#0F766E;--teal-light:#DDF5F2;--bg:#FFFFFF;--bg-alt:#F6F8FB;--border:#D8DEE8;--border-light:#E8ECF2;--text:#142033;--text-mid:#445066;--text-light:#6B7484;--shadow:0 1px 3px rgba(20,32,51,.07),0 1px 2px rgba(20,32,51,.05)}
+*{margin:0;padding:0;box-sizing:border-box}html,body{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border-light);padding:10px 28px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.topbar-logo{font-size:13px;font-weight:900;color:var(--accent-dark);letter-spacing:.8px;text-transform:uppercase}
+.topbar-badge{font-size:10px;font-weight:800;padding:3px 10px;border-radius:999px;background:var(--purple-light);color:var(--purple);border:1px solid #D8C7F4;letter-spacing:.5px;text-transform:uppercase}
+.topbar-hint{margin-left:auto;font-size:11px;color:var(--text-light)}
+.search-bar{padding:12px 28px 0}
+.search-input{width:100%;max-width:520px;padding:8px 14px;border:1px solid var(--border);border-radius:8px;font-size:13px;color:var(--text);background:var(--bg-alt);outline:none;transition:border-color .15s}
+.search-input:focus{border-color:var(--purple)}
+.page-header{padding:22px 28px 14px}
+.page-header h1{font-size:20px;font-weight:800;color:var(--accent-dark);margin-bottom:4px}
+.page-header p{font-size:13px;color:var(--text-mid);max-width:720px;line-height:1.6}
+.how-to{margin:0 28px 16px;padding:10px 14px;background:var(--purple-light);border:1px solid #D8C7F4;border-radius:8px;font-size:12px;color:var(--purple);line-height:1.6}
+.how-to strong{font-weight:800}
+.section-label{padding:8px 28px 4px;font-size:10px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-light)}
+.terms-list{padding:0 28px 32px;display:flex;flex-direction:column;gap:8px}
+.term-card{border:1px solid var(--border);border-radius:8px;background:var(--bg);box-shadow:var(--shadow);overflow:hidden;transition:border-color .15s,box-shadow .15s;scroll-margin-top:90px}
+.term-card:hover{border-color:#b8c9de;box-shadow:0 3px 10px rgba(20,32,51,.09)}
+.term-card.open{border-color:var(--purple);box-shadow:0 4px 16px rgba(111,60,195,.13)}
+.term-card.xref-highlight{outline:3px solid var(--purple);background:var(--purple-light)}
+:target{outline:3px solid var(--purple);outline-offset:2px}
+.term-bar{display:flex;align-items:center;gap:10px;padding:11px 14px;cursor:pointer;user-select:none}
+.term-name{font-size:13px;font-weight:700;color:var(--text);flex:1}
+.term-tag{font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;background:var(--purple-light);color:var(--purple);border:1px solid #D8C7F4;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap}
+.role-chip{font-size:10px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--bg-alt);color:var(--text-mid);border:1px solid var(--border);white-space:nowrap}
+.term-refs-chips{display:flex;gap:5px;flex-shrink:0}
+.ref-chip{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.3px}
+.ref-inv{background:#DCEAF5;color:#1E4E79;border:1px solid #BFD6EB}
+.ref-sal{background:#E3F0E6;color:#2E6A3D;border:1px solid #B9D7C0}
+.ref-acg{background:#EFE7FB;color:#6F3CC3;border:1px solid #D8C7F4}
+.term-arrow{font-size:11px;color:#9ca3af;transition:transform .18s ease;flex-shrink:0}
+.term-card.open .term-arrow{transform:rotate(180deg);color:var(--purple)}
+.term-body{max-height:0;overflow:hidden;transition:max-height .3s ease;border-top:0 solid transparent}
+.term-card.open .term-body{max-height:400px;border-top:1px dashed var(--border-light)}
+.term-inner{padding:12px 16px 14px;background:var(--bg-alt);display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.td-label{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.1px;color:var(--text-light);margin-bottom:4px}
+.td-value{font-size:12px;color:var(--text-mid);line-height:1.55}
+.hidden{display:none!important}
+@media(max-width:700px){.term-inner{grid-template-columns:1fr}.topbar-hint{display:none}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-logo">MGC Workflow</div>
+  <span class="topbar-badge">Personnel Directory</span>
+  <span class="topbar-hint">Click any card to expand · Names link back from Inventory / Sales / Accounting</span>
+</div>
+
+<div class="page-header">
+  <h1>Personnel Directory</h1>
+  <p>All personnel referenced across the Inventory, Sales, and Accounting workflow tabs. Click a card to see the person's role, responsibilities, and which workflow tabs mention them. Names highlighted in purple in Inventory, Sales, and Accounting pages link directly here.</p>
+</div>
+
+<div class="how-to">
+  <strong>How cross-links work:</strong> When a person's name is highlighted and underlined in an Inventory, Sales, or Accounting page, clicking it will switch to this tab and scroll to that entry. To add or remove a name from the link list, edit <code>cross_reference_terms.txt</code> then run <code>python workflow_generate.py</code>.
+</div>
+
+<div class="search-bar">
+  <input class="search-input" type="text" placeholder="Filter personnel…" oninput="filterCards(this.value)" />
+</div>
+
+<div class="section-label">Field &amp; Delivery Staff</div>
+<div class="terms-list" id="terms-list">
+
+  <div class="term-card" id="personnel-driver">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Driver</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Field — Delivery</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Delivery driver responsible for transporting cylinders from the warehouse to client sites and returning empty cylinders to the plant.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Receives DR from Warehouse · Drives to client locations with Pahinante · Collects client-signed DR · Weighs empty cylinders on return · Submits signed DR and AR to Accounting</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-pahinante">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Pahinante</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Field — Delivery Helper</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Delivery helper who accompanies the Driver on all delivery runs. Physically handles the cylinders at the client site and performs weight recording.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Weighs cylinders on-site at client location · Records cylinder measurements · Delivers cylinders to client · Collects empty cylinders for return</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-delivery-head">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Delivery Head</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Operations — Logistics</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Logistics coordinator who reads the Sales Order and schedules all delivery logistics including vehicle assignment, load capacity, and route planning.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Reads Sales Order · Schedules delivery vehicle · Assigns driver and load capacity · Plans delivery route · Coordinates pickup schedules</div></div>
+    </div></div>
+  </div>
+
+</div>
+
+<div class="section-label" style="margin-top:8px">Warehouse &amp; Plant Staff</div>
+<div class="terms-list">
+
+  <div class="term-card" id="personnel-sales-rep">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Sales Rep</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Sales — Dealer/Retail</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Sales representative responsible for dealer and retail channel client orders. Creates the Sales Order Form and coordinates pickup or delivery scheduling.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Creates Sales Order Form with delivery/pickup date · Communicates to Delivery Head · Monitors order fulfilment for dealer clients</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-purchaser">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Purchaser</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Procurement</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Procurement officer responsible for ordering gas stock from the Refinery Supplier and coordinating inbound plant deliveries.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Forwards Purchase Order to Refinery Supplier · Schedules Lorry Truck delivery to plant · Coordinates with Plant Manager for receiving</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-plant-manager">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Plant Manager</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Plant — Management</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Manages plant operations including the receipt of Lorry Truck deliveries, documentation of incoming stock, and oversight of the Storage Tank.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Receives Purchased Lorry Trucks · Gets DR and Invoice from delivery team · Fills Receiving Report · Unloads contents to Storage Tank · Oversees Tank 1 and Tank 2</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-plant-staff">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Plant Staff</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Plant — Operations</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Plant operations staff responsible for measuring gas content volume in storage tanks and documenting inventory changes after each delivery or transfer.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Measures content volume using gauge · Documents volume changes · Reports changes after Receiving Report · Supports Stock Transfer / FIFO process</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-acctg-staff">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Acctg Staff</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Accounting</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Accounting staff who handles the reconciliation of delivery documents against the General Ledger and manages receivables and payroll.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Receives DR from Warehouse to make General Ledger entry · Reconciles GL with signed DR and AR · Handles receivables · Prepares payroll incentives on 15th and 30th</div></div>
+    </div></div>
+  </div>
+
+</div>
+
+<div class="section-label" style="margin-top:8px">Sales &amp; Pricing Team</div>
+<div class="terms-list">
+
+  <div class="term-card" id="personnel-it-head">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">IT Head</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">IT / Reporting</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">IT Head responsible for generating and printing the Sales Performance Report (SPR). Frequency depends on inventory volume — bi-weekly or monthly.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Prints Sales Performance Report (SPR) bi-weekly or monthly · Report covers: sales per kg, total sales, net sales, cost of sales, Gross Profit Margin</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-mel">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Mel</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Sales — Comm/Bulk</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Manages Comm/Bulk client communications and is responsible for emailing updated pricing changes to all contacts after the Pricing Matrix is updated.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Emails updated pricing changes after General Meeting · Manages Commercial/Bulk client accounts · Updates competitor pricing together with Joebert</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-joebert">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Joebert</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Sales — Market Intelligence</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Responsible for monitoring and updating competitor prices in the End-User Pricing comparison. Works alongside Mel in market intelligence gathering.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Updates competitors' prices in End-User Pricing dashboard · Collaborates with Mel on price comparison · Feeds data into Pricing Matrix meetings</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-jabert">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Jabert</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Sales — CODO / Audit</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Maintains audit logs for all pricing changes and manages CODO (Company-Owned, Dealer-Operated) channel communications in the Price Cascade Process.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Records audit logs for every pricing change · Cascades updated prices to CODO contacts · Ensures traceability in the Price Cascade Process</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-jobert">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Jobert</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Sales — Contact Centers</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Handles pricing cascade to contact centers, marketing teams, and cashiers. Ensures internal operational channels receive updated pricing after each Pricing Matrix change.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Cascades prices to contact centers · Updates marketing team · Informs cashiers of new price points</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-lou">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Lou</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Sales — Comm/Bulk</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Manages Commercial and Bulk client communications for the pricing cascade. Works alongside Mel to ensure all Commercial/Bulk accounts receive updated pricing.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Cascades updated prices to Comm/Bulk clients · Co-manages bulk client accounts with Mel</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-claire">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Claire</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Sales — Retail</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Manages retail client communications for the pricing cascade. Responsible for ensuring all retail accounts receive and acknowledge updated price points.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Cascades updated prices to retail clients · Manages retail channel account communications</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-jen">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Jen</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Sales — Makati Accounts</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Dedicated account manager for the Makati territory. Handles pricing cascade and client communications for all Makati-based accounts.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Cascades updated prices to Makati accounts · Manages Makati client relationships and communications</div></div>
+    </div></div>
+  </div>
+
+</div><!-- /terms-list -->
+
+<script>
+function toggle(bar){var card=bar.closest('.term-card');card.classList.toggle('open')}
+
+function filterCards(val){
+  var q=val.trim().toLowerCase();
+  document.querySelectorAll('.term-card').forEach(function(card){
+    var name=card.querySelector('.term-name').textContent.toLowerCase();
+    var role=card.querySelector('.role-chip')?card.querySelector('.role-chip').textContent.toLowerCase():'';
+    card.classList.toggle('hidden',q&&name.indexOf(q)===-1&&role.indexOf(q)===-1);
+  });
+}
+
+function scrollToAnchor(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  el.classList.add('open','xref-highlight');
+  el.scrollIntoView({behavior:'smooth',block:'center'});
+  setTimeout(function(){el.classList.remove('xref-highlight')},2200);
+}
+
+(function(){
+  var hash=window.location.hash.slice(1);
+  if(!hash)return;
+  var el=document.getElementById(hash);
+  if(el){el.classList.add('open');setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'})},120)}
+})();
+</script>
+</body>
+</html>
