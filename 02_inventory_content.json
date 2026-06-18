@@ -91,64 +91,67 @@
     },
     {
       "kanji": "",
-      "romaji": "Industrial",
-      "english": "Process Order | Delivery | Return to Plant",
+      "romaji": "Bulk",
+      "english": "Process Order | Schedule and Delivery | Return to Plant",
       "cards": [
         {
           "id": "ACTIVE",
-          "status": "core",
-          "name": "P1 Delivery Plan",
-          "trigger": "A qualified item moves into planning.",
+          "status": "active",
+          "name": "I2A.1 Prepare and Ship Product from Sales Order",
+          "trigger": "Confirmed Sales Order.",
           "features": [
-            "Define milestones",
-            "Assign owners",
-            "Outline acceptance criteria"
+            "I2A.1.1 Instant Pick List, Delivery Receipt, mobile-access",
+            "I2A.1.2 summary table and individual order formats",
+            "I2A.1.3 Multiple details like location, date timestamps, product S/N",
+            "I2A.1.4 Multi-level user",
+            "I2A.1.5 Gate Pass - manual"
           ],
           "approval": [
             { "role": "owner", "label": "Draft plan" },
             { "role": "manager", "label": "Approve scope" }
           ],
           "data_outputs": [
-            "Planning tracker",
-            "Milestone summary"
+            "Docs from system: Pick List, Delivery Receipt, Charge Invoice (softcopy and pdf formats)",
+            "Written docs: Gate pass',
+            "equivalent system data crawl in Inventory and Accounting modules"
           ],
           "tags": [
-            { "text": "Core", "bg": "#DCEAF5", "color": "#1E4E79" },
-            { "text": "Reusable", "bg": "#E3F0E6", "color": "#2E6A3D" }
+            { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" },
+            { "text": "xx", "bg": "#E3F0E6", "color": "#2E6A3D" }
           ]
         },
         {
-          "id": "PLANNED",
-          "status": "pending",
-          "name": "Fulfil Order",
-          "trigger": "The team reviews fit, effort, and delivery timing.",
+          "id": "MANUAL",
+          "status": "core",
+          "name": "I2A.1 Deliver Order, Return Lorry Tank, Signed Charge Invoice, Client Inventory Report",
+          "trigger": "Printed DR, Charge Invoice with specified delivery date and team.",
           "features": [
-            "Record qualification notes",
-            "Highlight blockers and dependencies",
-            "Route to the next owner"
+            "I2A.2.1 as is current",
+            "I2A.2.2 as is current",
+            "I2A.2.3 Client inventory monitor"
           ],
           "approval": [
             { "role": "owner", "label": "Prepare context" },
             { "role": "manager", "label": "Approve direction" }
           ],
           "data_outputs": [
-            "Qualified request list",
+            "signed",
             "Decision notes"
           ],
           "tags": [
-            { "text": "Template", "bg": "#DCEAF5", "color": "#1E4E79" },
-            { "text": "Replace Me", "bg": "#F9EEDC", "color": "#B96B13" }
+            { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" },
+            { "text": "xx", "bg": "#F9EEDC", "color": "#B96B13" }
           ]
         },
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "Credit Notes and Compute Gains",
-          "trigger": "A request arrives through your chosen intake channel.",
+          "name": "I3A.1 Return to Plant, signed Charge Invoice, monitor sheet",
+          "trigger": "Client signs Charge Invoice and Delivery Receipt",
           "features": [
-            "Collect project scope and owner details",
-            "Assign a request reference number",
-            "Save progress before final submission"
+            "",
+            "I2A.3 Acctg staff confirms Invoice entry, upon receiving signed Charge Invoice and Delivery Receipt Confirm from Delivery Driver",
+            "I2A.3 Review correct collection date and chart of account"
           ],
           "approval": [
             { "role": "auto", "label": "Create request" },
@@ -156,7 +159,7 @@
             { "role": "review", "label": "Validate completeness" }
           ],
           "data_outputs": [
-            "Request summary",
+            "Data",
             "Open intake queue"
           ],
           "tags": [
@@ -172,7 +175,7 @@
       "english": "Process Order | Delivery/Pickup | Invoice",
       "cards": [
         {
-          "section": "Execution Checklist",
+          "section": "I3A.1 Execution Checklist",
           "stage": 3,
           "version": "1.0",
           "phases": [
@@ -217,7 +220,7 @@
         {
           "id": "ACTIVE",
           "status": "pending",
-          "name": "E1 Build Workstream",
+          "name": "I3A.2 Build Workstream",
           "trigger": "Planning is approved and work begins.",
           "features": [
             "Track progress by milestone",
@@ -245,14 +248,14 @@
       "english": "Process Order | Delivery/Pickup | Collect Payment",
       "cards": [
         {
-          "id": "PLANNED",
-          "status": "pending",
-          "name": "L1 Release Approval",
-          "trigger": "The team completes execution and requests release approval.",
+          "id": "ACTIVE",
+          "status": "active",
+          "name": "I4A.1 ",
+          "trigger": "Sets quantity for floor stocks for key periods",
           "features": [
-            "Capture release notes",
-            "Confirm handoff status",
-            "Log go-live decision"
+            "I4A.1.1 ",
+            "I4A.1.2 ",
+            "I4A.1.3 "
           ],
           "approval": [
             { "role": "review", "label": "Check release" },
@@ -271,29 +274,78 @@
     },
     {
       "kanji": "",
-      "romaji": "Company-Wide",
-      "english": "Purchase Order | Stock Transfer | Refill | Floor Stock",
+      "romaji": "Overall",
+      "english": "Reports | Monitoring",
       "cards": [
         {
           "id": "ACTIVE",
           "status": "core",
-          "name": "O1 Improvement Loop",
-          "trigger": "Feedback arrives after launch.",
+          "name": "I5A.1 Daily/Weekly/Monthly Inventory Monitoring Report",
+          "trigger": "Daily data input of warehouse and floor stock location (from/to), customer, transaction (in and out), scheduled/actual timestamps, truck, deliver team",
           "features": [
-            "Track enhancements",
-            "Measure impact",
-            "Feed new items into discovery"
+            "I5A.1.1 Daily/Weekly/Monthly instant, consolidated data",
+            "I5A.1.2 versatile multi-view reports",
+            "I5A.1.3 Mobile-friendly data input"
           ],
           "approval": [
-            { "role": "owner", "label": "Log findings" },
-            { "role": "manager", "label": "Prioritize follow-up" }
+            { "role": "owner", "label": "" },
+            { "role": "manager", "label": "" }
           ],
           "data_outputs": [
-            "Improvement backlog",
-            "Outcome summary"
+            "Inventory per location/per receiving report",
+            "Inv Variances per location Summary",
+            "Inv Adjustment per location Summary"
           ],
           "tags": [
-            { "text": "Iterative", "bg": "#E3F0E6", "color": "#2E6A3D" },
+            { "text": "Odoo Module", "bg": "#E3F0E6", "color": "#2E6A3D" },
+            { "text": "Reusable", "bg": "#DCEAF5", "color": "#1E4E79" }
+          ]
+        },
+        {
+          "id": "ACTIVE",
+          "status": "active",
+          "name": "I5A.2 Inventory Planning and Forecast",
+          "trigger": "Daily data input of warehouse and floor stock location (from/to), customer, transaction (in and out), scheduled/actual timestamps, truck, deliver team",
+          "features": [
+            "I5A.2.1 Daily/Weekly/Monthly instant, consolidated data",
+            "I5A.2.2 versatile multi-view reports",
+            "I5A.2.3 Mobile-friendly data input"
+          ],
+          "approval": [
+            { "role": "owner", "label": "" },
+            { "role": "manager", "label": "" }
+          ],
+          "data_outputs": [
+            "Inventory per location/per receiving report",
+            "Inv Variances per location Summary",
+            "Inv Adjustment per location Summary"
+          ],
+          "tags": [
+            { "text": "Odoo Module", "bg": "#E3F0E6", "color": "#2E6A3D" },
+            { "text": "Reusable", "bg": "#DCEAF5", "color": "#1E4E79" }
+          ]
+        },
+        {
+          "id": "ACTIVE",
+          "status": "active",
+          "name": "I5A.3 Variance Monitoring and Resolving",
+          "trigger": "Daily data input of warehouse and floor stock location (from/to), customer, transaction (in and out), scheduled/actual timestamps, truck, deliver team",
+          "features": [
+            "I5A.3.1 Daily/Weekly/Monthly instant, consolidated data",
+            "I5A.3.2 versatile multi-view reports",
+            "I5A.3.3 Mobile-friendly data input"
+          ],
+          "approval": [
+            { "role": "owner", "label": "" },
+            { "role": "manager", "label": "" }
+          ],
+          "data_outputs": [
+            "Inventory per location/per receiving report",
+            "Inv Variances per location Summary",
+            "Inv Adjustment per location Summary"
+          ],
+          "tags": [
+            { "text": "Odoo Module", "bg": "#E3F0E6", "color": "#2E6A3D" },
             { "text": "Reusable", "bg": "#DCEAF5", "color": "#1E4E79" }
           ]
         }
@@ -302,7 +354,7 @@
   ],
   "cross_stage": {
     "id": "X1",
-    "name": "Company-Wide",
+    "name": "Overall",
     "description": "Processes involving Company-wide operations.",
     "features": [
       "Track blockers across the full workflow",
@@ -353,7 +405,7 @@
       ]
     },
     {
-      "english": "Industrial pain points",
+      "english": "Bulk pain points",
       "kanji": "",
       "pain_points": [
         "C2.1 Process Order: Industrial clients orders selected cylinder tanks.",
