@@ -53,34 +53,52 @@ def load_cross_terms(path):
 
 
 def link_and_esc(text, cross_terms):
-    """HTML-escape text then wrap matched cross-reference terms in hyperlinks."""
+    """HTML-escape text then wrap matched cross-reference terms in hyperlinks.
+
+    Uses a single combined regex pass so that no substitution can accidentally
+    match inside an already-injected <a> tag (which would nest anchors and
+    break the HTML Guard validator).
+    """
     escaped = htmlmod.escape(str(text))
     if not cross_terms:
         return escaped
+
+    # Build lookup: lowercase escaped term → term data
+    term_lookup = {}
+    patterns = []
     for t in cross_terms:
         esc_term = htmlmod.escape(t['term'])
-        pattern = re.compile(
-            r'(?<![A-Za-z])(' + re.escape(esc_term) + r')(?![A-Za-z])',
-            re.IGNORECASE
-        )
-        tab_key   = t['tab_key']
+        key = esc_term.lower()
+        if key not in term_lookup:          # first entry wins (longest already first)
+            term_lookup[key] = t
+            patterns.append(re.escape(esc_term))
+
+    combined = re.compile(
+        r'(?<![A-Za-z])(' + '|'.join(patterns) + r')(?![A-Za-z])',
+        re.IGNORECASE
+    )
+
+    def replace(m):
+        matched = m.group(1)
+        t = term_lookup.get(matched.lower())
+        if not t:
+            return matched
         anchor_id = t['anchor_id']
+        tab_key   = t['tab_key']
         page      = t['page']
         cat       = t['category']
+        esc_term  = htmlmod.escape(t['term'])
+        # Use &#39; for single quotes and avoid curly braces to keep the
+        # attribute value safe for Python's HTMLParser (used by HTML Guard).
+        return (
+            f'<a href="{page}#{anchor_id}" class="xref xref-{cat}" '
+            f'onclick="window.parent.activateTabById'
+            f'&amp;&amp;window.parent.activateTabById(&#39;{tab_key}&#39;,&#39;{anchor_id}&#39;);return false" '
+            f'title="{cat.capitalize()}: {esc_term}">'
+            f'{matched}</a>'
+        )
 
-        def make_repl(page=page, anchor_id=anchor_id, tab_key=tab_key, cat=cat, esc_term=esc_term):
-            def repl(m):
-                return (
-                    f'<a href="{page}#{anchor_id}" class="xref xref-{cat}" '
-                    f'onclick="if(window.parent&amp;&amp;window.parent.activateTabById)'
-                    f'{{window.parent.activateTabById(&apos;{tab_key}&apos;,&apos;{anchor_id}&apos;);return false}}" '
-                    f'title="{cat.capitalize()}: {esc_term}">'
-                    f'{m.group(1)}</a>'
-                )
-            return repl
-
-        escaped = pattern.sub(make_repl(), escaped)
-    return escaped
+    return combined.sub(replace, escaped)
 
 
 def load_json(path):
