@@ -14,17 +14,17 @@
     {
       "kanji": "",
       "romaji": "Commercial",
-      "english": "Intake | Validation | Prioritization",
+      "english": "Collection | Balance | Bank Recon",
       "cards": [
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "D1 Intake Form",
+          "name": "A1A1 D1 Intake Form",
           "trigger": "A request arrives through your chosen intake channel.",
           "features": [
-            "Collect project scope and owner details",
-            "Assign a request reference number",
-            "Save progress before final submission"
+            "A1A1.1 Collect project scope and owner details",
+            "A1A1.2 Assign a request reference number",
+            "A1A1.3 Save progress before final submission"
           ],
           "approval": [
             { "role": "auto", "label": "Create request" },
@@ -43,7 +43,7 @@
         {
           "id": "PLANNED",
           "status": "pending",
-          "name": "D2 Qualification Review",
+          "name": "A1A2 Qualification Review",
           "trigger": "The team reviews fit, effort, and delivery timing.",
           "features": [
             "Record qualification notes",
@@ -67,16 +67,16 @@
     },
     {
       "kanji": "",
-      "romaji": "Industrial",
-      "english": "Scope | Owners | Schedule",
+      "romaji": "Bulk",
+      "english": "Collection | Balance | Bank Recon",
       "cards": [
         {
           "id": "ACTIVE",
           "status": "core",
-          "name": "P1 Delivery Plan",
+          "name": "A2A1 Same as Commercial",
           "trigger": "A qualified item moves into planning.",
           "features": [
-            "Define milestones",
+            "A2A1.1 Define milestones",
             "Assign owners",
             "Outline acceptance criteria"
           ],
@@ -89,8 +89,8 @@
             "Milestone summary"
           ],
           "tags": [
-            { "text": "Core", "bg": "#DCEAF5", "color": "#1E4E79" },
-            { "text": "Reusable", "bg": "#E3F0E6", "color": "#2E6A3D" }
+            { "xx": "Core", "bg": "#DCEAF5", "color": "#1E4E79" },
+            { "xx": "Reusable", "bg": "#E3F0E6", "color": "#2E6A3D" }
           ]
         }
       ]
@@ -98,10 +98,10 @@
     {
       "kanji": "",
       "romaji": "Dealer",
-      "english": "Build | Review | Readiness",
+      "english": "Collection | Balance | Bank Recon",
       "cards": [
         {
-          "section": "Execution Checklist",
+          "section": x",
           "stage": 3,
           "version": "1.0",
           "phases": [
@@ -146,8 +146,8 @@
         {
           "id": "ACTIVE",
           "status": "pending",
-          "name": "E1 Build Workstream",
-          "trigger": "Planning is approved and work begins.",
+          "name": "A3A1.1 Same as Commercial",
+          "trigger": "x.",
           "features": [
             "Track progress by milestone",
             "Log implementation notes",
@@ -162,8 +162,8 @@
             "Readiness summary"
           ],
           "tags": [
-            { "text": "Checklist Compatible", "bg": "#EFE7FB", "color": "#6F3CC3" },
-            { "text": "Sample", "bg": "#F9EEDC", "color": "#B96B13" }
+            { "xx": "Checklist Compatible", "bg": "#EFE7FB", "color": "#6F3CC3" },
+            { "xx": "Sample", "bg": "#F9EEDC", "color": "#B96B13" }
           ]
         }
       ]
@@ -171,12 +171,12 @@
     {
       "kanji": "",
       "romaji": "Retail",
-      "english": "Approval | Publish | Support",
+      "english": "Collection | Balance | Bank Recon",
       "cards": [
         {
-          "id": "PLANNED",
-          "status": "pending",
-          "name": "L1 Release Approval",
+          "id": "ACTIVE",
+          "status": "active",
+          "name": "A4A1 Same as Commercial",
           "trigger": "The team completes execution and requests release approval.",
           "features": [
             "Capture release notes",
@@ -192,17 +192,65 @@
             "Launch approval log"
           ],
           "tags": [
-            { "text": "Pending", "bg": "#F9EEDC", "color": "#B96B13" },
-            { "text": "Replace Me", "bg": "#DCEAF5", "color": "#1E4E79" }
+            { "xx": "Pending", "bg": "#F9EEDC", "color": "#B96B13" },
+            { "xx": "Replace Me", "bg": "#DCEAF5", "color": "#1E4E79" }
           ]
         }
       ]
     },
     {
       "kanji": "",
-      "romaji": "Company-wide",
-      "english": "Feedback | Enhancements | Next Iteration",
+      "romaji": "Overall",
+      "english": "Monitoring | Updates | Reports",
       "cards": [
+        {
+          "id": "ACTIVE",
+          "status": "active",
+          "name": "A5A1 Consolidate and check all relevant data",
+          "trigger": "Request Bi-monthly or Monthly Financial Statements",
+          "features": [
+            "A5A1.1 Versatile, Multi-format 3 Financial Statements and Payroll Summary",
+            "A5A1.2 Can drill into individual summary amounts",
+            "A5A1.3 Instant pdf or excel for further analysis",
+            "A5A1.4 Multi-data Comparison, Multi-channel data separation",
+            "A5A1.5 Budget vs Actual Summaries"
+          ],
+          "approval": [
+            { "role": "owner", "label": "Log findings" },
+            { "role": "manager", "label": "Prioritize follow-up" }
+          ],
+          "data_outputs": [
+            "Monthly, Yearly or period-based 3 Financial Statements",
+            "Ledgers/accounts Reports"
+          ],
+          "tags": [
+            { "Odoo": "Iterative", "bg": "#E3F0E6", "color": "#2E6A3D" },
+            { "Report": "Reusable", "bg": "#DCEAF5", "color": "#1E4E79" }
+          ]
+        },
+        {
+          "id": "ACTIVE",
+          "status": "active",
+          "name": "O1 Improvement Loop",
+          "trigger": "Feedback arrives after launch.",
+          "features": [
+            "Track enhancements",
+            "Measure impact",
+            "Feed new items into discovery"
+          ],
+          "approval": [
+            { "role": "owner", "label": "Log findings" },
+            { "role": "manager", "label": "Prioritize follow-up" }
+          ],
+          "data_outputs": [
+            "Improvement backlog",
+            "Outcome summary"
+          ],
+          "tags": [
+            { "text": "Iterative", "bg": "#E3F0E6", "color": "#2E6A3D" },
+            { "text": "Reusable", "bg": "#DCEAF5", "color": "#1E4E79" }
+          ]
+        },
         {
           "id": "ACTIVE",
           "status": "core",
@@ -261,62 +309,72 @@
       "english": "Commercial pain points",
       "kanji": "",
       "pain_points": [
-        "Receivable",
-        "C1.1.1 Collect DR and Sales Order and Invoice",
-        "Check monthly summary table of invoices for collection",
-        "Print summary of Aged Receivables",
-        "Check summary table of amounts for bank reconciliation",
-        "Resolve customer disputes",
-        "Check and print summary of Write-off/Loss Accounts",
-        "C1.2.1 Prepare Incentive in Payroll (15th and 30th):",
-        "C1.2.1.1 Prepare Incentive template for Commercial and Retail. Use LUT forms, (check 2.7kg, 11kg, 50kg) to balance empty and field cylinders data.",
+        "A5C1 Make Invoice (before delivery):", 
+        "A5C1.1 Check past receivables and dues with the customer",
+        "A5C1.1.1 If customer has past dues, flag the upcoming order", 
+        "A5C1.1.2 If with passable or supervisor-approved past dues, approve the upcoming order",
+        "A5C1.1.3 If no past dues, approve the upcoming order",
+        "A5C2 Update and close Receivables:",
+        "A5C2.1.1 Acctg Staff collect signed DR and Invoice from Delivery Team",
+        "A5C2.1.2 Check monthly summary table of invoices for collection",
+        "A5C2.1.3 Print summary of Aged Receivables",
+        "A5C2.1.4 Check and print summary of Write-off/Loss Accounts",
+        "A5C3 Bank Reconciliation:",
+        "A5C3.1 Update and check summary table of amounts for bank reconciliation",
+        "A5C4 Resolve customer disputes",
+        "A5C4.1 Refer to the Sales Order xxx",
+        "A5C4.2 Submit paper to superior",
+        "A5C5 Payroll Incentive:",
+        "A5C5.1 Prepare Incentive in Payroll (15th and 30th):",
+        "A5C5.2 Prepare Incentive template for Commercial and Retail. Use LUT forms, (check 2.7kg, 11kg, 50kg) to balance empty and field cylinders data.",
         "NIL"
       ]
     },
     {
-      "english": "Industrial pain points",
+      "english": "Bulk pain points",
       "kanji": "",
       "pain_points": [
-        "Scope changes are hard to track",
-        "Owners are assigned too late"
+        "A5C2 Same as Acctg Commercial A5C1-A5C5",
+        "A5C2 Exceptions"
       ]
     },
     {
       "english": "Dealer pain points",
       "kanji": "",
       "pain_points": [
-        "Checklists are scattered across files",
-        "Readiness criteria are inconsistent"
+        "A5C3 Same as Acctg Commercial A5C1-A5C5",
+        "A5C3 Exceptions"
       ]
     },
     {
       "english": "Retail pain points",
       "kanji": "",
       "pain_points": [
-        "Approvals happen over chat",
-        "Release notes are not centralized"
+        "A5C4 Same as Acctg Commercial A5C1-A5C5",
+        "A5C4
+        Exceptions"
       ]
     },
     {
-      "english": "Company-wide pain points",
+      "english": "Overall pain points",
       "kanji": "",
       "pain_points": [
-        "C5.1 Finacial Statements:",
-        "C5.1.1 Profit and Loss Statement:",
-        "C5.1.1.1 Ensure that all entries above are encoded",
-        "C5.1.1.2 Refresh the PNL Table to get the latest report. Print the monthly PNL Statement",
-        "C5.1.2 Cash Flow Statement:",
-        "C5.1.2.1 Ensure that all entries above are encoded",
-        "C5.1.2.2 Refresh the Cash Flow Table to get the latest report. Print the monthly CF Statement",
-        "C5.1.3 Balance Sheet",
-        "C5.1.3.1 Ensure that all entries above are encoded",
-        "C5.1.3.2 Refresh the Balance Sheet Table to get the latest report. Print the monthly BS Statement",
-        "C5.2 Payroll", 
-        "C5.2.1 xxx Payroll Summary",
-        "C5.3 Industrial Projects",
-        "C5.3.1 Budget PNL",
-        "C5.3.2 Actual PNL",
-        "C5.3.3 Timeline"
+        "A5C5.1 Finacial Statements:",
+        "A5C5.1.1 Profit and Loss Statement:",
+        "A5C5.1.1.1 Ensure that all entries above are encoded",
+        "A5C5.1.1.2 Refresh the PNL Table to get the latest report. Print the monthly PNL Statement",
+        "A5C5.1.2 Cash Flow Statement:",
+        "A5C5.1.2.1 Ensure that all entries above are encoded",
+        "A5C5.1.2.2 Refresh the Cash Flow Table to get the latest report. Print the monthly CF Statement",
+        "A5C5.1.3 Balance Sheet",
+        "A5C5.1.3.1 Ensure that all entries above are encoded",
+        "A5C5.1.3.2 Refresh the Balance Sheet Table to get the latest report. Print the monthly BS Statement",
+        "A5C5.2 Payroll", 
+        "A5C5.2.1 xxx Payroll Summary",
+        "A5C5.3 Industrial Projects",
+        "A5C5.3.1 Budget PNL",
+        "A5C5.3.2 Actual PNL",
+        "A5C5.3.3 Timeline"
       ]
     }
   ],
