@@ -112,7 +112,7 @@
           ],
           "data_outputs": [
             "Docs from system: Pick List, Delivery Receipt, Charge Invoice (softcopy and pdf formats)",
-            "Written docs: Gate pass',
+            "Written docs: Gate pass",
             "equivalent system data crawl in Inventory and Accounting modules"
           ],
           "tags": [
@@ -149,7 +149,7 @@
           "name": "I3A.1 Return to Plant, signed Charge Invoice, monitor sheet",
           "trigger": "Client signs Charge Invoice and Delivery Receipt",
           "features": [
-            "",
+            "I2A.3 Driver returns to plant with signed Charge Invoice and Delivery Receipt",
             "I2A.3 Acctg staff confirms Invoice entry, upon receiving signed Charge Invoice and Delivery Receipt Confirm from Delivery Driver",
             "I2A.3 Review correct collection date and chart of account"
           ],
@@ -288,8 +288,8 @@
             "I5A.1.3 Mobile-friendly data input"
           ],
           "approval": [
-            { "role": "owner", "label": "" },
-            { "role": "manager", "label": "" }
+            { "role": "owner", "label": "Review report" },
+            { "role": "manager", "label": "Approve report" }
           ],
           "data_outputs": [
             "Inventory per location/per receiving report",
@@ -312,8 +312,8 @@
             "I5A.2.3 Mobile-friendly data input"
           ],
           "approval": [
-            { "role": "owner", "label": "" },
-            { "role": "manager", "label": "" }
+            { "role": "owner", "label": "Review forecast" },
+            { "role": "manager", "label": "Approve plan" }
           ],
           "data_outputs": [
             "Inventory per location/per receiving report",
@@ -336,8 +336,8 @@
             "I5A.3.3 Mobile-friendly data input"
           ],
           "approval": [
-            { "role": "owner", "label": "" },
-            { "role": "manager", "label": "" }
+            { "role": "owner", "label": "Review variances" },
+            { "role": "manager", "label": "Resolve variances" }
           ],
           "data_outputs": [
             "Inventory per location/per receiving report",

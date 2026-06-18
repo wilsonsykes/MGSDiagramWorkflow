@@ -62,7 +62,7 @@ Bank Reconciliation | subprocess | Matching bank records with internal general l
 # ============================================================
 Sales Order Form | form | Sales Order Form created by Sales Rep for dealer/retail client orders
 Sales Order | form | Primary sales order document used for commercial, dealer, and retail transactions
-Delivery Receiptsfsd | form | DR document that accompanies each delivery; signed by client on receipt
+Delivery Receipt | form | DR document that accompanies each delivery; signed by client on receipt
 Picklist | form | Warehouse picking list generated per order before cylinder dispatch
 Credit Notes | form | CR document issued to client recording cylinder weight residue credits
 General Ledger | form | Accounting ledger entry updated for each delivery and financial transaction
