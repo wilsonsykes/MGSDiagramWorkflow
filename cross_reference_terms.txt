@@ -34,26 +34,24 @@
 # SUBPROCESSES
 # (expandable titles in subprocess.html)
 # ============================================================
+Pricing Matrix and Cascade | subprocess | LPG price setting dashboard across different sales avenues
+Financial Statements | subprocess | Monthly P&L, Cash Flow, and Balance Sheet reporting cycle
 Process Order | subprocess | Order intake, scheduling, and validation workflow
 Fulfil Order | subprocess | Order execution and delivery to client
 Invoicing | subprocess | Billing and invoice issuance process
+Accounts Receivable | subprocess | Collection and reconciliation of outstanding client invoices
+Bank Reconciliation | subprocess | Matching bank records with internal general ledger amounts
+Industrial Projects | subprocess | planning and execution of construction project and timeline tracking
+Budget Analysis | subprocess | Industrial project budget vs. actual PNL
 Compute Commercial Gains | subprocess | Commercial sector commission and profit computation
 Compute Operational Gains | subprocess | Operational commission tracking and distribution
-Compute Gains | subprocess | General commission and gains computation
-Commission Distribution | subprocess | Calculation and distribution of commissions to staff
-Credit Notes Computation | subprocess | Credit note issuance for cylinder weight residue
+Compute Credit Notes | subprocess | Credit note issuance for cylinder weight residue
+Compute Incentives | subprocess | Bi-monthly (15th and 30th) payroll and incentive computation
 Stock Transfer | subprocess | Gas content refilling from Storage Tank to cylinders (FIFO)
 FIFO | subprocess | First-In-First-Out inventory management for cylinder refilling
-Pull-out Calendar | subprocess | Scheduled cylinder retrieval dates at client sites
-Sales Reports | subprocess | Bi-weekly/monthly Sales Performance Report generation
-Pricing Matrix | subprocess | LPG price setting dashboard across different sales avenues
-Price Cascade Process | subprocess | Pricing change communication and rollout to all contacts
-End-User Pricing | subprocess | SRP and competitor pricing comparison process
-Accounts Receivable | subprocess | Collection and reconciliation of outstanding client invoices
-Financial Statements | subprocess | Monthly P&L, Cash Flow, and Balance Sheet reporting cycle
-Payroll | subprocess | Bi-monthly (15th and 30th) payroll and incentive computation
-Industrial Projects | subprocess | Industrial project budget vs. actual PNL and timeline tracking
-Bank Reconciliation | subprocess | Matching bank records with internal general ledger amounts
+Sales Target and Reports | subprocess | Bi-weekly/monthly Sales Performance Report generation
+Inventory Target and Reports | subprocess | cylinder and gas physical count and variance closing
+Process Pull-out Schedule | subprocess | Scheduled cylinder retrieval dates at client sites
 
 
 # ============================================================
@@ -61,28 +59,32 @@ Bank Reconciliation | subprocess | Matching bank records with internal general l
 # (expandable titles in forms.html)
 # ============================================================
 Sales Order Form | form | Sales Order Form created by Sales Rep for dealer/retail client orders
-Sales Order | form | Primary sales order document used for commercial, dealer, and retail transactions
-Delivery Receipt | form | DR document that accompanies each delivery; signed by client on receipt
-Picklist | form | Warehouse picking list generated per order before cylinder dispatch
 Credit Notes | form | CR document issued to client recording cylinder weight residue credits
 General Ledger | form | Accounting ledger entry updated for each delivery and financial transaction
-Receiving Report | form | RR document filled by Plant Manager when Lorry Truck delivery arrives
-Purchase Order | form | PO forwarded by Purchaser to Refinery Supplier for gas stock replenishment
+Delivery Receipt | form | DR document that accompanies each delivery; signed by client on receipt
+Picklist | form | Warehouse picking list generated per order before cylinder dispatch
 Invoice | form | Billing document collected together with the DR and Sales Order
-Sales Performance Report | form | SPR bi-weekly/monthly sales report printed by IT Head
 LUT forms | form | Look-Up Table forms used for incentive computation (2.7 kg, 11 kg, 50 kg cylinders)
-Incentive template | form | Template used for 15th and 30th payroll incentive computation
-Aged Receivables | form | Summary report of outstanding client receivables organized by age/duration
-Payroll Summary | form | Monthly payroll summary document for all staff
-Budget PNL | form | Budgeted Profit and Loss report for industrial projects
-Actual PNL | form | Actual Profit and Loss performance report for industrial projects
-MGC LPG Pricing Matrix | form | Dashboard document for deciding gas prices across all sales avenues
+Purchase Order | form | PO forwarded by Purchaser to Refinery Supplier for gas stock replenishment
+Receiving Report | report | RR document filled by Plant Manager when Lorry Truck delivery arrives
+MGC LPG Pricing Matrix | dashboard | Dashboard document for deciding gas prices across all sales avenues
+Sales Performance Report | report | SPR bi-weekly/monthly sales report printed by IT Head
+Aged Receivables | report | Summary report of outstanding client receivables organized by age/duration
+Budget PNL | report | Budgeted Profit and Loss report for industrial projects
+Actual PNL | report | Actual Profit and Loss performance report for industrial projects
+Incentive Summary | report | Template used for 15th and 30th payroll incentive computation
 
 
 # ============================================================
 # PERSONNEL
 # (expandable titles in personnel.html)
 # ============================================================
+Mel | personnel | Emails updated pricing changes to all contacts; manages Comm/Bulk clients
+Jabert | personnel | Records audit logs for pricing changes; manages CODO communications
+Jobert | personnel | Handles contact center, marketing, and cashier communications
+Lou | personnel | Manages Comm/Bulk client communications
+Claire | personnel | Manages retail client communications
+Jen | personnel | Manages Makati accounts
 Delivery Head | personnel | Schedules delivery vehicle, capacity, and route from the Sales Order
 Pahinante | personnel | Delivery helper who weighs and records cylinders on-site at client location
 Driver | personnel | Delivery driver who transports cylinders to and from client sites
@@ -92,10 +94,4 @@ Purchaser | personnel | Forwards Purchase Order to Refinery Supplier and schedul
 Plant Manager | personnel | Receives Lorry Trucks, fills Receiving Report, and manages Storage Tank
 Plant Staff | personnel | Measures gas content volume using gauge and documents inventory changes
 IT Head | personnel | Prints the Sales Performance Report (bi-weekly or monthly)
-Mel | personnel | Emails updated pricing changes to all contacts; manages Comm/Bulk clients
-Joebert | personnel | Updates competitors' prices in the End-User Pricing comparison
-Jabert | personnel | Records audit logs for pricing changes; manages CODO communications
-Jobert | personnel | Handles contact center, marketing, and cashier communications
-Lou | personnel | Manages Comm/Bulk client communications
-Claire | personnel | Manages retail client communications
-Jen | personnel | Manages Makati accounts
+
