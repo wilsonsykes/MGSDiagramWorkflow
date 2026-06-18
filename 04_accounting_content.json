@@ -89,8 +89,8 @@
             "Milestone summary"
           ],
           "tags": [
-            { "xx": "Core", "bg": "#DCEAF5", "color": "#1E4E79" },
-            { "xx": "Reusable", "bg": "#E3F0E6", "color": "#2E6A3D" }
+            { "text": "Core", "bg": "#DCEAF5", "color": "#1E4E79" },
+            { "text": "Reusable", "bg": "#E3F0E6", "color": "#2E6A3D" }
           ]
         }
       ]
@@ -101,7 +101,7 @@
       "english": "Collection | Balance | Bank Recon",
       "cards": [
         {
-          "section": x,
+          "section": "A3A1 Execution Checklist",
           "stage": 3,
           "version": "1.0",
           "phases": [
@@ -162,8 +162,8 @@
             "Readiness summary"
           ],
           "tags": [
-            { "xx": "Checklist Compatible", "bg": "#EFE7FB", "color": "#6F3CC3" },
-            { "xx": "Sample", "bg": "#F9EEDC", "color": "#B96B13" }
+            { "text": "Checklist Compatible", "bg": "#EFE7FB", "color": "#6F3CC3" },
+            { "text": "Sample", "bg": "#F9EEDC", "color": "#B96B13" }
           ]
         }
       ]
@@ -192,8 +192,8 @@
             "Launch approval log"
           ],
           "tags": [
-            { "xx": "Pending", "bg": "#F9EEDC", "color": "#B96B13" },
-            { "xx": "Replace Me", "bg": "#DCEAF5", "color": "#1E4E79" }
+            { "text": "Pending", "bg": "#F9EEDC", "color": "#B96B13" },
+            { "text": "Replace Me", "bg": "#DCEAF5", "color": "#1E4E79" }
           ]
         }
       ]
@@ -224,8 +224,8 @@
             "Ledgers/accounts Reports"
           ],
           "tags": [
-            { "Odoo": "Iterative", "bg": "#E3F0E6", "color": "#2E6A3D" },
-            { "Report": "Reusable", "bg": "#DCEAF5", "color": "#1E4E79" }
+            { "text": "Odoo Module", "bg": "#E3F0E6", "color": "#2E6A3D" },
+            { "text": "Report", "bg": "#DCEAF5", "color": "#1E4E79" }
           ]
         },
         {
@@ -351,8 +351,7 @@
       "kanji": "",
       "pain_points": [
         "A5C4 Same as Acctg Commercial A5C1-A5C5",
-        "A5C4
-        Exceptions"
+        "A5C4 Exceptions"
       ]
     },
     {
