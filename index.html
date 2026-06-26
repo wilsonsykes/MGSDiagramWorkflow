@@ -27,6 +27,50 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .frame-card{border:1px solid var(--border);border-radius:22px;background:rgba(255,255,255,.97);box-shadow:var(--shadow);overflow:hidden}
 #page-frame{display:block;width:100%;min-height:1200px;border:0;background:#fff}
 @media(max-width:900px){.shell-nav{padding:12px 16px;align-items:flex-start;flex-direction:column}.shell-wrap{padding:20px 12px 28px}.shell-header h1{font-size:28px}.page-tab{width:100%;justify-content:center}.shell-version{font-size:11px}}
+
+/* ── Log Notes Panel ── */
+#ln-toggle{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:200;background:var(--accent-dark);color:#fff;border:none;padding:12px 7px;border-radius:8px 0 0 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;box-shadow:-2px 0 10px rgba(15,23,42,.16);transition:background .18s}
+#ln-toggle:hover{background:var(--accent)}
+#ln-toggle .ln-ico{font-size:15px;line-height:1}
+#ln-toggle .ln-lbl{writing-mode:vertical-rl;transform:rotate(180deg);font-size:9px;font-weight:900;letter-spacing:1.3px;text-transform:uppercase}
+#ln-panel{position:fixed;right:-336px;top:0;width:316px;height:100vh;background:#fff;border-left:1px solid var(--border);box-shadow:-6px 0 28px rgba(15,23,42,.12);z-index:300;display:flex;flex-direction:column;transition:right .28s cubic-bezier(.4,0,.2,1);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+#ln-panel.open{right:0}
+.ln-hdr{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid var(--border-light);background:var(--surface-soft);flex-shrink:0}
+.ln-hdr-title{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.9px;color:var(--accent-dark)}
+#ln-close{background:none;border:none;cursor:pointer;font-size:17px;color:var(--text-mid);line-height:1;padding:3px 6px;border-radius:5px;transition:background .15s}
+#ln-close:hover{color:var(--text);background:var(--border-light)}
+.ln-scroll{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.ln-lbl-sm{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-light);display:block;margin-bottom:3px}
+#ln-login{display:flex;flex-direction:column;gap:8px}
+#ln-login select,#ln-login input[type=password],.ln-add textarea,#ln-newpw{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;background:#fff;color:var(--text);outline:none;box-sizing:border-box}
+#ln-login select:focus,#ln-login input:focus,.ln-add textarea:focus,#ln-newpw:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(30,78,121,.08)}
+.ln-btn{padding:7px 13px;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:opacity .15s;font-family:inherit;line-height:1.3}
+.ln-btn:hover{opacity:.82}
+.ln-btn-primary{background:var(--accent-dark);color:#fff}
+.ln-btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text-mid)}
+.ln-btn-xs{padding:4px 9px;font-size:10px;border-radius:6px}
+.ln-err{color:#b91c1c;font-size:11px;min-height:13px;margin:0}
+.ln-ok{color:#15803d;font-size:11px;min-height:13px;margin:0}
+.ln-user-bar{display:flex;align-items:center;gap:6px;padding:8px 10px;background:var(--accent-light);border-radius:8px}
+.ln-cur-user{font-size:13px;font-weight:900;color:var(--accent-dark);flex:1}
+#ln-pw-panel{display:none;flex-direction:column;gap:7px;padding:10px;background:var(--surface-soft);border-radius:8px;border:1px solid var(--border-light)}
+.ln-pw-row{display:flex;gap:6px}
+.ln-pw-row .ln-btn{flex:1}
+.ln-divider{height:1px;background:var(--border-light);flex-shrink:0}
+.ln-add{display:flex;flex-direction:column;gap:6px}
+.ln-add textarea{resize:vertical;min-height:74px;line-height:1.5}
+.ln-section-hdr{display:flex;align-items:center;justify-content:space-between;padding:2px 0}
+.ln-section-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-light)}
+.ln-empty{font-size:12px;color:var(--text-light);text-align:center;padding:14px 0;margin:0;font-style:italic}
+.ln-card{background:var(--surface-soft);border:1px solid var(--border-light);border-radius:10px;padding:10px 12px;display:flex;flex-direction:column;gap:5px}
+.ln-card+.ln-card{margin-top:6px}
+.ln-card.ln-resolved{opacity:.45;border-style:dashed}
+.ln-meta{display:flex;align-items:center;gap:6px}
+.ln-badge{font-size:10px;font-weight:900;color:var(--accent-dark);background:var(--accent-light);padding:2px 8px;border-radius:999px;white-space:nowrap}
+.ln-ts{font-size:10px;color:var(--text-light);flex:1;text-align:right}
+.ln-text{font-size:13px;color:var(--text);line-height:1.55;word-break:break-word;white-space:pre-wrap}
+.ln-res-label{font-size:10px;color:#15803d;font-weight:700}
+.ln-res-toggle-row{display:flex;align-items:center;gap:4px}
 </style>
 </head>
 <body>
@@ -57,7 +101,89 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     <iframe id="page-frame" title="Workflow page" src="main.html" loading="eager"></iframe>
   </div>
 </div>
+
+<!-- ── Log Notes Toggle ── -->
+<button id="ln-toggle" aria-label="Open log notes">
+  <span class="ln-ico">📝</span>
+  <span class="ln-lbl">Notes</span>
+</button>
+
+<!-- ── Log Notes Panel ── -->
+<div id="ln-panel" role="complementary" aria-label="Log Notes">
+  <div class="ln-hdr">
+    <span class="ln-hdr-title">Log Notes</span>
+    <button id="ln-close" aria-label="Close">✕</button>
+  </div>
+  <div class="ln-scroll">
+
+    <!-- Login form -->
+    <div id="ln-login">
+      <label class="ln-lbl-sm" for="ln-user-sel">User</label>
+      <select id="ln-user-sel">
+        <option value="RY">RY</option>
+        <option value="CDV">CDV</option>
+        <option value="JAS">JAS</option>
+      </select>
+      <label class="ln-lbl-sm" for="ln-pw-input">Password</label>
+      <input type="password" id="ln-pw-input" placeholder="Enter password" autocomplete="current-password" />
+      <p id="ln-login-err" class="ln-err"></p>
+      <button id="ln-login-btn" class="ln-btn ln-btn-primary">Sign In</button>
+    </div>
+
+    <!-- Logged-in section -->
+    <div id="ln-session" style="display:none;flex-direction:column;gap:10px">
+
+      <!-- User bar -->
+      <div class="ln-user-bar">
+        <span id="ln-cur-user" class="ln-cur-user"></span>
+        <button id="ln-chpw-btn" class="ln-btn ln-btn-ghost ln-btn-xs">Change PW</button>
+        <button id="ln-logout-btn" class="ln-btn ln-btn-ghost ln-btn-xs">Sign Out</button>
+      </div>
+
+      <!-- Change password -->
+      <div id="ln-pw-panel">
+        <label class="ln-lbl-sm" for="ln-newpw">New Password</label>
+        <input type="password" id="ln-newpw" placeholder="Min 3 characters" autocomplete="new-password" />
+        <div class="ln-pw-row">
+          <button id="ln-savepw-btn" class="ln-btn ln-btn-primary">Save</button>
+          <button id="ln-cancelpw-btn" class="ln-btn ln-btn-ghost">Cancel</button>
+        </div>
+        <p id="ln-pw-err" class="ln-err"></p>
+        <p id="ln-pw-ok" class="ln-ok"></p>
+      </div>
+
+      <div class="ln-divider"></div>
+
+      <!-- Add note -->
+      <div class="ln-add">
+        <label class="ln-lbl-sm" for="ln-note-text">New Note</label>
+        <textarea id="ln-note-text" placeholder="Write a note… (Ctrl+Enter to save)" rows="3"></textarea>
+        <button id="ln-save-note-btn" class="ln-btn ln-btn-primary">Save Note</button>
+      </div>
+
+      <div class="ln-divider"></div>
+
+      <!-- Open notes -->
+      <div class="ln-section-hdr">
+        <span class="ln-section-title">Open</span>
+        <span id="ln-open-cnt" class="ln-section-title"></span>
+      </div>
+      <div id="ln-open-list"></div>
+
+      <!-- Resolved notes toggle -->
+      <div class="ln-res-toggle-row">
+        <button id="ln-resolved-toggle" class="ln-btn ln-btn-ghost ln-btn-xs" style="display:flex;align-items:center;gap:4px">
+          <span id="ln-arrow">▶</span>&nbsp;Resolved&nbsp;<span id="ln-resolved-cnt"></span>
+        </button>
+      </div>
+      <div id="ln-resolved-list" style="display:none"></div>
+
+    </div>
+  </div>
+</div>
+
 <script>
+/* ── Tab navigation ── */
 var pageFrame=document.getElementById('page-frame');
 var caption=document.getElementById('tab-caption');
 var tabs=Array.prototype.slice.call(document.querySelectorAll('.page-tab'));
@@ -106,6 +232,226 @@ window.addEventListener('resize',resizeFrame);
 window.addEventListener('hashchange',function(){var key=(window.location.hash||'#main').slice(1);activateTab(pageLookup[key]||pageLookup.main,false)});
 tabs.forEach(function(tab){tab.addEventListener('click',function(){activateTab(tab,true)})});
 activateTab(pageLookup[(window.location.hash||'#main').slice(1)]||pageLookup.main,false);
+
+/* ── Log Notes System ── */
+(function(){
+  var KEY_USERS   = 'mgcwf_users';
+  var KEY_NOTES   = 'mgcwf_notes';
+  var KEY_SESSION = 'mgcwf_session';
+
+  var DEFAULTS = { RY:'ry123', CDV:'cdv123', JAS:'jas123' };
+
+  function getUsers(){try{return JSON.parse(localStorage.getItem(KEY_USERS));}catch(e){return null;}}
+  function saveUsers(u){localStorage.setItem(KEY_USERS,JSON.stringify(u));}
+  function getNotes(){try{return JSON.parse(localStorage.getItem(KEY_NOTES))||[];}catch(e){return[];}}
+  function saveNotes(n){localStorage.setItem(KEY_NOTES,JSON.stringify(n));}
+  function getSession(){try{return sessionStorage.getItem(KEY_SESSION);}catch(e){return null;}}
+  function setSession(u){if(u)sessionStorage.setItem(KEY_SESSION,u);else sessionStorage.removeItem(KEY_SESSION);}
+
+  /* init users on first visit */
+  var users=getUsers();
+  if(!users){
+    users={};
+    Object.keys(DEFAULTS).forEach(function(k){users[k]={password:DEFAULTS[k]};});
+    saveUsers(users);
+  }
+
+  var currentUser=null;
+
+  /* elements */
+  var panelEl    = document.getElementById('ln-panel');
+  var toggleBtn  = document.getElementById('ln-toggle');
+  var closeBtn   = document.getElementById('ln-close');
+  var loginSec   = document.getElementById('ln-login');
+  var sessionSec = document.getElementById('ln-session');
+  var loginErr   = document.getElementById('ln-login-err');
+  var pwPanel    = document.getElementById('ln-pw-panel');
+  var pwErr      = document.getElementById('ln-pw-err');
+  var pwOk       = document.getElementById('ln-pw-ok');
+  var openList   = document.getElementById('ln-open-list');
+  var resList    = document.getElementById('ln-resolved-list');
+  var resCnt     = document.getElementById('ln-resolved-cnt');
+  var openCnt    = document.getElementById('ln-open-cnt');
+  var arrowEl    = document.getElementById('ln-arrow');
+
+  /* panel open/close */
+  toggleBtn.addEventListener('click',function(){panelEl.classList.toggle('open');});
+  closeBtn.addEventListener('click',function(){panelEl.classList.remove('open');});
+
+  /* login */
+  document.getElementById('ln-login-btn').addEventListener('click',doLogin);
+  document.getElementById('ln-pw-input').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+
+  function doLogin(){
+    var user = document.getElementById('ln-user-sel').value;
+    var pw   = document.getElementById('ln-pw-input').value;
+    var u    = getUsers();
+    if(u[user]&&u[user].password===pw){
+      setSession(user);
+      currentUser=user;
+      document.getElementById('ln-pw-input').value='';
+      loginErr.textContent='';
+      render();
+    } else {
+      loginErr.textContent='Incorrect password.';
+    }
+  }
+
+  /* logout */
+  document.getElementById('ln-logout-btn').addEventListener('click',function(){
+    setSession(null); currentUser=null; render();
+  });
+
+  /* change password */
+  document.getElementById('ln-chpw-btn').addEventListener('click',function(){
+    var shown=pwPanel.style.display==='flex';
+    pwPanel.style.display=shown?'none':'flex';
+    pwErr.textContent=''; pwOk.textContent='';
+  });
+  document.getElementById('ln-cancelpw-btn').addEventListener('click',function(){
+    pwPanel.style.display='none';
+    document.getElementById('ln-newpw').value='';
+    pwErr.textContent='';
+  });
+  document.getElementById('ln-savepw-btn').addEventListener('click',function(){
+    var np=document.getElementById('ln-newpw').value.trim();
+    if(!np||np.length<3){pwErr.textContent='Min 3 characters.';return;}
+    var u=getUsers(); u[currentUser].password=np; saveUsers(u);
+    document.getElementById('ln-newpw').value='';
+    pwErr.textContent=''; pwOk.textContent='Password updated!';
+    pwPanel.style.display='none';
+    setTimeout(function(){pwOk.textContent='';},2500);
+  });
+
+  /* save note */
+  document.getElementById('ln-save-note-btn').addEventListener('click',saveNote);
+  document.getElementById('ln-note-text').addEventListener('keydown',function(e){
+    if(e.key==='Enter'&&(e.ctrlKey||e.metaKey))saveNote();
+  });
+
+  function saveNote(){
+    var text=document.getElementById('ln-note-text').value.trim();
+    if(!text)return;
+    var notes=getNotes();
+    notes.unshift({
+      id: Date.now().toString(36)+Math.random().toString(36).slice(2),
+      user: currentUser,
+      text: text,
+      ts:   new Date().toISOString(),
+      resolved:   false,
+      resolvedBy: null,
+      resolvedTs: null
+    });
+    saveNotes(notes);
+    document.getElementById('ln-note-text').value='';
+    renderNotes();
+  }
+
+  /* resolved toggle */
+  document.getElementById('ln-resolved-toggle').addEventListener('click',function(){
+    var hidden=resList.style.display==='none';
+    resList.style.display=hidden?'':'none';
+    arrowEl.textContent=hidden?'▼':'▶';
+  });
+
+  /* render */
+  function render(){
+    currentUser=getSession();
+    if(currentUser){
+      loginSec.style.display='none';
+      sessionSec.style.display='flex';
+      document.getElementById('ln-cur-user').textContent=currentUser;
+      renderNotes();
+    } else {
+      loginSec.style.display='';
+      sessionSec.style.display='none';
+    }
+  }
+
+  function fmt(iso){
+    if(!iso)return'';
+    var d=new Date(iso);
+    return d.toLocaleDateString('en-US',{month:'short',day:'numeric'})+
+      ' '+d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+  }
+
+  function renderNotes(){
+    var notes=getNotes();
+    var open=notes.filter(function(n){return!n.resolved;});
+    var resolved=notes.filter(function(n){return n.resolved;});
+
+    openCnt.textContent=open.length?'('+open.length+')':'';
+    resCnt.textContent=resolved.length?'('+resolved.length+')':'';
+
+    openList.innerHTML='';
+    if(open.length===0){
+      var emp=document.createElement('p');
+      emp.className='ln-empty'; emp.textContent='No open notes yet.';
+      openList.appendChild(emp);
+    } else {
+      open.forEach(function(n){openList.appendChild(buildCard(n));});
+    }
+
+    resList.innerHTML='';
+    resolved.forEach(function(n){resList.appendChild(buildCard(n));});
+  }
+
+  function buildCard(note){
+    var card=document.createElement('div');
+    card.className='ln-card'+(note.resolved?' ln-resolved':'');
+
+    var meta=document.createElement('div');
+    meta.className='ln-meta';
+
+    var badge=document.createElement('span');
+    badge.className='ln-badge';
+    badge.textContent=note.user;
+
+    var ts=document.createElement('span');
+    ts.className='ln-ts';
+    ts.textContent=fmt(note.ts);
+
+    meta.appendChild(badge);
+    meta.appendChild(ts);
+    card.appendChild(meta);
+
+    var body=document.createElement('div');
+    body.className='ln-text';
+    body.textContent=note.text;
+    card.appendChild(body);
+
+    if(note.resolved){
+      var rb=document.createElement('div');
+      rb.className='ln-res-label';
+      rb.textContent='✓ Resolved by '+note.resolvedBy+' · '+fmt(note.resolvedTs);
+      card.appendChild(rb);
+    } else {
+      var btn=document.createElement('button');
+      btn.className='ln-btn ln-btn-ghost ln-btn-xs';
+      btn.textContent='Resolve';
+      btn.style.marginTop='2px';
+      btn.style.alignSelf='flex-start';
+      (function(n){
+        btn.addEventListener('click',function(){
+          var notes=getNotes();
+          var i=notes.findIndex(function(x){return x.id===n.id;});
+          if(i!==-1){
+            notes[i].resolved=true;
+            notes[i].resolvedBy=currentUser;
+            notes[i].resolvedTs=new Date().toISOString();
+            saveNotes(notes);
+            renderNotes();
+          }
+        });
+      })(note);
+      card.appendChild(btn);
+    }
+
+    return card;
+  }
+
+  render();
+})();
 </script>
 </body>
 </html>
