@@ -33,34 +33,51 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .role-chip{font-size:10px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--bg-alt);color:var(--text-mid);border:1px solid var(--border);white-space:nowrap}
 .term-refs-chips{display:flex;gap:5px;flex-shrink:0}
 .ref-chip{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.3px}
-.ref-inv{background:#DCEAF5;color:#1E4E79;border:1px solid #BFD6EB}
+.ref-ops{background:#DCEAF5;color:#1E4E79;border:1px solid #BFD6EB}
 .ref-sal{background:#E3F0E6;color:#2E6A3D;border:1px solid #B9D7C0}
 .ref-acg{background:#EFE7FB;color:#6F3CC3;border:1px solid #D8C7F4}
 .term-arrow{font-size:11px;color:#9ca3af;transition:transform .18s ease;flex-shrink:0}
 .term-card.open .term-arrow{transform:rotate(180deg);color:var(--purple)}
 .term-body{max-height:0;overflow:hidden;transition:max-height .3s ease;border-top:0 solid transparent}
-.term-card.open .term-body{max-height:400px;border-top:1px dashed var(--border-light)}
+.term-card.open .term-body{max-height:3600px;border-top:1px dashed var(--border-light)}
 .term-inner{padding:12px 16px 14px;background:var(--bg-alt);display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .td-label{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.1px;color:var(--text-light);margin-bottom:4px}
 .td-value{font-size:12px;color:var(--text-mid);line-height:1.55}
 .hidden{display:none!important}
 @media(max-width:700px){.term-inner{grid-template-columns:1fr}.topbar-hint{display:none}}
+
+/* Workflow Mentions */
+.xref-mentions{grid-column:1/-1;border-top:1px dashed var(--border);padding-top:10px;margin-top:6px}
+.xm-section-lbl{color:#6F3CC3!important}
+.xm-loading,.xm-empty{font-size:11px;color:var(--text-light);font-style:italic}
+.xm-group{margin-bottom:10px}
+.xm-group-lbl{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--text-light);margin-bottom:5px;padding-bottom:3px;border-bottom:1px solid var(--border-light)}
+.xm-cnt{font-weight:600;opacity:.7}
+.xm-item{padding:5px 0;border-bottom:1px dashed var(--border-light)}
+.xm-item:last-child{border-bottom:none}
+.xm-link{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:inherit;margin-bottom:2px}
+.xm-link:hover .xm-code{text-decoration:underline;opacity:.8}
+.xm-code{font-size:11.5px;font-weight:800;color:var(--accent-dark);font-family:ui-monospace,SFMono-Regular,monospace;white-space:nowrap}
+.xm-badge{font-size:9px;font-weight:700;padding:1px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.3px;white-space:nowrap}
+.xm-badge-current{background:#e5e7eb;color:#374151}
+.xm-badge-future{background:#dbeafe;color:#1e40af}
+.xm-full{font-size:11px;color:var(--text-light);line-height:1.45;padding-left:2px}
 </style>
 </head>
 <body>
 <div class="topbar">
   <div class="topbar-logo">MGC Workflow</div>
   <span class="topbar-badge">Personnel Directory</span>
-  <span class="topbar-hint">Click any card to expand · Names link back from Inventory / Sales / Accounting</span>
+  <span class="topbar-hint">Click any card to expand · Names link back from Operations / Sales / Accounting</span>
 </div>
 
 <div class="page-header">
   <h1>Personnel Directory</h1>
-  <p>All personnel referenced across the Inventory, Sales, and Accounting workflow tabs. Click a card to see the person's role, responsibilities, and which workflow tabs mention them. Names highlighted in purple in Inventory, Sales, and Accounting pages link directly here.</p>
+  <p>All personnel referenced across the Operations, Sales, and Accounting workflow tabs. Click a card to see the person's role, responsibilities, and which workflow tabs mention them. Names highlighted in purple in Inventory, Sales, and Accounting pages link directly here.</p>
 </div>
 
 <div class="how-to">
-  <strong>How cross-links work:</strong> When a person's name is highlighted and underlined in an Inventory, Sales, or Accounting page, clicking it will switch to this tab and scroll to that entry. To add or remove a name from the link list, edit <code>cross_reference_terms.txt</code> then run <code>python workflow_generate.py</code>.
+  <strong>How cross-links work:</strong> When a person's name is highlighted and underlined in an Operations, Sales, or Accounting page, clicking it will switch to this tab and scroll to that entry. To add or remove a name from the link list, edit <code>cross_reference_terms.txt</code> then run <code>python workflow_generate.py</code>.
 </div>
 
 <div class="search-bar">
@@ -75,7 +92,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <span class="term-name">Driver</span>
       <span class="term-tag">Personnel</span>
       <span class="role-chip">Field — Delivery</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">INV</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -89,7 +106,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <span class="term-name">Pahinante</span>
       <span class="term-tag">Personnel</span>
       <span class="role-chip">Field — Delivery Helper</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">INV</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -103,7 +120,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <span class="term-name">Delivery Head</span>
       <span class="term-tag">Personnel</span>
       <span class="role-chip">Operations — Logistics</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">INV</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -122,7 +139,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <span class="term-name">Sales Rep</span>
       <span class="term-tag">Personnel</span>
       <span class="role-chip">Sales — Dealer/Retail</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">INV</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -136,7 +153,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <span class="term-name">Purchaser</span>
       <span class="term-tag">Personnel</span>
       <span class="role-chip">Procurement</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">INV</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -150,7 +167,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <span class="term-name">Plant Manager</span>
       <span class="term-tag">Personnel</span>
       <span class="role-chip">Plant — Management</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">INV</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -164,7 +181,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <span class="term-name">Plant Staff</span>
       <span class="term-tag">Personnel</span>
       <span class="role-chip">Plant — Operations</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span></span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">INV</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -178,7 +195,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <span class="term-name">Acctg Staff</span>
       <span class="term-tag">Personnel</span>
       <span class="role-chip">Accounting</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-inv">INV</span><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">INV</span><span class="ref-chip ref-acg">ACG</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -333,5 +350,6 @@ function scrollToAnchor(id){
   if(el){el.classList.add('open');setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'})},120)}
 })();
 </script>
+<script src="mentions_loader.js"></script>
 </body>
 </html>

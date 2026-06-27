@@ -150,7 +150,7 @@ def render_tags(tags):
     return h + '</span>'
 
 
-def render_card(card, badge_styles, chip_colors, colors):
+def render_card(card, badge_styles, chip_colors, colors, feat_id_prefix=''):
     h = '    <div class="pcard" onclick="toggleP(this)">\n      <div class="pcard-bar">\n'
     h += f'        <span class="badge" style="{get_badge_style(card["status"], badge_styles, colors)}">{esc(card["id"])}</span>\n'
     h += f'        <span class="pcard-name">{esc(card["name"])}</span>\n'
@@ -164,8 +164,9 @@ def render_card(card, badge_styles, chip_colors, colors):
     h += '      <div class="pcard-body"><div class="pcard-inner">\n      <div class="det-grid">\n'
     h += f'        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">{esc(card.get("trigger", ""))}</div></div>\n'
     h += '        <div class="d-group"><div class="d-label lbl-features">System Features</div>'
-    for feat in card.get('features', []):
-        h += f'<div class="d-item">{esc(feat)}</div>\n'
+    for fi, feat in enumerate(card.get('features', [])):
+        id_attr = f' id="{feat_id_prefix}-{fi}"' if feat_id_prefix else ''
+        h += f'<div class="d-item"{id_attr}>{esc(feat)}</div>\n'
     h += '</div>\n      </div>\n'
     h += '      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow">'
     for i, appr in enumerate(card.get('approval', [])):
@@ -221,7 +222,7 @@ def render_section_block(block):
     return h
 
 
-def render_html(content, control, cross_terms=None):
+def render_html(content, control, cross_terms=None, page_key='page'):
     colors = control.get('colors', {})
     chip_colors = control.get('chip_colors', {})
     badge_styles = control.get('badge_styles', {})
@@ -375,18 +376,21 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica 
     out += '    <button class="ctrl-btn" onclick="printShortBond()">&#128424; Print (Short Bond)</button>\n  </div>\n</div>\n\n'
 
     for i, stage in enumerate(stages, 1):
+        si = i - 1
         out += f'<section class="stage-section" id="stage-{i}">\n  <div class="stage-banner" onclick="toggleStage(this)">\n'
         out += f'    <div class="stage-num"><span class="num-big">{i}</span><span class="num-sub">OF {len(stages)}</span></div>\n'
         out += f'    <div class="stage-info"><div class="stage-title">{esc(stage.get("romaji", "").upper())}</div><div class="stage-sub">{esc(stage.get("english", ""))}</div></div>\n'
         out += '    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>\n  </div>\n  <div class="stage-body"><div class="two-col">\n'
         out += f'      <div class="future-col">\n        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">{esc(hoshi.get("tag", ""))}</span></div>\n        <div class="cards-list">\n'
-        for card in stage.get('cards', []):
-            out += render_section_block(card) if is_section_block(card) else render_card(card, badge_styles, chip_colors, colors)
+        for ci, card in enumerate(stage.get('cards', [])):
+            feat_prefix = f'feat-{page_key}-{si}-{ci}'
+            out += render_section_block(card) if is_section_block(card) else render_card(card, badge_styles, chip_colors, colors, feat_prefix)
         out += '        </div>\n      </div>\n'
         out += f'      <div class="manual-col">\n        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">{esc(manual_sec.get("tag", ""))}</span></div>\n        <div class="pain-list">\n'
-        if i - 1 < len(manual_stages):
-            for pp in manual_stages[i - 1].get('pain_points', []):
-                out += f'          <div class="pain-row"><span class="pain-icon">&#10005;</span><span>{link_and_esc(pp, cross_terms)}</span></div>\n'
+        if si < len(manual_stages):
+            for pi, pp in enumerate(manual_stages[si].get('pain_points', [])):
+                pp_id = f'pp-{page_key}-{si}-{pi}'
+                out += f'          <div class="pain-row" id="{pp_id}"><span class="pain-icon">&#10005;</span><span>{link_and_esc(pp, cross_terms)}</span></div>\n'
         out += '        </div>\n      </div>\n    </div></div>\n</section>\n\n'
 
     if cross:
@@ -419,6 +423,7 @@ function toggleP(el){{el.classList.toggle('open')}}
 function expandAll(){{document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){{s.classList.add('open')}});document.querySelectorAll('.pcard').forEach(function(p){{p.classList.add('open')}})}}
 function collapseAll(){{document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){{s.classList.remove('open')}});document.querySelectorAll('.pcard').forEach(function(p){{p.classList.remove('open')}})}}
 function printShortBond(){{var s=document.createElement('style');s.id='psb';s.innerHTML='@page{{size:{print_size};margin:{print_margin}}}';document.head.appendChild(s);window.print();setTimeout(function(){{var e=document.getElementById('psb');if(e)e.remove()}},1000)}}
+function scrollToAnchor(id){{var el=document.getElementById(id);if(!el)return;var stage=el.closest('.stage-section')||el.closest('.cross-section');if(stage)stage.classList.add('open');var pcard=el.closest('.pcard');if(pcard)pcard.classList.add('open');setTimeout(function(){{el.scrollIntoView({{behavior:'smooth',block:'center'}});el.style.outline='2px solid var(--accent)';setTimeout(function(){{el.style.outline=''}},1800)}},180)}}
 document.querySelectorAll('.topnav a').forEach(function(link){{link.addEventListener('click',function(){{var hash=link.getAttribute('href');if(!hash||!hash.startsWith('#'))return;var t=document.querySelector(hash);if(t)t.classList.add('open')}});}});
 </script>
 </body>
@@ -488,7 +493,7 @@ def generate(selected_key=None):
             print(f"  [ERROR] {content_file}: {e}")
             return 1
 
-        html = render_html(content, control, cross_terms)
+        html = render_html(content, control, cross_terms, page_key=key)
         output_path = os.path.join(SCRIPT_DIR, output_file)
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(html)
