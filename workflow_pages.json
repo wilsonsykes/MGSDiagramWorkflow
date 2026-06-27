@@ -8,10 +8,10 @@
       "output_file": "main.html"
     },
     {
-      "key": "inventory",
-      "label": "Inventory",
-      "content_file": "02_inventory_content.json",
-      "output_file": "inventory.html"
+      "key": "operations",
+      "label": "Operations",
+      "content_file": "02_operations_content.json",
+      "output_file": "operations.html"
     },
     {
       "key": "sales",
