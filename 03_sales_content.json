@@ -200,13 +200,13 @@
     },
     {
       "kanji": "",
-      "romaji": "Company-Wide",
-      "english": "Feedback | Enhancements | Next Iteration",
+      "romaji": "Overall",
+      "english": "Reports | Monitoring | Compliance | Write-Offs",
       "cards": [
         {
           "id": "ACTIVE",
           "status": "core",
-          "name": "O1 Improvement Loop",
+          "name": "xx",
           "trigger": "Feedback arrives after launch.",
           "features": [
             "Track enhancements",
@@ -290,7 +290,7 @@
       ]
     },
     {
-      "english": "Company-wide pain points",
+      "english": "Overall pain points",
       "kanji": "",
       "pain_points": [
         "C5.1 Sales Reports:",
