@@ -308,7 +308,7 @@
             "I5A.1.1 Inv Variances and Adjustment Monthly Summary"
           ],
           "tags": [
-            { "text": "Odoo Module", "bg": "#E3F0E6", "color": "#2E6A3D" },
+            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
             { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" }
           ]
         },
@@ -334,7 +334,7 @@
             "I5A.2.1 auto-draft Purchased Orders"
           ],
           "tags": [
-            { "text": "Dashboard Module", "bg": "#E3F0E6", "color": "#2E6A3D" },
+            { "text": "Dashboard Module", "bg": "#dbe302", "color": "#2E6A3D" },
             { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" }
           ]
         },
@@ -359,8 +359,8 @@
             "Inv Adjustment per location/per period Summary"
           ],
           "tags": [
-            { "text": "Odoo Module", "bg": "#E3F0E6", "color": "#2E6A3D" },
-            { "text": "Dashboard Module", "bg": "#DCEAF5", "color": "#1E4E79" }
+            { "text": "Odoo Module", "bg":  "#791e76", "color": "#ffffff" },
+            { "text": "Dashboard Module", "bg": "#dbe302", "color": "#1E4E79" }
           ]
         },
         {
@@ -387,7 +387,7 @@
             "I5A.4.7 Cylinder Adjustment per location/per period Summary"
           ],
           "tags": [
-            { "text": "Odoo Module", "bg": "#E3F0E6", "color": "#2E6A3D" },
+            { "text": "Odoo Module", "bg":  "#791e76", "color": "#ffffff" },
             { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" }
           ]
         },
@@ -411,7 +411,7 @@
             "I5A.5.5 Inv Adjustment per location/per period Summary"
           ],
           "tags": [
-            { "text": "Odoo Module", "bg": "#E3F0E6", "color": "#2E6A3D" },
+            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
             { "text": "Reusable", "bg": "#DCEAF5", "color": "#1E4E79" }
           ]
         }
