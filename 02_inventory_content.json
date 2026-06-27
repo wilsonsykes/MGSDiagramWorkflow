@@ -297,6 +297,8 @@
             "I5A.1.3 Mobile-friendly data input"
           ],
           "approval": [
+            { "role": "Optns Supervisor", "label": "Input Storage Tanks Opening and Closing Readings" },
+            { "role": "Senior Plant Supervisor", "label": "Input Sold Cylinders for the Day" },
             { "role": "Industrial Engr", "label": "Consolidate and account for variances" },
             { "role": "Plant Operation Officer", "label": "Review and Approve report" },
             { "role": "Sir RY", "label": "Review and Approve report" }
@@ -317,27 +319,30 @@
           "trigger": "Daily data input of inventory + Sales Target Budget per week per sales avenue",
           "features": [
             "I5A.2.1 Weekly/Monthly real-time data",
-            "I5A.2.2 versatile multi-view reports",
+            "I5A.2.2 versatile multi-view reports",                                    
             "I5A.2.3 PC data Input"
           ],
           "approval": [
-            { "role": "owner", "label": "Review forecast" },
-            { "role": "manager", "label": "Approve plan" }
-          ],
+            { "role": "Senior Operations Supervisor", "label": "Daily data source" },
+            { "role": "Sales AVP", "label": "Recommend sales target" },
+            { "role": "Industrial Engineer", "label": "Set Budget and Review forecast data" },
+            { "role": "Sir RY", "label": "Review Forecast and Approve order" },
+            { "role": "Purchaser/Dispatcher", "label": "Prepare and forward Purchase Orders" }
+          ],                                          
           "data_outputs": [
-            "I5A.2.1 Inventory Forecast Report",
-            "I5A.2.1 Advanced Purchased Orders (draft copies)"
+            "I5A.2.1 Weekly/Monthly Inventory Forecast Report",
+            "I5A.2.1 auto-draft Purchased Orders"
           ],
           "tags": [
             { "text": "Dashboard Module", "bg": "#E3F0E6", "color": "#2E6A3D" },
-            { "text": "", "bg": "#791e76", "color": "#ffffff" }
+            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" }
           ]
         },
         {
           "id": "ACTIVE",
           "status": "active",
           "name": "I5A.3 Variance Monitoring and Resolving",
-          "trigger": "",
+          "trigger": "Weekly and Daily",
           "features": [
             "I5A.3.1 Daily/Weekly/Monthly instant, consolidated data",
             "I5A.3.2 versatile multi-view reports",
@@ -346,11 +351,64 @@
           "approval": [
             { "role": "Senior Plant Supervisor", "label": "Review and resolve variances" },
             { "role": "Operations Officer", "label": "Resolve and adjust variances" },
-            { "role": "Sir RY", "label": "Review extent of variances" }
+            { "role": "Sir RY", "label": "Review extent of variances" },
+            { "role": "Accounting Manager", "label": "Verify adjustments and close" }
           ],
           "data_outputs": [
             "Inv Variance per Location/per period Summary",
             "Inv Adjustment per location/per period Summary"
+          ],
+          "tags": [
+            { "text": "Odoo Module", "bg": "#E3F0E6", "color": "#2E6A3D" },
+            { "text": "Dashboard Module", "bg": "#DCEAF5", "color": "#1E4E79" }
+          ]
+        },
+        {
+          "id": "ACTIVE",
+          "status": "active",
+          "name": "I5A.4 Cylinder Qty, State and Variance Monitoring",
+          "trigger": "Daily data input of warehouse and floor stock location (from/to), S/N, Size, Qty, Tare Weight, and Painting State, Customers/Locations",
+          "features": [
+            "I5A.4.1 Daily/Weekly/Monthly instant, consolidated data per user",
+            "I5A.4.2 Versatile multi-view, multi-period summaries for updating groups/ for reviewing qty",
+            "I5A.4.3 Versatile Cylinder Qty and State Reports",
+            "I5A.4.4 Mobile-friendly data input"
+          ],
+          "approval": [
+            { "role": "Warehouse and Quality Supervisor", "label": "Count qty,size and state of cylinders, Grind and Label" },
+            { "role": "Inventory Supervisor", "label": "Encode qty,size and state of cylinders" },
+            { "role": "Sales Assistant", "label": "Review cylinder swapping transactions" },
+            { "role": "Operations Officer", "label": "Resolve and adjust variances" },
+            { "role": "Sir RY", "label": "Review extent of cylinder state, qty and variances" }
+          ],
+          "data_outputs": [
+            "I5A.4.5 Cylinder Inventory and State Report",
+            "I5A.4.6 Cylinder Variance per Location/per period Summary",
+            "I5A.4.7 Cylinder Adjustment per location/per period Summary"
+          ],
+          "tags": [
+            { "text": "Odoo Module", "bg": "#E3F0E6", "color": "#2E6A3D" },
+            { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" }
+          ]
+        },
+        {
+          "id": "ACTIVE",
+          "status": "active",
+          "name": "I5A.5 xx",
+          "trigger": "",
+          "features": [
+            "I5A.5.1 Daily/Weekly/Monthly instant, consolidated data",
+            "I5A.5.2 versatile multi-view reports",
+            "I5A.5.3 Mobile-friendly data input"
+          ],
+          "approval": [
+            { "role": "Senior Plant Supervisor", "label": "Review and resolve variances" },
+            { "role": "Operations Officer", "label": "Resolve and adjust variances" },
+            { "role": "Sir RY", "label": "Review extent of variances" }
+          ],
+          "data_outputs": [
+            "I5A.5.4 Inv Variance per Location/per period Summary",
+            "I5A.5.5 Inv Adjustment per location/per period Summary"
           ],
           "tags": [
             { "text": "Odoo Module", "bg": "#E3F0E6", "color": "#2E6A3D" },
