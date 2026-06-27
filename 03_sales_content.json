@@ -150,7 +150,8 @@
           "features": [
             "S3A1.1 Coordinate multiple dealers' Plant Visit Calendar Schedule. Instant schedule conflict updates",
             "S3A1.2 Dealers can book schedule via viber online",
-            "S3A1.3 Dealer advance quantity request/order"
+            "S3A1.3 Check Dealer advance quantity request/order",
+            "S3A1.4 easy maintenance/update of Dealer database"
           ],
           "approval": [
             { "role": "Sales Assistant", "label": "Call and schedule" },
@@ -158,8 +159,8 @@
             { "role": "Operations Officer", "label": "Look and review" }
           ],
           "data_outputs": [
-            "S3A1.4 Single shared calendar chart of visits (check if already in Monday)",
-            "S3A1.5 Advanced order qty list"
+            "S3A1.5 Single shared calendar chart of visits (check if already in Monday)",
+            "S3A1.6 Advanced order qty list"
           ],
           "tags": [
             { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
