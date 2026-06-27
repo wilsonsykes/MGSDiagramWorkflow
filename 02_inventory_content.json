@@ -395,7 +395,7 @@
           "id": "ACTIVE",
           "status": "active",
           "name": "I5A.5 xx",
-          "trigger": "",
+          "trigger": "TBD",
           "features": [
             "I5A.5.1 Daily/Weekly/Monthly instant, consolidated data",
             "I5A.5.2 versatile multi-view reports",
