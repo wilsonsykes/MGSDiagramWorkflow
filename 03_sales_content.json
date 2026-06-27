@@ -150,8 +150,8 @@
           "features": [
             "S3A1.1 Coordinate multiple dealers' Plant Visit Calendar Schedule. Instant schedule conflict updates",
             "S3A1.2 Dealers can book schedule via viber online",
-            "S3A1.3 Check Dealer advance quantity request/order",
-            "S3A1.4 easy maintenance/update of Dealer database"
+            "S3A1.3 Disseminate Dealer advance quantity request/order to multiple staff",
+            "S3A1.4 Easy maintenance/update of Dealer database"
           ],
           "approval": [
             { "role": "Sales Assistant", "label": "Call and schedule" },
@@ -166,27 +166,59 @@
             { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
             { "text": "Calls/Texts", "bg": "#F9EEDC", "color": "#B96B13" }
           ]
-        },{
+        },
+        {
           "id": "ACTIVE",
           "status": "active",
           "name": "S3A2 Repeat orders from "Delivery Truck" and "Plant-Pickup" Dealer",
-          "trigger": "Client's Purchase Order (eg MGSA), Call or Email Order, Client Plant Visit",
+          "trigger": "Client's Purchase Order (eg MGSA), Truck Pickup or Client Plant Visit",
           "features": [
-            "S3A2.1 ",
-            "S3A2.2 Log implementation notes",
-            "S3A2.3 Surface dependencies early"
+            "S3A2.1 Produce digital Sales Order and instant counterpart Invoice, editable before confirming",
+            "S3A2.2 Product digital LUT, EES and other documents with Sales Order for printing",
+            "S3A2.3 Instant Sales/Inventory/Invoice movement upon sales order confirmation",
+            "S3A2.4 Real-time, multi-user shared sales/invoice/inventory dashboard",
+            "S3A2.5 Variance monitoring dashboard and faster daily resolution"
           ],
           "approval": [
-            { "role": "Sales Assistant", "label": "Build and update" },
+            { "role": "Sales Assistant", "label": "Confirm orders and produce invoice, LUT, EES" },
             { "role": "Sales Manager", "label": "Review output" }
           ],
           "data_outputs": [
-            "Build status board",
-            "Readiness summary"
+            "S3A2.5 Digital and printed Sales Orders and Invoices",
+            "S3A2.6 Sales Order and Invoice Summary Tables"
           ],
           "tags": [
-            { "text": "Checklist Compatible", "bg": "#EFE7FB", "color": "#6F3CC3" },
-            { "text": "Sample", "bg": "#F9EEDC", "color": "#B96B13" }
+            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
+            { "text": "xx", "bg": "#F9EEDC", "color": "#B96B13" }
+          ]
+        },
+        {
+          "id": "ACTIVE",
+          "status": "active",
+          "name": "S3A3 Customer marketing support, cylinder swapping, pricing adjustments, concerns",
+          "trigger": "any of the above requests",
+          "features": [
+            "S3A3.1 Digital Cylinder Swapping Approval Process, signed Swapping Form, and other photos, requirements",
+            "S3A3.2 Cylinder swap inventory entries are multi-user viewed and printable",
+            "S3A3.3 Multi-user, real-time Cylinder inventory and status management",
+            "S3A3.4 Real-time, multi-user shared inventory dashboard",
+            "S3A3.5 digital CRM for new dealer application process from start to end"
+          ],
+          "approval": [
+            { "role": "Sales Assistant", "label": "Request cylinder swapping with doc requests" },
+            { "role": "Sir RY", "label": "Review and approve/reject request digital files" },
+            { "role": "Warehouse and Quality Supervisor", "label": "List the qty, status and treatment of cylinders" },
+            { "role": "Senior Supervisor", "label": "Review cylinders batch request and requirements" },
+            { "role": "Operations Officer", "label": "Review and note transactions" }
+          ],
+          "data_outputs": [
+            "S3A2.6 Real-time list of dealers' marketing support and pricing concerns",
+            "S3A2.7 Real-time Swapped cylinders inventory and status summary",
+            "S3A3.8 Multi-step Customer Relation Management process for New Dealers",
+          ],
+          "tags": [
+            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
+            { "text": "xx", "bg": "#F9EEDC", "color": "#B96B13" }
           ]
         }
       ]
@@ -198,9 +230,9 @@
       "cards": [
         {
           "id": "ACTIVE",
-          "status": "pending",
-          "name": "L1 Release Approval",
-          "trigger": "The team completes execution and requests release approval.",
+          "status": "active",
+          "name": "Retail Orders Scheduling",
+          "trigger": "Retail Daily and Monthly Sales Target",
           "features": [
             "Capture release notes",
             "Confirm handoff status",
@@ -215,8 +247,31 @@
             "Launch approval log"
           ],
           "tags": [
-            { "text": "Pending", "bg": "#F9EEDC", "color": "#B96B13" },
-            { "text": "Replace Me", "bg": "#DCEAF5", "color": "#1E4E79" }
+            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
+            { "text": "xx Me", "bg": "#DCEAF5", "color": "#1E4E79" }
+          ]
+        },
+        {
+          "id": "ACTIVE",
+          "status": "active",
+          "name": "Efficient Retail Delivery Scheduling",
+          "trigger": "Accumulated retail deliveries ready to dispatch",
+          "features": [
+            "Capture release notes",
+            "Confirm handoff status",
+            "Log go-live decision"
+          ],
+          "approval": [
+            { "role": "review", "label": "Check release" },
+            { "role": "manager", "label": "Approve launch" }
+          ],
+          "data_outputs": [
+            "Release history",
+            "Launch approval log"
+          ],
+          "tags": [
+            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
+            { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" }
           ]
         }
       ]
