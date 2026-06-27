@@ -27,7 +27,7 @@ jobs:
         run: |
           python scripts/validate_index_html.py index.html
           python scripts/validate_index_html.py main.html
-          python scripts/validate_index_html.py inventory.html
+          python scripts/validate_index_html.py operations.html
           python scripts/validate_index_html.py sales.html
           python scripts/validate_index_html.py accounting.html
 
