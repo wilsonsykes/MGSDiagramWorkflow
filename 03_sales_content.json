@@ -3,7 +3,7 @@
     "logo": "Sales",
     "kanji": "v1",
     "title": "Workflow Process Diagram",
-    "subtitle": "Sales workflow content driven from 03_sales_content.json."
+    "subtitle": "Sales for the 4 Sales Avenues and Overall."
   },
   "hoshi_section": {
     "title": "Delivery Pipeline",
@@ -14,17 +14,17 @@
     {
       "kanji": "",
       "romaji": "Commercial",
-      "english": "Intake | Validation | Prioritization",
+      "english": "Find Client | Serve | Schedule | Repeat Order",
       "cards": [
         {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "D1 Intake Form",
-          "trigger": "A request arrives through your chosen intake channel.",
+          "id": "manual",
+          "status": "pending",
+          "name": "S1A1 Solicit Orders",
+          "trigger": "Daily and Monthly Sales Target",
           "features": [
-            "Collect project scope and owner details",
-            "Assign a request reference number",
-            "Save progress before final submission"
+            "S1A1.1 Complete fie",
+            "S1A1.2 ",
+            "S1A1.3 "
           ],
           "approval": [
             { "role": "auto", "label": "Create request" },
@@ -42,13 +42,13 @@
         },
         {
           "id": "ACTIVE",
-          "status": "pending",
-          "name": "D2 Qualification Review",
-          "trigger": "The team reviews fit, effort, and delivery timing.",
+          "status": "active",
+          "name": "S1A2 Take Order",
+          "trigger": "A client order. Regular repeat orders. ",
           "features": [
-            "Record qualification notes",
-            "Highlight blockers and dependencies",
-            "Route to the next owner"
+            "",
+            "S1A2.2 Include the required sales-operations-acctg fields in the form.",
+            "S1A2.3 Auto-assign permanent, non-editable Sales Order Control No."
           ],
           "approval": [
             { "role": "owner", "label": "Prepare context" },
@@ -67,41 +67,10 @@
     },
     {
       "kanji": "",
-      "romaji": "Industrial",
-      "english": "Scope | Owners | Schedule",
+      "romaji": "Bulk",
+      "english": "Find Client | Serve | Schedule | Repeat Order",
       "cards": [
-        {
-          "id": "ACTIVE",
-          "status": "core",
-          "name": "P1 Delivery Plan",
-          "trigger": "A qualified item moves into planning.",
-          "features": [
-            "Define milestones",
-            "Assign owners",
-            "Outline acceptance criteria"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Draft plan" },
-            { "role": "manager", "label": "Approve scope" }
-          ],
-          "data_outputs": [
-            "Planning tracker",
-            "Milestone summary"
-          ],
-          "tags": [
-            { "text": "Core", "bg": "#DCEAF5", "color": "#1E4E79" },
-            { "text": "Reusable", "bg": "#E3F0E6", "color": "#2E6A3D" }
-          ]
-        }
-      ]
-    },
-    {
-      "kanji": "",
-      "romaji": "Dealer",
-      "english": "Build | Review | Readiness",
-      "cards": [
-        {
-          "section": "Execution Checklist",
+        "section": "Execution Checklist",
           "stage": 3,
           "version": "1.0",
           "phases": [
@@ -143,19 +112,72 @@
           ],
           "note": "This section block is optional. Use it when you want a detailed checklist inside the same stage layout."
         },
-        {
+{
           "id": "ACTIVE",
-          "status": "pending",
-          "name": "E1 Build Workstream",
-          "trigger": "Planning is approved and work begins.",
+          "status": "core",
+          "name": "P1 Delivery Plan",
+          "trigger": "A qualified item moves into planning.",
           "features": [
-            "Track progress by milestone",
-            "Log implementation notes",
-            "Surface dependencies early"
+            "Define milestones",
+            "Assign owners",
+            "Outline acceptance criteria"
           ],
           "approval": [
-            { "role": "owner", "label": "Build and update" },
-            { "role": "review", "label": "Review output" }
+            { "role": "owner", "label": "Draft plan" },
+            { "role": "manager", "label": "Approve scope" }
+          ],
+          "data_outputs": [
+            "Planning tracker",
+            "Milestone summary"
+          ],
+          "tags": [
+            { "text": "Core", "bg": "#DCEAF5", "color": "#1E4E79" },
+            { "text": "Reusable", "bg": "#E3F0E6", "color": "#2E6A3D" }
+          ]
+        }
+      ]
+    },
+    {
+      "kanji": "",
+      "romaji": "Dealer",
+      "english": "Find Client | Serve | Schedule | Repeat Order",
+      "cards": [
+        {
+          "id": "MIXED ACTIVE",
+          "status": "pending",
+          "name": "S3A1 Contact Dealers Pre-visit",
+          "trigger": "Sales assistant contacts dealers in advance for plant visit",
+          "features": [
+            "S3A1.1 Coordinate multiple dealers' Plant Visit Calendar Schedule. Instant schedule conflict updates",
+            "S3A1.2 Dealers can book schedule via viber online",
+            "S3A1.3 Dealer advance quantity request/order"
+          ],
+          "approval": [
+            { "role": "Sales Assistant", "label": "Call and schedule" },
+            { "role": "Plant Supervisor", "label": "Look and prepare cylinders" },
+            { "role": "Operations Officer", "label": "Look and review" }
+          ],
+          "data_outputs": [
+            "S3A1.4 Single shared calendar chart of visits (check if already in Monday)",
+            "S3A1.5 Advanced order qty list"
+          ],
+          "tags": [
+            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
+            { "text": "Calls/Texts", "bg": "#F9EEDC", "color": "#B96B13" }
+          ]
+        },{
+          "id": "ACTIVE",
+          "status": "active",
+          "name": "S3A2 Repeat orders from "Delivery Truck" and "Plant-Pickup" Dealer",
+          "trigger": "Client's Purchase Order (eg MGSA), Call or Email Order, Client Plant Visit",
+          "features": [
+            "S3A2.1 ",
+            "S3A2.2 Log implementation notes",
+            "S3A2.3 Surface dependencies early"
+          ],
+          "approval": [
+            { "role": "Sales Assistant", "label": "Build and update" },
+            { "role": "Sales Manager", "label": "Review output" }
           ],
           "data_outputs": [
             "Build status board",
@@ -171,7 +193,7 @@
     {
       "kanji": "",
       "romaji": "Retail",
-      "english": "Approval | Publish | Support",
+      "english": "Find Client | Serve | Schedule | Repeat Order",
       "cards": [
         {
           "id": "ACTIVE",
