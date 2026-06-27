@@ -303,8 +303,7 @@
           ],
           "data_outputs": [
             "I5A.1.1 Inventory per location/per transaction/per period reports",
-            "I5A.1.1 Inv Variances per location Summary",
-            "I5A.1.1 Inv Adjustment per location Summary"
+            "I5A.1.1 Inv Variances and Adjustment Monthly Summary"
           ],
           "tags": [
             { "text": "Odoo Module", "bg": "#E3F0E6", "color": "#2E6A3D" },
@@ -315,20 +314,19 @@
           "id": "ACTIVE",
           "status": "active",
           "name": "I5A.2 Inventory Planning and Forecast",
-          "trigger": "Daily data input of inventory + Sales Target Budget",
+          "trigger": "Daily data input of inventory + Sales Target Budget per week per sales avenue",
           "features": [
-            "I5A.2.1 Daily/Weekly/Monthly instant, consolidated data",
+            "I5A.2.1 Weekly/Monthly real-time data",
             "I5A.2.2 versatile multi-view reports",
-            "I5A.2.3 Mobile-friendly data input"
+            "I5A.2.3 PC data Input"
           ],
           "approval": [
             { "role": "owner", "label": "Review forecast" },
             { "role": "manager", "label": "Approve plan" }
           ],
           "data_outputs": [
-            "I5A.2.1 Inventory per location/per receiving report",
-            "I5A.2.1 Inv Variances per location Summary",
-            "I5A.2.1 Inv Adjustment per location Summary"
+            "I5A.2.1 Inventory Forecast Report",
+            "I5A.2.1 Advanced Purchased Orders (draft copies)"
           ],
           "tags": [
             { "text": "Dashboard Module", "bg": "#E3F0E6", "color": "#2E6A3D" },
@@ -339,20 +337,20 @@
           "id": "ACTIVE",
           "status": "active",
           "name": "I5A.3 Variance Monitoring and Resolving",
-          "trigger": "Daily data input of warehouse and floor stock location (from/to), customer, transaction (in and out), scheduled/actual timestamps, truck, deliver team",
+          "trigger": "",
           "features": [
             "I5A.3.1 Daily/Weekly/Monthly instant, consolidated data",
             "I5A.3.2 versatile multi-view reports",
             "I5A.3.3 Mobile-friendly data input"
           ],
           "approval": [
-            { "role": "owner", "label": "Review variances" },
-            { "role": "manager", "label": "Resolve variances" }
+            { "role": "Senior Plant Supervisor", "label": "Review and resolve variances" },
+            { "role": "Operations Officer", "label": "Resolve and adjust variances" },
+            { "role": "Sir RY", "label": "Review extent of variances" }
           ],
           "data_outputs": [
-            "Inventory per location/per receiving report",
-            "Inv Variances per location Summary",
-            "Inv Adjustment per location Summary"
+            "Inv Variance per Location/per period Summary",
+            "Inv Adjustment per location/per period Summary"
           ],
           "tags": [
             { "text": "Odoo Module", "bg": "#E3F0E6", "color": "#2E6A3D" },
