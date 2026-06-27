@@ -46,7 +46,7 @@
           "name": "S1A2 Take Order",
           "trigger": "A client order. Regular repeat orders. ",
           "features": [
-            "",
+            "S1A2.1 TBD",
             "S1A2.2 Include the required sales-operations-acctg fields in the form.",
             "S1A2.3 Auto-assign permanent, non-editable Sales Order Control No."
           ],
@@ -70,7 +70,7 @@
       "romaji": "Bulk",
       "english": "Find Client | Serve | Schedule | Repeat Order",
       "cards": [
-        "section": "Execution Checklist",
+        {"section": "Execution Checklist",
           "stage": 3,
           "version": "1.0",
           "phases": [
@@ -170,7 +170,7 @@
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "S3A2 Repeat orders from "Delivery Truck" and "Plant-Pickup" Dealer",
+          "name": "S3A2 Repeat orders from Delivery Truck and Plant-Pickup Dealer",
           "trigger": "Client's Purchase Order (eg MGSA), Truck Pickup or Client Plant Visit",
           "features": [
             "S3A2.1 Produce digital Sales Order and instant counterpart Invoice, editable before confirming",

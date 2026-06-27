@@ -119,7 +119,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <nav class="topnav">
   <div class="nav-logo">Sales</div>
   <a href="#stage-1" class="nav-link">1 &middot; Commercial</a>
-  <a href="#stage-2" class="nav-link">2 &middot; Industrial</a>
+  <a href="#stage-2" class="nav-link">2 &middot; Bulk</a>
   <a href="#stage-3" class="nav-link">3 &middot; Dealer</a>
   <a href="#stage-4" class="nav-link">4 &middot; Retail</a>
   <a href="#stage-5" class="nav-link">5 &middot; Overall</a>
@@ -129,7 +129,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <div class="header">
   <div class="header-top"><div class="header-logo">Sales</div><span class="header-kanji">v1</span></div>
   <h1>Workflow Process Diagram</h1>
-  <p>Sales workflow content driven from 03_sales_content.json.</p>
+  <p>Sales for the 4 Sales Avenues and Overall.</p>
 </div>
 
 <div class="legend-bar">
@@ -147,7 +147,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <section class="stage-section" id="stage-1">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">1</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">COMMERCIAL</div><div class="stage-sub">Intake | Validation | Prioritization</div></div>
+    <div class="stage-info"><div class="stage-title">COMMERCIAL</div><div class="stage-sub">Find Client | Serve | Schedule | Repeat Order</div></div>
     <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body"><div class="two-col">
@@ -156,18 +156,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
         <div class="cards-list">
     <div class="pcard" onclick="toggleP(this)">
       <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">D1 Intake Form</span>
-        <span class="st-dot st-active" title="Active"></span>
+        <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">manual</span>
+        <span class="pcard-name">S1A1 Solicit Orders</span>
+        <span class="st-dot st-pending" title="In Build"></span>
         <span class="card-tags"><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Live</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Editable</span></span>
         <span class="pcard-arrow">&#9662;</span>
       </div>
       <div class="pcard-body"><div class="pcard-inner">
       <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">A request arrives through your chosen intake channel.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-0-0-0">Collect project scope and owner details</div>
-<div class="d-item" id="feat-sales-0-0-1">Assign a request reference number</div>
-<div class="d-item" id="feat-sales-0-0-2">Save progress before final submission</div>
+        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Daily and Monthly Sales Target</div></div>
+        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-0-0-0">S1A1.1 Complete fie</div>
+<div class="d-item" id="feat-sales-0-0-1">S1A1.2 </div>
+<div class="d-item" id="feat-sales-0-0-2">S1A1.3 </div>
 </div>
       </div>
       <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">AUTO</div><div class="appr-name">Create request</div></div>
@@ -183,18 +183,18 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div>
     <div class="pcard" onclick="toggleP(this)">
       <div class="pcard-bar">
-        <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">ACTIVE</span>
-        <span class="pcard-name">D2 Qualification Review</span>
-        <span class="st-dot st-pending" title="In Build"></span>
+        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
+        <span class="pcard-name">S1A2 Take Order</span>
+        <span class="st-dot st-active" title="Active"></span>
         <span class="card-tags"><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Template</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Replace Me</span></span>
         <span class="pcard-arrow">&#9662;</span>
       </div>
       <div class="pcard-body"><div class="pcard-inner">
       <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">The team reviews fit, effort, and delivery timing.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-0-1-0">Record qualification notes</div>
-<div class="d-item" id="feat-sales-0-1-1">Highlight blockers and dependencies</div>
-<div class="d-item" id="feat-sales-0-1-2">Route to the next owner</div>
+        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">A client order. Regular repeat orders. </div></div>
+        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-0-1-0">S1A2.1 TBD</div>
+<div class="d-item" id="feat-sales-0-1-1">S1A2.2 Include the required sales-operations-acctg fields in the form.</div>
+<div class="d-item" id="feat-sales-0-1-2">S1A2.3 Auto-assign permanent, non-editable Sales Order Control No.</div>
 </div>
       </div>
       <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Prepare context</div></div>
@@ -221,53 +221,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <section class="stage-section" id="stage-2">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">2</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">INDUSTRIAL</div><div class="stage-sub">Scope | Owners | Schedule</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
-  </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#DCEAF5;color:#1E4E79;border:1px solid #BFD6EB">ACTIVE</span>
-        <span class="pcard-name">P1 Delivery Plan</span>
-        <span class="card-tags"><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Core</span><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Reusable</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">A qualified item moves into planning.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-1-0-0">Define milestones</div>
-<div class="d-item" id="feat-sales-1-0-1">Assign owners</div>
-<div class="d-item" id="feat-sales-1-0-2">Outline acceptance criteria</div>
-</div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Draft plan</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve scope</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Planning tracker</div>
-<div class="d-item">Milestone summary</div>
-</div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-sales-1-0"><span class="pain-icon">&#10005;</span><span>Scope changes are hard to track</span></div>
-          <div class="pain-row" id="pp-sales-1-1"><span class="pain-icon">&#10005;</span><span>Owners are assigned too late</span></div>
-        </div>
-      </div>
-    </div></div>
-</section>
-
-<section class="stage-section" id="stage-3">
-  <div class="stage-banner" onclick="toggleStage(this)">
-    <div class="stage-num"><span class="num-big">3</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">DEALER</div><div class="stage-sub">Build | Review | Readiness</div></div>
+    <div class="stage-info"><div class="stage-title">BULK</div><div class="stage-sub">Find Client | Serve | Schedule | Repeat Order</div></div>
     <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body"><div class="two-col">
@@ -314,26 +268,136 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div>
     <div class="pcard" onclick="toggleP(this)">
       <div class="pcard-bar">
-        <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">ACTIVE</span>
-        <span class="pcard-name">E1 Build Workstream</span>
-        <span class="st-dot st-pending" title="In Build"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#EFE7FB;color:#6F3CC3;border:1px solid #6F3CC322">Checklist Compatible</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Sample</span></span>
+        <span class="badge" style="background:#DCEAF5;color:#1E4E79;border:1px solid #BFD6EB">ACTIVE</span>
+        <span class="pcard-name">P1 Delivery Plan</span>
+        <span class="card-tags"><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Core</span><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Reusable</span></span>
         <span class="pcard-arrow">&#9662;</span>
       </div>
       <div class="pcard-body"><div class="pcard-inner">
       <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Planning is approved and work begins.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-2-1-0">Track progress by milestone</div>
-<div class="d-item" id="feat-sales-2-1-1">Log implementation notes</div>
-<div class="d-item" id="feat-sales-2-1-2">Surface dependencies early</div>
+        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">A qualified item moves into planning.</div></div>
+        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-1-1-0">Define milestones</div>
+<div class="d-item" id="feat-sales-1-1-1">Assign owners</div>
+<div class="d-item" id="feat-sales-1-1-2">Outline acceptance criteria</div>
 </div>
       </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Build and update</div></div>
+      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Draft plan</div></div>
 <span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Review output</div></div>
+<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve scope</div></div>
 </div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Build status board</div>
-<div class="d-item">Readiness summary</div>
+      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Planning tracker</div>
+<div class="d-item">Milestone summary</div>
+</div>
+      </div></div>
+    </div>
+        </div>
+      </div>
+      <div class="manual-col">
+        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
+        <div class="pain-list">
+          <div class="pain-row" id="pp-sales-1-0"><span class="pain-icon">&#10005;</span><span>Scope changes are hard to track</span></div>
+          <div class="pain-row" id="pp-sales-1-1"><span class="pain-icon">&#10005;</span><span>Owners are assigned too late</span></div>
+        </div>
+      </div>
+    </div></div>
+</section>
+
+<section class="stage-section" id="stage-3">
+  <div class="stage-banner" onclick="toggleStage(this)">
+    <div class="stage-num"><span class="num-big">3</span><span class="num-sub">OF 5</span></div>
+    <div class="stage-info"><div class="stage-title">DEALER</div><div class="stage-sub">Find Client | Serve | Schedule | Repeat Order</div></div>
+    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+  </div>
+  <div class="stage-body"><div class="two-col">
+      <div class="future-col">
+        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
+        <div class="cards-list">
+    <div class="pcard" onclick="toggleP(this)">
+      <div class="pcard-bar">
+        <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">MIXED ACTIVE</span>
+        <span class="pcard-name">S3A1 Contact Dealers Pre-visit</span>
+        <span class="st-dot st-pending" title="In Build"></span>
+        <span class="card-tags"><span class="card-tag" style="background:#791e76;color:#ffffff;border:1px solid #ffffff22">Odoo Module</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Calls/Texts</span></span>
+        <span class="pcard-arrow">&#9662;</span>
+      </div>
+      <div class="pcard-body"><div class="pcard-inner">
+      <div class="det-grid">
+        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Sales assistant contacts dealers in advance for plant visit</div></div>
+        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-2-0-0">S3A1.1 Coordinate multiple dealers&#x27; Plant Visit Calendar Schedule. Instant schedule conflict updates</div>
+<div class="d-item" id="feat-sales-2-0-1">S3A1.2 Dealers can book schedule via viber online</div>
+<div class="d-item" id="feat-sales-2-0-2">S3A1.3 Disseminate Dealer advance quantity request/order to multiple staff</div>
+<div class="d-item" id="feat-sales-2-0-3">S3A1.4 Easy maintenance/update of Dealer database</div>
+</div>
+      </div>
+      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">SALES ASSISTANT</div><div class="appr-name">Call and schedule</div></div>
+<span class="arrow-sep">&rarr;</span>
+<div class="appr-card"><div class="appr-role" style="color:#0F766E">PLANT SUPERVISOR</div><div class="appr-name">Look and prepare cylinders</div></div>
+<span class="arrow-sep">&rarr;</span>
+<div class="appr-card"><div class="appr-role" style="color:#0F766E">OPERATIONS OFFICER</div><div class="appr-name">Look and review</div></div>
+</div></div>
+      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">S3A1.5 Single shared calendar chart of visits (check if already in Monday)</div>
+<div class="d-item">S3A1.6 Advanced order qty list</div>
+</div>
+      </div></div>
+    </div>
+    <div class="pcard" onclick="toggleP(this)">
+      <div class="pcard-bar">
+        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
+        <span class="pcard-name">S3A2 Repeat orders from Delivery Truck and Plant-Pickup Dealer</span>
+        <span class="st-dot st-active" title="Active"></span>
+        <span class="card-tags"><span class="card-tag" style="background:#791e76;color:#ffffff;border:1px solid #ffffff22">Odoo Module</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">xx</span></span>
+        <span class="pcard-arrow">&#9662;</span>
+      </div>
+      <div class="pcard-body"><div class="pcard-inner">
+      <div class="det-grid">
+        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Client&#x27;s Purchase Order (eg MGSA), Truck Pickup or Client Plant Visit</div></div>
+        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-2-1-0">S3A2.1 Produce digital Sales Order and instant counterpart Invoice, editable before confirming</div>
+<div class="d-item" id="feat-sales-2-1-1">S3A2.2 Product digital LUT, EES and other documents with Sales Order for printing</div>
+<div class="d-item" id="feat-sales-2-1-2">S3A2.3 Instant Sales/Inventory/Invoice movement upon sales order confirmation</div>
+<div class="d-item" id="feat-sales-2-1-3">S3A2.4 Real-time, multi-user shared sales/invoice/inventory dashboard</div>
+<div class="d-item" id="feat-sales-2-1-4">S3A2.5 Variance monitoring dashboard and faster daily resolution</div>
+</div>
+      </div>
+      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">SALES ASSISTANT</div><div class="appr-name">Confirm orders and produce invoice, LUT, EES</div></div>
+<span class="arrow-sep">&rarr;</span>
+<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">SALES MANAGER</div><div class="appr-name">Review output</div></div>
+</div></div>
+      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">S3A2.5 Digital and printed Sales Orders and Invoices</div>
+<div class="d-item">S3A2.6 Sales Order and Invoice Summary Tables</div>
+</div>
+      </div></div>
+    </div>
+    <div class="pcard" onclick="toggleP(this)">
+      <div class="pcard-bar">
+        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
+        <span class="pcard-name">S3A3 Customer marketing support, cylinder swapping, pricing adjustments, concerns</span>
+        <span class="st-dot st-active" title="Active"></span>
+        <span class="card-tags"><span class="card-tag" style="background:#791e76;color:#ffffff;border:1px solid #ffffff22">Odoo Module</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">xx</span></span>
+        <span class="pcard-arrow">&#9662;</span>
+      </div>
+      <div class="pcard-body"><div class="pcard-inner">
+      <div class="det-grid">
+        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">any of the above requests</div></div>
+        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-2-2-0">S3A3.1 Digital Cylinder Swapping Approval Process, signed Swapping Form, and other photos, requirements</div>
+<div class="d-item" id="feat-sales-2-2-1">S3A3.2 Cylinder swap inventory entries are multi-user viewed and printable</div>
+<div class="d-item" id="feat-sales-2-2-2">S3A3.3 Multi-user, real-time Cylinder inventory and status management</div>
+<div class="d-item" id="feat-sales-2-2-3">S3A3.4 Real-time, multi-user shared inventory dashboard</div>
+<div class="d-item" id="feat-sales-2-2-4">S3A3.5 digital CRM for new dealer application process from start to end</div>
+</div>
+      </div>
+      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">SALES ASSISTANT</div><div class="appr-name">Request cylinder swapping with doc requests</div></div>
+<span class="arrow-sep">&rarr;</span>
+<div class="appr-card"><div class="appr-role" style="color:#0F766E">SIR RY</div><div class="appr-name">Review and approve/reject request digital files</div></div>
+<span class="arrow-sep">&rarr;</span>
+<div class="appr-card"><div class="appr-role" style="color:#0F766E">WAREHOUSE AND QUALITY SUPERVISOR</div><div class="appr-name">List the qty, status and treatment of cylinders</div></div>
+<span class="arrow-sep">&rarr;</span>
+<div class="appr-card"><div class="appr-role" style="color:#0F766E">SENIOR SUPERVISOR</div><div class="appr-name">Review cylinders batch request and requirements</div></div>
+<span class="arrow-sep">&rarr;</span>
+<div class="appr-card"><div class="appr-role" style="color:#0F766E">OPERATIONS OFFICER</div><div class="appr-name">Review and note transactions</div></div>
+</div></div>
+      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">S3A2.6 Real-time list of dealers&#x27; marketing support and pricing concerns</div>
+<div class="d-item">S3A2.7 Real-time Swapped cylinders inventory and status summary</div>
+<div class="d-item">S3A3.8 Multi-step Customer Relation Management process for New Dealers</div>
 </div>
       </div></div>
     </div>
@@ -352,7 +416,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <section class="stage-section" id="stage-4">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">4</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">RETAIL</div><div class="stage-sub">Approval | Publish | Support</div></div>
+    <div class="stage-info"><div class="stage-title">RETAIL</div><div class="stage-sub">Find Client | Serve | Schedule | Repeat Order</div></div>
     <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body"><div class="two-col">
@@ -361,18 +425,43 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
         <div class="cards-list">
     <div class="pcard" onclick="toggleP(this)">
       <div class="pcard-bar">
-        <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">ACTIVE</span>
-        <span class="pcard-name">L1 Release Approval</span>
-        <span class="st-dot st-pending" title="In Build"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Pending</span><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Replace Me</span></span>
+        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
+        <span class="pcard-name">Retail Orders Scheduling</span>
+        <span class="st-dot st-active" title="Active"></span>
+        <span class="card-tags"><span class="card-tag" style="background:#791e76;color:#ffffff;border:1px solid #ffffff22">Odoo Module</span><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">xx Me</span></span>
         <span class="pcard-arrow">&#9662;</span>
       </div>
       <div class="pcard-body"><div class="pcard-inner">
       <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">The team completes execution and requests release approval.</div></div>
+        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Retail Daily and Monthly Sales Target</div></div>
         <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-3-0-0">Capture release notes</div>
 <div class="d-item" id="feat-sales-3-0-1">Confirm handoff status</div>
 <div class="d-item" id="feat-sales-3-0-2">Log go-live decision</div>
+</div>
+      </div>
+      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Check release</div></div>
+<span class="arrow-sep">&rarr;</span>
+<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve launch</div></div>
+</div></div>
+      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Release history</div>
+<div class="d-item">Launch approval log</div>
+</div>
+      </div></div>
+    </div>
+    <div class="pcard" onclick="toggleP(this)">
+      <div class="pcard-bar">
+        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
+        <span class="pcard-name">Efficient Retail Delivery Scheduling</span>
+        <span class="st-dot st-active" title="Active"></span>
+        <span class="card-tags"><span class="card-tag" style="background:#791e76;color:#ffffff;border:1px solid #ffffff22">Odoo Module</span><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">xx</span></span>
+        <span class="pcard-arrow">&#9662;</span>
+      </div>
+      <div class="pcard-body"><div class="pcard-inner">
+      <div class="det-grid">
+        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Accumulated retail deliveries ready to dispatch</div></div>
+        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-3-1-0">Capture release notes</div>
+<div class="d-item" id="feat-sales-3-1-1">Confirm handoff status</div>
+<div class="d-item" id="feat-sales-3-1-2">Log go-live decision</div>
 </div>
       </div>
       <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Check release</div></div>
