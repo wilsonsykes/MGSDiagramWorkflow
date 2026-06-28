@@ -59,7 +59,7 @@
             "Decision notes"
           ],
           "tags": [
-            { "text": "Template", "bg": "#DCEAF5", "color": "#1E4E79" },
+            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
             { "text": "Replace Me", "bg": "#F9EEDC", "color": "#B96B13" }
           ]
         }
