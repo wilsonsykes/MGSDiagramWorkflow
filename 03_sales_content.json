@@ -17,50 +17,84 @@
       "english": "Find Client | Serve | Schedule | Repeat Order",
       "cards": [
         {
-          "id": "manual",
+          "id": "MIXED",
           "status": "pending",
-          "name": "S1A1 Solicit Orders",
-          "trigger": "Daily and Monthly Sales Target",
+          "name": "S1A1 Solicit and Plan Orders",
+          "trigger": "Daily and Monthly Sales Targets | Operations Delivery Schedule",
           "features": [
-            "S1A1.1 Complete fie",
-            "S1A1.2 ",
-            "S1A1.3 "
+            "S1A1.1 Call cient for re-orders/ Find new client orders",
+            "S1A1.2 Auto-remind client and Sales Manager of impending order based on forecast",
+            "S1A1.3 Create draft Sales Order, Pick List and Delivery Receipt for each order",
+            "S1A1.4 Check Sales History for upcoming re-orders", 
+            "S1A1.5 Review current and upcoming inventory levels for upselling",
+            "S1A1.6 Review route schedule next week for upselling"
           ],
           "approval": [
-            { "role": "auto", "label": "Create request" },
-            { "role": "owner", "label": "Fill intake details" },
-            { "role": "review", "label": "Validate completeness" }
+            { "role": "Sales Assistant", "label": "Maintain complete past data" },
+            { "role": "Sales Manager", "label": "Review and validate" },
+            { "role": "AVP Sales", "label": "Review upcoming orders to upsell" }
           ],
           "data_outputs": [
-            "Request summary",
-            "Open intake queue"
+            "S1A1.7 draft Sales Orders-including Pick List, Delivery Receipt, Invoice",
+            "S1A1.8 xx"
           ],
           "tags": [
-            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
-            { "text": "Editable", "bg": "#F9EEDC", "color": "#B96B13" }
+            { "text": "Odoo Modules (CRM, Sales, Inventory)", "bg": "#791e76", "color": "#ffffff" },
+            { "text": "xx", "bg": "#F9EEDC", "color": "#B96B13" }
           ]
         },
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "S1A2 Take Order",
-          "trigger": "A client order. Regular repeat orders. ",
+          "name": "S1A2 Take and Fulfill Order",
+          "trigger": "New client order. Regular repeat orders.",
           "features": [
-            "S1A2.1 TBD",
-            "S1A2.2 Include the required sales-operations-acctg fields in the form.",
-            "S1A2.3 Auto-assign permanent, non-editable Sales Order Control No."
+            "S1A2.1 Confirm button for Sales Order, Invoice",
+            "S1A2.2 Includes the required sales-operations-acctg fields in the form.",
+            "S1A2.3 Auto-assign permanent, non-editable Sales Order Control No.", 
+            "S1A2.4 Update Synced Operations Calendar for current deliveries",
+            "S1A2.5 Assign and log Notes, activities and tags for each Sales Order"
           ],
           "approval": [
             { "role": "owner", "label": "Prepare context" },
             { "role": "manager", "label": "Approve direction" }
           ],
           "data_outputs": [
-            "Qualified request list",
-            "Decision notes"
+            "S1A2.6 Real-time Sales Summary Table Daily/Weekly/Monthly",
+            "S1A2.7 Customer/Location/Category Sales Contribution"
           ],
           "tags": [
             { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
-            { "text": "Replace Me", "bg": "#F9EEDC", "color": "#B96B13" }
+            { "text": "xx", "bg": "#F9EEDC", "color": "#B96B13" }
+          ]
+        },
+        {
+          "id": "ACTIVE",
+          "status": "active",
+          "name": "S1A3 Post-sales Actions",
+          "trigger": "New client order. Regular repeat orders.",
+          "features": [
+            "S1A3.1 Evaluate Sales Target vs Actual Sales",
+            "S1A3.2 Sync with Operations Calendar",
+            "S1A3.3 Real-time auto-computation of Gains/Losses per trip per driver/helper and back office team (see Accounting)", 
+            "S1A3.4 Record sales fulfilment concerns or issues",
+            "S1A3.5 Assign and log Notes, activities for Accounting-related concerns"
+          ],
+          "approval": [
+            { "role": "Sales Assistant", "label": "Input post-sales concerns" },
+            { "role": "Operations OIC", "label": "Confirm trip occurred" },
+            { "role": "Sales Manager", "label": "Confirm. Consolidate Sales Summary" },
+            { "role": "Industrial Engineer", "label": "Monitor Gains/Loss variance." }
+               
+          ],
+          "data_outputs": [
+            "S1A3.6 Past Deliveries and Qty and Sales Amount Summary",
+            "S1A3.7 Customer/Location/Category Sales Contribution",
+            "S1A3.8 Incentive Gain/Loss per person/trip/date/customer Summary"
+          ],
+          "tags": [
+            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
+            { "text": "xx", "bg": "#F9EEDC", "color": "#B96B13" }
           ]
         }
       ]
@@ -70,49 +104,7 @@
       "romaji": "Bulk",
       "english": "Find Client | Serve | Schedule | Repeat Order",
       "cards": [
-        {"section": "Execution Checklist",
-          "stage": 3,
-          "version": "1.0",
-          "phases": [
-            {
-              "phase": 1,
-              "title": "Pre-Launch Inputs",
-              "color": "orange",
-              "groups": [
-                {
-                  "name": "Content Requirements",
-                  "documents": [
-                    { "code": "C1.1", "name": "Business summary" },
-                    { "code": "C1.2", "name": "Approved copy blocks" }
-                  ]
-                },
-                {
-                  "name": "Design Inputs",
-                  "documents": [
-                    { "code": "C2.1", "name": "Brand palette" },
-                    { "code": "C2.2", "name": "Typography direction" }
-                  ]
-                }
-              ]
-            },
-            {
-              "phase": 2,
-              "title": "Release Readiness",
-              "color": "green",
-              "groups": [
-                {
-                  "name": "QA",
-                  "documents": [
-                    { "code": "Q1.1", "name": "Checklist signoff" },
-                    { "code": "Q1.2", "name": "Final approval notes" }
-                  ]
-                }
-              ]
-            }
-          ],
-          "note": "This section block is optional. Use it when you want a detailed checklist inside the same stage layout."
-        },
-{
+        {
           "id": "ACTIVE",
           "status": "core",
           "name": "P1 Delivery Plan",
@@ -136,7 +128,7 @@
           ]
         }
       ]
-    },
+    }  ,
     {
       "kanji": "",
       "romaji": "Dealer",
@@ -371,18 +363,19 @@
       "english": "Overall pain points",
       "kanji": "",
       "pain_points": [
-        "C5.1 Sales Reports:",
-        "C5.1.1 IT Head prints Sales Performance Report (SPR)- bi-weekly or monthly depending on inventory volume",
-        "C5.1.2 SPR fields: sales per kg, total sales, net sales, cost of sales. with formula. Gross Profit Margin per kg and total GPM.", 
-        "C5.2 Pricing Matrix:",
-        "C5.2.1 MGC LPG Pricing Matrix dashboard: Decide on the doneprices of gas for different sales avenues. 1-3x a month General Meeting",
-        "C5.2.2 Sales Price, MPL, Total Cost (Acq Cost + Hauling), kg. Avenues: Commercial to Retail and semi-dealers.",
-        "C5.2.4 MPL volume discounts for different radiuses",
-        "C5.2.5 End-User Pricing: SRP and competitors pricing comparison. Mel and Joebert updates competitors' prices.",
-        "C5.2.6 Price Cascade Process:",
-        "C5.2.6.1 Mel emails the updated changes. Jabert records audit logs for changes",
-        "C5.2.6.2 Jabert - CODO, Jobert - contact centers, marketing, cashiers. Mel, Lou - Comm/Bulk clients, Claire - retail clients. Jen - Makati accounts.",
-        "C5.2.6.3 NIL so far"
+        "S5C1 Sales Reports:",
+        "S5C1.1 IT Head prints Sales Performance Report (SPR)- bi-weekly or monthly depending on inventory volume",
+        "S5C1.2 SPR fields: sales per kg, total sales, net sales, cost of sales. with formula. Gross Profit Margin per kg and total GPM.", 
+        "S5C2 Pricing Matrix:",
+        "S5C2.1 MGC LPG Pricing Matrix dashboard: Decide on the doneprices of gas for different sales avenues. 1-3x a month General Meeting",
+        "S5C2.2 Sales Price, MPL, Total Cost (Acq Cost + Hauling), kg. Avenues: Commercial to Retail and semi-dealers.",
+        "S5C2.3 xxx",
+        "S5C2.4 MPL volume discounts for different radiuses",
+        "S5C2.5 End-User Pricing: SRP and competitors pricing comparison. Mel and Joebert updates competitors' prices.",
+        "S5C2.6 Price Cascade Process:",
+        "S5C2.6.1 Mel emails the updated changes. Jabert records audit logs for changes",
+        "S5C2.6.2 Jabert - CODO, Jobert - contact centers, marketing, cashiers. Mel, Lou - Comm/Bulk clients, Claire - retail clients. Jen - Makati accounts.",
+        "S5C2.6.3 NIL so far"
       ]
     }
   ],
