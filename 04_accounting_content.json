@@ -3,7 +3,7 @@
     "logo": "Accounting",
     "kanji": "v1",
     "title": "Workflow Process Diagram",
-    "subtitle": "Accounting workflow content driven from 04_accounting_content.json."
+    "subtitle": "Accounting workflow contents for current and future workflows."
   },
   "hoshi_section": {
     "title": "Delivery Pipeline",
