@@ -106,13 +106,11 @@
       "cards": [
         {
           "id": "ACTIVE",
-          "status": "core",
-          "name": "P1 Delivery Plan",
-          "trigger": "A qualified item moves into planning.",
+          "status": "active",
+          "name": "Same as Commercial sales avenue, with exceptions",
+          "trigger": "same as above",
           "features": [
-            "Define milestones",
-            "Assign owners",
-            "Outline acceptance criteria"
+            "xxx"
           ],
           "approval": [
             { "role": "owner", "label": "Draft plan" },
@@ -123,7 +121,7 @@
             "Milestone summary"
           ],
           "tags": [
-            { "text": "Core", "bg": "#DCEAF5", "color": "#1E4E79" },
+            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
             { "text": "Reusable", "bg": "#E3F0E6", "color": "#2E6A3D" }
           ]
         }
@@ -223,20 +221,22 @@
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "Retail Orders Scheduling",
+          "name": "S4A1 Retail Orders Scheduling",
           "trigger": "Retail Daily and Monthly Sales Target",
           "features": [
-            "Capture release notes",
-            "Confirm handoff status",
-            "Log go-live decision"
+            "S4A1.1 Call and consolidate orders",
+            "S4A1.2 Portal order (with discount) and consolidate draft Sales Orders",
+            "S4A1.3 cash invoice?"
           ],
           "approval": [
-            { "role": "review", "label": "Check release" },
-            { "role": "manager", "label": "Approve launch" }
+            { "role": "Retail Customers", "label": "Submit portal order" },
+            { "role": "Sales Assistant", "label": "Approve orders and check schedule, payment terms" },
+            { "role": "Sales Manager", "label": "Validate schedule, payment terms" }
           ],
           "data_outputs": [
-            "Release history",
-            "Launch approval log"
+            "S4A1.4 Forward Sales Quotations",
+            "S4A1.5 Actual Sales Summary",
+            "S4A1.6 Updated Operations Schedule"
           ],
           "tags": [
             { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
