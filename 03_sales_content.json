@@ -36,7 +36,7 @@
             "Open intake queue"
           ],
           "tags": [
-            { "text": "Live", "bg": "#E3F0E6", "color": "#2E6A3D" },
+            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
             { "text": "Editable", "bg": "#F9EEDC", "color": "#B96B13" }
           ]
         },
