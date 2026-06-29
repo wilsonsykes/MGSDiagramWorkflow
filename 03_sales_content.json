@@ -56,8 +56,8 @@
             "S1A2.5 Assign and log Notes, activities and tags for each Sales Order"
           ],
           "approval": [
-            { "role": "owner", "label": "Prepare context" },
-            { "role": "manager", "label": "Approve direction" }
+            { "role": "Regional Sales Manager", "label": "Update log notes. Confirm Sales Order" },
+            { "role": "AVP", "label": "xxx" }
           ],
           "data_outputs": [
             "S1A2.6 Real-time Sales Summary Table Daily/Weekly/Monthly",
@@ -75,15 +75,15 @@
           "trigger": "New client order. Regular repeat orders.",
           "features": [
             "S1A3.1 Evaluate Sales Target vs Actual Sales",
-            "S1A3.2 Sync with Operations Calendar",
-            "S1A3.3 Real-time auto-computation of Gains/Losses per trip per driver/helper and back office team (see Accounting)", 
+            "S1A3.2 Sync with Operations Calendar and actual delivery",
+            "S1A3.3 Real-time auto-computation of Gains/Losses per trip per driver/helper and back office team (see Operations)", 
             "S1A3.4 Record sales fulfilment concerns or issues",
             "S1A3.5 Assign and log Notes, activities for Accounting-related concerns"
           ],
           "approval": [
-            { "role": "Sales Assistant", "label": "Input post-sales concerns" },
-            { "role": "Operations OIC", "label": "Confirm trip occurred" },
-            { "role": "Sales Manager", "label": "Confirm. Consolidate Sales Summary" },
+            { "role": "Sales Assistant", "label": "Input post-sales concerns in log notes" },
+            { "role": "Operations OIC", "label": "Validate Delivery Receipt" },
+            { "role": "Regional Sales Manager", "label": "Review. Consolidate Sales Summary" },
             { "role": "Industrial Engineer", "label": "Monitor Gains/Loss variance." }
                
           ],
@@ -246,20 +246,20 @@
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "Efficient Retail Delivery Scheduling",
+          "name": "S4A2 Efficient Retail Delivery Scheduling",
           "trigger": "Accumulated retail deliveries ready to dispatch",
           "features": [
-            "Capture release notes",
-            "Confirm handoff status",
-            "Log go-live decision"
+            "S4A2.1 Capture release notes",
+            "S4A2.2 Confirm handoff status",
+            "S4A2.3 Log go-live decision"
           ],
           "approval": [
-            { "role": "review", "label": "Check release" },
-            { "role": "manager", "label": "Approve launch" }
+            { "role": "Sales Assistant1", "label": "Line-up confirmed Sales Orders" },
+            { "role": "Purchaser/Dispatcher", "label": "Review lined-up orders and their routes" }
           ],
           "data_outputs": [
-            "Release history",
-            "Launch approval log"
+            "S4A2.5 xx",
+            "S4A2.6 xx"
           ],
           "tags": [
             { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
@@ -275,25 +275,78 @@
       "cards": [
         {
           "id": "ACTIVE",
-          "status": "core",
-          "name": "xx",
-          "trigger": "Feedback arrives after launch.",
+          "status": "active",
+          "name": "S5A1 Sales Reports Monitoring and Review",
+          "trigger": "Daily/Weekly/Monthly specified date, per Sales Avenue",
           "features": [
-            "Track enhancements",
-            "Measure impact",
-            "Feed new items into discovery"
+            "S5A1.1 Multi-period Sales Performance Reports",
+            "S5A1.2 Multi-invoice status and incentive gains/loss Sales Reports",
+            "S5A1.3 Invoice-Credit Notes for Commercial Clients and Delivery Team",
+            "S5A1.4 xx"
           ],
           "approval": [
-            { "role": "owner", "label": "Log findings" },
-            { "role": "manager", "label": "Prioritize follow-up" }
+            { "role": "AVP - Sales", "label": "Print and Verify reports" },
+            { "role": "Industrial Engineer", "label": "Print and Verify month end gains" }
           ],
           "data_outputs": [
-            "Improvement backlog",
-            "Outcome summary"
+            "S5A1.5 Sales Report and Invoice Status Reports",
+            "S5A1.6 Credit Notes per client per month",
+            "S5A1.7 Incentive Gains per delivery person, operations staff per client per period"
           ],
           "tags": [
-            { "text": "Iterative", "bg": "#E3F0E6", "color": "#2E6A3D" },
-            { "text": "Reusable", "bg": "#DCEAF5", "color": "#1E4E79" }
+            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
+            { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" }
+          ]
+        },
+        {
+          "id": "ACTIVE",
+          "status": "active",
+          "name": "S5A2 Price Matrix, and Price Decision and Cascade Processes",
+          "trigger": "Need for price update. 1-3x meetings a month.",
+          "features": [
+            "S5A2.1 Price List recorded dashboard and useable in every Sales Order",
+            "S5A2.2 Price List per Specific period and Sales Avenue",
+            "S5A2.3 Simplified cascading of new price info to clients",
+            "S5A2.4 xx"
+          ],
+          "approval": [
+            { "role": "Regional Sales Manager", "label": "Setup the price matrix for decision" },
+            { "role": "Sir RY", "label": "Decide on price matrix for the period" },
+            { "role": "Sales Assistant1", "label": "Cascade new prices information" }
+          ],
+          "data_outputs": [
+            "S5A2.5 Historical pricelist dashboard and database",
+            "S5A2.6 Client price update list"
+          ],
+          "tags": [
+            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
+            { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" }
+          ]
+        },
+        {
+          "id": "ACTIVE",
+          "status": "active",
+          "name": "S5A3 Sales Quota per Client per Period",
+          "trigger": "Daily/Weekly/Monthly specified date, per Sales Avenue",
+          "features": [
+            "S5A1.1 Multi-period Sales Quota (Odoo CRM)",
+            "S5A1.2 xx",
+            "S5A1.3 xx",
+            "S5A1.4 xx"
+          ],
+          "approval": [
+            { "role": "Sir RY", "label": "Set Sales Quota" },
+            { "role": "AVP - Sales", "label": "Print and use as targets" },
+            { "role": "Sales Assistant", "label": "Update daily and weekly" }
+            
+          ],
+          "data_outputs": [
+            "S5A1.5 Sales Quota Summary",
+            "S5A1.6 xx"
+          ],
+          "tags": [
+            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
+            { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" }
           ]
         }
       ]
@@ -371,10 +424,10 @@
         "S5C2.2 Sales Price, MPL, Total Cost (Acq Cost + Hauling), kg. Avenues: Commercial to Retail and semi-dealers.",
         "S5C2.3 xxx",
         "S5C2.4 MPL volume discounts for different radiuses",
-        "S5C2.5 End-User Pricing: SRP and competitors pricing comparison. Mel and Joebert updates competitors' prices.",
+        "S5C2.5 End-User Pricing: SRP and competitors pricing comparison. Regional Sales Manager and IT Head updates competitors' prices.",
         "S5C2.6 Price Cascade Process:",
-        "S5C2.6.1 Mel emails the updated changes. Jabert records audit logs for changes",
-        "S5C2.6.2 Jabert - CODO, Jobert - contact centers, marketing, cashiers. Mel, Lou - Comm/Bulk clients, Claire - retail clients. Jen - Makati accounts.",
+        "S5C2.6.1 Regional Sales Manager emails the updated changes. IT Head records audit logs for changes",
+        "S5C2.6.2 IT Head informs CODO, contact centers, marketing, cashiers. Regional Sales Manager and Sales Assistant1 - Comm/Bulk clients, Sales Assistant2 - retail clients. AVP - Sales - Makati accounts.",
         "S5C2.6.3 NIL so far"
       ]
     }
