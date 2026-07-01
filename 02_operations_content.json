@@ -19,23 +19,23 @@
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "I2A.1 Prepare and Ship Product from Sales Order",
+          "name": "O1A.1 Prepare and Ship Product from Sales Order",
           "trigger": "Confirmed Sales Order.",
           "features": [
-            "I2A.1.1 Instant Pick List, Delivery Receipt, mobile-access",
-            "I2A.1.2 summary table and individual order formats",
-            "I2A.1.3 Multiple details like location, date timestamps, product S/N",
-            "I2A.1.4 Multi-level user",
-            "I2A.1.5 Gate Pass - manual"
+            "O1A.1.1 Instant Pick List, Delivery Receipt, mobile-access",
+            "O1A.1.2 summary table and individual order formats",
+            "O1A.1.3 Multiple details like location, date timestamps, product S/N",
+            "O1A.1.4 Multi-level user",
+            "O1A.1.5 Gate Pass - manual"
           ],
           "approval": [
             { "role": "owner", "label": "Draft plan" },
             { "role": "manager", "label": "Approve scope" }
           ],
           "data_outputs": [
-            "Docs from system: Pick List, Delivery Receipt, Charge Invoice (softcopy and pdf formats)",
-            "Written docs: Gate pass",
-            "equivalent system data crawl in Inventory and Accounting modules"
+            "O1A.1.6 Docs from system: Pick List, Delivery Receipt, Charge Invoice (softcopy and pdf formats)",
+            "O1A.1.7 Written docs: Gate pass",
+            "O1A.1.8 equivalent system data crawl in Inventory and Accounting modules"
           ],
           "tags": [
             { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" },
@@ -45,20 +45,20 @@
         {
           "id": "MANUAL",
           "status": "core",
-          "name": "I2A.1 Deliver Order, Return Lorry Tank, Signed Charge Invoice, Client Inventory Report",
+          "name": "O1A.2 Deliver Order, Return Lorry Tank, Signed Charge Invoice, Client Inventory Report",
           "trigger": "Printed DR, Charge Invoice with specified delivery date and team.",
           "features": [
-            "I2A.2.1 as is current",
-            "I2A.2.2 as is current",
-            "I2A.2.3 Client inventory monitor"
+            "O1A.2.1 as is current",
+            "O1A.2.2 as is current",
+            "O1A.2.3 Client inventory monitor"
           ],
           "approval": [
             { "role": "owner", "label": "Prepare context" },
             { "role": "manager", "label": "Approve direction" }
           ],
           "data_outputs": [
-            "signed Delivery Receipt and Charge Invoice",
-            "other docs"
+            "O1A.2.4 signed Delivery Receipt and Charge Invoice",
+            "O1A.2.5 other docs"
           ],
           "tags": [
             { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" },
@@ -68,12 +68,12 @@
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "I3A.1 Return to Plant, signed Charge Invoice, monitor sheet",
+          "name": "O1A.3 Return to Plant, signed Charge Invoice, monitor sheet",
           "trigger": "Client signs Charge Invoice and Delivery Receipt",
           "features": [
-            "I2A.3 Driver returns to plant with signed Charge Invoice and Delivery Receipt",
-            "I2A.3 Acctg staff confirms Invoice entry, upon receiving signed Charge Invoice and Delivery Receipt Confirm from Delivery Driver",
-            "I2A.3 Review correct collection date and chart of account"
+            "O1A.3.1 Driver returns to plant with signed Charge Invoice and Delivery Receipt",
+            "O1A.3.2 Acctg staff confirms Invoice entry, upon receiving signed Charge Invoice and Delivery Receipt Confirm from Delivery Driver",
+            "O1A.3.3 Review correct collection date and chart of account"
           ],
           "approval": [
             { "role": "auto", "label": "Create request" },
@@ -81,8 +81,8 @@
             { "role": "review", "label": "Validate completeness" }
           ],
           "data_outputs": [
-            "Data",
-            "Open intake queue"
+            "O1A.3.4 Data",
+            "O1A.3.5 Open intake queue"
           ],
           "tags": [
             { "text": "Live", "bg": "#E3F0E6", "color": "#2E6A3D" },
@@ -99,23 +99,23 @@
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "I2A.1 Prepare and Ship Product from Sales Order",
+          "name": "O2A.1 Prepare and Ship Product from Sales Order",
           "trigger": "Confirmed Sales Order.",
           "features": [
-            "I2A.1.1 Instant Pick List, Delivery Receipt, mobile-access",
-            "I2A.1.2 summary table and individual order formats",
-            "I2A.1.3 Multiple details like location, date timestamps, product S/N",
-            "I2A.1.4 Multi-level user",
-            "I2A.1.5 Gate Pass - manual"
+            "O2A.1.1 Instant Pick List, Delivery Receipt, mobile-access",
+            "O2A.1.2 summary table and individual order formats",
+            "O2A.1.3 Multiple details like location, date timestamps, product S/N",
+            "O2A.1.4 Multi-level user",
+            "O2A.1.5 Gate Pass - manual"
           ],
           "approval": [
             { "role": "owner", "label": "Draft plan" },
             { "role": "manager", "label": "Approve scope" }
           ],
           "data_outputs": [
-            "Docs from system: Pick List, Delivery Receipt, Charge Invoice (softcopy and pdf formats)",
-            "Written docs: Gate pass",
-            "equivalent system data crawl in Inventory and Accounting modules"
+            "O2A.1.6 Docs from system: Pick List, Delivery Receipt, Charge Invoice (softcopy and pdf formats)",
+            "O2A.1.7 Written docs: Gate pass",
+            "O2A.1.8 equivalent system data crawl in Inventory and Accounting modules"
           ],
           "tags": [
             { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" },
@@ -125,20 +125,20 @@
         {
           "id": "MANUAL",
           "status": "core",
-          "name": "I2A.1 Deliver Order, Return Lorry Tank, Signed Charge Invoice, Client Inventory Report",
+          "name": "O2A.2 Deliver Order, Return Lorry Tank, Signed Charge Invoice, Client Inventory Report",
           "trigger": "Printed DR, Charge Invoice with specified delivery date and team.",
           "features": [
-            "I2A.2.1 as is current",
-            "I2A.2.2 as is current",
-            "I2A.2.3 Client inventory monitor"
+            "O2A.2.1 as is current",
+            "O2A.2.2 as is current",
+            "O2A.2.3 Client inventory monitor"
           ],
           "approval": [
             { "role": "owner", "label": "Prepare context" },
             { "role": "manager", "label": "Approve direction" }
           ],
           "data_outputs": [
-            "signed Delivery Receipt and Charge Invoice",
-            "other docs"
+            "O2A.2.4 signed Delivery Receipt and Charge Invoice",
+            "O2A.2.5 other docs"
           ],
           "tags": [
             { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" },
@@ -148,12 +148,12 @@
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "I3A.1 Return to Plant, signed Charge Invoice, monitor sheet",
+          "name": "O2A.3 Return to Plant, signed Charge Invoice, monitor sheet",
           "trigger": "Client signs Charge Invoice and Delivery Receipt",
           "features": [
-            "I2A.3 Driver returns to plant with signed Charge Invoice and Delivery Receipt",
-            "I2A.3 Acctg staff confirms Invoice entry, upon receiving signed Charge Invoice and Delivery Receipt Confirm from Delivery Driver",
-            "I2A.3 Review correct collection date and chart of account"
+            "O2A.3.1 Driver returns to plant with signed Charge Invoice and Delivery Receipt",
+            "O2A.3.2 Acctg staff confirms Invoice entry, upon receiving signed Charge Invoice and Delivery Receipt Confirm from Delivery Driver",
+            "O2A.3.3 Review correct collection date and chart of account"
           ],
           "approval": [
             { "role": "auto", "label": "Create request" },
@@ -161,8 +161,8 @@
             { "role": "review", "label": "Validate completeness" }
           ],
           "data_outputs": [
-            "Data",
-            "Open intake queue"
+            "O2A.3.4 Data",
+            "O2A.3.5 Open intake queue"
           ],
           "tags": [
             { "text": "Live", "bg": "#E3F0E6", "color": "#2E6A3D" },
@@ -179,23 +179,23 @@
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "I2A.1 Prepare and Ship Product from Sales Order",
+          "name": "O3A.1 Prepare and Ship Product from Sales Order",
           "trigger": "Confirmed Sales Order.",
           "features": [
-            "I3A.1.1 Instant Pick List, Delivery Receipt, mobile-access",
-            "I3A.1.2 summary table and individual order formats",
-            "I3A.1.3 Multiple details like location, date timestamps, product S/N",
-            "I3A.1.4 Multi-level user",
-            "I3A.1.5 Gate Pass - manual"
+            "O3A.1.1 Instant Pick List, Delivery Receipt, mobile-access",
+            "O3A.1.2 summary table and individual order formats",
+            "O3A.1.3 Multiple details like location, date timestamps, product S/N",
+            "O3A.1.4 Multi-level user",
+            "O3A.1.5 Gate Pass - manual"
           ],
           "approval": [
             { "role": "owner", "label": "Draft plan" },
             { "role": "manager", "label": "Approve scope" }
           ],
           "data_outputs": [
-            "Docs from system: Pick List, Delivery Receipt, Charge Invoice (softcopy and pdf formats)",
-            "Written docs: Gate pass",
-            "equivalent system data crawl in Inventory and Accounting modules"
+            "O3A.1.6 Docs from system: Pick List, Delivery Receipt, Charge Invoice (softcopy and pdf formats)",
+            "O3A.1.7 Written docs: Gate pass",
+            "O3A.1.8 equivalent system data crawl in Inventory and Accounting modules"
           ],
           "tags": [
             { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" },
@@ -205,20 +205,20 @@
         {
           "id": "MANUAL",
           "status": "core",
-          "name": "I3A.2 Deliver Order, Return Lorry Tank, Signed Charge Invoice, Client Inventory Report",
+          "name": "O3A.2 Deliver Order, Return Lorry Tank, Signed Charge Invoice, Client Inventory Report",
           "trigger": "Printed DR, Charge Invoice with specified delivery date and team.",
           "features": [
-            "I3A.2.1 as is current",
-            "I3A.2.2 as is current",
-            "I3A.2.3 Client inventory monitor"
+            "O3A.2.1 as is current",
+            "O3A.2.2 as is current",
+            "O3A.2.3 Client inventory monitor"
           ],
           "approval": [
             { "role": "owner", "label": "Prepare context" },
             { "role": "manager", "label": "Approve direction" }
           ],
           "data_outputs": [
-            "signed Delivery Receipt and Charge Invoice",
-            "other docs"
+            "O3A.2.4 signed Delivery Receipt and Charge Invoice",
+            "O3A.2.5 other docs"
           ],
           "tags": [
             { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" },
@@ -228,12 +228,12 @@
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "I3A.3 Return to Plant, signed Charge Invoice, monitor sheet",
+          "name": "O3A.3 Return to Plant, signed Charge Invoice, monitor sheet",
           "trigger": "Client signs Charge Invoice and Delivery Receipt",
           "features": [
-            "I3A.3 Driver returns to plant with signed Charge Invoice and Delivery Receipt",
-            "I3A.3 Acctg staff confirms Invoice entry, upon receiving signed Charge Invoice and Delivery Receipt Confirm from Delivery Driver",
-            "I3A.3 Review correct collection date and chart of account"
+            "O3A.3.1 Driver returns to plant with signed Charge Invoice and Delivery Receipt",
+            "O3A.3.2 Acctg staff confirms Invoice entry, upon receiving signed Charge Invoice and Delivery Receipt Confirm from Delivery Driver",
+            "O3A.3.3 Review correct collection date and chart of account"
           ],
           "approval": [
             { "role": "auto", "label": "Create request" },
@@ -241,8 +241,8 @@
             { "role": "review", "label": "Validate completeness" }
           ],
           "data_outputs": [
-            "Data",
-            "Open intake queue"
+            "O3A.3.4 Data",
+            "O3A.3.5 Open intake queue"
           ],
           "tags": [
             { "text": "Live", "bg": "#E3F0E6", "color": "#2E6A3D" },
@@ -259,20 +259,20 @@
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "I4A.1 ",
+          "name": "O4A.1 ",
           "trigger": "Sets quantity for floor stocks for key periods",
           "features": [
-            "I4A.1.1 ",
-            "I4A.1.2 ",
-            "I4A.1.3 "
+            "O4A.1.1 ",
+            "O4A.1.2 ",
+            "O4A.1.3 "
           ],
           "approval": [
             { "role": "review", "label": "Check release" },
             { "role": "manager", "label": "Approve launch" }
           ],
           "data_outputs": [
-            "Release history",
-            "Launch approval log"
+            "O4A.1.4 Release history",
+            "O4A.1.5 Launch approval log"
           ],
           "tags": [
             { "text": "Pending", "bg": "#F9EEDC", "color": "#B96B13" },
@@ -289,12 +289,12 @@
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "I5A.1 Inventory Monitoring Report",
+          "name": "O5A.1 Inventory Monitoring Report",
           "trigger": "Daily data input of warehouse and floor stock location (from/to), customer, transaction (in and out), scheduled/actual timestamps, vehicle, driver, helper",
           "features": [
-            "I5A.1.1 Daily/Weekly/Monthly instant, consolidated data",
-            "I5A.1.2 versatile multi-view reports",
-            "I5A.1.3 Mobile-friendly data input"
+            "O5A.1.1 Daily/Weekly/Monthly instant, consolidated data",
+            "O5A.1.2 versatile multi-view reports",
+            "O5A.1.3 Mobile-friendly data input"
           ],
           "approval": [
             { "role": "Optns Supervisor", "label": "Input Storage Tanks Opening and Closing Readings" },
@@ -304,8 +304,8 @@
             { "role": "Sir RY", "label": "Review and Approve report" }
           ],
           "data_outputs": [
-            "I5A.1.1 Inventory per location/per transaction/per period reports",
-            "I5A.1.1 Inv Variances and Adjustment Monthly Summary"
+            "O5A.1.4 Inventory per location/per transaction/per period reports",
+            "O5A.1.5 Inv Variances and Adjustment Monthly Summary"
           ],
           "tags": [
             { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
@@ -315,12 +315,12 @@
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "I5A.2 Inventory Planning and Forecast",
+          "name": "O5A.2 Inventory Planning and Forecast",
           "trigger": "Daily data input of inventory + Sales Target Budget per week per sales avenue",
           "features": [
-            "I5A.2.1 Weekly/Monthly real-time data",
-            "I5A.2.2 versatile multi-view reports",                                    
-            "I5A.2.3 PC data Input"
+            "O5A.2.1 Weekly/Monthly real-time data",
+            "O5A.2.2 versatile multi-view reports",                                    
+            "O5A.2.3 PC data Input"
           ],
           "approval": [
             { "role": "Senior Operations Supervisor", "label": "Daily data source" },
@@ -330,8 +330,8 @@
             { "role": "Purchaser/Dispatcher", "label": "Prepare and forward Purchase Orders" }
           ],                                          
           "data_outputs": [
-            "I5A.2.1 Weekly/Monthly Inventory Forecast Report",
-            "I5A.2.1 auto-draft Purchased Orders"
+            "O5A.2.4 Weekly/Monthly Inventory Forecast Report",
+            "O5A.2.5 auto-draft Purchased Orders"
           ],
           "tags": [
             { "text": "Dashboard Module", "bg": "#dbe302", "color": "#2E6A3D" },
@@ -341,12 +341,12 @@
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "I5A.3 Variance Monitoring and Resolving",
+          "name": "O5A.3 Variance Monitoring and Resolving",
           "trigger": "Weekly and Daily",
           "features": [
-            "I5A.3.1 Daily/Weekly/Monthly instant, consolidated data",
-            "I5A.3.2 versatile multi-view reports",
-            "I5A.3.3 Mobile-friendly data input"
+            "O5A.3.1 Daily/Weekly/Monthly instant, consolidated data",
+            "O5A.3.2 versatile multi-view reports",
+            "O5A.3.3 Mobile-friendly data input"
           ],
           "approval": [
             { "role": "Senior Plant Supervisor", "label": "Review and resolve variances" },
@@ -355,8 +355,8 @@
             { "role": "Accounting Manager", "label": "Verify adjustments and close" }
           ],
           "data_outputs": [
-            "Inv Variance per Location/per period Summary",
-            "Inv Adjustment per location/per period Summary"
+            "O5A.3.4 Inv Variance per Location/per period Summary",
+            "O5A.3.5 Inv Adjustment per location/per period Summary"
           ],
           "tags": [
             { "text": "Odoo Module", "bg":  "#791e76", "color": "#ffffff" },
@@ -366,13 +366,13 @@
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "I5A.4 Cylinder Qty, State and Variance Monitoring",
+          "name": "O5A.4 Cylinder Qty, State and Variance Monitoring",
           "trigger": "Daily data input of warehouse and floor stock location (from/to), S/N, Size, Qty, Tare Weight, and Painting State, Customers/Locations",
           "features": [
-            "I5A.4.1 Daily/Weekly/Monthly instant, consolidated data per user",
-            "I5A.4.2 Versatile multi-view, multi-period summaries for updating groups/ for reviewing qty",
-            "I5A.4.3 Versatile Cylinder Qty and State Reports",
-            "I5A.4.4 Mobile-friendly data input"
+            "O5A.4.1 Daily/Weekly/Monthly instant, consolidated data per user",
+            "O5A.4.2 Versatile multi-view, multi-period summaries for updating groups/ for reviewing qty",
+            "O5A.4.3 Versatile Cylinder Qty and State Reports",
+            "O5A.4.4 Mobile-friendly data input"
           ],
           "approval": [
             { "role": "Warehouse and Quality Supervisor", "label": "Count qty,size and state of cylinders, Grind and Label" },
@@ -382,9 +382,9 @@
             { "role": "Sir RY", "label": "Review extent of cylinder state, qty and variances" }
           ],
           "data_outputs": [
-            "I5A.4.5 Cylinder Inventory and State Report",
-            "I5A.4.6 Cylinder Variance per Location/per period Summary",
-            "I5A.4.7 Cylinder Adjustment per location/per period Summary"
+            "O5A.4.5 Cylinder Inventory and State Report",
+            "O5A.4.6 Cylinder Variance per Location/per period Summary",
+            "O5A.4.7 Cylinder Adjustment per location/per period Summary"
           ],
           "tags": [
             { "text": "Odoo Module", "bg":  "#791e76", "color": "#ffffff" },
@@ -394,12 +394,12 @@
         {
           "id": "ACTIVE",
           "status": "active",
-          "name": "I5A.5 xx",
+          "name": "O5A.5 xx",
           "trigger": "TBD",
           "features": [
-            "I5A.5.1 Daily/Weekly/Monthly instant, consolidated data",
-            "I5A.5.2 versatile multi-view reports",
-            "I5A.5.3 Mobile-friendly data input"
+            "O5A.5.1 Daily/Weekly/Monthly instant, consolidated data",
+            "O5A.5.2 versatile multi-view reports",
+            "O5A.5.3 Mobile-friendly data input"
           ],
           "approval": [
             { "role": "Senior Plant Supervisor", "label": "Review and resolve variances" },
@@ -407,8 +407,8 @@
             { "role": "Sir RY", "label": "Review extent of variances" }
           ],
           "data_outputs": [
-            "I5A.5.4 Inv Variance per Location/per period Summary",
-            "I5A.5.5 Inv Adjustment per location/per period Summary"
+            "O5A.5.4 Inv Variance per Location/per period Summary",
+            "O5A.5.5 Inv Adjustment per location/per period Summary"
           ],
           "tags": [
             { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
