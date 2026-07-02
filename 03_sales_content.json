@@ -1,398 +1,210 @@
 {
   "header": {
     "logo": "Sales",
-    "kanji": "v1",
-    "title": "Workflow Process Diagram",
-    "subtitle": "Sales for the 4 Sales Avenues and Overall."
-  },
-  "hoshi_section": {
-    "title": "Delivery Pipeline",
-    "tag": "Platforms: Replace with your stack",
-    "subtitle": "Reusable static workflow layout with JSON-driven content"
+    "kanji": "SOP",
+    "title": "Sales SOP",
+    "subtitle": "Finding and serving clients, taking orders, applying MGC pricing, and post-sales follow-up across the Commercial, Bulk, Dealer, Retail, and Overall channels."
   },
   "stages": [
     {
-      "kanji": "",
       "romaji": "Commercial",
       "english": "Find Client | Serve | Schedule | Repeat Order",
-      "cards": [
-        {
-          "id": "manual",
-          "status": "pending",
-          "name": "S1A1 Solicit Orders",
-          "trigger": "Daily and Monthly Sales Target",
-          "features": [
-            "S1A1.1 Complete fie",
-            "S1A1.2 ",
-            "S1A1.3 "
-          ],
-          "approval": [
-            { "role": "auto", "label": "Create request" },
-            { "role": "owner", "label": "Fill intake details" },
-            { "role": "review", "label": "Validate completeness" }
-          ],
-          "data_outputs": [
-            "Request summary",
-            "Open intake queue"
-          ],
-          "tags": [
-            { "text": "Live", "bg": "#E3F0E6", "color": "#2E6A3D" },
-            { "text": "Editable", "bg": "#F9EEDC", "color": "#B96B13" }
-          ]
-        },
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "S1A2 Take Order",
-          "trigger": "A client order. Regular repeat orders. ",
-          "features": [
-            "S1A2.1 TBD",
-            "S1A2.2 Include the required sales-operations-acctg fields in the form.",
-            "S1A2.3 Auto-assign permanent, non-editable Sales Order Control No."
-          ],
-          "approval": [
-            { "role": "owner", "label": "Prepare context" },
-            { "role": "manager", "label": "Approve direction" }
-          ],
-          "data_outputs": [
-            "Qualified request list",
-            "Decision notes"
-          ],
-          "tags": [
-            { "text": "Template", "bg": "#DCEAF5", "color": "#1E4E79" },
-            { "text": "Replace Me", "bg": "#F9EEDC", "color": "#B96B13" }
-          ]
-        }
-      ]
+      "badge": "confirmed",
+      "sop_steps": [
+        "Call client for re-orders, or find new client orders. (S1A1.1)",
+        "System auto-reminds the client and Sales Manager ahead of an impending order based on forecast. (S1A1.2)",
+        "Create a draft Sales Order, Pick List, and Delivery Receipt for each order. (S1A1.3)",
+        "Check Sales History for upcoming re-orders. (S1A1.4)",
+        "Review current and upcoming inventory levels for upselling opportunities. (S1A1.5)",
+        "Review next week's route schedule for upselling opportunities. (S1A1.6)",
+        "Confirm the Sales Order and Invoice; auto-assign a permanent, non-editable Sales Order Control No. (S1A2.1-S1A2.3)",
+        "Update the synced Operations Calendar for current deliveries. (S1A2.4)",
+        "Assign and log notes, activities, and tags for each Sales Order. (S1A2.5)",
+        "Post-sales: evaluate Sales Target vs Actual Sales; sync with the Operations Calendar and actual delivery. (S1A3.1-S1A3.2)",
+        "Real-time computation of gains/losses per trip, per driver/helper and back-office team. (S1A3.3)",
+        "Record sales-fulfilment concerns/issues and log Accounting-related notes. (S1A3.4-S1A3.5)"
+      ],
+      "guidelines": [
+        "Sales Order Control Numbers are permanent and non-editable once assigned - a wrong entry is corrected with a new document, never by editing the control number.",
+        "The upsell review (inventory levels, route schedule) happens before the order is finalized, as a scheduled step in the flow, not an optional add-on afterward.",
+        "Gains/loss variance per trip is computed against the Operations Calendar in real time; unresolved fulfilment concerns are logged, never left unrecorded."
+      ],
+      "approval_matrix": [
+        { "transaction": "Draft order & upsell review", "threshold": "-", "initiator": "Sales Assistant", "reviewer": "Sales Manager", "approver": "AVP Sales (reviews upcoming orders to upsell)", "controls": ["Sales history check", "Route/inventory cross-check"] },
+        { "transaction": "Order confirmation & control numbering", "threshold": "-", "initiator": "Regional Sales Manager", "reviewer": "AVP", "approver": "AVP", "controls": ["Non-editable control number", "Notes/tags logged"] },
+        { "transaction": "Post-sales reconciliation", "threshold": "-", "initiator": "Sales Assistant", "reviewer": "Operations OIC (validates DR)", "approver": "Regional Sales Manager (consolidates)", "controls": ["Industrial Engineer monitors gain/loss variance"] }
+      ],
+      "current_future": {
+        "current": [
+          "System Features such as auto-reminders and real-time dashboards are tagged active in the source, but several Data Output fields are still marked placeholder - dashboard/report wiring may be incomplete for some outputs; verify go-live status per feature with the Sales Manager."
+        ],
+        "future": [
+          "No further automation items were flagged for Commercial beyond the active Odoo rollout; treat full completion of the still-placeholder fields as the near-term target rather than a new build."
+        ]
+      },
+      "sources": "Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Sales > Commercial (S1A1-S1A3)."
     },
     {
-      "kanji": "",
       "romaji": "Bulk",
       "english": "Find Client | Serve | Schedule | Repeat Order",
-      "cards": [
-        {"section": "Execution Checklist",
-          "stage": 3,
-          "version": "1.0",
-          "phases": [
-            {
-              "phase": 1,
-              "title": "Pre-Launch Inputs",
-              "color": "orange",
-              "groups": [
-                {
-                  "name": "Content Requirements",
-                  "documents": [
-                    { "code": "C1.1", "name": "Business summary" },
-                    { "code": "C1.2", "name": "Approved copy blocks" }
-                  ]
-                },
-                {
-                  "name": "Design Inputs",
-                  "documents": [
-                    { "code": "C2.1", "name": "Brand palette" },
-                    { "code": "C2.2", "name": "Typography direction" }
-                  ]
-                }
-              ]
-            },
-            {
-              "phase": 2,
-              "title": "Release Readiness",
-              "color": "green",
-              "groups": [
-                {
-                  "name": "QA",
-                  "documents": [
-                    { "code": "Q1.1", "name": "Checklist signoff" },
-                    { "code": "Q1.2", "name": "Final approval notes" }
-                  ]
-                }
-              ]
-            }
-          ],
-          "note": "This section block is optional. Use it when you want a detailed checklist inside the same stage layout."
-        },
-{
-          "id": "ACTIVE",
-          "status": "core",
-          "name": "P1 Delivery Plan",
-          "trigger": "A qualified item moves into planning.",
-          "features": [
-            "Define milestones",
-            "Assign owners",
-            "Outline acceptance criteria"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Draft plan" },
-            { "role": "manager", "label": "Approve scope" }
-          ],
-          "data_outputs": [
-            "Planning tracker",
-            "Milestone summary"
-          ],
-          "tags": [
-            { "text": "Core", "bg": "#DCEAF5", "color": "#1E4E79" },
-            { "text": "Reusable", "bg": "#E3F0E6", "color": "#2E6A3D" }
-          ]
-        }
-      ]
+      "badge": "pending",
+      "sop_steps": [
+        "Order intake, pricing, and confirmation follow the same Odoo-based process as Sales > Commercial (S1A1-S1A3), per company specification (\"same as Commercial sales avenue, with exceptions\").",
+        "Orders are sized to fill bulk lorry capacity (8-ton truck) rather than individual cylinder counts - see Operations > Industrial (Bulk) for the fulfilment side.",
+        "Bulk-specific pricing and exception handling are referenced but not yet documented in either source."
+      ],
+      "guidelines": [
+        "Sales > Bulk explicitly inherits Commercial's intake/approval flow per company note; the undocumented \"exceptions\" must be captured before this is treated as final SOP, particularly around bulk-specific pricing tiers and truck-capacity minimums."
+      ],
+      "approval_matrix": [
+        { "transaction": "Bulk order intake (inherits Commercial flow)", "threshold": "8-ton truck fill", "initiator": "Sales Assistant", "reviewer": "Sales Manager", "approver": "AVP Sales", "controls": ["Same controls as Commercial", "Exceptions pending"] }
+      ],
+      "current_future": {
+        "current": [
+          "Bulk sales handled as an unexceptioned copy of the Commercial flow; no bulk-specific pricing or approval variance is on file."
+        ],
+        "future": [
+          "Document the specific bulk exceptions (pricing tier, minimum load, dedicated approval step if any) and encode them as a distinct Sales > Bulk procedure rather than an inherited one."
+        ]
+      },
+      "gap_note": "The source site explicitly flags this stage as \"Same as Commercial sales avenue, with exceptions\" but never lists the exceptions, and the process manual does not cover Sales > Bulk separately. Recommend a short session with the Regional Sales Manager to capture what's actually different about Bulk pricing/approval before finalizing.",
+      "sources": "Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Sales > Bulk (placeholder). No corresponding section in \"MGC LPG Process Manual v2.docx\"."
     },
     {
-      "kanji": "",
       "romaji": "Dealer",
       "english": "Find Client | Serve | Schedule | Repeat Order",
-      "cards": [
-        {
-          "id": "MIXED ACTIVE",
-          "status": "pending",
-          "name": "S3A1 Contact Dealers Pre-visit",
-          "trigger": "Sales assistant contacts dealers in advance for plant visit",
-          "features": [
-            "S3A1.1 Coordinate multiple dealers' Plant Visit Calendar Schedule. Instant schedule conflict updates",
-            "S3A1.2 Dealers can book schedule via viber online",
-            "S3A1.3 Disseminate Dealer advance quantity request/order to multiple staff",
-            "S3A1.4 Easy maintenance/update of Dealer database"
-          ],
-          "approval": [
-            { "role": "Sales Assistant", "label": "Call and schedule" },
-            { "role": "Plant Supervisor", "label": "Look and prepare cylinders" },
-            { "role": "Operations Officer", "label": "Look and review" }
-          ],
-          "data_outputs": [
-            "S3A1.5 Single shared calendar chart of visits (check if already in Monday)",
-            "S3A1.6 Advanced order qty list"
-          ],
-          "tags": [
-            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
-            { "text": "Calls/Texts", "bg": "#F9EEDC", "color": "#B96B13" }
-          ]
-        },
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "S3A2 Repeat orders from Delivery Truck and Plant-Pickup Dealer",
-          "trigger": "Client's Purchase Order (eg MGSA), Truck Pickup or Client Plant Visit",
-          "features": [
-            "S3A2.1 Produce digital Sales Order and instant counterpart Invoice, editable before confirming",
-            "S3A2.2 Product digital LUT, EES and other documents with Sales Order for printing",
-            "S3A2.3 Instant Sales/Inventory/Invoice movement upon sales order confirmation",
-            "S3A2.4 Real-time, multi-user shared sales/invoice/inventory dashboard",
-            "S3A2.5 Variance monitoring dashboard and faster daily resolution"
-          ],
-          "approval": [
-            { "role": "Sales Assistant", "label": "Confirm orders and produce invoice, LUT, EES" },
-            { "role": "Sales Manager", "label": "Review output" }
-          ],
-          "data_outputs": [
-            "S3A2.5 Digital and printed Sales Orders and Invoices",
-            "S3A2.6 Sales Order and Invoice Summary Tables"
-          ],
-          "tags": [
-            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
-            { "text": "xx", "bg": "#F9EEDC", "color": "#B96B13" }
-          ]
-        },
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "S3A3 Customer marketing support, cylinder swapping, pricing adjustments, concerns",
-          "trigger": "any of the above requests",
-          "features": [
-            "S3A3.1 Digital Cylinder Swapping Approval Process, signed Swapping Form, and other photos, requirements",
-            "S3A3.2 Cylinder swap inventory entries are multi-user viewed and printable",
-            "S3A3.3 Multi-user, real-time Cylinder inventory and status management",
-            "S3A3.4 Real-time, multi-user shared inventory dashboard",
-            "S3A3.5 digital CRM for new dealer application process from start to end"
-          ],
-          "approval": [
-            { "role": "Sales Assistant", "label": "Request cylinder swapping with doc requests" },
-            { "role": "Sir RY", "label": "Review and approve/reject request digital files" },
-            { "role": "Warehouse and Quality Supervisor", "label": "List the qty, status and treatment of cylinders" },
-            { "role": "Senior Supervisor", "label": "Review cylinders batch request and requirements" },
-            { "role": "Operations Officer", "label": "Review and note transactions" }
-          ],
-          "data_outputs": [
-            "S3A2.6 Real-time list of dealers' marketing support and pricing concerns",
-            "S3A2.7 Real-time Swapped cylinders inventory and status summary",
-            "S3A3.8 Multi-step Customer Relation Management process for New Dealers",
-          ],
-          "tags": [
-            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
-            { "text": "xx", "bg": "#F9EEDC", "color": "#B96B13" }
-          ]
-        }
-      ]
+      "badge": "confirmed",
+      "sop_steps": [
+        "Sales Assistant coordinates the dealer's Plant Visit Calendar in advance, contacting dealers roughly three times a week.",
+        "Claire sends schedules and updates through the Viber Dealer Group.",
+        "Dealer identity and authorization are verified; only confirmed appointments are accommodated.",
+        "Confirm the dealer maintains at least 50 cylinders on hand; dealers typically buy in larger quantities.",
+        "Dealer advance quantity requests/orders are disseminated to multiple staff; the dealer database is kept current. (S3A1.3-S3A1.4)",
+        "Dealer brings empty cylinders for refilling or swapping (typically 8 tons).",
+        "Apply dealer pricing from the MGC Pricing Matrix, adjusted within the per-dealer buffer.",
+        "Set payment terms - installment with Post-Dated Checks (PDCs), COD, or a Promissory Note if no PDC is available.",
+        "Produce the digital Sales Order and its counterpart Invoice, editable before confirmation; produce LUT, EES and other documents for printing. (S3A2.1-S3A2.2)",
+        "Confirm the order - triggers instant Sales/Inventory/Invoice movement on a shared, multi-user dashboard. (S3A2.3-S3A2.4)",
+        "Fulfil: Mel schedules the plant visit/delivery and coordinates truck availability.",
+        "Post-sales: Claire maintains dealer records, runs call-outs and follow-ups, and handles pricing disputes/adjustments. (S3A3)",
+        "Cylinder swapping, marketing support, and pricing-adjustment requests route through: Sales Assistant -> Sir RY -> Warehouse and Quality Supervisor -> Senior Supervisor -> Operations Officer. (S3A3.1-S3A3.5)",
+        "New Dealer Accreditation: applicant proposes a business location with no existing dealer coverage.",
+        "Once approved, secure DTI Registration, Business Permit, and BIR Registration.",
+        "Submit the dealership application and secure the Supplier's Certificate.",
+        "Complete DOE requirements (Annex G and Annex V5) and execute a Special Power of Attorney (SPA).",
+        "Pay processing fees and submit documents to the Makati Office; coordinate with the DOE liaison for processing."
+      ],
+      "guidelines": [
+        "Only confirmed, scheduled dealer appointments are accommodated - mirrors the plant-refilling rule in Operations > Dealer.",
+        "New dealers must maintain a minimum of 50 LPG cylinders; MGC may process DOE/permit requirements on the applicant's behalf, or the applicant may self-file.",
+        "Cylinder swapping, marketing support, and new pricing adjustments all route through the same five-step approval chain ending in Operations Officer sign-off - no skipping to a later approver.",
+        "Dealer pricing is adjusted only within the per-dealer buffer defined in the MGC Pricing Matrix; adjustments outside the buffer require the same escalation used for a swap request."
+      ],
+      "approval_matrix": [
+        { "transaction": "Dealer order & pricing", "threshold": "Within per-dealer pricing buffer", "initiator": "Sales Assistant", "reviewer": "Sales Manager", "approver": "- (within buffer, no separate approval)", "controls": ["Min. 50-cylinder rule", "Digital Sales Order/Invoice"] },
+        { "transaction": "Cylinder swap / marketing support / pricing concern", "threshold": "-", "initiator": "Sales Assistant", "reviewer": "Warehouse & Quality Supervisor, Senior Supervisor", "approver": "Sir RY, then Operations Officer logs", "controls": ["Signed swap form", "Photo/document requirements"] },
+        { "transaction": "New Dealer Accreditation", "threshold": "Min. 50 cylinders, no territory overlap", "initiator": "Applicant / Sales", "reviewer": "DOE liaison", "approver": "Makati Office", "controls": ["DTI/BIR/Business Permit set", "SPA", "Processing fee receipt"] }
+      ],
+      "current_future": {
+        "current": [
+          "Swap and pricing-concern approvals still route through ad hoc chat threads rather than a structured workflow.",
+          "Dealer accreditation paperwork is tracked manually across DTI/BIR/DOE filings with no single status view."
+        ],
+        "future": [
+          "Extend the real-time, multi-user dashboard already covering order/invoice/inventory movement to swap approvals and accreditation status tracking.",
+          "Digital CRM for the new-dealer application process, start to end (already flagged as a target system feature)."
+        ]
+      },
+      "sources": "Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Sales > Dealer (S3A1-S3A3); \"MGC LPG Process Manual v2.docx\" - Sales > Dealer (Order Process & Dealer Accreditation)."
     },
     {
-      "kanji": "",
       "romaji": "Retail",
       "english": "Find Client | Serve | Schedule | Repeat Order",
-      "cards": [
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "Retail Orders Scheduling",
-          "trigger": "Retail Daily and Monthly Sales Target",
-          "features": [
-            "Capture release notes",
-            "Confirm handoff status",
-            "Log go-live decision"
-          ],
-          "approval": [
-            { "role": "review", "label": "Check release" },
-            { "role": "manager", "label": "Approve launch" }
-          ],
-          "data_outputs": [
-            "Release history",
-            "Launch approval log"
-          ],
-          "tags": [
-            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
-            { "text": "xx Me", "bg": "#DCEAF5", "color": "#1E4E79" }
-          ]
-        },
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "Efficient Retail Delivery Scheduling",
-          "trigger": "Accumulated retail deliveries ready to dispatch",
-          "features": [
-            "Capture release notes",
-            "Confirm handoff status",
-            "Log go-live decision"
-          ],
-          "approval": [
-            { "role": "review", "label": "Check release" },
-            { "role": "manager", "label": "Approve launch" }
-          ],
-          "data_outputs": [
-            "Release history",
-            "Launch approval log"
-          ],
-          "tags": [
-            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
-            { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" }
-          ]
-        }
-      ]
+      "badge": "confirmed",
+      "sop_steps": [
+        "Solicit and plan orders against daily and monthly Retail sales targets.",
+        "Call clients for re-orders and find new client orders; review sales history and next week's route schedule.",
+        "Take the order: confirm the Sales Order and assign a permanent, non-editable Sales Order Control No.",
+        "Retail and semi-dealer clients buy smaller quantities, mainly 11kg and 2.5kg, on a retail scale.",
+        "Apply pricing: offer SRP first, then the Minimum Price List (MPL) with volume discounts (3-5, 6-10 units) and distance-zone pricing (0-30km, 30.1-40km, 41-60km).",
+        "Retail customers may submit a portal order (with discount); Sales Assistant approves against schedule and payment terms, Sales Manager validates. (S4A1)",
+        "Set payment: mostly COD/cash invoice; the delivery team carries the cash invoice.",
+        "Fulfil: Sales Assistant lines up confirmed Sales Orders; Purchaser/Dispatcher reviews the lined-up orders and routes. (S4A2)",
+        "Post-sales: log concerns, evaluate sales target vs actual, and sync with the Operations calendar.",
+        "Compute gains/losses per trip per driver/helper; record customer/location/category sales contribution."
+      ],
+      "guidelines": [
+        "Retail pricing always follows SRP first, then falls to the Minimum Price List with volume/zone discounts - MPL is the floor, not the opening offer.",
+        "Sales Order Control Numbers are permanent and non-editable, the same rule as Commercial.",
+        "Retail is COD/cash-invoice by default; the delivery team physically carries the cash invoice and reconciles it same-day with Accounting > Retail."
+      ],
+      "approval_matrix": [
+        { "transaction": "Retail order & pricing", "threshold": "SRP, then MPL by volume/zone", "initiator": "Sales Assistant", "reviewer": "Sales Manager (validates schedule/terms)", "approver": "Sales Manager", "controls": ["Portal or call intake", "SRP-then-MPL sequence"] },
+        { "transaction": "Delivery line-up & routing", "threshold": "-", "initiator": "Sales Assistant", "reviewer": "Purchaser/Dispatcher", "approver": "Purchaser/Dispatcher", "controls": ["Route review before dispatch"] }
+      ],
+      "current_future": {
+        "current": [
+          "Retail order-to-cash is still carried physically via cash invoice, reconciled same-day rather than in real time.",
+          "Several Data Output fields for retail delivery scheduling are marked placeholder in the source and appear unfinished."
+        ],
+        "future": [
+          "Extend the Commercial/Dealer real-time dashboard pattern to Retail so cash-invoice status is visible before the driver returns, not just at end-of-day reconciliation."
+        ]
+      },
+      "sources": "Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Sales > Retail (S4A1-S4A2); \"MGC LPG Process Manual v2.docx\" - Sales > Retail."
     },
     {
-      "kanji": "",
       "romaji": "Overall",
       "english": "Reports | Monitoring | Compliance | Write-Offs",
-      "cards": [
-        {
-          "id": "ACTIVE",
-          "status": "core",
-          "name": "xx",
-          "trigger": "Feedback arrives after launch.",
-          "features": [
-            "Track enhancements",
-            "Measure impact",
-            "Feed new items into discovery"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Log findings" },
-            { "role": "manager", "label": "Prioritize follow-up" }
-          ],
-          "data_outputs": [
-            "Improvement backlog",
-            "Outcome summary"
-          ],
-          "tags": [
-            { "text": "Iterative", "bg": "#E3F0E6", "color": "#2E6A3D" },
-            { "text": "Reusable", "bg": "#DCEAF5", "color": "#1E4E79" }
-          ]
-        }
-      ]
+      "badge": "confirmed",
+      "sop_steps": [
+        "Print and verify multi-period Sales Performance Reports (daily/weekly/monthly, per sales avenue). (S5A1)",
+        "Report covers invoice status and incentive gains/loss; issue Invoice-linked Credit Notes for Commercial clients and the delivery team. (S5A1.3)",
+        "IT Head (Jabert) prints the Sales Performance Report (SPR) bi-weekly or monthly depending on inventory volume; fields include sales per kg, total sales, net sales, cost of sales, and Gross Profit Margin per kg and total.",
+        "Regional Sales Manager (Mel) sets up the MGC LPG Pricing Matrix for decision; Sir RY decides on the matrix for the period, 1-3 times per month in a General Meeting. (S5A2)",
+        "Pricing Matrix covers Sales Price, MPL, and Total Cost (Acquisition Cost + Hauling) per kg, by avenue - Commercial through Retail and semi-dealers - plus MPL volume discounts by radius.",
+        "Regional Sales Manager and IT Head update competitor end-user pricing (SRP comparison).",
+        "Price Cascade Process: Regional Sales Manager emails the updated changes; IT Head records the audit log for the change.",
+        "IT Head informs CODO, contact centers, marketing, and cashiers. Cascade is channel-owned: Regional Sales Manager and Sales Assistant1 - Commercial/Bulk clients (Mel, Lou); Sales Assistant2 - retail clients (Claire); AVP Sales - Makati accounts (Jen); Jabert - CODO/audit and contact centers/marketing/cashiers.",
+        "Sir RY sets the Sales Quota per client per period; AVP Sales prints and uses it as the working target; Sales Assistant updates it daily/weekly. (S5A3)"
+      ],
+      "guidelines": [
+        "Price changes are decided only in the General Meeting (1-3x per month) by Sir RY - no ad hoc price change cascades without going through this meeting.",
+        "Every price change is audit-logged by the IT Head before it cascades to any client-facing channel.",
+        "Cascade responsibility is channel-specific and does not overlap: Mel/Lou (Commercial/Bulk), Claire (Retail), Jen (Makati), Jabert (CODO/contact centers/marketing/cashiers) - a price update is not company-wide live until all channels confirm cascade."
+      ],
+      "approval_matrix": [
+        { "transaction": "Sales Performance Report issuance", "threshold": "-", "initiator": "IT Head (Jabert)", "reviewer": "AVP Sales", "approver": "AVP Sales (prints/verifies)", "controls": ["SPR formula fields", "GPM per kg check"] },
+        { "transaction": "Pricing Matrix decision", "threshold": "-", "initiator": "Regional Sales Manager (sets up)", "reviewer": "-", "approver": "Sir RY", "controls": ["General Meeting cadence 1-3x/month", "Audit log by IT Head"] },
+        { "transaction": "Price cascade to channels", "threshold": "-", "initiator": "Regional Sales Manager (emails change)", "reviewer": "IT Head (audit log)", "approver": "- (cascade, not approval)", "controls": ["Multi-channel cascade checklist"] },
+        { "transaction": "Sales Quota setting", "threshold": "-", "initiator": "Sir RY", "reviewer": "AVP Sales", "approver": "Sir RY", "controls": ["Daily/weekly update by Sales Assistant"] }
+      ],
+      "current_future": {
+        "current": [
+          "Price cascade is confirmed via email and informal notification to several separate people, with no single cascade-complete checklist.",
+          "Sales Quota tracking has several Data Output fields still marked placeholder in the source."
+        ],
+        "future": [
+          "A single Pricing Matrix dashboard (already partially specified) that shows cascade status per channel instead of relying on the Regional Sales Manager's memory of who's been notified."
+        ]
+      },
+      "sources": "Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Sales > Overall (S5A1-S5A3, S5C1-S5C2); Personnel & Forms indexes for named roles."
     }
   ],
   "cross_stage": {
-    "id": "X1",
     "name": "Cross-Stage Governance",
-    "description": "Use this area for controls that affect all stages.",
-    "features": [
-      "Track blockers across the full workflow",
-      "Maintain a shared audit trail",
-      "Standardize notifications and approvals"
-    ],
-    "approval": [
-      { "role": "auto", "label": "System watch" },
-      { "role": "review", "label": "Review updates" },
-      { "role": "manager", "label": "Approve escalations" }
-    ],
-    "data_outputs": [
-      "Cross-stage status report",
-      "Escalation dashboard"
-    ],
-    "tags": [
-      { "text": "Shared", "bg": "#EFE7FB", "color": "#6F3CC3" },
-      { "text": "Optional", "bg": "#DCEAF5", "color": "#1E4E79" }
+    "description": "Escalation and pricing-governance rules that apply on top of every Sales approval row above.",
+    "guidelines": [
+      "Sales Order Control Numbers, once assigned, are permanent and non-editable; a correction is made with a new document, never by editing the original control number.",
+      "Price changes are decided only in the scheduled General Meeting (1-3x per month) by Sir RY, and every change is audit-logged by the IT Head before it cascades to any client-facing channel.",
+      "Any transaction blocked or disputed at its normal approval level escalates through the standard chain (System watch -> Review -> Manager) rather than being resolved informally between the two parties involved."
     ]
   },
-  "manual_section": {
-    "title": "Current Processes",
-    "tag": "Manual workflow placeholders"
-  },
-  "manual_stages": [
-    {
-      "english": "Discovery pain points",
-      "kanji": "",
-      "pain_points": [
-        "Requests arrive in multiple channels",
-        "Important context is often missing"
-      ]
-    },
-    {
-      "english": "Planning pain points",
-      "kanji": "",
-      "pain_points": [
-        "Scope changes are hard to track",
-        "Owners are assigned too late"
-      ]
-    },
-    {
-      "english": "Execution pain points",
-      "kanji": "",
-      "pain_points": [
-        "Checklists are scattered across files",
-        "Readiness criteria are inconsistent"
-      ]
-    },
-    {
-      "english": "Launch pain points",
-      "kanji": "",
-      "pain_points": [
-        "Approvals happen over chat",
-        "Release notes are not centralized"
-      ]
-    },
-    {
-      "english": "Overall pain points",
-      "kanji": "",
-      "pain_points": [
-        "C5.1 Sales Reports:",
-        "C5.1.1 IT Head prints Sales Performance Report (SPR)- bi-weekly or monthly depending on inventory volume",
-        "C5.1.2 SPR fields: sales per kg, total sales, net sales, cost of sales. with formula. Gross Profit Margin per kg and total GPM.", 
-        "C5.2 Pricing Matrix:",
-        "C5.2.1 MGC LPG Pricing Matrix dashboard: Decide on the doneprices of gas for different sales avenues. 1-3x a month General Meeting",
-        "C5.2.2 Sales Price, MPL, Total Cost (Acq Cost + Hauling), kg. Avenues: Commercial to Retail and semi-dealers.",
-        "C5.2.4 MPL volume discounts for different radiuses",
-        "C5.2.5 End-User Pricing: SRP and competitors pricing comparison. Mel and Joebert updates competitors' prices.",
-        "C5.2.6 Price Cascade Process:",
-        "C5.2.6.1 Mel emails the updated changes. Jabert records audit logs for changes",
-        "C5.2.6.2 Jabert - CODO, Jobert - contact centers, marketing, cashiers. Mel, Lou - Comm/Bulk clients, Claire - retail clients. Jen - Makati accounts.",
-        "C5.2.6.3 NIL so far"
-      ]
-    }
-  ],
   "metrics": [
-    { "value": "5", "label": "Stages", "detail": "Editable sample structure" },
-    { "value": "1", "label": "Checklist Block", "detail": "Supported sectional format" },
-    { "value": "JSON", "label": "Content Source", "detail": "Easy to replace" },
-    { "value": "Pages", "label": "Deployment", "detail": "GitHub Pages ready" }
+    { "value": "5", "label": "Stages", "detail": "Commercial, Bulk, Dealer, Retail, Overall" },
+    { "value": "4", "label": "Confirmed", "detail": "Grounded in source data" },
+    { "value": "1", "label": "Partially Confirmed", "detail": "Bulk - gap flagged" },
+    { "value": "19", "label": "Personnel", "detail": "Named staff on roster" }
   ],
-  "footer": "Replace this footer text with your project name, owner, or release note."
+  "footer": "Masagana Gas Corporation - Sales SOP - Merged from Process Systemization Portal + source site - Internal use only"
 }
-
-

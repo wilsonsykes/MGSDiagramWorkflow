@@ -29,39 +29,31 @@
   function findMentions(term, sourceKey, data) {
     var results = [];
     var tl = term.toLowerCase();
+    var stages = data.stages || [];
+    var idPrefix = sourceKey; // matches id_prefix = f'{page_key}-{si}' in workflow_generate.py
 
-    /* Current workflow — manual_stages pain_points */
-    var mstages = data.manual_stages || [];
-    mstages.forEach(function (stage, si) {
-      (stage.pain_points || []).forEach(function (pp, pi) {
-        if (String(pp).toLowerCase().indexOf(tl) !== -1) {
+    function scanList(list, kind, anchorTag, label) {
+      (list || []).forEach(function (text, ti) {
+        if (String(text).toLowerCase().indexOf(tl) !== -1) {
           results.push({
-            text: String(pp),
-            anchor: 'pp-' + sourceKey + '-' + si + '-' + pi,
-            section: stage.english || ('Stage ' + (si + 1)),
+            text: String(text),
+            anchor: idPrefix + '-' + anchorTag + '-' + ti,
+            section: label,
             tabKey: sourceKey,
-            type: 'current'
+            type: kind
           });
         }
       });
-    });
+    }
 
-    /* Future workflow — stages → cards → features */
-    var stages = data.stages || [];
     stages.forEach(function (stage, si) {
-      (stage.cards || []).forEach(function (card, ci) {
-        (card.features || []).forEach(function (feat, fi) {
-          if (String(feat).toLowerCase().indexOf(tl) !== -1) {
-            results.push({
-              text: String(feat),
-              anchor: 'feat-' + sourceKey + '-' + si + '-' + ci + '-' + fi,
-              section: (stage.romaji || ('Stage ' + (si + 1))) + ' · ' + (card.name || ''),
-              tabKey: sourceKey,
-              type: 'future'
-            });
-          }
-        });
-      });
+      idPrefix = sourceKey + '-' + si;
+      var stageLabel = stage.romaji || ('Stage ' + (si + 1));
+      scanList(stage.sop_steps, 'current', 'sop', stageLabel + ' · SOP Manual');
+      scanList(stage.guidelines, 'current', 'gl', stageLabel + ' · Operational Guidelines');
+      var cf = stage.current_future || {};
+      scanList(cf.current, 'current', 'cur', stageLabel + ' · Current Workflow');
+      scanList(cf.future, 'future', 'fut', stageLabel + ' · Future Workflow');
     });
 
     return results;

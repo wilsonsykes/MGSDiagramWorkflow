@@ -31,6 +31,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .term-name{font-size:13px;font-weight:700;color:var(--text);flex:1}
 .term-tag{font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;background:var(--purple-light);color:var(--purple);border:1px solid #D8C7F4;text-transform:uppercase;letter-spacing:.4px;white-space:nowrap}
 .role-chip{font-size:10px;font-weight:600;padding:2px 9px;border-radius:999px;background:var(--bg-alt);color:var(--text-mid);border:1px solid var(--border);white-space:nowrap}
+.dept-chip{font-size:9px;font-weight:800;padding:2px 8px;border-radius:4px;background:var(--teal-light);color:var(--teal);border:1px solid #AADBD6;text-transform:uppercase;letter-spacing:.3px;white-space:nowrap}
 .term-refs-chips{display:flex;gap:5px;flex-shrink:0}
 .ref-chip{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.3px}
 .ref-ops{background:#DCEAF5;color:#1E4E79;border:1px solid #BFD6EB}
@@ -43,6 +44,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .term-inner{padding:12px 16px 14px;background:var(--bg-alt);display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .td-label{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.1px;color:var(--text-light);margin-bottom:4px}
 .td-value{font-size:12px;color:var(--text-mid);line-height:1.55}
+.td-group{grid-column:1/-1}
 .hidden{display:none!important}
 @media(max-width:700px){.term-inner{grid-template-columns:1fr}.topbar-hint{display:none}}
 
@@ -73,26 +75,353 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 
 <div class="page-header">
   <h1>Personnel Directory</h1>
-  <p>All personnel referenced across the Operations, Sales, and Accounting workflow tabs. Click a card to see the person's role, responsibilities, and which workflow tabs mention them. Names highlighted in purple in Inventory, Sales, and Accounting pages link directly here.</p>
+  <p>Named staff from the company Personnel Table, grouped by department, plus the functional roles (Driver, Checker, Cashier, etc.) still referenced by title rather than by name in the Operations, Sales, and Accounting SOP pages. Click a card to see role, responsibilities, and which workflow tabs mention them.</p>
 </div>
 
 <div class="how-to">
-  <strong>How cross-links work:</strong> When a person's name is highlighted and underlined in an Operations, Sales, or Accounting page, clicking it will switch to this tab and scroll to that entry. To add or remove a name from the link list, edit <code>cross_reference_terms.txt</code> then run <code>python workflow_generate.py</code>.
+  <strong>How cross-links work:</strong> When a person's name or role title is highlighted and underlined in an Operations, Sales, or Accounting page, clicking it will switch to this tab and scroll to that entry. To add or remove a name from the link list, edit <code>cross_reference_terms.txt</code> then run <code>python workflow_generate.py</code>.
 </div>
 
 <div class="search-bar">
   <input class="search-input" type="text" placeholder="Filter personnel…" oninput="filterCards(this.value)" />
 </div>
 
-<div class="section-label">Field &amp; Delivery Staff</div>
-<div class="terms-list" id="terms-list">
+<div class="section-label">Operations</div>
+<div class="terms-list">
+
+  <div class="term-card" id="personnel-joseph">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Joseph</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Operations</span>
+      <span class="role-chip">Plant Operations Officer</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">Plant Operations Officer</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Operations &gt; Dealer &mdash; reviews and confirms the plant refilling transaction and records it in inventory.</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-buding">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Buding</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Operations</span>
+      <span class="role-chip">Senior Plant Supervisor</span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">Senior Plant Supervisor</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Not yet cross-referenced by name in a specific SOP step &mdash; role likely overlaps with the Plant Manager / Warehouse Supervisor functions in Operations.</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-lexter">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Lexter</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Operations</span>
+      <span class="role-chip">Operations Supervisor</span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">Operations Supervisor</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Not yet cross-referenced by name in a specific SOP step &mdash; role likely overlaps with the Warehouse Supervisor / Operations Manager functions in Operations.</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-edmond">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Edmond</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Operations</span>
+      <span class="role-chip">Warehouse and Quality Supervisor</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">Warehouse and Quality Supervisor</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Operations &gt; Dealer &mdash; handles the physical cylinder swap (allied brands only) and keeps swap records.</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-josephine">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Josephine</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Operations</span>
+      <span class="role-chip">Checker</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">Checker</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Operations &gt; Dealer, Retail &mdash; the "Checker" role that encodes refill transactions in AppSheet and verifies the receipt at the gate.</div></div>
+    </div></div>
+  </div>
+
+</div>
+
+<div class="section-label" style="margin-top:8px">Sales</div>
+<div class="terms-list">
+
+  <div class="term-card" id="personnel-mel">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Mel</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Sales</span>
+      <span class="role-chip">Regional Sales Manager</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">Regional Sales Manager</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Sales &gt; Dealer &mdash; schedules plant visit/delivery and truck availability · Sales &gt; Overall &mdash; sets up the Pricing Matrix and cascades price changes · Accounting &gt; Dealer &mdash; reviews dealer AR/CNC checks.</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-lou">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Lou</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Sales</span>
+      <span class="role-chip">Sales Assistant 1</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">Sales Assistant 1</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Sales &gt; Overall &mdash; cascades updated pricing to Commercial/Bulk clients alongside Mel.</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-claire">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Claire</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Sales</span>
+      <span class="role-chip">Sales Assistant 2</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">Sales Assistant 2</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Sales &gt; Dealer &mdash; sends schedules via the Viber Dealer Group, maintains dealer records and handles pricing disputes · Sales &gt; Overall &mdash; cascades pricing to retail clients.</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-jen">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Jen</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Sales</span>
+      <span class="role-chip">AVP - Sales</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">AVP - Sales</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Sales &gt; Overall &mdash; cascades pricing to Makati accounts · reviews draft order/upsell and order confirmation approvals across channels.</div></div>
+    </div></div>
+  </div>
+
+</div>
+
+<div class="section-label" style="margin-top:8px">Engineering</div>
+<div class="terms-list">
+
+  <div class="term-card" id="personnel-kenneth">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Kenneth</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Engineering</span>
+      <span class="role-chip">Sr Plant Engineer</span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">Sr Plant Engineer</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Not yet cross-referenced by name in a specific SOP step.</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-jef">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Jef</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Engineering</span>
+      <span class="role-chip">Industrial Engineer</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">Industrial Engineer</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Sales &gt; Commercial &mdash; monitors gain/loss variance in post-sales reconciliation · Accounting &gt; Overall &mdash; reviews Industrial Projects Budget vs Actual.</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-jerelyn">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Jerelyn</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Engineering</span>
+      <span class="role-chip">Eng'g Document Controller / Staff</span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">Eng'g Document Controller / Staff</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Not yet cross-referenced by name in a specific SOP step.</div></div>
+    </div></div>
+  </div>
+
+</div>
+
+<div class="section-label" style="margin-top:8px">Accounting</div>
+<div class="terms-list">
+
+  <div class="term-card" id="personnel-malou">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Malou</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Accounting</span>
+      <span class="role-chip">Accounting Manager</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">Accounting Manager</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Accounting &mdash; likely maps to the "Acctg Manager" approver role in Commercial and Overall approval rows.</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-vicky">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Vicky</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Accounting</span>
+      <span class="role-chip">OIC-Acctg / Credit &amp; Collection Analyst</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">OIC-Acctg / Credit &amp; Collection Analyst</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Accounting &gt; Retail &mdash; audits cash sales and validates daily cash/LUT balancing and bank deposit · Operations &gt; Dealer &mdash; verifies AppSheet against the official receipt.</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-anton">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Anton</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Accounting</span>
+      <span class="role-chip">Audit Supervisor</span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">Audit Supervisor</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Not yet cross-referenced by name in a specific SOP step.</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-richel">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Richel</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Accounting</span>
+      <span class="role-chip">Operations Supervisor</span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">Operations Supervisor</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Listed under Accounting on the staff roster despite the "Operations Supervisor" title &mdash; not yet cross-referenced by name in a specific SOP step; confirm department placement with the client.</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-juary">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Juary</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Accounting</span>
+      <span class="role-chip">Accounting Sales Encoder</span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">Accounting Sales Encoder</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Not yet cross-referenced by name in a specific SOP step &mdash; role likely overlaps with the "Acctg Staff" function referenced throughout Accounting.</div></div>
+    </div></div>
+  </div>
+
+</div>
+
+<div class="section-label" style="margin-top:8px">IT</div>
+<div class="terms-list">
+
+  <a id="personnel-it-head" style="position:relative;top:-90px" aria-hidden="true"></a>
+  <div class="term-card" id="personnel-jabert">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Jabert</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">IT</span>
+      <span class="role-chip">IT Manager</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">IT Manager</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Sales &gt; Overall &mdash; prints the Sales Performance Report as "IT Head", records the audit log for every pricing change, and cascades pricing to CODO, contact centers, marketing, and cashiers.</div></div>
+    </div></div>
+  </div>
+
+</div>
+
+<div class="section-label" style="margin-top:8px">Purchase Dispatch</div>
+<div class="terms-list">
+
+  <div class="term-card" id="personnel-liza">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Liza</span>
+      <span class="term-tag">Personnel</span>
+      <span class="dept-chip">Purchase Dispatch</span>
+      <span class="role-chip">Logistics Officer</span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Position</div><div class="td-value">Logistics Officer</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Not yet cross-referenced by name in a specific SOP step &mdash; role likely overlaps with the "Purchaser/Dispatcher" function referenced in Sales &gt; Retail routing.</div></div>
+    </div></div>
+  </div>
+
+</div>
+
+<div class="section-label" style="margin-top:8px">Executive (not on staff roster)</div>
+<div class="terms-list">
+
+  <div class="term-card" id="personnel-sir-ry">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Sir RY</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Executive / Owner</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Top-level decision-maker referenced across Operations and Sales approval chains. Does not appear on the Personnel Table staff roster &mdash; confirm with the client whether to add an executive tier to the roster.</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Operations &gt; Dealer &mdash; approves cylinder swaps · Sales &gt; Dealer &amp; Overall &mdash; final escalation for swap/pricing concerns, decides the Pricing Matrix and sets the Sales Quota.</div></div>
+    </div></div>
+  </div>
+
+</div>
+
+<div class="section-label" style="margin-top:8px">Functional Roles (referenced by title, not yet named)</div>
+<div class="terms-list">
 
   <div class="term-card" id="personnel-driver">
     <div class="term-bar" onclick="toggle(this)">
       <span class="term-name">Driver</span>
       <span class="term-tag">Personnel</span>
       <span class="role-chip">Field — Delivery</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">INV</span></span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -106,7 +435,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <span class="term-name">Pahinante</span>
       <span class="term-tag">Personnel</span>
       <span class="role-chip">Field — Delivery Helper</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">INV</span></span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -120,7 +449,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <span class="term-name">Delivery Head</span>
       <span class="term-tag">Personnel</span>
       <span class="role-chip">Operations — Logistics</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">INV</span></span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -129,17 +458,54 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-</div>
+  <div class="term-card" id="personnel-warehouse-supervisor">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Warehouse Supervisor</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Operations — Warehouse</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Reviews and disputes residue classification, and reviews commission computation before Operations Manager sign-off.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Escalation point for 1-3kg residue disputes · Reviews Picklist/DR/CR pairing · Reviews commission computation</div></div>
+    </div></div>
+  </div>
 
-<div class="section-label" style="margin-top:8px">Warehouse &amp; Plant Staff</div>
-<div class="terms-list">
+  <div class="term-card" id="personnel-guard">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Guard</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Operations — Gate</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Records vehicle entry, validates tank classification, and performs final exit verification for Dealer plant visits.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Records vehicle entry · Issues EEF/EES · Radios Production Team · Final exit verification before release</div></div>
+    </div></div>
+  </div>
+
+  <div class="term-card" id="personnel-cashier">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Cashier</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Accounting — Retail</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">Collects retail cash at loading, balances the daily cash and LUT, and receives retail cash invoices from the delivery team. Retail source material names this person "Don"; not yet matched to the staff roster.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Collects cash/charge invoice at loading · Balances cash vs LUT same-day · Submits cash collection report for bank deposit validation</div></div>
+    </div></div>
+  </div>
 
   <div class="term-card" id="personnel-sales-rep">
     <div class="term-bar" onclick="toggle(this)">
       <span class="term-name">Sales Rep</span>
       <span class="term-tag">Personnel</span>
       <span class="role-chip">Sales — Dealer/Retail</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">INV</span></span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -148,12 +514,26 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
+  <div class="term-card" id="personnel-sales-assistant">
+    <div class="term-bar" onclick="toggle(this)">
+      <span class="term-name">Sales Assistant</span>
+      <span class="term-tag">Personnel</span>
+      <span class="role-chip">Sales — Retail/Commercial</span>
+      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="term-arrow">&#9662;</span>
+    </div>
+    <div class="term-body"><div class="term-inner">
+      <div><div class="td-label">Role</div><div class="td-value">General title used for draft-order intake, upsell review, and retail order/pricing across the Sales SOP. Lou and Claire (Sales Assistant 1 and 2 on the roster) carry out this function for their respective channels.</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Drafts Sales Order · Runs upsell review · Applies pricing sequence (SRP then MPL) · Lines up confirmed orders for dispatch</div></div>
+    </div></div>
+  </div>
+
   <div class="term-card" id="personnel-purchaser">
     <div class="term-bar" onclick="toggle(this)">
       <span class="term-name">Purchaser</span>
       <span class="term-tag">Personnel</span>
       <span class="role-chip">Procurement</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">INV</span></span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -167,7 +547,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <span class="term-name">Plant Manager</span>
       <span class="term-tag">Personnel</span>
       <span class="role-chip">Plant — Management</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">INV</span></span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -181,7 +561,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <span class="term-name">Plant Staff</span>
       <span class="term-tag">Personnel</span>
       <span class="role-chip">Plant — Operations</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">INV</span></span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -195,133 +575,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <span class="term-name">Acctg Staff</span>
       <span class="term-tag">Personnel</span>
       <span class="role-chip">Accounting</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">INV</span><span class="ref-chip ref-acg">ACG</span></span>
+      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span><span class="ref-chip ref-acg">ACG</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Role</div><div class="td-value">Accounting staff who handles the reconciliation of delivery documents against the General Ledger and manages receivables and payroll.</div></div>
+      <div><div class="td-label">Role</div><div class="td-value">Accounting staff who handles the reconciliation of delivery documents against the General Ledger and manages receivables and payroll. Nora is referenced by name in source material handling Dealer AR; not yet matched to the staff roster.</div></div>
       <div><div class="td-label">Key Responsibilities</div><div class="td-value">Receives DR from Warehouse to make General Ledger entry · Reconciles GL with signed DR and AR · Handles receivables · Prepares payroll incentives on 15th and 30th</div></div>
     </div></div>
   </div>
 
 </div>
-
-<div class="section-label" style="margin-top:8px">Sales &amp; Pricing Team</div>
-<div class="terms-list">
-
-  <div class="term-card" id="personnel-it-head">
-    <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">IT Head</span>
-      <span class="term-tag">Personnel</span>
-      <span class="role-chip">IT / Reporting</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
-      <span class="term-arrow">&#9662;</span>
-    </div>
-    <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Role</div><div class="td-value">IT Head responsible for generating and printing the Sales Performance Report (SPR). Frequency depends on inventory volume — bi-weekly or monthly.</div></div>
-      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Prints Sales Performance Report (SPR) bi-weekly or monthly · Report covers: sales per kg, total sales, net sales, cost of sales, Gross Profit Margin</div></div>
-    </div></div>
-  </div>
-
-  <div class="term-card" id="personnel-mel">
-    <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Mel</span>
-      <span class="term-tag">Personnel</span>
-      <span class="role-chip">Sales — Comm/Bulk</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
-      <span class="term-arrow">&#9662;</span>
-    </div>
-    <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Role</div><div class="td-value">Manages Comm/Bulk client communications and is responsible for emailing updated pricing changes to all contacts after the Pricing Matrix is updated.</div></div>
-      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Emails updated pricing changes after General Meeting · Manages Commercial/Bulk client accounts · Updates competitor pricing together with Joebert</div></div>
-    </div></div>
-  </div>
-
-  <div class="term-card" id="personnel-joebert">
-    <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Joebert</span>
-      <span class="term-tag">Personnel</span>
-      <span class="role-chip">Sales — Market Intelligence</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
-      <span class="term-arrow">&#9662;</span>
-    </div>
-    <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Role</div><div class="td-value">Responsible for monitoring and updating competitor prices in the End-User Pricing comparison. Works alongside Mel in market intelligence gathering.</div></div>
-      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Updates competitors' prices in End-User Pricing dashboard · Collaborates with Mel on price comparison · Feeds data into Pricing Matrix meetings</div></div>
-    </div></div>
-  </div>
-
-  <div class="term-card" id="personnel-jabert">
-    <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Jabert</span>
-      <span class="term-tag">Personnel</span>
-      <span class="role-chip">Sales — CODO / Audit</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
-      <span class="term-arrow">&#9662;</span>
-    </div>
-    <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Role</div><div class="td-value">Maintains audit logs for all pricing changes and manages CODO (Company-Owned, Dealer-Operated) channel communications in the Price Cascade Process.</div></div>
-      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Records audit logs for every pricing change · Cascades updated prices to CODO contacts · Ensures traceability in the Price Cascade Process</div></div>
-    </div></div>
-  </div>
-
-  <div class="term-card" id="personnel-jobert">
-    <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Jobert</span>
-      <span class="term-tag">Personnel</span>
-      <span class="role-chip">Sales — Contact Centers</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
-      <span class="term-arrow">&#9662;</span>
-    </div>
-    <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Role</div><div class="td-value">Handles pricing cascade to contact centers, marketing teams, and cashiers. Ensures internal operational channels receive updated pricing after each Pricing Matrix change.</div></div>
-      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Cascades prices to contact centers · Updates marketing team · Informs cashiers of new price points</div></div>
-    </div></div>
-  </div>
-
-  <div class="term-card" id="personnel-lou">
-    <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Lou</span>
-      <span class="term-tag">Personnel</span>
-      <span class="role-chip">Sales — Comm/Bulk</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
-      <span class="term-arrow">&#9662;</span>
-    </div>
-    <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Role</div><div class="td-value">Manages Commercial and Bulk client communications for the pricing cascade. Works alongside Mel to ensure all Commercial/Bulk accounts receive updated pricing.</div></div>
-      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Cascades updated prices to Comm/Bulk clients · Co-manages bulk client accounts with Mel</div></div>
-    </div></div>
-  </div>
-
-  <div class="term-card" id="personnel-claire">
-    <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Claire</span>
-      <span class="term-tag">Personnel</span>
-      <span class="role-chip">Sales — Retail</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
-      <span class="term-arrow">&#9662;</span>
-    </div>
-    <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Role</div><div class="td-value">Manages retail client communications for the pricing cascade. Responsible for ensuring all retail accounts receive and acknowledge updated price points.</div></div>
-      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Cascades updated prices to retail clients · Manages retail channel account communications</div></div>
-    </div></div>
-  </div>
-
-  <div class="term-card" id="personnel-jen">
-    <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Jen</span>
-      <span class="term-tag">Personnel</span>
-      <span class="role-chip">Sales — Makati Accounts</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
-      <span class="term-arrow">&#9662;</span>
-    </div>
-    <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Role</div><div class="td-value">Dedicated account manager for the Makati territory. Handles pricing cascade and client communications for all Makati-based accounts.</div></div>
-      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Cascades updated prices to Makati accounts · Manages Makati client relationships and communications</div></div>
-    </div></div>
-  </div>
-
-</div><!-- /terms-list -->
 
 <script>
 function toggle(bar){var card=bar.closest('.term-card');card.classList.toggle('open')}

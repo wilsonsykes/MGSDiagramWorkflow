@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Workflow Process Diagram</title>
+<title>Masagana Gas Corporation - SOP Portal</title>
 <style>
 :root{--accent:#1E4E79;--accent-light:#DCEAF5;--accent-dark:#163A5A;--green:#2E6A3D;--green-light:#E3F0E6;--orange:#B96B13;--orange-light:#F9EEDC;--red:#B42318;--red-light:#FEE4E2;--purple:#6F3CC3;--purple-light:#EFE7FB;--teal:#0F766E;--teal-light:#DDF5F2;--bg:#FFFFFF;--bg-alt:#F6F8FB;--border:#D8DEE8;--border-light:#E8ECF2;--text:#142033;--text-mid:#445066;--text-light:#6B7484;--radius:10px;--shadow:0 1px 3px rgba(15,23,42,.06),0 1px 2px rgba(15,23,42,.04);--shadow-open:0 6px 20px rgba(15,23,42,.10)}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -27,80 +27,47 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .ctrl-btns{margin-left:auto;display:flex;gap:6px}
 .ctrl-btn{background:#fff;border:1px solid var(--border);color:var(--accent-dark);padding:5px 16px;border-radius:4px;font-size:11px;font-weight:600;font-family:inherit;cursor:pointer;letter-spacing:.4px;transition:all .12s}
 .ctrl-btn:hover{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
-.stage-section{margin:14px 48px 0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow);scroll-margin-top:80px}
-.stage-banner{background:linear-gradient(180deg,var(--accent-light) 0%,#c4d3ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;transition:background .2s ease;user-select:none}
+.stage-section,.cross-section{margin:14px 48px 0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow);scroll-margin-top:80px}
+.cross-section{background:#faf5ff;border:1px dashed #d8b4fe}
+.stage-banner,.cross-banner{background:linear-gradient(180deg,var(--accent-light) 0%,#c4d3ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;transition:background .2s ease;user-select:none}
 .stage-banner:hover{background:linear-gradient(180deg,#cddcf0 0%,#b8cbe5 100%)}
-.stage-section.open .stage-banner{border-bottom-color:var(--border)}
+.cross-banner{background:linear-gradient(180deg,#f0e6f6 0%,#e0d0ec 100%)}
+.cross-banner:hover{background:linear-gradient(180deg,#e8daf0 0%,#d6c4e6 100%)}
+.stage-section.open .stage-banner,.cross-section.open .cross-banner{border-bottom-color:var(--border)}
 .stage-num{width:60px;height:60px;border-radius:12px;background:var(--accent-dark);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;letter-spacing:.5px;font-size:9px;line-height:1.1;text-align:center}
 .num-big{font-size:24px;font-weight:800;line-height:1;margin-bottom:2px}.num-sub{font-size:9px;font-weight:800;letter-spacing:1.2px;opacity:.7}
 .cross-num{background:var(--purple)}
 .stage-info{flex-shrink:0;min-width:200px}
 .stage-title{font-size:22px;font-weight:800;color:var(--accent-dark);text-transform:uppercase;letter-spacing:-.3px;margin:0}
 .stage-sub{font-size:11px;font-weight:700;color:var(--accent);margin-top:2px;text-transform:uppercase;letter-spacing:1.5px}
-.stage-desc{flex:2;min-width:260px;color:#374151;font-size:13px;line-height:1.5}
-.stage-desc strong{color:var(--accent-dark)}
 .stage-arrow{font-size:22px;color:var(--accent-dark);font-weight:700;transition:transform .25s ease;flex-shrink:0;margin-left:auto}
-.stage-section.open .stage-arrow{transform:rotate(180deg)}
+.stage-section.open .stage-arrow,.cross-section.open .stage-arrow{transform:rotate(180deg)}
 .stage-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
-.stage-section.open .stage-body{max-height:8000px}
-.two-col{display:flex;gap:0;border-top:1px solid var(--border-light)}
-.future-col{flex:3;padding:18px 22px 22px;border-right:1px dashed var(--border-light);background:#fbfcfe}
-.manual-col{flex:2;padding:18px 22px 22px;background:#f3f4f6}
-.col-header{display:flex;align-items:center;gap:8px;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border-light)}
-.manual-col .col-header{border-bottom-color:#d1d5db}
-.col-dot{width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
-.future-dot{background:var(--green-light);color:#166534}.manual-dot{background:#e5e7eb;color:#4b5563}
-.col-title{font-size:11px;font-weight:800;letter-spacing:1.3px}
-.future-title{color:var(--accent-dark)}.manual-title{color:#4b5563}
-.col-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:999px;margin-left:auto;letter-spacing:.3px}
-.future-tag{background:#dbe7f6;color:var(--accent-dark);border:1px solid #B3CCE6}
-.manual-tag{background:#e5e7eb;color:#4b5563;border:1px solid #D1D5DB}
-.pcard{margin:8px 0;border-radius:6px;border:1px solid var(--border);background:#fff;overflow:hidden;cursor:pointer;box-shadow:var(--shadow);transition:border-color .15s,box-shadow .15s}
-.pcard:hover{box-shadow:0 3px 8px rgba(15,23,42,.08);border-color:#b7c7df}
-.pcard.open{border-color:var(--accent);box-shadow:var(--shadow-open)}
-.pcard-bar{display:flex;align-items:center;gap:8px;padding:9px 12px}
-.badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;letter-spacing:.3px}
-.pcard-name{font-size:12.5px;font-weight:600;color:#1f2937;flex:1;line-height:1.3}
-.st-dot{width:8px;height:8px;border-radius:50%;box-shadow:0 0 0 2px rgba(0,0,0,.06)}.st-active{background:var(--green)}.st-pending{background:var(--orange)}
-.pcard-arrow{font-size:11px;color:#9ca3af;transition:transform .18s ease;margin-left:2px}
-.pcard.open .pcard-arrow{transform:rotate(180deg);color:var(--accent-dark)}
-.pcard-body{max-height:0;overflow:hidden;transition:max-height .3s ease;border-top:0 solid transparent}
-.pcard.open .pcard-body{max-height:1800px;border-top:1px dashed var(--border-light)}
-.pcard-inner{padding:12px 14px 14px;background:var(--bg-alt)}
-.checklist-card{border-style:dashed}
-.checklist-badge{background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe}
-.checklist-tag{background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe}
-.checklist-inner{background:#fcfcff}
-.check-note{font-size:11px;color:#4b5563;padding:8px 10px;border:1px dashed #cbd5e1;border-radius:6px;background:#f8fafc;margin-bottom:10px}
-.check-phase{border:1px solid #e5e7eb;border-radius:8px;padding:8px 10px;margin:8px 0;background:#fff}
-.check-phase-title{font-size:11px;font-weight:800;color:#1e3a8a;letter-spacing:.4px;margin-bottom:6px;text-transform:uppercase}
-.check-group{margin:8px 0 6px}
-.check-group-name{font-size:11px;font-weight:700;color:#334155;margin-bottom:5px}
-.check-docs{display:grid;gap:4px}
-.check-doc-row{display:flex;gap:8px;font-size:11px;color:#334155;line-height:1.4}
-.check-doc-code{min-width:52px;font-weight:800;color:#0f766e}
-.check-doc-name{flex:1}
-.card-tags{display:flex;gap:5px;margin-left:auto;flex-shrink:0}
-.card-tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;white-space:nowrap;letter-spacing:.3px;text-transform:uppercase}
-.det-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
-.d-group{margin-bottom:9px}.d-group:last-child{margin-bottom:0}
-.d-label{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:4px;color:var(--text-light)}
-.d-label.lbl-trigger{color:var(--orange)}.d-label.lbl-features{color:var(--teal)}.d-label.lbl-approval{color:var(--purple)}.d-label.lbl-data{color:var(--green)}
-.d-item{font-size:11.5px;color:#374151;line-height:1.55;padding-left:14px;position:relative}
-.d-item::before{content:'2';position:absolute;left:2px;color:var(--text-light);font-size:11px}
-.appr-flow{display:flex;gap:6px;flex-wrap:wrap;align-items:stretch;margin-top:6px}
-.appr-card{border:1px solid #cbd5e1;border-radius:6px;padding:6px 9px;background:#f8fafc;min-width:110px;flex:1;max-width:200px}
-.appr-role{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;margin-bottom:1px;color:#155e75}
-.appr-name{font-size:11.5px;font-weight:700;color:#1e293b;line-height:1.25;margin-bottom:2px}
-.arrow-sep{display:flex;align-items:center;color:#94a3b8;font-weight:800;font-size:16px;margin:0 2px}
-.pain-row{font-size:12px;color:#4b5563;line-height:1.55;padding:6px 0;display:flex;gap:8px;align-items:flex-start;border-bottom:1px dashed #d1d5db}
-.pain-row:last-child{border-bottom:none}
-.pain-icon{color:#6b7280;font-weight:800;font-size:11px;flex-shrink:0;margin-top:1px}
-.cross-section{margin:14px 48px 0;background:#faf5ff;border:1px dashed #d8b4fe;border-radius:var(--radius);overflow:hidden;scroll-margin-top:80px}
-.cross-banner{background:linear-gradient(180deg,#f0e6f6 0%,#e0d0ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;user-select:none}
-.cross-banner:hover{background:linear-gradient(180deg,#e8daf0 0%,#d6c4e6 100%)}
-.cross-section.open .cross-banner{border-bottom-color:#d0b8e0}
-.cross-inner{padding:20px 28px}
+.stage-section.open .stage-body,.cross-section.open .stage-body{max-height:12000px}
+.badge{font-size:10.5px;font-weight:800;padding:4px 11px;border-radius:999px;white-space:nowrap;letter-spacing:.3px;margin-left:auto}
+.doc-section{padding:18px 28px;border-top:1px dashed var(--border-light)}
+.doc-section:first-child{border-top:1px solid var(--border-light)}
+.doc-section h4{margin:0 0 12px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--accent-dark)}
+.doc-section h4 .n{display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--accent-dark);color:#fff;text-align:center;line-height:22px;font-size:12px;margin-right:8px}
+ol.sop{margin:0;padding-left:22px}
+ol.sop li{margin:0 0 9px;font-size:13px;line-height:1.55;color:#374151}
+.guide-list{margin:0;padding-left:20px}
+.guide-list li{font-size:13px;line-height:1.6;margin-bottom:8px;color:#374151}
+table.matrix{width:100%;border-collapse:collapse;font-size:12px;margin-top:2px}
+table.matrix th{background:var(--accent-dark);color:#fff;text-align:left;padding:8px 10px;font-size:10.5px;letter-spacing:.3px}
+table.matrix td{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#374151}
+table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
+.control-chip{display:inline-block;background:var(--accent-light);color:var(--accent-dark);border:1px solid #BFD6EB;border-radius:5px;padding:1px 7px;font-size:10.5px;margin:1px 4px 1px 0}
+.cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cf-col{border-radius:8px;padding:14px 16px}
+.cf-col.current{background:var(--orange-light);border:1px solid #E9CDA8}
+.cf-col.future{background:var(--green-light);border:1px solid #B7D8C4}
+.cf-col h5{margin:0 0 8px;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
+.cf-col.current h5{color:var(--orange)}.cf-col.future h5{color:var(--green)}
+.cf-col ul{margin:0;padding-left:18px}.cf-col li{font-size:12.5px;margin-bottom:6px;line-height:1.5;color:#374151}
+.gap-note{background:var(--red-light);border:1px solid #f0c9c9;color:var(--red);border-radius:8px;padding:12px 16px;font-size:12.5px}
+.gap-note b{display:block;margin-bottom:4px}
+.sources{font-size:11px;color:var(--text-light);padding:12px 28px;background:var(--bg-alt);border-top:1px solid var(--border-light)}
 .metrics-strip{margin:20px 48px;padding:18px 24px;border-radius:var(--radius);border:1px solid var(--border);background:#fff;box-shadow:var(--shadow);display:flex;justify-content:space-around;flex-wrap:wrap;gap:8px}
 .metric{text-align:center;padding:6px 14px}.metric-val{font-size:26px;font-weight:800;color:var(--accent-dark)}
 .metric-lbl{font-size:12px;font-weight:600;color:var(--text-mid);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
@@ -111,376 +78,117 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .xref-form{color:#0F766E}
 .xref-subprocess{color:#1E4E79}
 .xref-personnel{color:#6F3CC3}
-@media print{.topnav,.ctrl-btns,.footer button{display:none!important}.stage-body,.pcard-body{max-height:none!important}.stage-section,.cross-section{page-break-inside:avoid;box-shadow:none}}
-@media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.two-col{flex-direction:column}.future-col{border-right:none;border-bottom:1px dashed var(--border-light)}.det-grid{grid-template-columns:1fr}.topnav{gap:12px}.nav-link{font-size:10.5px}}
+@media print{
+  .topnav,.ctrl-btns,.footer button{display:none!important}
+  body{font-size:11.5px}
+  .stage-body,.cross-section .stage-body{max-height:none!important}
+  .stage-section,.cross-section{margin:0 0 16px;box-shadow:none;border:1px solid #999;page-break-inside:avoid}
+  .doc-section{page-break-inside:avoid}
+  .stage-banner,.cross-banner{background:#eef2f6!important;cursor:default}
+  .stage-arrow{display:none}
+  .cf-grid{grid-template-columns:1fr 1fr}
+  a.xref{color:inherit;text-decoration:none}
+  .legend-bar{page-break-after:avoid}
+}
+@media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.doc-section{padding-left:16px;padding-right:16px}.cf-grid{grid-template-columns:1fr}.topnav{gap:12px}.nav-link{font-size:10.5px}}
 </style>
 </head>
 <body>
 <nav class="topnav">
-  <div class="nav-logo">PROJECT NAME</div>
-  <a href="#stage-1" class="nav-link">1 &middot; Discovery</a>
-  <a href="#stage-2" class="nav-link">2 &middot; Planning</a>
-  <a href="#stage-3" class="nav-link">3 &middot; Execution</a>
-  <a href="#stage-4" class="nav-link">4 &middot; Launch</a>
-  <a href="#stage-5" class="nav-link">5 &middot; Optimization</a>
+  <div class="nav-logo">MGC SOP Portal</div>
+  <a href="#stage-1" class="nav-link">1 &middot; Overview</a>
   <a href="#cross-stage" class="nav-link">Cross-Stage</a>
 </nav>
 
 <div class="header">
-  <div class="header-top"><div class="header-logo">PROJECT NAME</div><span class="header-kanji">Replace Me</span></div>
-  <h1>Workflow Process Diagram</h1>
-  <p>Replace the labels, stages, and card content with your own project data. Source: 01_main_content.json.</p>
+  <div class="header-top"><div class="header-logo">MGC SOP Portal</div><span class="header-kanji">SOP</span></div>
+  <h1>Masagana Gas Corporation - SOP Portal</h1>
+  <p>SOP Manual, Operational Guidelines, Approval Matrix &amp; Controls, and Current vs. Future Workflow for Masagana Gas Corporation - covering Operations, Sales, and Accounting across the Commercial, Industrial/Bulk, Dealer, Retail, and Company-Wide/Overall channels.</p>
 </div>
 
 <div class="legend-bar">
-  <div class="legend-item"><div class="legend-dot" style="background:#2E6A3D"></div> Active</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#B96B13"></div> Planned / In Progress</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#6F3CC3"></div> Cross-Stage</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#1E4E79"></div> Current / Manual</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#2E6A3D"></div> Confirmed with source data</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#B96B13"></div> Partially confirmed — see gap note</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#6F3CC3"></div> Cross-Stage Governance</div>
   <div class="ctrl-btns">
     <button class="ctrl-btn" onclick="expandAll()">Expand All</button>
     <button class="ctrl-btn" onclick="collapseAll()">Collapse All</button>
-    <button class="ctrl-btn" onclick="printShortBond()">&#128424; Print (Short Bond)</button>
+    <button class="ctrl-btn" onclick="printShortBond()">&#128424; Print</button>
   </div>
 </div>
 
 <section class="stage-section" id="stage-1">
   <div class="stage-banner" onclick="toggleStage(this)">
-    <div class="stage-num"><span class="num-big">1</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">DISCOVERY</div><div class="stage-sub">Intake | Validation | Prioritization</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+    <div class="stage-num"><span class="num-big">1</span><span class="num-sub">OF 1</span></div>
+    <div class="stage-info"><div class="stage-title">OVERVIEW</div><div class="stage-sub">How This Portal Works</div></div>
+    <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
+    <span class="stage-arrow">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">D1 Intake Form</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Live</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Editable</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">A request arrives through your chosen intake channel.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-main-0-0-0">Collect project scope and owner details</div>
-<div class="d-item" id="feat-main-0-0-1">Assign a request reference number</div>
-<div class="d-item" id="feat-main-0-0-2">Save progress before final submission</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+<li id="main-0-sop-0">Each department page (Operations, Sales, Accounting) is organized in the same four-part order: SOP Manual, Operational Guidelines, Approval Matrix &amp; Controls, and Current vs. Future Workflow.</li>
+<li id="main-0-sop-1">Start with the SOP Manual - the numbered, step-by-step procedure for how work actually gets done today.</li>
+<li id="main-0-sop-2">Read the Operational Guidelines next - the policy rules that govern how those steps are applied and where staff discretion ends.</li>
+<li id="main-0-sop-3">Check the Approval Matrix &amp; Controls - who is authorized to initiate, review, and approve each transaction, and what control activity is in place.</li>
+<li id="main-0-sop-4">Finish with Current vs. Future Workflow - today&#x27;s manual/paper reality next to the target automated state.</li>
+<li id="main-0-sop-5">A green &quot;Confirmed with source data&quot; badge means the stage is grounded in real, Masagana-specific source data; an amber &quot;Partially confirmed&quot; badge means part of that stage is still a placeholder, with the gap called out explicitly in a gap note.</li>
+<li id="main-0-sop-6">Cross-linked terms (personnel names, forms, subprocesses) are underlined - click one to jump to its entry in the Personnel, Forms, or Subprocess tab.</li>
+</ol>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">AUTO</div><div class="appr-name">Create request</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Fill intake details</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Validate completeness</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Request summary</div>
-<div class="d-item">Open intake queue</div>
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="main-0-gl-0">Financial Controls &amp; Credit Policy: no <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> or plant release proceeds on an account with unresolved past dues unless a supervisor has explicitly approved a passable balance.</li>
+<li id="main-0-gl-1">Weighing, Residue &amp; Inventory Integrity: gains, losses, and commission are computed only from a matched pair of weigh-in and weigh-out readings; an unmatched reading is held for investigation, never estimated.</li>
+<li id="main-0-gl-2">Approval &amp; Escalation Discipline: any transaction blocked or disputed at its normal approval level escalates through the standard chain rather than being resolved informally between the two parties involved.</li>
+<li id="main-0-gl-3">Documentation &amp; Reconciliation: the person who initiates a transaction is not the same person who posts it to the GL or reconciles it - segregation of duties applies at every posting step.</li>
+</ul>
 </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">PLANNED</span>
-        <span class="pcard-name">D2 Qualification Review</span>
-        <span class="st-dot st-pending" title="In Build"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Template</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Replace Me</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">The team reviews fit, effort, and delivery timing.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-main-0-1-0">Record qualification notes</div>
-<div class="d-item" id="feat-main-0-1-1">Highlight blockers and dependencies</div>
-<div class="d-item" id="feat-main-0-1-2">Route to the next owner</div>
+    <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
+<tr><th>Transaction / Decision</th><th>Threshold</th><th>Initiator</th><th>Reviewer</th><th>Approver</th><th>Control Activity</th></tr>
+<tr><td>Company-wide pricing decision</td><td>1-3x per month, General Meeting</td><td>Regional Sales Manager (sets up matrix)</td><td>-</td><td><b><a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a></b></td><td><span class="control-chip">Audit log by IT Head</span><span class="control-chip">Channel cascade checklist</span></td></tr>
+<tr><td>Cross-department dispute escalation</td><td>-</td><td>Any stage owner</td><td>Supervisor / Manager</td><td><b>Department Manager</b></td><td><span class="control-chip">System watch -&gt; Review -&gt; Manager chain</span></td></tr>
+</table>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Prepare context</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve direction</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Qualified request list</div>
-<div class="d-item">Decision notes</div>
+    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
+  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="main-0-cur-0">Process knowledge for Operations, Sales, and Accounting has lived across separate documents, transcripts, and institutional memory, plus different tools (Google Sheets, ACCPAC, AppSheet, Viber).</li></ul></div>
+  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="main-0-fut-0">One SOP portal - GitHub-hosted, JSON-driven, and cross-linked to Personnel/Forms/Subprocess - as the single source of truth for how MGC actually runs, with a clear owner for each transaction.</li></ul></div>
 </div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-main-0-0"><span class="pain-icon">&#10005;</span><span>Requests arrive in multiple channels</span></div>
-          <div class="pain-row" id="pp-main-0-1"><span class="pain-icon">&#10005;</span><span>Important context is often missing</span></div>
-        </div>
-      </div>
-    </div></div>
-</section>
-
-<section class="stage-section" id="stage-2">
-  <div class="stage-banner" onclick="toggleStage(this)">
-    <div class="stage-num"><span class="num-big">2</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">PLANNING</div><div class="stage-sub">Scope | Owners | Schedule</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+</div>
+    <div class="sources"><b>Sources:</b> Merged from Process Systemization Portal (local draft) + source site (wilsonsykes.github.io/MGSDiagramWorkflow).</div>
   </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#DCEAF5;color:#1E4E79;border:1px solid #BFD6EB">ACTIVE</span>
-        <span class="pcard-name">P1 Delivery Plan</span>
-        <span class="card-tags"><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Core</span><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Reusable</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">A qualified item moves into planning.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-main-1-0-0">Define milestones</div>
-<div class="d-item" id="feat-main-1-0-1">Assign owners</div>
-<div class="d-item" id="feat-main-1-0-2">Outline acceptance criteria</div>
-</div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Draft plan</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve scope</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Planning tracker</div>
-<div class="d-item">Milestone summary</div>
-</div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-main-1-0"><span class="pain-icon">&#10005;</span><span>Scope changes are hard to track</span></div>
-          <div class="pain-row" id="pp-main-1-1"><span class="pain-icon">&#10005;</span><span>Owners are assigned too late</span></div>
-        </div>
-      </div>
-    </div></div>
-</section>
-
-<section class="stage-section" id="stage-3">
-  <div class="stage-banner" onclick="toggleStage(this)">
-    <div class="stage-num"><span class="num-big">3</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">EXECUTION</div><div class="stage-sub">Build | Review | Readiness</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
-  </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard checklist-card" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge checklist-badge">SECTION</span>
-        <span class="pcard-name">Execution Checklist</span>
-        <span class="card-tags"><span class="card-tag checklist-tag">v1.0</span><span class="card-tag checklist-tag">Stage 3</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner checklist-inner">
-        <div class="check-note">This section block is optional. Use it when you want a detailed checklist inside the same stage layout.</div>
-        <div class="check-phase">
-          <div class="check-phase-title">PHASE 1: Pre-Launch Inputs</div>
-          <div class="check-group">
-            <div class="check-group-name">Content Requirements</div>
-            <div class="check-docs">
-              <div class="check-doc-row"><span class="check-doc-code">C1.1</span><span class="check-doc-name">Business summary</span></div>
-              <div class="check-doc-row"><span class="check-doc-code">C1.2</span><span class="check-doc-name">Approved copy blocks</span></div>
-            </div>
-          </div>
-          <div class="check-group">
-            <div class="check-group-name">Design Inputs</div>
-            <div class="check-docs">
-              <div class="check-doc-row"><span class="check-doc-code">C2.1</span><span class="check-doc-name">Brand palette</span></div>
-              <div class="check-doc-row"><span class="check-doc-code">C2.2</span><span class="check-doc-name">Typography direction</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="check-phase">
-          <div class="check-phase-title">PHASE 2: Release Readiness</div>
-          <div class="check-group">
-            <div class="check-group-name">QA</div>
-            <div class="check-docs">
-              <div class="check-doc-row"><span class="check-doc-code">Q1.1</span><span class="check-doc-name">Checklist signoff</span></div>
-              <div class="check-doc-row"><span class="check-doc-code">Q1.2</span><span class="check-doc-name">Final approval notes</span></div>
-            </div>
-          </div>
-        </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">ACTIVE</span>
-        <span class="pcard-name">E1 Build Workstream</span>
-        <span class="st-dot st-pending" title="In Build"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#EFE7FB;color:#6F3CC3;border:1px solid #6F3CC322">Checklist Compatible</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Sample</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Planning is approved and work begins.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-main-2-1-0">Track progress by milestone</div>
-<div class="d-item" id="feat-main-2-1-1">Log implementation notes</div>
-<div class="d-item" id="feat-main-2-1-2">Surface dependencies early</div>
-</div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Build and update</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Review output</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Build status board</div>
-<div class="d-item">Readiness summary</div>
-</div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-main-2-0"><span class="pain-icon">&#10005;</span><span>Checklists are scattered across files</span></div>
-          <div class="pain-row" id="pp-main-2-1"><span class="pain-icon">&#10005;</span><span>Readiness criteria are inconsistent</span></div>
-        </div>
-      </div>
-    </div></div>
-</section>
-
-<section class="stage-section" id="stage-4">
-  <div class="stage-banner" onclick="toggleStage(this)">
-    <div class="stage-num"><span class="num-big">4</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">LAUNCH</div><div class="stage-sub">Approval | Publish | Support</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
-  </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">PLANNED</span>
-        <span class="pcard-name">L1 Release Approval</span>
-        <span class="st-dot st-pending" title="In Build"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Pending</span><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Replace Me</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">The team completes execution and requests release approval.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-main-3-0-0">Capture release notes</div>
-<div class="d-item" id="feat-main-3-0-1">Confirm handoff status</div>
-<div class="d-item" id="feat-main-3-0-2">Log go-live decision</div>
-</div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Check release</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve launch</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Release history</div>
-<div class="d-item">Launch approval log</div>
-</div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-main-3-0"><span class="pain-icon">&#10005;</span><span>Approvals happen over chat</span></div>
-          <div class="pain-row" id="pp-main-3-1"><span class="pain-icon">&#10005;</span><span>Release notes are not centralized</span></div>
-        </div>
-      </div>
-    </div></div>
-</section>
-
-<section class="stage-section" id="stage-5">
-  <div class="stage-banner" onclick="toggleStage(this)">
-    <div class="stage-num"><span class="num-big">5</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">OPTIMIZATION</div><div class="stage-sub">Feedback | Enhancements | Next Iteration</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
-  </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#DCEAF5;color:#1E4E79;border:1px solid #BFD6EB">ACTIVE</span>
-        <span class="pcard-name">O1 Improvement Loop</span>
-        <span class="card-tags"><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Iterative</span><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Reusable</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Feedback arrives after launch.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-main-4-0-0">Track enhancements</div>
-<div class="d-item" id="feat-main-4-0-1">Measure impact</div>
-<div class="d-item" id="feat-main-4-0-2">Feed new items into discovery</div>
-</div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Log findings</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Prioritize follow-up</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Improvement backlog</div>
-<div class="d-item">Outcome summary</div>
-</div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-main-4-0"><span class="pain-icon">&#10005;</span><span>Feedback is not captured consistently</span></div>
-          <div class="pain-row" id="pp-main-4-1"><span class="pain-icon">&#10005;</span><span>Next-step ownership is unclear</span></div>
-        </div>
-      </div>
-    </div></div>
 </section>
 
 <section class="cross-section" id="cross-stage">
   <div class="cross-banner" onclick="toggleStage(this)">
     <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>
-    <div class="stage-info"><div class="stage-title" style="color:#7030A0">CROSS-STAGE GOVERNANCE</div><div class="stage-sub" style="color:#7c3aed">Use this area for controls that affect all stages.</div></div>
+    <div class="stage-info"><div class="stage-title" style="color:#7030A0">PORTAL-WIDE GOVERNANCE</div><div class="stage-sub" style="color:#7c3aed">The four cross-cutting policy themes that apply across every department, detailed further inside each stage&#x27;s Operational Guidelines section.</div></div>
     <span class="stage-arrow" style="color:#7030A0">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="cross-inner">
-      <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item">Track blockers across the full workflow</div>
-<div class="d-item">Maintain a shared audit trail</div>
-<div class="d-item">Standardize notifications and approvals</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="cross-gl-0">Financial Controls &amp; Credit Policy - Accounting &gt; Commercial, Dealer, Retail.</li>
+<li id="cross-gl-1">Weighing, Residue &amp; Inventory Integrity - Operations &gt; Commercial, Bulk, Company-Wide.</li>
+<li id="cross-gl-2">Approval &amp; Escalation Discipline - Sales &gt; Dealer, Operations &gt; Dealer, Cross-Stage Governance.</li>
+<li id="cross-gl-3">Documentation &amp; Reconciliation - Operations &gt; Commercial, Dealer; Accounting &gt; Retail.</li>
+</ul>
 </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">AUTO</div><div class="appr-name">System watch</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Review updates</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve escalations</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Cross-stage status report</div>
-<div class="d-item">Escalation dashboard</div>
-</div>
-  </div></div>
+  </div>
 </section>
 
 <div class="metrics-strip">
-  <div class="metric"><div class="metric-val">5</div><div class="metric-lbl">Stages</div><div class="metric-sub">Editable sample structure</div></div>
-  <div class="metric"><div class="metric-val">1</div><div class="metric-lbl">Checklist Block</div><div class="metric-sub">Supported sectional format</div></div>
-  <div class="metric"><div class="metric-val">JSON</div><div class="metric-lbl">Content Source</div><div class="metric-sub">Easy to replace</div></div>
-  <div class="metric"><div class="metric-val">Pages</div><div class="metric-lbl">Deployment</div><div class="metric-sub">GitHub Pages ready</div></div>
+  <div class="metric"><div class="metric-val">3</div><div class="metric-lbl">SOP Tabs</div><div class="metric-sub">Operations, Sales, Accounting</div></div>
+  <div class="metric"><div class="metric-val">12 of 15</div><div class="metric-lbl">Confirmed Stages</div><div class="metric-sub">Fully grounded in source data</div></div>
+  <div class="metric"><div class="metric-val">3 of 15</div><div class="metric-lbl">Partially Confirmed</div><div class="metric-sub">Gap notes flagged for client confirmation</div></div>
+  <div class="metric"><div class="metric-val">19</div><div class="metric-lbl">Personnel</div><div class="metric-sub">Named staff on roster</div></div>
 </div>
 
-<div class="footer"><div>Replace this footer text with your project name, owner, or release note.</div><button class="ctrl-btn" onclick="printShortBond()">&#128424; Print Short Bond</button></div>
+<div class="footer"><div>Masagana Gas Corporation - SOP Portal - Merged from Process Systemization Portal + source site - Internal use only</div><button class="ctrl-btn" onclick="printShortBond()">&#128424; Print</button></div>
 
 <script>
 function toggleStage(el){var sec=el.closest('.stage-section')||el.closest('.cross-section');if(sec)sec.classList.toggle('open')}
-function toggleP(el){el.classList.toggle('open')}
-function expandAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.add('open')});document.querySelectorAll('.pcard').forEach(function(p){p.classList.add('open')})}
-function collapseAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.remove('open')});document.querySelectorAll('.pcard').forEach(function(p){p.classList.remove('open')})}
-function printShortBond(){var s=document.createElement('style');s.id='psb';s.innerHTML='@page{size:8.5in 13in;margin:0.4in 0.5in}';document.head.appendChild(s);window.print();setTimeout(function(){var e=document.getElementById('psb');if(e)e.remove()},1000)}
-function scrollToAnchor(id){var el=document.getElementById(id);if(!el)return;var stage=el.closest('.stage-section')||el.closest('.cross-section');if(stage)stage.classList.add('open');var pcard=el.closest('.pcard');if(pcard)pcard.classList.add('open');setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='2px solid var(--accent)';setTimeout(function(){el.style.outline=''},1800)},180)}
+function expandAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.add('open')})}
+function collapseAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.remove('open')})}
+function printShortBond(){var s=document.createElement('style');s.id='psb';s.innerHTML='@page{size:8.5in 14in;margin:0.5in 0.6in}';document.head.appendChild(s);expandAll();window.print();setTimeout(function(){var e=document.getElementById('psb');if(e)e.remove()},1000)}
+function scrollToAnchor(id){var el=document.getElementById(id);if(!el)return;var stage=el.closest('.stage-section')||el.closest('.cross-section');if(stage)stage.classList.add('open');setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='2px solid var(--accent)';setTimeout(function(){el.style.outline=''},1800)},180)}
 document.querySelectorAll('.topnav a').forEach(function(link){link.addEventListener('click',function(){var hash=link.getAttribute('href');if(!hash||!hash.startsWith('#'))return;var t=document.querySelector(hash);if(t)t.classList.add('open')});});
 </script>
 </body>

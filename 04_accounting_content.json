@@ -1,389 +1,204 @@
 {
   "header": {
     "logo": "Accounting",
-    "kanji": "v1",
-    "title": "Workflow Process Diagram",
-    "subtitle": "Accounting workflow content driven from 04_accounting_content.json."
-  },
-  "hoshi_section": {
-    "title": "Delivery Pipeline",
-    "tag": "Platforms: Replace with your stack",
-    "subtitle": "Reusable static workflow layout with JSON-driven content"
+    "kanji": "SOP",
+    "title": "Accounting SOP",
+    "subtitle": "Invoicing, cash and receivables, bank reconciliation, and payroll/incentives across the Commercial, Bulk, Dealer, Retail, and Overall channels."
   },
   "stages": [
     {
-      "kanji": "",
       "romaji": "Commercial",
       "english": "Collection | Balance | Bank Recon",
-      "cards": [
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "A1A1 D1 Intake Form",
-          "trigger": "A request arrives through your chosen intake channel.",
-          "features": [
-            "A1A1.1 Collect project scope and owner details",
-            "A1A1.2 Assign a request reference number",
-            "A1A1.3 Save progress before final submission"
-          ],
-          "approval": [
-            { "role": "auto", "label": "Create request" },
-            { "role": "owner", "label": "Fill intake details" },
-            { "role": "review", "label": "Validate completeness" }
-          ],
-          "data_outputs": [
-            "Request summary",
-            "Open intake queue"
-          ],
-          "tags": [
-            { "text": "Live", "bg": "#E3F0E6", "color": "#2E6A3D" },
-            { "text": "Editable", "bg": "#F9EEDC", "color": "#B96B13" }
-          ]
-        },
-        {
-          "id": "PLANNED",
-          "status": "pending",
-          "name": "A1A2 Qualification Review",
-          "trigger": "The team reviews fit, effort, and delivery timing.",
-          "features": [
-            "Record qualification notes",
-            "Highlight blockers and dependencies",
-            "Route to the next owner"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Prepare context" },
-            { "role": "manager", "label": "Approve direction" }
-          ],
-          "data_outputs": [
-            "Qualified request list",
-            "Decision notes"
-          ],
-          "tags": [
-            { "text": "Template", "bg": "#DCEAF5", "color": "#1E4E79" },
-            { "text": "Replace Me", "bg": "#F9EEDC", "color": "#B96B13" }
-          ]
-        }
-      ]
+      "badge": "confirmed",
+      "sop_steps": [
+        "Make the Invoice before delivery: check past receivables and dues with the customer. (A5C1.1)",
+        "If the customer has past dues, flag the upcoming order. (A5C1.1.1)",
+        "If past dues are within a passable / supervisor-approved range, approve the upcoming order. (A5C1.1.2)",
+        "If there are no past dues, approve the upcoming order directly. (A5C1.1.3)",
+        "Update and close Receivables: Acctg Staff collects the signed Delivery Receipt (DR) and Invoice from the Delivery Team. (A5C2.1.1)",
+        "Check the monthly summary table of invoices for collection. (A5C2.1.2)",
+        "Print the summary of Aged Receivables. (A5C2.1.3)",
+        "Check and print the summary of Write-off / Loss Accounts. (A5C2.1.4)",
+        "Bank Reconciliation: update and check the summary table of amounts for bank reconciliation. (A5C3.1)",
+        "Resolve customer disputes: refer to the Sales Order; submit the paper to a superior if unresolved. (A5C4.1-A5C4.2)",
+        "Payroll Incentive: prepare the incentive in payroll on the 15th and 30th. (A5C5.1)",
+        "Prepare the Incentive template for Commercial and Retail using LUT forms (2.7kg, 11kg, 50kg) to balance empty and field cylinder data. (A5C5.2)"
+      ],
+      "guidelines": [
+        "No invoice is issued before the past-dues check on the customer's AR; only a supervisor-approved past-due balance clears an order that has outstanding receivables.",
+        "Aged Receivables and Write-off/Loss summaries are printed monthly without exception, whether or not there's a specific collection issue that period.",
+        "Unresolved customer disputes are escalated by referring back to the original Sales Order and submitting to a superior - not settled informally at the collection desk.",
+        "Payroll incentives are computed only after LUT forms balance empty vs field cylinders; incentives are not paid out ahead of that balance check."
+      ],
+      "approval_matrix": [
+        { "transaction": "Invoice issuance (past-dues check)", "threshold": "Supervisor override for passable past dues", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Supervisor (orders with past dues)", "controls": ["AR check before invoice", "3-way flag: none / passable / blocked"] },
+        { "transaction": "Receivables close-out", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Supervisor", "controls": ["Monthly Aged Receivables print", "Write-off/Loss summary"] },
+        { "transaction": "Bank reconciliation", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Manager", "controls": ["Summary table cross-check"] },
+        { "transaction": "Payroll incentive (15th/30th)", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Manager", "controls": ["LUT balance required before payout"] }
+      ],
+      "current_future": {
+        "current": [
+          "Aged Receivables and Write-off summaries are printed, not dashboarded - a stale figure is possible between print runs.",
+          "Dispute resolution travels as a physical paper submission to a superior."
+        ],
+        "future": [
+          "Real-time AR aging visible on demand instead of a monthly print cycle.",
+          "Digital dispute log with status tracking instead of a paper hand-off."
+        ]
+      },
+      "sources": "Merged from Process Systemization Portal draft + source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting > Commercial (A5C1-A5C5)."
     },
     {
-      "kanji": "",
       "romaji": "Bulk",
       "english": "Collection | Balance | Bank Recon",
-      "cards": [
-        {
-          "id": "ACTIVE",
-          "status": "core",
-          "name": "A2A1 Same as Commercial",
-          "trigger": "A qualified item moves into planning.",
-          "features": [
-            "A2A1.1 Define milestones",
-            "Assign owners",
-            "Outline acceptance criteria"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Draft plan" },
-            { "role": "manager", "label": "Approve scope" }
-          ],
-          "data_outputs": [
-            "Planning tracker",
-            "Milestone summary"
-          ],
-          "tags": [
-            { "text": "Core", "bg": "#DCEAF5", "color": "#1E4E79" },
-            { "text": "Reusable", "bg": "#E3F0E6", "color": "#2E6A3D" }
-          ]
-        }
-      ]
+      "badge": "pending",
+      "sop_steps": [
+        "Invoicing, receivables, bank reconciliation, and payroll incentive steps follow the same procedure as Accounting > Commercial (A5C1-A5C5), per company specification.",
+        "Bulk-specific exceptions to that procedure are referenced but not documented in either source."
+      ],
+      "guidelines": [
+        "Accounting > Bulk explicitly inherits the Commercial A5C1-A5C5 procedure; the undocumented exceptions should be confirmed with Accounting before this is finalized, particularly whether per-truck (rather than per-cylinder) reconciliation changes any AR or bank-rec step."
+      ],
+      "approval_matrix": [
+        { "transaction": "Bulk invoicing & receivables (inherits Commercial)", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Supervisor", "controls": ["Same as Commercial", "Exceptions pending"] }
+      ],
+      "current_future": {
+        "current": [
+          "Bulk accounting handled as an unexceptioned copy of Commercial; per-truck reconciliation differences (Operations > Industrial) are not reflected in the accounting procedure."
+        ],
+        "future": [
+          "Confirm and document whether per-truck gain computation requires a distinct AR/bank-rec step, then encode it explicitly."
+        ]
+      },
+      "gap_note": "The source site flags this stage as \"Same as Acctg Commercial A5C1-A5C5\" plus \"Exceptions\", but the exceptions field is blank, and the process manual does not cover Accounting > Bulk separately. Recommend confirming with Accounting whether Bulk's per-truck (not per-cylinder) fulfilment changes any receivables or reconciliation step.",
+      "sources": "Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting > Bulk (placeholder). No corresponding section in \"MGC LPG Process Manual v2.docx\"."
     },
     {
-      "kanji": "",
       "romaji": "Dealer",
-      "english": "Collection | Balance | Bank Recon",
-      "cards": [
-        {
-          "section": "A3A1 Execution Checklist",
-          "stage": 3,
-          "version": "1.0",
-          "phases": [
-            {
-              "phase": 1,
-              "title": "Pre-Launch Inputs",
-              "color": "orange",
-              "groups": [
-                {
-                  "name": "Content Requirements",
-                  "documents": [
-                    { "code": "C1.1", "name": "Business summary" },
-                    { "code": "C1.2", "name": "Approved copy blocks" }
-                  ]
-                },
-                {
-                  "name": "Design Inputs",
-                  "documents": [
-                    { "code": "C2.1", "name": "Brand palette" },
-                    { "code": "C2.2", "name": "Typography direction" }
-                  ]
-                }
-              ]
-            },
-            {
-              "phase": 2,
-              "title": "Release Readiness",
-              "color": "green",
-              "groups": [
-                {
-                  "name": "QA",
-                  "documents": [
-                    { "code": "Q1.1", "name": "Checklist signoff" },
-                    { "code": "Q1.2", "name": "Final approval notes" }
-                  ]
-                }
-              ]
-            }
-          ],
-          "note": "This section block is optional. Use it when you want a detailed checklist inside the same stage layout."
-        },
-        {
-          "id": "ACTIVE",
-          "status": "pending",
-          "name": "A3A1.1 Same as Commercial",
-          "trigger": "x.",
-          "features": [
-            "Track progress by milestone",
-            "Log implementation notes",
-            "Surface dependencies early"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Build and update" },
-            { "role": "review", "label": "Review output" }
-          ],
-          "data_outputs": [
-            "Build status board",
-            "Readiness summary"
-          ],
-          "tags": [
-            { "text": "Checklist Compatible", "bg": "#EFE7FB", "color": "#6F3CC3" },
-            { "text": "Sample", "bg": "#F9EEDC", "color": "#B96B13" }
-          ]
-        }
-      ]
+      "english": "Collection (Charge/Installment/PDC) | Balance | Bank Recon",
+      "badge": "confirmed",
+      "sop_steps": [
+        "Before approving the order, verify the dealer's AR with CNC - check past dues and other factors first.",
+        "Confirm the payment type: about 70% of dealers are on installment, about 30% are COD.",
+        "For installment, collect Post-Dated Checks (PDCs) as payment security.",
+        "If the dealer cannot issue PDCs, have them execute a Promissory Note instead.",
+        "Track the installment schedule in Google Sheets (due dates and payment completion dates).",
+        "Issue the Charge Invoice on terms and encode it in ACCPAC before sending to the client.",
+        "File the countered hardcopy invoice; CNC accounts stay at CNC and a messenger brings them to the client.",
+        "Update and close receivables; check the monthly summary of invoices for collection.",
+        "Print the Aged Receivables summary and check write-off/loss accounts.",
+        "Perform bank reconciliation and resolve dealer disputes (refer back to the Sales Order).",
+        "Apply dealer pricing from the MGC Pricing Matrix (per-channel buffer and per-dealer adjustment)."
+      ],
+      "guidelines": [
+        "Dealer AR is checked against CNC before any order is approved - this runs even for dealers presumed current, not only for flagged accounts.",
+        "A dealer without PDCs is not simply denied credit - a Promissory Note is the required fallback before COD is enforced.",
+        "Installment schedules are tracked in a dedicated Google Sheet with due dates and completion dates; a missed due date should surface there, not only get noticed at the monthly Aged Receivables review.",
+        "CNC-held accounts are physically couriered by messenger, matching the CNC filing convention already in place."
+      ],
+      "approval_matrix": [
+        { "transaction": "Dealer credit approval (AR/CNC check)", "threshold": "~70% installment / ~30% COD", "initiator": "Acctg Staff (AR)", "reviewer": "Sales (Mel - Sales/AR)", "approver": "Acctg Supervisor", "controls": ["CNC past-dues check", "PDC or Promissory Note required"] },
+        { "transaction": "Charge Invoice issuance", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Supervisor", "controls": ["ACCPAC encoding before client send", "Countered hardcopy filed"] },
+        { "transaction": "Installment tracking & collection", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Manager", "controls": ["Google Sheets due-date tracker", "Aged Receivables monthly print"] },
+        { "transaction": "Dealer dispute resolution", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Sales (refer to Sales Order)", "approver": "Acctg Supervisor", "controls": ["Bank reconciliation cross-check"] }
+      ],
+      "current_future": {
+        "current": [
+          "Installment due dates tracked in a standalone Google Sheet, separate from ACCPAC and from the Aged Receivables print.",
+          "CNC accounts couriered physically by messenger rather than transmitted digitally."
+        ],
+        "future": [
+          "A single AR system linking PDC/Promissory Note status, installment due dates, and ACCPAC invoice status, so a missed due date raises a flag automatically instead of waiting for the monthly Aged Receivables print."
+        ]
+      },
+      "sources": "\"MGC LPG Process Manual v2.docx\" - Accounting > Dealer (invoicing notes, dealer payment terms, Commercial accounting card cross-reference)."
     },
     {
-      "kanji": "",
       "romaji": "Retail",
-      "english": "Collection | Balance | Bank Recon",
-      "cards": [
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "A4A1 Same as Commercial",
-          "trigger": "The team completes execution and requests release approval.",
-          "features": [
-            "Capture release notes",
-            "Confirm handoff status",
-            "Log go-live decision"
-          ],
-          "approval": [
-            { "role": "review", "label": "Check release" },
-            { "role": "manager", "label": "Approve launch" }
-          ],
-          "data_outputs": [
-            "Release history",
-            "Launch approval log"
-          ],
-          "tags": [
-            { "text": "Pending", "bg": "#F9EEDC", "color": "#B96B13" },
-            { "text": "Replace Me", "bg": "#DCEAF5", "color": "#1E4E79" }
-          ]
-        }
-      ]
+      "english": "Collection (Cash/COD) | Balance | Bank Recon",
+      "badge": "confirmed",
+      "sop_steps": [
+        "Issue the entry/exit slip (EES) to the customer, encode it, and have the guard validate the tank classification.",
+        "After loading, the checker goes to Accounting; issue the cashier a cash/charge invoice or DR.",
+        "Cashier collects the cash; the receipt (recibo) must match the empty and filled cylinders (the LUT contents).",
+        "Checker encodes in AppSheet (= Refilling Report); AppSheet and the receipt must match (basis of the GRR).",
+        "Forward retail cash invoices straight to the cashier at Plant Accounting; collect cash and documents by 4-5pm.",
+        "Balance sales and the LUT within the same day (2.7kg, 11kg, 50kg must be indicated and balance).",
+        "Audit cash sales, collections, and returns from advances.",
+        "Validate the cash collection report from the cashier and check the deposit balancing at the bank.",
+        "Prepare the payroll incentive (15th and 30th) using LUT forms to balance empty and field cylinders."
+      ],
+      "guidelines": [
+        "The recibo must match empty and filled cylinder counts (LUT contents) before cash is considered collected - a mismatch holds the transaction rather than being resolved by adjusting the receipt after the fact.",
+        "AppSheet entry and the physical receipt must match in quantity, mirroring the same rule used in Operations > Dealer refilling.",
+        "Sales and the LUT are balanced same-day, not at month-end - this is a daily close, not a periodic one.",
+        "Cash and documents are due to the Plant Accounting cashier by 4-5pm; a late submission is an exception to flag, not a routine occurrence."
+      ],
+      "approval_matrix": [
+        { "transaction": "Cash/charge invoice at loading", "threshold": "-", "initiator": "Checker", "reviewer": "Cashier", "approver": "- (cash sale)", "controls": ["EES validated", "LUT-matched recibo"] },
+        { "transaction": "Daily cash & LUT balancing", "threshold": "Same-day close", "initiator": "Cashier", "reviewer": "Vicky (Acctg)", "approver": "Vicky", "controls": ["2.7kg/11kg/50kg LUT balance", "AppSheet = receipt match"] },
+        { "transaction": "Bank deposit validation", "threshold": "-", "initiator": "Cashier", "reviewer": "Vicky", "approver": "Acctg Manager", "controls": ["Cash collection report vs bank deposit"] }
+      ],
+      "current_future": {
+        "current": [
+          "Cash and documents are physically collected by a fixed 4-5pm cutoff, creating a hard daily bottleneck at the plant cashier.",
+          "LUT balancing is done same-day but by hand against the AppSheet entry rather than system-matched."
+        ],
+        "future": [
+          "Automatic same-day LUT/AppSheet/receipt three-way match, flagging mismatches before the 4-5pm cutoff instead of during the manual audit."
+        ]
+      },
+      "sources": "\"MGC LPG Process Manual v2.docx\" - Accounting > Retail (plant-accounting duties, Commercial accounting card A5C cross-reference)."
     },
     {
-      "kanji": "",
       "romaji": "Overall",
       "english": "Monitoring | Updates | Reports",
-      "cards": [
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "A5A1 Consolidate and check all relevant data",
-          "trigger": "Request Bi-monthly or Monthly Financial Statements",
-          "features": [
-            "A5A1.1 Versatile, Multi-format 3 Financial Statements and Payroll Summary",
-            "A5A1.2 Can drill into individual summary amounts",
-            "A5A1.3 Instant pdf or excel for further analysis",
-            "A5A1.4 Multi-data Comparison, Multi-channel data separation",
-            "A5A1.5 Budget vs Actual Summaries"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Log findings" },
-            { "role": "manager", "label": "Prioritize follow-up" }
-          ],
-          "data_outputs": [
-            "Monthly, Yearly or period-based 3 Financial Statements",
-            "Ledgers/accounts Reports"
-          ],
-          "tags": [
-            { "text": "Odoo Module", "bg": "#E3F0E6", "color": "#2E6A3D" },
-            { "text": "Report", "bg": "#DCEAF5", "color": "#1E4E79" }
-          ]
-        },
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "O1 Improvement Loop",
-          "trigger": "Feedback arrives after launch.",
-          "features": [
-            "Track enhancements",
-            "Measure impact",
-            "Feed new items into discovery"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Log findings" },
-            { "role": "manager", "label": "Prioritize follow-up" }
-          ],
-          "data_outputs": [
-            "Improvement backlog",
-            "Outcome summary"
-          ],
-          "tags": [
-            { "text": "Iterative", "bg": "#E3F0E6", "color": "#2E6A3D" },
-            { "text": "Reusable", "bg": "#DCEAF5", "color": "#1E4E79" }
-          ]
-        },
-        {
-          "id": "ACTIVE",
-          "status": "core",
-          "name": "O1 Improvement Loop",
-          "trigger": "Feedback arrives after launch.",
-          "features": [
-            "Track enhancements",
-            "Measure impact",
-            "Feed new items into discovery"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Log findings" },
-            { "role": "manager", "label": "Prioritize follow-up" }
-          ],
-          "data_outputs": [
-            "Improvement backlog",
-            "Outcome summary"
-          ],
-          "tags": [
-            { "text": "Iterative", "bg": "#E3F0E6", "color": "#2E6A3D" },
-            { "text": "Reusable", "bg": "#DCEAF5", "color": "#1E4E79" }
-          ]
-        }
-      ]
+      "badge": "confirmed",
+      "sop_steps": [
+        "Consolidate and check all relevant data on request - bi-monthly or monthly Financial Statements. (A5A1)",
+        "Produce versatile, multi-format financial statements and payroll summary; drill into individual summary amounts. (A5A1.1-A5A1.2)",
+        "Generate instant PDF or Excel exports for further analysis; separate data by channel; compare Budget vs Actual. (A5A1.3-A5A1.5)",
+        "Profit and Loss Statement: ensure all entries are encoded, refresh the P&L table, and print the monthly P&L Statement. (A5C5.1.1)",
+        "Cash Flow Statement: ensure all entries are encoded, refresh the Cash Flow table, and print the monthly CF Statement. (A5C5.1.2)",
+        "Balance Sheet: ensure all entries are encoded, refresh the Balance Sheet table, and print the monthly BS Statement. (A5C5.1.3)",
+        "Prepare the Payroll Summary, consolidating all incentive computations and salary data for the period. (A5C5.2)",
+        "Industrial Projects: track Budget P&L against Actual P&L and timeline. (A5C5.3)"
+      ],
+      "guidelines": [
+        "All three financial statements (P&L, Cash Flow, Balance Sheet) require full entry encoding before the monthly refresh - a partial encode is not printed as final.",
+        "Industrial Projects are tracked with a Budget P&L set at project start, compared against Actual P&L throughout - variance review is continuous, not just at project close.",
+        "The Payroll Summary is only finalized after the Incentive template (LUT-balanced, see Commercial/Retail) is complete for the period."
+      ],
+      "approval_matrix": [
+        { "transaction": "Monthly financial statement close (P&L / CF / BS)", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Manager / Controller", "controls": ["Full entry encoding before refresh", "Budget vs Actual comparison"] },
+        { "transaction": "Payroll Summary consolidation", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Manager", "controls": ["Depends on finalized Incentive template"] },
+        { "transaction": "Industrial Projects Budget vs Actual", "threshold": "-", "initiator": "Project Acctg", "reviewer": "Industrial Engineer", "approver": "Acctg Manager", "controls": ["Budget PNL vs Actual PNL", "Timeline tracking"] }
+      ],
+      "current_future": {
+        "current": [
+          "Statements are printed monthly rather than continuously available; drill-down exists but the base refresh is still a manual, scheduled step."
+        ],
+        "future": [
+          "On-demand PDF/Excel exports with live drill-down (already specified as a target feature), so a mid-month check doesn't wait for the scheduled refresh."
+        ]
+      },
+      "sources": "Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting > Overall (A5A1, A5C5.1-A5C5.3)."
     }
   ],
   "cross_stage": {
-    "id": "X1",
     "name": "Cross-Stage Governance",
-    "description": "Use this area for controls that affect all stages.",
-    "features": [
-      "Track blockers across the full workflow",
-      "Maintain a shared audit trail",
-      "Standardize notifications and approvals"
-    ],
-    "approval": [
-      { "role": "auto", "label": "System watch" },
-      { "role": "review", "label": "Review updates" },
-      { "role": "manager", "label": "Approve escalations" }
-    ],
-    "data_outputs": [
-      "Cross-stage status report",
-      "Escalation dashboard"
-    ],
-    "tags": [
-      { "text": "Shared", "bg": "#EFE7FB", "color": "#6F3CC3" },
-      { "text": "Optional", "bg": "#DCEAF5", "color": "#1E4E79" }
+    "description": "Escalation and audit-trail rules that apply on top of every Accounting approval row above.",
+    "guidelines": [
+      "Any transaction blocked or disputed at its normal approval level escalates through the standard chain (System watch -> Review -> Manager) rather than being resolved informally between the two parties involved.",
+      "Sales Order Control Numbers, once assigned, are permanent and non-editable; a correction is made with a new document, never by editing the original control number.",
+      "The person who initiates a transaction is not the same person who posts it to the GL or reconciles it - segregation of duties applies at every posting step."
     ]
   },
-  "manual_section": {
-    "title": "Current Processes",
-    "tag": "Manual workflow placeholders"
-  },
-  "manual_stages": [
-    {
-      "english": "Commercial pain points",
-      "kanji": "",
-      "pain_points": [
-        "A5C1 Make Invoice (before delivery):", 
-        "A5C1.1 Check past receivables and dues with the customer",
-        "A5C1.1.1 If customer has past dues, flag the upcoming order", 
-        "A5C1.1.2 If with passable or supervisor-approved past dues, approve the upcoming order",
-        "A5C1.1.3 If no past dues, approve the upcoming order",
-        "A5C2 Update and close Receivables:",
-        "A5C2.1.1 Acctg Staff collect signed DR and Invoice from Delivery Team",
-        "A5C2.1.2 Check monthly summary table of invoices for collection",
-        "A5C2.1.3 Print summary of Aged Receivables",
-        "A5C2.1.4 Check and print summary of Write-off/Loss Accounts",
-        "A5C3 Bank Reconciliation:",
-        "A5C3.1 Update and check summary table of amounts for bank reconciliation",
-        "A5C4 Resolve customer disputes",
-        "A5C4.1 Refer to the Sales Order xxx",
-        "A5C4.2 Submit paper to superior",
-        "A5C5 Payroll Incentive:",
-        "A5C5.1 Prepare Incentive in Payroll (15th and 30th):",
-        "A5C5.2 Prepare Incentive template for Commercial and Retail. Use LUT forms, (check 2.7kg, 11kg, 50kg) to balance empty and field cylinders data.",
-        "NIL"
-      ]
-    },
-    {
-      "english": "Bulk pain points",
-      "kanji": "",
-      "pain_points": [
-        "A5C2 Same as Acctg Commercial A5C1-A5C5",
-        "A5C2 Exceptions"
-      ]
-    },
-    {
-      "english": "Dealer pain points",
-      "kanji": "",
-      "pain_points": [
-        "A5C3 Same as Acctg Commercial A5C1-A5C5",
-        "A5C3 Exceptions"
-      ]
-    },
-    {
-      "english": "Retail pain points",
-      "kanji": "",
-      "pain_points": [
-        "A5C4 Same as Acctg Commercial A5C1-A5C5",
-        "A5C4 Exceptions"
-      ]
-    },
-    {
-      "english": "Overall pain points",
-      "kanji": "",
-      "pain_points": [
-        "A5C5.1 Finacial Statements:",
-        "A5C5.1.1 Profit and Loss Statement:",
-        "A5C5.1.1.1 Ensure that all entries above are encoded",
-        "A5C5.1.1.2 Refresh the PNL Table to get the latest report. Print the monthly PNL Statement",
-        "A5C5.1.2 Cash Flow Statement:",
-        "A5C5.1.2.1 Ensure that all entries above are encoded",
-        "A5C5.1.2.2 Refresh the Cash Flow Table to get the latest report. Print the monthly CF Statement",
-        "A5C5.1.3 Balance Sheet",
-        "A5C5.1.3.1 Ensure that all entries above are encoded",
-        "A5C5.1.3.2 Refresh the Balance Sheet Table to get the latest report. Print the monthly BS Statement",
-        "A5C5.2 Payroll", 
-        "A5C5.2.1 xxx Payroll Summary",
-        "A5C5.3 Industrial Projects",
-        "A5C5.3.1 Budget PNL",
-        "A5C5.3.2 Actual PNL",
-        "A5C5.3.3 Timeline"
-      ]
-    }
-  ],
   "metrics": [
-    { "value": "5", "label": "Stages", "detail": "Editable sample structure" },
-    { "value": "1", "label": "Checklist Block", "detail": "Supported sectional format" },
-    { "value": "JSON", "label": "Content Source", "detail": "Easy to replace" },
-    { "value": "Pages", "label": "Deployment", "detail": "GitHub Pages ready" }
+    { "value": "5", "label": "Stages", "detail": "Commercial, Bulk, Dealer, Retail, Overall" },
+    { "value": "4", "label": "Confirmed", "detail": "Grounded in source data" },
+    { "value": "1", "label": "Partially Confirmed", "detail": "Bulk - gap flagged" },
+    { "value": "19", "label": "Personnel", "detail": "Named staff on roster" }
   ],
-  "footer": "Replace this footer text with your project name, owner, or release note."
+  "footer": "Masagana Gas Corporation - Accounting SOP - Merged from Process Systemization Portal + source site - Internal use only"
 }
-
-

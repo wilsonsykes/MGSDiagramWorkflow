@@ -1,309 +1,60 @@
 {
   "header": {
-    "logo": "PROJECT NAME",
-    "kanji": "Replace Me",
-    "title": "Workflow Process Diagram",
-    "subtitle": "Replace the labels, stages, and card content with your own project data. Source: 01_main_content.json."
-  },
-  "hoshi_section": {
-    "title": "Delivery Pipeline",
-    "tag": "Platforms: Replace with your stack",
-    "subtitle": "Reusable static workflow layout with JSON-driven content"
+    "logo": "MGC SOP Portal",
+    "kanji": "SOP",
+    "title": "Masagana Gas Corporation - SOP Portal",
+    "subtitle": "SOP Manual, Operational Guidelines, Approval Matrix & Controls, and Current vs. Future Workflow for Masagana Gas Corporation - covering Operations, Sales, and Accounting across the Commercial, Industrial/Bulk, Dealer, Retail, and Company-Wide/Overall channels."
   },
   "stages": [
     {
-      "kanji": "",
-      "romaji": "Discovery",
-      "english": "Intake | Validation | Prioritization",
-      "cards": [
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "D1 Intake Form",
-          "trigger": "A request arrives through your chosen intake channel.",
-          "features": [
-            "Collect project scope and owner details",
-            "Assign a request reference number",
-            "Save progress before final submission"
-          ],
-          "approval": [
-            { "role": "auto", "label": "Create request" },
-            { "role": "owner", "label": "Fill intake details" },
-            { "role": "review", "label": "Validate completeness" }
-          ],
-          "data_outputs": [
-            "Request summary",
-            "Open intake queue"
-          ],
-          "tags": [
-            { "text": "Live", "bg": "#E3F0E6", "color": "#2E6A3D" },
-            { "text": "Editable", "bg": "#F9EEDC", "color": "#B96B13" }
-          ]
-        },
-        {
-          "id": "PLANNED",
-          "status": "pending",
-          "name": "D2 Qualification Review",
-          "trigger": "The team reviews fit, effort, and delivery timing.",
-          "features": [
-            "Record qualification notes",
-            "Highlight blockers and dependencies",
-            "Route to the next owner"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Prepare context" },
-            { "role": "manager", "label": "Approve direction" }
-          ],
-          "data_outputs": [
-            "Qualified request list",
-            "Decision notes"
-          ],
-          "tags": [
-            { "text": "Template", "bg": "#DCEAF5", "color": "#1E4E79" },
-            { "text": "Replace Me", "bg": "#F9EEDC", "color": "#B96B13" }
-          ]
-        }
-      ]
-    },
-    {
-      "kanji": "",
-      "romaji": "Planning",
-      "english": "Scope | Owners | Schedule",
-      "cards": [
-        {
-          "id": "ACTIVE",
-          "status": "core",
-          "name": "P1 Delivery Plan",
-          "trigger": "A qualified item moves into planning.",
-          "features": [
-            "Define milestones",
-            "Assign owners",
-            "Outline acceptance criteria"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Draft plan" },
-            { "role": "manager", "label": "Approve scope" }
-          ],
-          "data_outputs": [
-            "Planning tracker",
-            "Milestone summary"
-          ],
-          "tags": [
-            { "text": "Core", "bg": "#DCEAF5", "color": "#1E4E79" },
-            { "text": "Reusable", "bg": "#E3F0E6", "color": "#2E6A3D" }
-          ]
-        }
-      ]
-    },
-    {
-      "kanji": "",
-      "romaji": "Execution",
-      "english": "Build | Review | Readiness",
-      "cards": [
-        {
-          "section": "Execution Checklist",
-          "stage": 3,
-          "version": "1.0",
-          "phases": [
-            {
-              "phase": 1,
-              "title": "Pre-Launch Inputs",
-              "color": "orange",
-              "groups": [
-                {
-                  "name": "Content Requirements",
-                  "documents": [
-                    { "code": "C1.1", "name": "Business summary" },
-                    { "code": "C1.2", "name": "Approved copy blocks" }
-                  ]
-                },
-                {
-                  "name": "Design Inputs",
-                  "documents": [
-                    { "code": "C2.1", "name": "Brand palette" },
-                    { "code": "C2.2", "name": "Typography direction" }
-                  ]
-                }
-              ]
-            },
-            {
-              "phase": 2,
-              "title": "Release Readiness",
-              "color": "green",
-              "groups": [
-                {
-                  "name": "QA",
-                  "documents": [
-                    { "code": "Q1.1", "name": "Checklist signoff" },
-                    { "code": "Q1.2", "name": "Final approval notes" }
-                  ]
-                }
-              ]
-            }
-          ],
-          "note": "This section block is optional. Use it when you want a detailed checklist inside the same stage layout."
-        },
-        {
-          "id": "ACTIVE",
-          "status": "pending",
-          "name": "E1 Build Workstream",
-          "trigger": "Planning is approved and work begins.",
-          "features": [
-            "Track progress by milestone",
-            "Log implementation notes",
-            "Surface dependencies early"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Build and update" },
-            { "role": "review", "label": "Review output" }
-          ],
-          "data_outputs": [
-            "Build status board",
-            "Readiness summary"
-          ],
-          "tags": [
-            { "text": "Checklist Compatible", "bg": "#EFE7FB", "color": "#6F3CC3" },
-            { "text": "Sample", "bg": "#F9EEDC", "color": "#B96B13" }
-          ]
-        }
-      ]
-    },
-    {
-      "kanji": "",
-      "romaji": "Launch",
-      "english": "Approval | Publish | Support",
-      "cards": [
-        {
-          "id": "PLANNED",
-          "status": "pending",
-          "name": "L1 Release Approval",
-          "trigger": "The team completes execution and requests release approval.",
-          "features": [
-            "Capture release notes",
-            "Confirm handoff status",
-            "Log go-live decision"
-          ],
-          "approval": [
-            { "role": "review", "label": "Check release" },
-            { "role": "manager", "label": "Approve launch" }
-          ],
-          "data_outputs": [
-            "Release history",
-            "Launch approval log"
-          ],
-          "tags": [
-            { "text": "Pending", "bg": "#F9EEDC", "color": "#B96B13" },
-            { "text": "Replace Me", "bg": "#DCEAF5", "color": "#1E4E79" }
-          ]
-        }
-      ]
-    },
-    {
-      "kanji": "",
-      "romaji": "Optimization",
-      "english": "Feedback | Enhancements | Next Iteration",
-      "cards": [
-        {
-          "id": "ACTIVE",
-          "status": "core",
-          "name": "O1 Improvement Loop",
-          "trigger": "Feedback arrives after launch.",
-          "features": [
-            "Track enhancements",
-            "Measure impact",
-            "Feed new items into discovery"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Log findings" },
-            { "role": "manager", "label": "Prioritize follow-up" }
-          ],
-          "data_outputs": [
-            "Improvement backlog",
-            "Outcome summary"
-          ],
-          "tags": [
-            { "text": "Iterative", "bg": "#E3F0E6", "color": "#2E6A3D" },
-            { "text": "Reusable", "bg": "#DCEAF5", "color": "#1E4E79" }
-          ]
-        }
-      ]
+      "romaji": "Overview",
+      "english": "How This Portal Works",
+      "badge": "confirmed",
+      "sop_steps": [
+        "Each department page (Operations, Sales, Accounting) is organized in the same four-part order: SOP Manual, Operational Guidelines, Approval Matrix & Controls, and Current vs. Future Workflow.",
+        "Start with the SOP Manual - the numbered, step-by-step procedure for how work actually gets done today.",
+        "Read the Operational Guidelines next - the policy rules that govern how those steps are applied and where staff discretion ends.",
+        "Check the Approval Matrix & Controls - who is authorized to initiate, review, and approve each transaction, and what control activity is in place.",
+        "Finish with Current vs. Future Workflow - today's manual/paper reality next to the target automated state.",
+        "A green \"Confirmed with source data\" badge means the stage is grounded in real, Masagana-specific source data; an amber \"Partially confirmed\" badge means part of that stage is still a placeholder, with the gap called out explicitly in a gap note.",
+        "Cross-linked terms (personnel names, forms, subprocesses) are underlined - click one to jump to its entry in the Personnel, Forms, or Subprocess tab."
+      ],
+      "guidelines": [
+        "Financial Controls & Credit Policy: no invoice or plant release proceeds on an account with unresolved past dues unless a supervisor has explicitly approved a passable balance.",
+        "Weighing, Residue & Inventory Integrity: gains, losses, and commission are computed only from a matched pair of weigh-in and weigh-out readings; an unmatched reading is held for investigation, never estimated.",
+        "Approval & Escalation Discipline: any transaction blocked or disputed at its normal approval level escalates through the standard chain rather than being resolved informally between the two parties involved.",
+        "Documentation & Reconciliation: the person who initiates a transaction is not the same person who posts it to the GL or reconciles it - segregation of duties applies at every posting step."
+      ],
+      "approval_matrix": [
+        { "transaction": "Company-wide pricing decision", "threshold": "1-3x per month, General Meeting", "initiator": "Regional Sales Manager (sets up matrix)", "reviewer": "-", "approver": "Sir RY", "controls": ["Audit log by IT Head", "Channel cascade checklist"] },
+        { "transaction": "Cross-department dispute escalation", "threshold": "-", "initiator": "Any stage owner", "reviewer": "Supervisor / Manager", "approver": "Department Manager", "controls": ["System watch -> Review -> Manager chain"] }
+      ],
+      "current_future": {
+        "current": [
+          "Process knowledge for Operations, Sales, and Accounting has lived across separate documents, transcripts, and institutional memory, plus different tools (Google Sheets, ACCPAC, AppSheet, Viber)."
+        ],
+        "future": [
+          "One SOP portal - GitHub-hosted, JSON-driven, and cross-linked to Personnel/Forms/Subprocess - as the single source of truth for how MGC actually runs, with a clear owner for each transaction."
+        ]
+      },
+      "sources": "Merged from Process Systemization Portal (local draft) + source site (wilsonsykes.github.io/MGSDiagramWorkflow)."
     }
   ],
   "cross_stage": {
-    "id": "X1",
-    "name": "Cross-Stage Governance",
-    "description": "Use this area for controls that affect all stages.",
-    "features": [
-      "Track blockers across the full workflow",
-      "Maintain a shared audit trail",
-      "Standardize notifications and approvals"
-    ],
-    "approval": [
-      { "role": "auto", "label": "System watch" },
-      { "role": "review", "label": "Review updates" },
-      { "role": "manager", "label": "Approve escalations" }
-    ],
-    "data_outputs": [
-      "Cross-stage status report",
-      "Escalation dashboard"
-    ],
-    "tags": [
-      { "text": "Shared", "bg": "#EFE7FB", "color": "#6F3CC3" },
-      { "text": "Optional", "bg": "#DCEAF5", "color": "#1E4E79" }
+    "name": "Portal-Wide Governance",
+    "description": "The four cross-cutting policy themes that apply across every department, detailed further inside each stage's Operational Guidelines section.",
+    "guidelines": [
+      "Financial Controls & Credit Policy - Accounting > Commercial, Dealer, Retail.",
+      "Weighing, Residue & Inventory Integrity - Operations > Commercial, Bulk, Company-Wide.",
+      "Approval & Escalation Discipline - Sales > Dealer, Operations > Dealer, Cross-Stage Governance.",
+      "Documentation & Reconciliation - Operations > Commercial, Dealer; Accounting > Retail."
     ]
   },
-  "manual_section": {
-    "title": "Current Processes",
-    "tag": "Manual workflow placeholders"
-  },
-  "manual_stages": [
-    {
-      "english": "Discovery pain points",
-      "kanji": "",
-      "pain_points": [
-        "Requests arrive in multiple channels",
-        "Important context is often missing"
-      ]
-    },
-    {
-      "english": "Planning pain points",
-      "kanji": "",
-      "pain_points": [
-        "Scope changes are hard to track",
-        "Owners are assigned too late"
-      ]
-    },
-    {
-      "english": "Execution pain points",
-      "kanji": "",
-      "pain_points": [
-        "Checklists are scattered across files",
-        "Readiness criteria are inconsistent"
-      ]
-    },
-    {
-      "english": "Launch pain points",
-      "kanji": "",
-      "pain_points": [
-        "Approvals happen over chat",
-        "Release notes are not centralized"
-      ]
-    },
-    {
-      "english": "Optimization pain points",
-      "kanji": "",
-      "pain_points": [
-        "Feedback is not captured consistently",
-        "Next-step ownership is unclear"
-      ]
-    }
-  ],
   "metrics": [
-    { "value": "5", "label": "Stages", "detail": "Editable sample structure" },
-    { "value": "1", "label": "Checklist Block", "detail": "Supported sectional format" },
-    { "value": "JSON", "label": "Content Source", "detail": "Easy to replace" },
-    { "value": "Pages", "label": "Deployment", "detail": "GitHub Pages ready" }
+    { "value": "3", "label": "SOP Tabs", "detail": "Operations, Sales, Accounting" },
+    { "value": "12 of 15", "label": "Confirmed Stages", "detail": "Fully grounded in source data" },
+    { "value": "3 of 15", "label": "Partially Confirmed", "detail": "Gap notes flagged for client confirmation" },
+    { "value": "19", "label": "Personnel", "detail": "Named staff on roster" }
   ],
-  "footer": "Replace this footer text with your project name, owner, or release note."
+  "footer": "Masagana Gas Corporation - SOP Portal - Merged from Process Systemization Portal + source site - Internal use only"
 }
-

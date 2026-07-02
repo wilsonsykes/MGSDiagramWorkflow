@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Workflow Process Diagram</title>
+<title>Sales SOP</title>
 <style>
 :root{--accent:#1E4E79;--accent-light:#DCEAF5;--accent-dark:#163A5A;--green:#2E6A3D;--green-light:#E3F0E6;--orange:#B96B13;--orange-light:#F9EEDC;--red:#B42318;--red-light:#FEE4E2;--purple:#6F3CC3;--purple-light:#EFE7FB;--teal:#0F766E;--teal-light:#DDF5F2;--bg:#FFFFFF;--bg-alt:#F6F8FB;--border:#D8DEE8;--border-light:#E8ECF2;--text:#142033;--text-mid:#445066;--text-light:#6B7484;--radius:10px;--shadow:0 1px 3px rgba(15,23,42,.06),0 1px 2px rgba(15,23,42,.04);--shadow-open:0 6px 20px rgba(15,23,42,.10)}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -27,80 +27,47 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .ctrl-btns{margin-left:auto;display:flex;gap:6px}
 .ctrl-btn{background:#fff;border:1px solid var(--border);color:var(--accent-dark);padding:5px 16px;border-radius:4px;font-size:11px;font-weight:600;font-family:inherit;cursor:pointer;letter-spacing:.4px;transition:all .12s}
 .ctrl-btn:hover{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
-.stage-section{margin:14px 48px 0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow);scroll-margin-top:80px}
-.stage-banner{background:linear-gradient(180deg,var(--accent-light) 0%,#c4d3ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;transition:background .2s ease;user-select:none}
+.stage-section,.cross-section{margin:14px 48px 0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow);scroll-margin-top:80px}
+.cross-section{background:#faf5ff;border:1px dashed #d8b4fe}
+.stage-banner,.cross-banner{background:linear-gradient(180deg,var(--accent-light) 0%,#c4d3ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;transition:background .2s ease;user-select:none}
 .stage-banner:hover{background:linear-gradient(180deg,#cddcf0 0%,#b8cbe5 100%)}
-.stage-section.open .stage-banner{border-bottom-color:var(--border)}
+.cross-banner{background:linear-gradient(180deg,#f0e6f6 0%,#e0d0ec 100%)}
+.cross-banner:hover{background:linear-gradient(180deg,#e8daf0 0%,#d6c4e6 100%)}
+.stage-section.open .stage-banner,.cross-section.open .cross-banner{border-bottom-color:var(--border)}
 .stage-num{width:60px;height:60px;border-radius:12px;background:var(--accent-dark);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;letter-spacing:.5px;font-size:9px;line-height:1.1;text-align:center}
 .num-big{font-size:24px;font-weight:800;line-height:1;margin-bottom:2px}.num-sub{font-size:9px;font-weight:800;letter-spacing:1.2px;opacity:.7}
 .cross-num{background:var(--purple)}
 .stage-info{flex-shrink:0;min-width:200px}
 .stage-title{font-size:22px;font-weight:800;color:var(--accent-dark);text-transform:uppercase;letter-spacing:-.3px;margin:0}
 .stage-sub{font-size:11px;font-weight:700;color:var(--accent);margin-top:2px;text-transform:uppercase;letter-spacing:1.5px}
-.stage-desc{flex:2;min-width:260px;color:#374151;font-size:13px;line-height:1.5}
-.stage-desc strong{color:var(--accent-dark)}
 .stage-arrow{font-size:22px;color:var(--accent-dark);font-weight:700;transition:transform .25s ease;flex-shrink:0;margin-left:auto}
-.stage-section.open .stage-arrow{transform:rotate(180deg)}
+.stage-section.open .stage-arrow,.cross-section.open .stage-arrow{transform:rotate(180deg)}
 .stage-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
-.stage-section.open .stage-body{max-height:8000px}
-.two-col{display:flex;gap:0;border-top:1px solid var(--border-light)}
-.future-col{flex:3;padding:18px 22px 22px;border-right:1px dashed var(--border-light);background:#fbfcfe}
-.manual-col{flex:2;padding:18px 22px 22px;background:#f3f4f6}
-.col-header{display:flex;align-items:center;gap:8px;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border-light)}
-.manual-col .col-header{border-bottom-color:#d1d5db}
-.col-dot{width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
-.future-dot{background:var(--green-light);color:#166534}.manual-dot{background:#e5e7eb;color:#4b5563}
-.col-title{font-size:11px;font-weight:800;letter-spacing:1.3px}
-.future-title{color:var(--accent-dark)}.manual-title{color:#4b5563}
-.col-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:999px;margin-left:auto;letter-spacing:.3px}
-.future-tag{background:#dbe7f6;color:var(--accent-dark);border:1px solid #B3CCE6}
-.manual-tag{background:#e5e7eb;color:#4b5563;border:1px solid #D1D5DB}
-.pcard{margin:8px 0;border-radius:6px;border:1px solid var(--border);background:#fff;overflow:hidden;cursor:pointer;box-shadow:var(--shadow);transition:border-color .15s,box-shadow .15s}
-.pcard:hover{box-shadow:0 3px 8px rgba(15,23,42,.08);border-color:#b7c7df}
-.pcard.open{border-color:var(--accent);box-shadow:var(--shadow-open)}
-.pcard-bar{display:flex;align-items:center;gap:8px;padding:9px 12px}
-.badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;letter-spacing:.3px}
-.pcard-name{font-size:12.5px;font-weight:600;color:#1f2937;flex:1;line-height:1.3}
-.st-dot{width:8px;height:8px;border-radius:50%;box-shadow:0 0 0 2px rgba(0,0,0,.06)}.st-active{background:var(--green)}.st-pending{background:var(--orange)}
-.pcard-arrow{font-size:11px;color:#9ca3af;transition:transform .18s ease;margin-left:2px}
-.pcard.open .pcard-arrow{transform:rotate(180deg);color:var(--accent-dark)}
-.pcard-body{max-height:0;overflow:hidden;transition:max-height .3s ease;border-top:0 solid transparent}
-.pcard.open .pcard-body{max-height:1800px;border-top:1px dashed var(--border-light)}
-.pcard-inner{padding:12px 14px 14px;background:var(--bg-alt)}
-.checklist-card{border-style:dashed}
-.checklist-badge{background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe}
-.checklist-tag{background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe}
-.checklist-inner{background:#fcfcff}
-.check-note{font-size:11px;color:#4b5563;padding:8px 10px;border:1px dashed #cbd5e1;border-radius:6px;background:#f8fafc;margin-bottom:10px}
-.check-phase{border:1px solid #e5e7eb;border-radius:8px;padding:8px 10px;margin:8px 0;background:#fff}
-.check-phase-title{font-size:11px;font-weight:800;color:#1e3a8a;letter-spacing:.4px;margin-bottom:6px;text-transform:uppercase}
-.check-group{margin:8px 0 6px}
-.check-group-name{font-size:11px;font-weight:700;color:#334155;margin-bottom:5px}
-.check-docs{display:grid;gap:4px}
-.check-doc-row{display:flex;gap:8px;font-size:11px;color:#334155;line-height:1.4}
-.check-doc-code{min-width:52px;font-weight:800;color:#0f766e}
-.check-doc-name{flex:1}
-.card-tags{display:flex;gap:5px;margin-left:auto;flex-shrink:0}
-.card-tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;white-space:nowrap;letter-spacing:.3px;text-transform:uppercase}
-.det-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
-.d-group{margin-bottom:9px}.d-group:last-child{margin-bottom:0}
-.d-label{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:4px;color:var(--text-light)}
-.d-label.lbl-trigger{color:var(--orange)}.d-label.lbl-features{color:var(--teal)}.d-label.lbl-approval{color:var(--purple)}.d-label.lbl-data{color:var(--green)}
-.d-item{font-size:11.5px;color:#374151;line-height:1.55;padding-left:14px;position:relative}
-.d-item::before{content:'2';position:absolute;left:2px;color:var(--text-light);font-size:11px}
-.appr-flow{display:flex;gap:6px;flex-wrap:wrap;align-items:stretch;margin-top:6px}
-.appr-card{border:1px solid #cbd5e1;border-radius:6px;padding:6px 9px;background:#f8fafc;min-width:110px;flex:1;max-width:200px}
-.appr-role{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;margin-bottom:1px;color:#155e75}
-.appr-name{font-size:11.5px;font-weight:700;color:#1e293b;line-height:1.25;margin-bottom:2px}
-.arrow-sep{display:flex;align-items:center;color:#94a3b8;font-weight:800;font-size:16px;margin:0 2px}
-.pain-row{font-size:12px;color:#4b5563;line-height:1.55;padding:6px 0;display:flex;gap:8px;align-items:flex-start;border-bottom:1px dashed #d1d5db}
-.pain-row:last-child{border-bottom:none}
-.pain-icon{color:#6b7280;font-weight:800;font-size:11px;flex-shrink:0;margin-top:1px}
-.cross-section{margin:14px 48px 0;background:#faf5ff;border:1px dashed #d8b4fe;border-radius:var(--radius);overflow:hidden;scroll-margin-top:80px}
-.cross-banner{background:linear-gradient(180deg,#f0e6f6 0%,#e0d0ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;user-select:none}
-.cross-banner:hover{background:linear-gradient(180deg,#e8daf0 0%,#d6c4e6 100%)}
-.cross-section.open .cross-banner{border-bottom-color:#d0b8e0}
-.cross-inner{padding:20px 28px}
+.stage-section.open .stage-body,.cross-section.open .stage-body{max-height:12000px}
+.badge{font-size:10.5px;font-weight:800;padding:4px 11px;border-radius:999px;white-space:nowrap;letter-spacing:.3px;margin-left:auto}
+.doc-section{padding:18px 28px;border-top:1px dashed var(--border-light)}
+.doc-section:first-child{border-top:1px solid var(--border-light)}
+.doc-section h4{margin:0 0 12px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--accent-dark)}
+.doc-section h4 .n{display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--accent-dark);color:#fff;text-align:center;line-height:22px;font-size:12px;margin-right:8px}
+ol.sop{margin:0;padding-left:22px}
+ol.sop li{margin:0 0 9px;font-size:13px;line-height:1.55;color:#374151}
+.guide-list{margin:0;padding-left:20px}
+.guide-list li{font-size:13px;line-height:1.6;margin-bottom:8px;color:#374151}
+table.matrix{width:100%;border-collapse:collapse;font-size:12px;margin-top:2px}
+table.matrix th{background:var(--accent-dark);color:#fff;text-align:left;padding:8px 10px;font-size:10.5px;letter-spacing:.3px}
+table.matrix td{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#374151}
+table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
+.control-chip{display:inline-block;background:var(--accent-light);color:var(--accent-dark);border:1px solid #BFD6EB;border-radius:5px;padding:1px 7px;font-size:10.5px;margin:1px 4px 1px 0}
+.cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cf-col{border-radius:8px;padding:14px 16px}
+.cf-col.current{background:var(--orange-light);border:1px solid #E9CDA8}
+.cf-col.future{background:var(--green-light);border:1px solid #B7D8C4}
+.cf-col h5{margin:0 0 8px;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
+.cf-col.current h5{color:var(--orange)}.cf-col.future h5{color:var(--green)}
+.cf-col ul{margin:0;padding-left:18px}.cf-col li{font-size:12.5px;margin-bottom:6px;line-height:1.5;color:#374151}
+.gap-note{background:var(--red-light);border:1px solid #f0c9c9;color:var(--red);border-radius:8px;padding:12px 16px;font-size:12.5px}
+.gap-note b{display:block;margin-bottom:4px}
+.sources{font-size:11px;color:var(--text-light);padding:12px 28px;background:var(--bg-alt);border-top:1px solid var(--border-light)}
 .metrics-strip{margin:20px 48px;padding:18px 24px;border-radius:var(--radius);border:1px solid var(--border);background:#fff;box-shadow:var(--shadow);display:flex;justify-content:space-around;flex-wrap:wrap;gap:8px}
 .metric{text-align:center;padding:6px 14px}.metric-val{font-size:26px;font-weight:800;color:var(--accent-dark)}
 .metric-lbl{font-size:12px;font-weight:600;color:var(--text-mid);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
@@ -111,8 +78,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .xref-form{color:#0F766E}
 .xref-subprocess{color:#1E4E79}
 .xref-personnel{color:#6F3CC3}
-@media print{.topnav,.ctrl-btns,.footer button{display:none!important}.stage-body,.pcard-body{max-height:none!important}.stage-section,.cross-section{page-break-inside:avoid;box-shadow:none}}
-@media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.two-col{flex-direction:column}.future-col{border-right:none;border-bottom:1px dashed var(--border-light)}.det-grid{grid-template-columns:1fr}.topnav{gap:12px}.nav-link{font-size:10.5px}}
+@media print{
+  .topnav,.ctrl-btns,.footer button{display:none!important}
+  body{font-size:11.5px}
+  .stage-body,.cross-section .stage-body{max-height:none!important}
+  .stage-section,.cross-section{margin:0 0 16px;box-shadow:none;border:1px solid #999;page-break-inside:avoid}
+  .doc-section{page-break-inside:avoid}
+  .stage-banner,.cross-banner{background:#eef2f6!important;cursor:default}
+  .stage-arrow{display:none}
+  .cf-grid{grid-template-columns:1fr 1fr}
+  a.xref{color:inherit;text-decoration:none}
+  .legend-bar{page-break-after:avoid}
+}
+@media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.doc-section{padding-left:16px;padding-right:16px}.cf-grid{grid-template-columns:1fr}.topnav{gap:12px}.nav-link{font-size:10.5px}}
 </style>
 </head>
 <body>
@@ -127,20 +105,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 </nav>
 
 <div class="header">
-  <div class="header-top"><div class="header-logo">Sales</div><span class="header-kanji">v1</span></div>
-  <h1>Workflow Process Diagram</h1>
-  <p>Sales for the 4 Sales Avenues and Overall.</p>
+  <div class="header-top"><div class="header-logo">Sales</div><span class="header-kanji">SOP</span></div>
+  <h1>Sales SOP</h1>
+  <p>Finding and serving clients, taking orders, applying MGC pricing, and post-sales follow-up across the Commercial, Bulk, Dealer, Retail, and Overall channels.</p>
 </div>
 
 <div class="legend-bar">
-  <div class="legend-item"><div class="legend-dot" style="background:#2E6A3D"></div> Active</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#B96B13"></div> Planned / In Progress</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#6F3CC3"></div> Cross-Stage</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#1E4E79"></div> Current / Manual</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#2E6A3D"></div> Confirmed with source data</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#B96B13"></div> Partially confirmed — see gap note</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#6F3CC3"></div> Cross-Stage Governance</div>
   <div class="ctrl-btns">
     <button class="ctrl-btn" onclick="expandAll()">Expand All</button>
     <button class="ctrl-btn" onclick="collapseAll()">Collapse All</button>
-    <button class="ctrl-btn" onclick="printShortBond()">&#128424; Print (Short Bond)</button>
+    <button class="ctrl-btn" onclick="printShortBond()">&#128424; Print</button>
   </div>
 </div>
 
@@ -148,438 +125,248 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">1</span><span class="num-sub">OF 5</span></div>
     <div class="stage-info"><div class="stage-title">COMMERCIAL</div><div class="stage-sub">Find Client | Serve | Schedule | Repeat Order</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+    <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
+    <span class="stage-arrow">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">manual</span>
-        <span class="pcard-name">S1A1 Solicit Orders</span>
-        <span class="st-dot st-pending" title="In Build"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Live</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Editable</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Daily and Monthly Sales Target</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-0-0-0">S1A1.1 Complete fie</div>
-<div class="d-item" id="feat-sales-0-0-1">S1A1.2 </div>
-<div class="d-item" id="feat-sales-0-0-2">S1A1.3 </div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+<li id="sales-0-sop-0">Call client for re-orders, or find new client orders. (S1A1.1)</li>
+<li id="sales-0-sop-1">System auto-reminds the client and Sales Manager ahead of an impending order based on forecast. (S1A1.2)</li>
+<li id="sales-0-sop-2">Create a draft Sales Order, Pick List, and <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> for each order. (S1A1.3)</li>
+<li id="sales-0-sop-3">Check Sales History for upcoming re-orders. (S1A1.4)</li>
+<li id="sales-0-sop-4">Review current and upcoming inventory levels for upselling opportunities. (S1A1.5)</li>
+<li id="sales-0-sop-5">Review next week&#x27;s route schedule for upselling opportunities. (S1A1.6)</li>
+<li id="sales-0-sop-6">Confirm the Sales Order and <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a>; auto-assign a permanent, non-editable Sales Order Control No. (S1A2.1-S1A2.3)</li>
+<li id="sales-0-sop-7">Update the synced Operations Calendar for current deliveries. (S1A2.4)</li>
+<li id="sales-0-sop-8">Assign and log notes, activities, and tags for each Sales Order. (S1A2.5)</li>
+<li id="sales-0-sop-9">Post-sales: evaluate Sales Target vs Actual Sales; sync with the Operations Calendar and actual delivery. (S1A3.1-S1A3.2)</li>
+<li id="sales-0-sop-10">Real-time computation of gains/losses per trip, per <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">driver</a>/helper and back-office team. (S1A3.3)</li>
+<li id="sales-0-sop-11">Record sales-fulfilment concerns/issues and log Accounting-related notes. (S1A3.4-S1A3.5)</li>
+</ol>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">AUTO</div><div class="appr-name">Create request</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Fill intake details</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Validate completeness</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Request summary</div>
-<div class="d-item">Open intake queue</div>
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="sales-0-gl-0">Sales Order Control Numbers are permanent and non-editable once assigned - a wrong entry is corrected with a new document, never by editing the control number.</li>
+<li id="sales-0-gl-1">The upsell review (inventory levels, route schedule) happens before the order is finalized, as a scheduled step in the flow, not an optional add-on afterward.</li>
+<li id="sales-0-gl-2">Gains/loss variance per trip is computed against the Operations Calendar in real time; unresolved fulfilment concerns are logged, never left unrecorded.</li>
+</ul>
 </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">S1A2 Take Order</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Template</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Replace Me</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">A client order. Regular repeat orders. </div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-0-1-0">S1A2.1 TBD</div>
-<div class="d-item" id="feat-sales-0-1-1">S1A2.2 Include the required sales-operations-acctg fields in the form.</div>
-<div class="d-item" id="feat-sales-0-1-2">S1A2.3 Auto-assign permanent, non-editable Sales Order Control No.</div>
+    <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
+<tr><th>Transaction / Decision</th><th>Threshold</th><th>Initiator</th><th>Reviewer</th><th>Approver</th><th>Control Activity</th></tr>
+<tr><td>Draft order &amp; upsell review</td><td>-</td><td><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a></td><td>Sales Manager</td><td><b>AVP Sales (reviews upcoming orders to upsell)</b></td><td><span class="control-chip">Sales history check</span><span class="control-chip">Route/inventory cross-check</span></td></tr>
+<tr><td>Order confirmation &amp; control numbering</td><td>-</td><td>Regional Sales Manager</td><td>AVP</td><td><b>AVP</b></td><td><span class="control-chip">Non-editable control number</span><span class="control-chip">Notes/tags logged</span></td></tr>
+<tr><td>Post-sales reconciliation</td><td>-</td><td><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a></td><td>Operations OIC (validates DR)</td><td><b>Regional Sales Manager (consolidates)</b></td><td><span class="control-chip">Industrial Engineer monitors gain/loss variance</span></td></tr>
+</table>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Prepare context</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve direction</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Qualified request list</div>
-<div class="d-item">Decision notes</div>
+    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
+  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="sales-0-cur-0">System Features such as auto-reminders and real-time dashboards are tagged active in the source, but several Data Output fields are still marked placeholder - dashboard/report wiring may be incomplete for some outputs; verify go-live status per feature with the Sales Manager.</li></ul></div>
+  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="sales-0-fut-0">No further automation items were flagged for Commercial beyond the active Odoo rollout; treat full completion of the still-placeholder fields as the near-term target rather than a new build.</li></ul></div>
 </div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-sales-0-0"><span class="pain-icon">&#10005;</span><span>Requests arrive in multiple channels</span></div>
-          <div class="pain-row" id="pp-sales-0-1"><span class="pain-icon">&#10005;</span><span>Important context is often missing</span></div>
-        </div>
-      </div>
-    </div></div>
+</div>
+    <div class="sources"><b>Sources:</b> Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Sales &gt; Commercial (S1A1-S1A3).</div>
+  </div>
 </section>
 
 <section class="stage-section" id="stage-2">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">2</span><span class="num-sub">OF 5</span></div>
     <div class="stage-info"><div class="stage-title">BULK</div><div class="stage-sub">Find Client | Serve | Schedule | Repeat Order</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+    <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">Partially confirmed — see gap note</span>
+    <span class="stage-arrow">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard checklist-card" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge checklist-badge">SECTION</span>
-        <span class="pcard-name">Execution Checklist</span>
-        <span class="card-tags"><span class="card-tag checklist-tag">v1.0</span><span class="card-tag checklist-tag">Stage 3</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner checklist-inner">
-        <div class="check-note">This section block is optional. Use it when you want a detailed checklist inside the same stage layout.</div>
-        <div class="check-phase">
-          <div class="check-phase-title">PHASE 1: Pre-Launch Inputs</div>
-          <div class="check-group">
-            <div class="check-group-name">Content Requirements</div>
-            <div class="check-docs">
-              <div class="check-doc-row"><span class="check-doc-code">C1.1</span><span class="check-doc-name">Business summary</span></div>
-              <div class="check-doc-row"><span class="check-doc-code">C1.2</span><span class="check-doc-name">Approved copy blocks</span></div>
-            </div>
-          </div>
-          <div class="check-group">
-            <div class="check-group-name">Design Inputs</div>
-            <div class="check-docs">
-              <div class="check-doc-row"><span class="check-doc-code">C2.1</span><span class="check-doc-name">Brand palette</span></div>
-              <div class="check-doc-row"><span class="check-doc-code">C2.2</span><span class="check-doc-name">Typography direction</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="check-phase">
-          <div class="check-phase-title">PHASE 2: Release Readiness</div>
-          <div class="check-group">
-            <div class="check-group-name">QA</div>
-            <div class="check-docs">
-              <div class="check-doc-row"><span class="check-doc-code">Q1.1</span><span class="check-doc-name">Checklist signoff</span></div>
-              <div class="check-doc-row"><span class="check-doc-code">Q1.2</span><span class="check-doc-name">Final approval notes</span></div>
-            </div>
-          </div>
-        </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#DCEAF5;color:#1E4E79;border:1px solid #BFD6EB">ACTIVE</span>
-        <span class="pcard-name">P1 Delivery Plan</span>
-        <span class="card-tags"><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Core</span><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Reusable</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">A qualified item moves into planning.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-1-1-0">Define milestones</div>
-<div class="d-item" id="feat-sales-1-1-1">Assign owners</div>
-<div class="d-item" id="feat-sales-1-1-2">Outline acceptance criteria</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+<li id="sales-1-sop-0">Order intake, pricing, and confirmation follow the same Odoo-based process as Sales &gt; Commercial (S1A1-S1A3), per company specification (&quot;same as Commercial sales avenue, with exceptions&quot;).</li>
+<li id="sales-1-sop-1">Orders are sized to fill bulk lorry capacity (8-ton truck) rather than individual cylinder counts - see Operations &gt; Industrial (Bulk) for the fulfilment side.</li>
+<li id="sales-1-sop-2">Bulk-specific pricing and exception handling are referenced but not yet documented in either source.</li>
+</ol>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Draft plan</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve scope</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Planning tracker</div>
-<div class="d-item">Milestone summary</div>
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="sales-1-gl-0">Sales &gt; Bulk explicitly inherits Commercial&#x27;s intake/approval flow per company note; the undocumented &quot;exceptions&quot; must be captured before this is treated as final SOP, particularly around bulk-specific pricing tiers and truck-capacity minimums.</li>
+</ul>
 </div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-sales-1-0"><span class="pain-icon">&#10005;</span><span>Scope changes are hard to track</span></div>
-          <div class="pain-row" id="pp-sales-1-1"><span class="pain-icon">&#10005;</span><span>Owners are assigned too late</span></div>
-        </div>
-      </div>
-    </div></div>
+    <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
+<tr><th>Transaction / Decision</th><th>Threshold</th><th>Initiator</th><th>Reviewer</th><th>Approver</th><th>Control Activity</th></tr>
+<tr><td>Bulk order intake (inherits Commercial flow)</td><td>8-ton truck fill</td><td><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a></td><td>Sales Manager</td><td><b>AVP Sales</b></td><td><span class="control-chip">Same controls as Commercial</span><span class="control-chip">Exceptions pending</span></td></tr>
+</table>
+</div>
+    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
+  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="sales-1-cur-0">Bulk sales handled as an unexceptioned copy of the Commercial flow; no bulk-specific pricing or approval variance is on file.</li></ul></div>
+  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="sales-1-fut-0">Document the specific bulk exceptions (pricing tier, minimum load, dedicated approval step if any) and encode them as a distinct Sales &gt; Bulk procedure rather than an inherited one.</li></ul></div>
+</div>
+</div>
+    <div class="doc-section gap-note-wrap"><div class="gap-note"><b>Data gap flagged for client confirmation</b>The source site explicitly flags this stage as &quot;Same as Commercial sales avenue, with exceptions&quot; but never lists the exceptions, and the process manual does not cover Sales &gt; Bulk separately. Recommend a short session with the Regional Sales Manager to capture what&#x27;s actually different about Bulk pricing/approval before finalizing.</div></div>
+    <div class="sources"><b>Sources:</b> Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Sales &gt; Bulk (placeholder). No corresponding section in &quot;MGC LPG Process Manual v2.docx&quot;.</div>
+  </div>
 </section>
 
 <section class="stage-section" id="stage-3">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">3</span><span class="num-sub">OF 5</span></div>
     <div class="stage-info"><div class="stage-title">DEALER</div><div class="stage-sub">Find Client | Serve | Schedule | Repeat Order</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+    <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
+    <span class="stage-arrow">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">MIXED ACTIVE</span>
-        <span class="pcard-name">S3A1 Contact Dealers Pre-visit</span>
-        <span class="st-dot st-pending" title="In Build"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#791e76;color:#ffffff;border:1px solid #ffffff22">Odoo Module</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Calls/Texts</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Sales assistant contacts dealers in advance for plant visit</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-2-0-0">S3A1.1 Coordinate multiple dealers&#x27; Plant Visit Calendar Schedule. Instant schedule conflict updates</div>
-<div class="d-item" id="feat-sales-2-0-1">S3A1.2 Dealers can book schedule via viber online</div>
-<div class="d-item" id="feat-sales-2-0-2">S3A1.3 Disseminate Dealer advance quantity request/order to multiple staff</div>
-<div class="d-item" id="feat-sales-2-0-3">S3A1.4 Easy maintenance/update of Dealer database</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+<li id="sales-2-sop-0"><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a> coordinates the dealer&#x27;s Plant Visit Calendar in advance, contacting dealers roughly three times a week.</li>
+<li id="sales-2-sop-1"><a href="personnel.html#personnel-claire" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-claire&#39;);return false" title="Personnel: Claire">Claire</a> sends schedules and updates through the Viber Dealer Group.</li>
+<li id="sales-2-sop-2">Dealer identity and authorization are verified; only confirmed appointments are accommodated.</li>
+<li id="sales-2-sop-3">Confirm the dealer maintains at least 50 cylinders on hand; dealers typically buy in larger quantities.</li>
+<li id="sales-2-sop-4">Dealer advance quantity requests/orders are disseminated to multiple staff; the dealer database is kept current. (S3A1.3-S3A1.4)</li>
+<li id="sales-2-sop-5">Dealer brings empty cylinders for refilling or swapping (typically 8 tons).</li>
+<li id="sales-2-sop-6">Apply dealer pricing from the MGC Pricing Matrix, adjusted within the per-dealer buffer.</li>
+<li id="sales-2-sop-7">Set payment terms - installment with <a href="forms.html#form-post-dated-checks" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-post-dated-checks&#39;);return false" title="Form: Post-Dated Checks">Post-Dated Checks</a> (PDCs), COD, or a <a href="forms.html#form-promissory-note" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-promissory-note&#39;);return false" title="Form: Promissory Note">Promissory Note</a> if no PDC is available.</li>
+<li id="sales-2-sop-8">Produce the digital Sales Order and its counterpart <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a>, editable before confirmation; produce LUT, EES and other documents for printing. (S3A2.1-S3A2.2)</li>
+<li id="sales-2-sop-9">Confirm the order - triggers instant Sales/Inventory/<a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> movement on a shared, multi-user dashboard. (S3A2.3-S3A2.4)</li>
+<li id="sales-2-sop-10">Fulfil: <a href="personnel.html#personnel-mel" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-mel&#39;);return false" title="Personnel: Mel">Mel</a> schedules the plant visit/delivery and coordinates truck availability.</li>
+<li id="sales-2-sop-11">Post-sales: <a href="personnel.html#personnel-claire" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-claire&#39;);return false" title="Personnel: Claire">Claire</a> maintains dealer records, runs call-outs and follow-ups, and handles pricing disputes/adjustments. (S3A3)</li>
+<li id="sales-2-sop-12">Cylinder swapping, marketing support, and pricing-adjustment requests route through: <a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a> -&gt; <a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a> -&gt; Warehouse and Quality Supervisor -&gt; Senior Supervisor -&gt; Operations Officer. (S3A3.1-S3A3.5)</li>
+<li id="sales-2-sop-13">New Dealer Accreditation: applicant proposes a business location with no existing dealer coverage.</li>
+<li id="sales-2-sop-14">Once approved, secure DTI Registration, Business Permit, and BIR Registration.</li>
+<li id="sales-2-sop-15">Submit the dealership application and secure the Supplier&#x27;s Certificate.</li>
+<li id="sales-2-sop-16">Complete DOE requirements (Annex G and Annex V5) and execute a Special Power of Attorney (SPA).</li>
+<li id="sales-2-sop-17">Pay processing fees and submit documents to the Makati Office; coordinate with the DOE liaison for processing.</li>
+</ol>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">SALES ASSISTANT</div><div class="appr-name">Call and schedule</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">PLANT SUPERVISOR</div><div class="appr-name">Look and prepare cylinders</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">OPERATIONS OFFICER</div><div class="appr-name">Look and review</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">S3A1.5 Single shared calendar chart of visits (check if already in Monday)</div>
-<div class="d-item">S3A1.6 Advanced order qty list</div>
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="sales-2-gl-0">Only confirmed, scheduled dealer appointments are accommodated - mirrors the plant-refilling rule in Operations &gt; Dealer.</li>
+<li id="sales-2-gl-1">New dealers must maintain a minimum of 50 LPG cylinders; MGC may process DOE/permit requirements on the applicant&#x27;s behalf, or the applicant may self-file.</li>
+<li id="sales-2-gl-2">Cylinder swapping, marketing support, and new pricing adjustments all route through the same five-step approval chain ending in Operations Officer sign-off - no skipping to a later approver.</li>
+<li id="sales-2-gl-3">Dealer pricing is adjusted only within the per-dealer buffer defined in the MGC Pricing Matrix; adjustments outside the buffer require the same escalation used for a swap request.</li>
+</ul>
 </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">S3A2 Repeat orders from Delivery Truck and Plant-Pickup Dealer</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#791e76;color:#ffffff;border:1px solid #ffffff22">Odoo Module</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">xx</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Client&#x27;s Purchase Order (eg MGSA), Truck Pickup or Client Plant Visit</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-2-1-0">S3A2.1 Produce digital Sales Order and instant counterpart Invoice, editable before confirming</div>
-<div class="d-item" id="feat-sales-2-1-1">S3A2.2 Product digital LUT, EES and other documents with Sales Order for printing</div>
-<div class="d-item" id="feat-sales-2-1-2">S3A2.3 Instant Sales/Inventory/Invoice movement upon sales order confirmation</div>
-<div class="d-item" id="feat-sales-2-1-3">S3A2.4 Real-time, multi-user shared sales/invoice/inventory dashboard</div>
-<div class="d-item" id="feat-sales-2-1-4">S3A2.5 Variance monitoring dashboard and faster daily resolution</div>
+    <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
+<tr><th>Transaction / Decision</th><th>Threshold</th><th>Initiator</th><th>Reviewer</th><th>Approver</th><th>Control Activity</th></tr>
+<tr><td>Dealer order &amp; pricing</td><td>Within per-dealer pricing buffer</td><td><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a></td><td>Sales Manager</td><td><b>- (within buffer, no separate approval)</b></td><td><span class="control-chip">Min. 50-cylinder rule</span><span class="control-chip">Digital Sales Order/Invoice</span></td></tr>
+<tr><td>Cylinder swap / marketing support / pricing concern</td><td>-</td><td><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a></td><td>Warehouse &amp; Quality Supervisor, Senior Supervisor</td><td><b><a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a>, then Operations Officer logs</b></td><td><span class="control-chip">Signed swap form</span><span class="control-chip">Photo/document requirements</span></td></tr>
+<tr><td>New Dealer Accreditation</td><td>Min. 50 cylinders, no territory overlap</td><td>Applicant / Sales</td><td>DOE liaison</td><td><b>Makati Office</b></td><td><span class="control-chip">DTI/BIR/Business Permit set</span><span class="control-chip">SPA</span><span class="control-chip">Processing fee receipt</span></td></tr>
+</table>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">SALES ASSISTANT</div><div class="appr-name">Confirm orders and produce invoice, LUT, EES</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">SALES MANAGER</div><div class="appr-name">Review output</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">S3A2.5 Digital and printed Sales Orders and Invoices</div>
-<div class="d-item">S3A2.6 Sales Order and Invoice Summary Tables</div>
+    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
+  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="sales-2-cur-0">Swap and pricing-concern approvals still route through ad hoc chat threads rather than a structured workflow.</li><li id="sales-2-cur-1">Dealer accreditation paperwork is tracked manually across DTI/BIR/DOE filings with no single status view.</li></ul></div>
+  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="sales-2-fut-0">Extend the real-time, multi-user dashboard already covering order/<a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a>/inventory movement to swap approvals and accreditation status tracking.</li><li id="sales-2-fut-1">Digital CRM for the new-dealer application process, start to end (already flagged as a target system feature).</li></ul></div>
 </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">S3A3 Customer marketing support, cylinder swapping, pricing adjustments, concerns</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#791e76;color:#ffffff;border:1px solid #ffffff22">Odoo Module</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">xx</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">any of the above requests</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-2-2-0">S3A3.1 Digital Cylinder Swapping Approval Process, signed Swapping Form, and other photos, requirements</div>
-<div class="d-item" id="feat-sales-2-2-1">S3A3.2 Cylinder swap inventory entries are multi-user viewed and printable</div>
-<div class="d-item" id="feat-sales-2-2-2">S3A3.3 Multi-user, real-time Cylinder inventory and status management</div>
-<div class="d-item" id="feat-sales-2-2-3">S3A3.4 Real-time, multi-user shared inventory dashboard</div>
-<div class="d-item" id="feat-sales-2-2-4">S3A3.5 digital CRM for new dealer application process from start to end</div>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">SALES ASSISTANT</div><div class="appr-name">Request cylinder swapping with doc requests</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">SIR RY</div><div class="appr-name">Review and approve/reject request digital files</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">WAREHOUSE AND QUALITY SUPERVISOR</div><div class="appr-name">List the qty, status and treatment of cylinders</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">SENIOR SUPERVISOR</div><div class="appr-name">Review cylinders batch request and requirements</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">OPERATIONS OFFICER</div><div class="appr-name">Review and note transactions</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">S3A2.6 Real-time list of dealers&#x27; marketing support and pricing concerns</div>
-<div class="d-item">S3A2.7 Real-time Swapped cylinders inventory and status summary</div>
-<div class="d-item">S3A3.8 Multi-step Customer Relation Management process for New Dealers</div>
-</div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-sales-2-0"><span class="pain-icon">&#10005;</span><span>Checklists are scattered across files</span></div>
-          <div class="pain-row" id="pp-sales-2-1"><span class="pain-icon">&#10005;</span><span>Readiness criteria are inconsistent</span></div>
-        </div>
-      </div>
-    </div></div>
+    <div class="sources"><b>Sources:</b> Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Sales &gt; Dealer (S3A1-S3A3); &quot;MGC LPG Process Manual v2.docx&quot; - Sales &gt; Dealer (Order Process &amp; Dealer Accreditation).</div>
+  </div>
 </section>
 
 <section class="stage-section" id="stage-4">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">4</span><span class="num-sub">OF 5</span></div>
     <div class="stage-info"><div class="stage-title">RETAIL</div><div class="stage-sub">Find Client | Serve | Schedule | Repeat Order</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+    <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
+    <span class="stage-arrow">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">Retail Orders Scheduling</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#791e76;color:#ffffff;border:1px solid #ffffff22">Odoo Module</span><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">xx Me</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Retail Daily and Monthly Sales Target</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-3-0-0">Capture release notes</div>
-<div class="d-item" id="feat-sales-3-0-1">Confirm handoff status</div>
-<div class="d-item" id="feat-sales-3-0-2">Log go-live decision</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+<li id="sales-3-sop-0">Solicit and plan orders against daily and monthly Retail sales targets.</li>
+<li id="sales-3-sop-1">Call clients for re-orders and find new client orders; review sales history and next week&#x27;s route schedule.</li>
+<li id="sales-3-sop-2">Take the order: confirm the Sales Order and assign a permanent, non-editable Sales Order Control No.</li>
+<li id="sales-3-sop-3">Retail and semi-dealer clients buy smaller quantities, mainly 11kg and 2.5kg, on a retail scale.</li>
+<li id="sales-3-sop-4">Apply pricing: offer SRP first, then the Minimum Price List (MPL) with volume discounts (3-5, 6-10 units) and distance-zone pricing (0-30km, 30.1-40km, 41-60km).</li>
+<li id="sales-3-sop-5">Retail customers may submit a portal order (with discount); <a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a> approves against schedule and payment terms, Sales Manager validates. (S4A1)</li>
+<li id="sales-3-sop-6">Set payment: mostly COD/cash <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a>; the delivery team carries the cash <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a>.</li>
+<li id="sales-3-sop-7">Fulfil: <a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a> lines up confirmed Sales Orders; <a href="personnel.html#personnel-purchaser" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-purchaser&#39;);return false" title="Personnel: Purchaser">Purchaser</a>/Dispatcher reviews the lined-up orders and routes. (S4A2)</li>
+<li id="sales-3-sop-8">Post-sales: log concerns, evaluate sales target vs actual, and sync with the Operations calendar.</li>
+<li id="sales-3-sop-9">Compute gains/losses per trip per <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">driver</a>/helper; record customer/location/category sales contribution.</li>
+</ol>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Check release</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve launch</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Release history</div>
-<div class="d-item">Launch approval log</div>
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="sales-3-gl-0">Retail pricing always follows SRP first, then falls to the Minimum Price List with volume/zone discounts - MPL is the floor, not the opening offer.</li>
+<li id="sales-3-gl-1">Sales Order Control Numbers are permanent and non-editable, the same rule as Commercial.</li>
+<li id="sales-3-gl-2">Retail is COD/cash-<a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> by default; the delivery team physically carries the cash <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> and reconciles it same-day with Accounting &gt; Retail.</li>
+</ul>
 </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">Efficient Retail Delivery Scheduling</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#791e76;color:#ffffff;border:1px solid #ffffff22">Odoo Module</span><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">xx</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Accumulated retail deliveries ready to dispatch</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-3-1-0">Capture release notes</div>
-<div class="d-item" id="feat-sales-3-1-1">Confirm handoff status</div>
-<div class="d-item" id="feat-sales-3-1-2">Log go-live decision</div>
+    <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
+<tr><th>Transaction / Decision</th><th>Threshold</th><th>Initiator</th><th>Reviewer</th><th>Approver</th><th>Control Activity</th></tr>
+<tr><td>Retail order &amp; pricing</td><td>SRP, then MPL by volume/zone</td><td><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a></td><td>Sales Manager (validates schedule/terms)</td><td><b>Sales Manager</b></td><td><span class="control-chip">Portal or call intake</span><span class="control-chip">SRP-then-MPL sequence</span></td></tr>
+<tr><td>Delivery line-up &amp; routing</td><td>-</td><td><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a></td><td><a href="personnel.html#personnel-purchaser" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-purchaser&#39;);return false" title="Personnel: Purchaser">Purchaser</a>/Dispatcher</td><td><b><a href="personnel.html#personnel-purchaser" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-purchaser&#39;);return false" title="Personnel: Purchaser">Purchaser</a>/Dispatcher</b></td><td><span class="control-chip">Route review before dispatch</span></td></tr>
+</table>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Check release</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve launch</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Release history</div>
-<div class="d-item">Launch approval log</div>
+    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
+  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="sales-3-cur-0">Retail order-to-cash is still carried physically via cash <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a>, reconciled same-day rather than in real time.</li><li id="sales-3-cur-1">Several Data Output fields for retail delivery scheduling are marked placeholder in the source and appear unfinished.</li></ul></div>
+  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="sales-3-fut-0">Extend the Commercial/Dealer real-time dashboard pattern to Retail so cash-<a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> status is visible before the <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">driver</a> returns, not just at end-of-day reconciliation.</li></ul></div>
 </div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-sales-3-0"><span class="pain-icon">&#10005;</span><span>Approvals happen over chat</span></div>
-          <div class="pain-row" id="pp-sales-3-1"><span class="pain-icon">&#10005;</span><span>Release notes are not centralized</span></div>
-        </div>
-      </div>
-    </div></div>
+</div>
+    <div class="sources"><b>Sources:</b> Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Sales &gt; Retail (S4A1-S4A2); &quot;MGC LPG Process Manual v2.docx&quot; - Sales &gt; Retail.</div>
+  </div>
 </section>
 
 <section class="stage-section" id="stage-5">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">5</span><span class="num-sub">OF 5</span></div>
     <div class="stage-info"><div class="stage-title">OVERALL</div><div class="stage-sub">Reports | Monitoring | Compliance | Write-Offs</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+    <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
+    <span class="stage-arrow">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#DCEAF5;color:#1E4E79;border:1px solid #BFD6EB">ACTIVE</span>
-        <span class="pcard-name">xx</span>
-        <span class="card-tags"><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Iterative</span><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Reusable</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Feedback arrives after launch.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-sales-4-0-0">Track enhancements</div>
-<div class="d-item" id="feat-sales-4-0-1">Measure impact</div>
-<div class="d-item" id="feat-sales-4-0-2">Feed new items into discovery</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+<li id="sales-4-sop-0">Print and verify multi-period Sales Performance Reports (daily/weekly/monthly, per sales avenue). (S5A1)</li>
+<li id="sales-4-sop-1">Report covers <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> status and incentive gains/loss; issue <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a>-linked <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a> for Commercial clients and the delivery team. (S5A1.3)</li>
+<li id="sales-4-sop-2"><a href="personnel.html#personnel-it-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-it-head&#39;);return false" title="Personnel: IT Head">IT Head</a> (<a href="personnel.html#personnel-jabert" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-jabert&#39;);return false" title="Personnel: Jabert">Jabert</a>) prints the <a href="forms.html#form-sales-performance-report" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-sales-performance-report&#39;);return false" title="Form: Sales Performance Report">Sales Performance Report</a> (SPR) bi-weekly or monthly depending on inventory volume; fields include sales per kg, total sales, net sales, cost of sales, and Gross Profit Margin per kg and total.</li>
+<li id="sales-4-sop-3">Regional Sales Manager (<a href="personnel.html#personnel-mel" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-mel&#39;);return false" title="Personnel: Mel">Mel</a>) sets up the <a href="forms.html#form-mgc-lpg-pricing-matrix" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-mgc-lpg-pricing-matrix&#39;);return false" title="Form: MGC LPG Pricing Matrix">MGC LPG Pricing Matrix</a> for decision; <a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a> decides on the matrix for the period, 1-3 times per month in a General Meeting. (S5A2)</li>
+<li id="sales-4-sop-4">Pricing Matrix covers Sales Price, MPL, and Total Cost (Acquisition Cost + Hauling) per kg, by avenue - Commercial through Retail and semi-dealers - plus MPL volume discounts by radius.</li>
+<li id="sales-4-sop-5">Regional Sales Manager and <a href="personnel.html#personnel-it-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-it-head&#39;);return false" title="Personnel: IT Head">IT Head</a> update competitor end-user pricing (SRP comparison).</li>
+<li id="sales-4-sop-6">Price Cascade Process: Regional Sales Manager emails the updated changes; <a href="personnel.html#personnel-it-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-it-head&#39;);return false" title="Personnel: IT Head">IT Head</a> records the audit log for the change.</li>
+<li id="sales-4-sop-7"><a href="personnel.html#personnel-it-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-it-head&#39;);return false" title="Personnel: IT Head">IT Head</a> informs CODO, contact centers, marketing, and cashiers. Cascade is channel-owned: Regional Sales Manager and <a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a>1 - Commercial/Bulk clients (<a href="personnel.html#personnel-mel" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-mel&#39;);return false" title="Personnel: Mel">Mel</a>, <a href="personnel.html#personnel-lou" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-lou&#39;);return false" title="Personnel: Lou">Lou</a>); <a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a>2 - retail clients (<a href="personnel.html#personnel-claire" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-claire&#39;);return false" title="Personnel: Claire">Claire</a>); AVP Sales - Makati accounts (<a href="personnel.html#personnel-jen" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-jen&#39;);return false" title="Personnel: Jen">Jen</a>); <a href="personnel.html#personnel-jabert" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-jabert&#39;);return false" title="Personnel: Jabert">Jabert</a> - CODO/audit and contact centers/marketing/cashiers.</li>
+<li id="sales-4-sop-8"><a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a> sets the Sales Quota per client per period; AVP Sales prints and uses it as the working target; <a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a> updates it daily/weekly. (S5A3)</li>
+</ol>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Log findings</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Prioritize follow-up</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Improvement backlog</div>
-<div class="d-item">Outcome summary</div>
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="sales-4-gl-0">Price changes are decided only in the General Meeting (1-3x per month) by <a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a> - no ad hoc price change cascades without going through this meeting.</li>
+<li id="sales-4-gl-1">Every price change is audit-logged by the <a href="personnel.html#personnel-it-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-it-head&#39;);return false" title="Personnel: IT Head">IT Head</a> before it cascades to any client-facing channel.</li>
+<li id="sales-4-gl-2">Cascade responsibility is channel-specific and does not overlap: <a href="personnel.html#personnel-mel" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-mel&#39;);return false" title="Personnel: Mel">Mel</a>/<a href="personnel.html#personnel-lou" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-lou&#39;);return false" title="Personnel: Lou">Lou</a> (Commercial/Bulk), <a href="personnel.html#personnel-claire" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-claire&#39;);return false" title="Personnel: Claire">Claire</a> (Retail), <a href="personnel.html#personnel-jen" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-jen&#39;);return false" title="Personnel: Jen">Jen</a> (Makati), <a href="personnel.html#personnel-jabert" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-jabert&#39;);return false" title="Personnel: Jabert">Jabert</a> (CODO/contact centers/marketing/cashiers) - a price update is not company-wide live until all channels confirm cascade.</li>
+</ul>
 </div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-sales-4-0"><span class="pain-icon">&#10005;</span><span>C5.1 Sales Reports:</span></div>
-          <div class="pain-row" id="pp-sales-4-1"><span class="pain-icon">&#10005;</span><span>C5.1.1 <a href="personnel.html#personnel-it-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-it-head&#39;);return false" title="Personnel: IT Head">IT Head</a> prints Sales Performance Report (SPR)- bi-weekly or monthly depending on inventory volume</span></div>
-          <div class="pain-row" id="pp-sales-4-2"><span class="pain-icon">&#10005;</span><span>C5.1.2 SPR fields: sales per kg, total sales, net sales, cost of sales. with formula. Gross Profit Margin per kg and total GPM.</span></div>
-          <div class="pain-row" id="pp-sales-4-3"><span class="pain-icon">&#10005;</span><span>C5.2 Pricing Matrix:</span></div>
-          <div class="pain-row" id="pp-sales-4-4"><span class="pain-icon">&#10005;</span><span>C5.2.1 MGC LPG Pricing Matrix dashboard: Decide on the doneprices of gas for different sales avenues. 1-3x a month General Meeting</span></div>
-          <div class="pain-row" id="pp-sales-4-5"><span class="pain-icon">&#10005;</span><span>C5.2.2 Sales Price, MPL, Total Cost (Acq Cost + Hauling), kg. Avenues: Commercial to Retail and semi-dealers.</span></div>
-          <div class="pain-row" id="pp-sales-4-6"><span class="pain-icon">&#10005;</span><span>C5.2.4 MPL volume discounts for different radiuses</span></div>
-          <div class="pain-row" id="pp-sales-4-7"><span class="pain-icon">&#10005;</span><span>C5.2.5 End-User Pricing: SRP and competitors pricing comparison. <a href="personnel.html#personnel-mel" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-mel&#39;);return false" title="Personnel: Mel">Mel</a> and Joebert updates competitors&#x27; prices.</span></div>
-          <div class="pain-row" id="pp-sales-4-8"><span class="pain-icon">&#10005;</span><span>C5.2.6 Price Cascade Process:</span></div>
-          <div class="pain-row" id="pp-sales-4-9"><span class="pain-icon">&#10005;</span><span>C5.2.6.1 <a href="personnel.html#personnel-mel" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-mel&#39;);return false" title="Personnel: Mel">Mel</a> emails the updated changes. <a href="personnel.html#personnel-jabert" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-jabert&#39;);return false" title="Personnel: Jabert">Jabert</a> records audit logs for changes</span></div>
-          <div class="pain-row" id="pp-sales-4-10"><span class="pain-icon">&#10005;</span><span>C5.2.6.2 <a href="personnel.html#personnel-jabert" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-jabert&#39;);return false" title="Personnel: Jabert">Jabert</a> - CODO, <a href="personnel.html#personnel-jobert" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-jobert&#39;);return false" title="Personnel: Jobert">Jobert</a> - contact centers, marketing, cashiers. <a href="personnel.html#personnel-mel" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-mel&#39;);return false" title="Personnel: Mel">Mel</a>, <a href="personnel.html#personnel-lou" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-lou&#39;);return false" title="Personnel: Lou">Lou</a> - Comm/Bulk clients, <a href="personnel.html#personnel-claire" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-claire&#39;);return false" title="Personnel: Claire">Claire</a> - retail clients. <a href="personnel.html#personnel-jen" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-jen&#39;);return false" title="Personnel: Jen">Jen</a> - Makati accounts.</span></div>
-          <div class="pain-row" id="pp-sales-4-11"><span class="pain-icon">&#10005;</span><span>C5.2.6.3 NIL so far</span></div>
-        </div>
-      </div>
-    </div></div>
+    <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
+<tr><th>Transaction / Decision</th><th>Threshold</th><th>Initiator</th><th>Reviewer</th><th>Approver</th><th>Control Activity</th></tr>
+<tr><td><a href="forms.html#form-sales-performance-report" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-sales-performance-report&#39;);return false" title="Form: Sales Performance Report">Sales Performance Report</a> issuance</td><td>-</td><td><a href="personnel.html#personnel-it-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-it-head&#39;);return false" title="Personnel: IT Head">IT Head</a> (<a href="personnel.html#personnel-jabert" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-jabert&#39;);return false" title="Personnel: Jabert">Jabert</a>)</td><td>AVP Sales</td><td><b>AVP Sales (prints/verifies)</b></td><td><span class="control-chip">SPR formula fields</span><span class="control-chip">GPM per kg check</span></td></tr>
+<tr><td>Pricing Matrix decision</td><td>-</td><td>Regional Sales Manager (sets up)</td><td>-</td><td><b><a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a></b></td><td><span class="control-chip">General Meeting cadence 1-3x/month</span><span class="control-chip">Audit log by IT Head</span></td></tr>
+<tr><td>Price cascade to channels</td><td>-</td><td>Regional Sales Manager (emails change)</td><td><a href="personnel.html#personnel-it-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-it-head&#39;);return false" title="Personnel: IT Head">IT Head</a> (audit log)</td><td><b>- (cascade, not approval)</b></td><td><span class="control-chip">Multi-channel cascade checklist</span></td></tr>
+<tr><td>Sales Quota setting</td><td>-</td><td><a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a></td><td>AVP Sales</td><td><b><a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a></b></td><td><span class="control-chip">Daily/weekly update by Sales Assistant</span></td></tr>
+</table>
+</div>
+    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
+  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="sales-4-cur-0">Price cascade is confirmed via email and informal notification to several separate people, with no single cascade-complete checklist.</li><li id="sales-4-cur-1">Sales Quota tracking has several Data Output fields still marked placeholder in the source.</li></ul></div>
+  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="sales-4-fut-0">A single Pricing Matrix dashboard (already partially specified) that shows cascade status per channel instead of relying on the Regional Sales Manager&#x27;s memory of who&#x27;s been notified.</li></ul></div>
+</div>
+</div>
+    <div class="sources"><b>Sources:</b> Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Sales &gt; Overall (S5A1-S5A3, S5C1-S5C2); Personnel &amp; Forms indexes for named roles.</div>
+  </div>
 </section>
 
 <section class="cross-section" id="cross-stage">
   <div class="cross-banner" onclick="toggleStage(this)">
     <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>
-    <div class="stage-info"><div class="stage-title" style="color:#7030A0">CROSS-STAGE GOVERNANCE</div><div class="stage-sub" style="color:#7c3aed">Use this area for controls that affect all stages.</div></div>
+    <div class="stage-info"><div class="stage-title" style="color:#7030A0">CROSS-STAGE GOVERNANCE</div><div class="stage-sub" style="color:#7c3aed">Escalation and pricing-governance rules that apply on top of every Sales approval row above.</div></div>
     <span class="stage-arrow" style="color:#7030A0">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="cross-inner">
-      <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item">Track blockers across the full workflow</div>
-<div class="d-item">Maintain a shared audit trail</div>
-<div class="d-item">Standardize notifications and approvals</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="cross-gl-0">Sales Order Control Numbers, once assigned, are permanent and non-editable; a correction is made with a new document, never by editing the original control number.</li>
+<li id="cross-gl-1">Price changes are decided only in the scheduled General Meeting (1-3x per month) by <a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a>, and every change is audit-logged by the <a href="personnel.html#personnel-it-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-it-head&#39;);return false" title="Personnel: IT Head">IT Head</a> before it cascades to any client-facing channel.</li>
+<li id="cross-gl-2">Any transaction blocked or disputed at its normal approval level escalates through the standard chain (System watch -&gt; Review -&gt; Manager) rather than being resolved informally between the two parties involved.</li>
+</ul>
 </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">AUTO</div><div class="appr-name">System watch</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Review updates</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve escalations</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Cross-stage status report</div>
-<div class="d-item">Escalation dashboard</div>
-</div>
-  </div></div>
+  </div>
 </section>
 
 <div class="metrics-strip">
-  <div class="metric"><div class="metric-val">5</div><div class="metric-lbl">Stages</div><div class="metric-sub">Editable sample structure</div></div>
-  <div class="metric"><div class="metric-val">1</div><div class="metric-lbl">Checklist Block</div><div class="metric-sub">Supported sectional format</div></div>
-  <div class="metric"><div class="metric-val">JSON</div><div class="metric-lbl">Content Source</div><div class="metric-sub">Easy to replace</div></div>
-  <div class="metric"><div class="metric-val">Pages</div><div class="metric-lbl">Deployment</div><div class="metric-sub">GitHub Pages ready</div></div>
+  <div class="metric"><div class="metric-val">5</div><div class="metric-lbl">Stages</div><div class="metric-sub">Commercial, Bulk, Dealer, Retail, Overall</div></div>
+  <div class="metric"><div class="metric-val">4</div><div class="metric-lbl">Confirmed</div><div class="metric-sub">Grounded in source data</div></div>
+  <div class="metric"><div class="metric-val">1</div><div class="metric-lbl">Partially Confirmed</div><div class="metric-sub">Bulk - gap flagged</div></div>
+  <div class="metric"><div class="metric-val">19</div><div class="metric-lbl">Personnel</div><div class="metric-sub">Named staff on roster</div></div>
 </div>
 
-<div class="footer"><div>Replace this footer text with your project name, owner, or release note.</div><button class="ctrl-btn" onclick="printShortBond()">&#128424; Print Short Bond</button></div>
+<div class="footer"><div>Masagana Gas Corporation - Sales SOP - Merged from Process Systemization Portal + source site - Internal use only</div><button class="ctrl-btn" onclick="printShortBond()">&#128424; Print</button></div>
 
 <script>
 function toggleStage(el){var sec=el.closest('.stage-section')||el.closest('.cross-section');if(sec)sec.classList.toggle('open')}
-function toggleP(el){el.classList.toggle('open')}
-function expandAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.add('open')});document.querySelectorAll('.pcard').forEach(function(p){p.classList.add('open')})}
-function collapseAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.remove('open')});document.querySelectorAll('.pcard').forEach(function(p){p.classList.remove('open')})}
-function printShortBond(){var s=document.createElement('style');s.id='psb';s.innerHTML='@page{size:8.5in 13in;margin:0.4in 0.5in}';document.head.appendChild(s);window.print();setTimeout(function(){var e=document.getElementById('psb');if(e)e.remove()},1000)}
-function scrollToAnchor(id){var el=document.getElementById(id);if(!el)return;var stage=el.closest('.stage-section')||el.closest('.cross-section');if(stage)stage.classList.add('open');var pcard=el.closest('.pcard');if(pcard)pcard.classList.add('open');setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='2px solid var(--accent)';setTimeout(function(){el.style.outline=''},1800)},180)}
+function expandAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.add('open')})}
+function collapseAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.remove('open')})}
+function printShortBond(){var s=document.createElement('style');s.id='psb';s.innerHTML='@page{size:8.5in 14in;margin:0.5in 0.6in}';document.head.appendChild(s);expandAll();window.print();setTimeout(function(){var e=document.getElementById('psb');if(e)e.remove()},1000)}
+function scrollToAnchor(id){var el=document.getElementById(id);if(!el)return;var stage=el.closest('.stage-section')||el.closest('.cross-section');if(stage)stage.classList.add('open');setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='2px solid var(--accent)';setTimeout(function(){el.style.outline=''},1800)},180)}
 document.querySelectorAll('.topnav a').forEach(function(link){link.addEventListener('click',function(){var hash=link.getAttribute('href');if(!hash||!hash.startsWith('#'))return;var t=document.querySelector(hash);if(t)t.classList.add('open')});});
 </script>
 </body>

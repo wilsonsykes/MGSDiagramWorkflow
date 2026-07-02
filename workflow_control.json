@@ -46,29 +46,27 @@
     "cross": { "bg": "{purple_light}", "text": "{purple}", "border": "#D8C7F4" }
   },
   "legend_items": [
-    { "color": "{green}", "label": "Active" },
-    { "color": "{orange}", "label": "Planned / In Progress" },
-    { "color": "{purple}", "label": "Cross-Stage" },
-    { "color": "{accent}", "label": "Current / Manual" }
+    { "color": "{green}", "label": "Confirmed with source data" },
+    { "color": "{orange}", "label": "Partially confirmed — see gap note" },
+    { "color": "{purple}", "label": "Cross-Stage Governance" }
   ],
   "sections": {
-    "show_hoshi_pipeline": true,
     "show_cross_stage": true,
-    "show_manual_pipeline": true,
     "show_metrics_strip": true,
     "show_legend": true
   },
-  "detail_labels": {
-    "trigger": "Trigger",
-    "features": "System Features",
-    "approval": "Approval Matrix",
-    "data": "Data Outputs"
+  "section_labels": {
+    "sop": "SOP Manual — Step-by-Step Procedure",
+    "guidelines": "Operational Guidelines",
+    "approval": "Approval Matrix &amp; Controls",
+    "current_future": "Current vs. Future Workflow"
   },
-  "manual_pain_title": "Pain Points",
-  "vs_label": "VS",
+  "approval_matrix_columns": ["Transaction / Decision", "Threshold", "Initiator", "Reviewer", "Approver", "Control Activity"],
+  "current_label": "Current — Traditional / Manual",
+  "future_label": "Future — Target / Automated",
   "expand_all_label": "Expand All",
   "collapse_all_label": "Collapse All",
   "print_label": "Print",
-  "print_page_size": "8.5in 13in",
-  "print_page_margin": "0.4in 0.5in"
+  "print_page_size": "8.5in 14in",
+  "print_page_margin": "0.5in 0.6in"
 }

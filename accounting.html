@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Workflow Process Diagram</title>
+<title>Accounting SOP</title>
 <style>
 :root{--accent:#1E4E79;--accent-light:#DCEAF5;--accent-dark:#163A5A;--green:#2E6A3D;--green-light:#E3F0E6;--orange:#B96B13;--orange-light:#F9EEDC;--red:#B42318;--red-light:#FEE4E2;--purple:#6F3CC3;--purple-light:#EFE7FB;--teal:#0F766E;--teal-light:#DDF5F2;--bg:#FFFFFF;--bg-alt:#F6F8FB;--border:#D8DEE8;--border-light:#E8ECF2;--text:#142033;--text-mid:#445066;--text-light:#6B7484;--radius:10px;--shadow:0 1px 3px rgba(15,23,42,.06),0 1px 2px rgba(15,23,42,.04);--shadow-open:0 6px 20px rgba(15,23,42,.10)}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -27,80 +27,47 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .ctrl-btns{margin-left:auto;display:flex;gap:6px}
 .ctrl-btn{background:#fff;border:1px solid var(--border);color:var(--accent-dark);padding:5px 16px;border-radius:4px;font-size:11px;font-weight:600;font-family:inherit;cursor:pointer;letter-spacing:.4px;transition:all .12s}
 .ctrl-btn:hover{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
-.stage-section{margin:14px 48px 0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow);scroll-margin-top:80px}
-.stage-banner{background:linear-gradient(180deg,var(--accent-light) 0%,#c4d3ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;transition:background .2s ease;user-select:none}
+.stage-section,.cross-section{margin:14px 48px 0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow);scroll-margin-top:80px}
+.cross-section{background:#faf5ff;border:1px dashed #d8b4fe}
+.stage-banner,.cross-banner{background:linear-gradient(180deg,var(--accent-light) 0%,#c4d3ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;transition:background .2s ease;user-select:none}
 .stage-banner:hover{background:linear-gradient(180deg,#cddcf0 0%,#b8cbe5 100%)}
-.stage-section.open .stage-banner{border-bottom-color:var(--border)}
+.cross-banner{background:linear-gradient(180deg,#f0e6f6 0%,#e0d0ec 100%)}
+.cross-banner:hover{background:linear-gradient(180deg,#e8daf0 0%,#d6c4e6 100%)}
+.stage-section.open .stage-banner,.cross-section.open .cross-banner{border-bottom-color:var(--border)}
 .stage-num{width:60px;height:60px;border-radius:12px;background:var(--accent-dark);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;letter-spacing:.5px;font-size:9px;line-height:1.1;text-align:center}
 .num-big{font-size:24px;font-weight:800;line-height:1;margin-bottom:2px}.num-sub{font-size:9px;font-weight:800;letter-spacing:1.2px;opacity:.7}
 .cross-num{background:var(--purple)}
 .stage-info{flex-shrink:0;min-width:200px}
 .stage-title{font-size:22px;font-weight:800;color:var(--accent-dark);text-transform:uppercase;letter-spacing:-.3px;margin:0}
 .stage-sub{font-size:11px;font-weight:700;color:var(--accent);margin-top:2px;text-transform:uppercase;letter-spacing:1.5px}
-.stage-desc{flex:2;min-width:260px;color:#374151;font-size:13px;line-height:1.5}
-.stage-desc strong{color:var(--accent-dark)}
 .stage-arrow{font-size:22px;color:var(--accent-dark);font-weight:700;transition:transform .25s ease;flex-shrink:0;margin-left:auto}
-.stage-section.open .stage-arrow{transform:rotate(180deg)}
+.stage-section.open .stage-arrow,.cross-section.open .stage-arrow{transform:rotate(180deg)}
 .stage-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
-.stage-section.open .stage-body{max-height:8000px}
-.two-col{display:flex;gap:0;border-top:1px solid var(--border-light)}
-.future-col{flex:3;padding:18px 22px 22px;border-right:1px dashed var(--border-light);background:#fbfcfe}
-.manual-col{flex:2;padding:18px 22px 22px;background:#f3f4f6}
-.col-header{display:flex;align-items:center;gap:8px;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border-light)}
-.manual-col .col-header{border-bottom-color:#d1d5db}
-.col-dot{width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
-.future-dot{background:var(--green-light);color:#166534}.manual-dot{background:#e5e7eb;color:#4b5563}
-.col-title{font-size:11px;font-weight:800;letter-spacing:1.3px}
-.future-title{color:var(--accent-dark)}.manual-title{color:#4b5563}
-.col-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:999px;margin-left:auto;letter-spacing:.3px}
-.future-tag{background:#dbe7f6;color:var(--accent-dark);border:1px solid #B3CCE6}
-.manual-tag{background:#e5e7eb;color:#4b5563;border:1px solid #D1D5DB}
-.pcard{margin:8px 0;border-radius:6px;border:1px solid var(--border);background:#fff;overflow:hidden;cursor:pointer;box-shadow:var(--shadow);transition:border-color .15s,box-shadow .15s}
-.pcard:hover{box-shadow:0 3px 8px rgba(15,23,42,.08);border-color:#b7c7df}
-.pcard.open{border-color:var(--accent);box-shadow:var(--shadow-open)}
-.pcard-bar{display:flex;align-items:center;gap:8px;padding:9px 12px}
-.badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;letter-spacing:.3px}
-.pcard-name{font-size:12.5px;font-weight:600;color:#1f2937;flex:1;line-height:1.3}
-.st-dot{width:8px;height:8px;border-radius:50%;box-shadow:0 0 0 2px rgba(0,0,0,.06)}.st-active{background:var(--green)}.st-pending{background:var(--orange)}
-.pcard-arrow{font-size:11px;color:#9ca3af;transition:transform .18s ease;margin-left:2px}
-.pcard.open .pcard-arrow{transform:rotate(180deg);color:var(--accent-dark)}
-.pcard-body{max-height:0;overflow:hidden;transition:max-height .3s ease;border-top:0 solid transparent}
-.pcard.open .pcard-body{max-height:1800px;border-top:1px dashed var(--border-light)}
-.pcard-inner{padding:12px 14px 14px;background:var(--bg-alt)}
-.checklist-card{border-style:dashed}
-.checklist-badge{background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe}
-.checklist-tag{background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe}
-.checklist-inner{background:#fcfcff}
-.check-note{font-size:11px;color:#4b5563;padding:8px 10px;border:1px dashed #cbd5e1;border-radius:6px;background:#f8fafc;margin-bottom:10px}
-.check-phase{border:1px solid #e5e7eb;border-radius:8px;padding:8px 10px;margin:8px 0;background:#fff}
-.check-phase-title{font-size:11px;font-weight:800;color:#1e3a8a;letter-spacing:.4px;margin-bottom:6px;text-transform:uppercase}
-.check-group{margin:8px 0 6px}
-.check-group-name{font-size:11px;font-weight:700;color:#334155;margin-bottom:5px}
-.check-docs{display:grid;gap:4px}
-.check-doc-row{display:flex;gap:8px;font-size:11px;color:#334155;line-height:1.4}
-.check-doc-code{min-width:52px;font-weight:800;color:#0f766e}
-.check-doc-name{flex:1}
-.card-tags{display:flex;gap:5px;margin-left:auto;flex-shrink:0}
-.card-tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;white-space:nowrap;letter-spacing:.3px;text-transform:uppercase}
-.det-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
-.d-group{margin-bottom:9px}.d-group:last-child{margin-bottom:0}
-.d-label{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:4px;color:var(--text-light)}
-.d-label.lbl-trigger{color:var(--orange)}.d-label.lbl-features{color:var(--teal)}.d-label.lbl-approval{color:var(--purple)}.d-label.lbl-data{color:var(--green)}
-.d-item{font-size:11.5px;color:#374151;line-height:1.55;padding-left:14px;position:relative}
-.d-item::before{content:'2';position:absolute;left:2px;color:var(--text-light);font-size:11px}
-.appr-flow{display:flex;gap:6px;flex-wrap:wrap;align-items:stretch;margin-top:6px}
-.appr-card{border:1px solid #cbd5e1;border-radius:6px;padding:6px 9px;background:#f8fafc;min-width:110px;flex:1;max-width:200px}
-.appr-role{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;margin-bottom:1px;color:#155e75}
-.appr-name{font-size:11.5px;font-weight:700;color:#1e293b;line-height:1.25;margin-bottom:2px}
-.arrow-sep{display:flex;align-items:center;color:#94a3b8;font-weight:800;font-size:16px;margin:0 2px}
-.pain-row{font-size:12px;color:#4b5563;line-height:1.55;padding:6px 0;display:flex;gap:8px;align-items:flex-start;border-bottom:1px dashed #d1d5db}
-.pain-row:last-child{border-bottom:none}
-.pain-icon{color:#6b7280;font-weight:800;font-size:11px;flex-shrink:0;margin-top:1px}
-.cross-section{margin:14px 48px 0;background:#faf5ff;border:1px dashed #d8b4fe;border-radius:var(--radius);overflow:hidden;scroll-margin-top:80px}
-.cross-banner{background:linear-gradient(180deg,#f0e6f6 0%,#e0d0ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;user-select:none}
-.cross-banner:hover{background:linear-gradient(180deg,#e8daf0 0%,#d6c4e6 100%)}
-.cross-section.open .cross-banner{border-bottom-color:#d0b8e0}
-.cross-inner{padding:20px 28px}
+.stage-section.open .stage-body,.cross-section.open .stage-body{max-height:12000px}
+.badge{font-size:10.5px;font-weight:800;padding:4px 11px;border-radius:999px;white-space:nowrap;letter-spacing:.3px;margin-left:auto}
+.doc-section{padding:18px 28px;border-top:1px dashed var(--border-light)}
+.doc-section:first-child{border-top:1px solid var(--border-light)}
+.doc-section h4{margin:0 0 12px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--accent-dark)}
+.doc-section h4 .n{display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--accent-dark);color:#fff;text-align:center;line-height:22px;font-size:12px;margin-right:8px}
+ol.sop{margin:0;padding-left:22px}
+ol.sop li{margin:0 0 9px;font-size:13px;line-height:1.55;color:#374151}
+.guide-list{margin:0;padding-left:20px}
+.guide-list li{font-size:13px;line-height:1.6;margin-bottom:8px;color:#374151}
+table.matrix{width:100%;border-collapse:collapse;font-size:12px;margin-top:2px}
+table.matrix th{background:var(--accent-dark);color:#fff;text-align:left;padding:8px 10px;font-size:10.5px;letter-spacing:.3px}
+table.matrix td{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#374151}
+table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
+.control-chip{display:inline-block;background:var(--accent-light);color:var(--accent-dark);border:1px solid #BFD6EB;border-radius:5px;padding:1px 7px;font-size:10.5px;margin:1px 4px 1px 0}
+.cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cf-col{border-radius:8px;padding:14px 16px}
+.cf-col.current{background:var(--orange-light);border:1px solid #E9CDA8}
+.cf-col.future{background:var(--green-light);border:1px solid #B7D8C4}
+.cf-col h5{margin:0 0 8px;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
+.cf-col.current h5{color:var(--orange)}.cf-col.future h5{color:var(--green)}
+.cf-col ul{margin:0;padding-left:18px}.cf-col li{font-size:12.5px;margin-bottom:6px;line-height:1.5;color:#374151}
+.gap-note{background:var(--red-light);border:1px solid #f0c9c9;color:var(--red);border-radius:8px;padding:12px 16px;font-size:12.5px}
+.gap-note b{display:block;margin-bottom:4px}
+.sources{font-size:11px;color:var(--text-light);padding:12px 28px;background:var(--bg-alt);border-top:1px solid var(--border-light)}
 .metrics-strip{margin:20px 48px;padding:18px 24px;border-radius:var(--radius);border:1px solid var(--border);background:#fff;box-shadow:var(--shadow);display:flex;justify-content:space-around;flex-wrap:wrap;gap:8px}
 .metric{text-align:center;padding:6px 14px}.metric-val{font-size:26px;font-weight:800;color:var(--accent-dark)}
 .metric-lbl{font-size:12px;font-weight:600;color:var(--text-mid);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
@@ -111,8 +78,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .xref-form{color:#0F766E}
 .xref-subprocess{color:#1E4E79}
 .xref-personnel{color:#6F3CC3}
-@media print{.topnav,.ctrl-btns,.footer button{display:none!important}.stage-body,.pcard-body{max-height:none!important}.stage-section,.cross-section{page-break-inside:avoid;box-shadow:none}}
-@media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.two-col{flex-direction:column}.future-col{border-right:none;border-bottom:1px dashed var(--border-light)}.det-grid{grid-template-columns:1fr}.topnav{gap:12px}.nav-link{font-size:10.5px}}
+@media print{
+  .topnav,.ctrl-btns,.footer button{display:none!important}
+  body{font-size:11.5px}
+  .stage-body,.cross-section .stage-body{max-height:none!important}
+  .stage-section,.cross-section{margin:0 0 16px;box-shadow:none;border:1px solid #999;page-break-inside:avoid}
+  .doc-section{page-break-inside:avoid}
+  .stage-banner,.cross-banner{background:#eef2f6!important;cursor:default}
+  .stage-arrow{display:none}
+  .cf-grid{grid-template-columns:1fr 1fr}
+  a.xref{color:inherit;text-decoration:none}
+  .legend-bar{page-break-after:avoid}
+}
+@media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.doc-section{padding-left:16px;padding-right:16px}.cf-grid{grid-template-columns:1fr}.topnav{gap:12px}.nav-link{font-size:10.5px}}
 </style>
 </head>
 <body>
@@ -127,20 +105,19 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 </nav>
 
 <div class="header">
-  <div class="header-top"><div class="header-logo">Accounting</div><span class="header-kanji">v1</span></div>
-  <h1>Workflow Process Diagram</h1>
-  <p>Accounting workflow content driven from 04_accounting_content.json.</p>
+  <div class="header-top"><div class="header-logo">Accounting</div><span class="header-kanji">SOP</span></div>
+  <h1>Accounting SOP</h1>
+  <p>Invoicing, cash and receivables, bank reconciliation, and payroll/incentives across the Commercial, Bulk, Dealer, Retail, and Overall channels.</p>
 </div>
 
 <div class="legend-bar">
-  <div class="legend-item"><div class="legend-dot" style="background:#2E6A3D"></div> Active</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#B96B13"></div> Planned / In Progress</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#6F3CC3"></div> Cross-Stage</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#1E4E79"></div> Current / Manual</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#2E6A3D"></div> Confirmed with source data</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#B96B13"></div> Partially confirmed — see gap note</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#6F3CC3"></div> Cross-Stage Governance</div>
   <div class="ctrl-btns">
     <button class="ctrl-btn" onclick="expandAll()">Expand All</button>
     <button class="ctrl-btn" onclick="collapseAll()">Collapse All</button>
-    <button class="ctrl-btn" onclick="printShortBond()">&#128424; Print (Short Bond)</button>
+    <button class="ctrl-btn" onclick="printShortBond()">&#128424; Print</button>
   </div>
 </div>
 
@@ -148,422 +125,242 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">1</span><span class="num-sub">OF 5</span></div>
     <div class="stage-info"><div class="stage-title">COMMERCIAL</div><div class="stage-sub">Collection | Balance | Bank Recon</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+    <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
+    <span class="stage-arrow">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">A1A1 D1 Intake Form</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Live</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Editable</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">A request arrives through your chosen intake channel.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-accounting-0-0-0">A1A1.1 Collect project scope and owner details</div>
-<div class="d-item" id="feat-accounting-0-0-1">A1A1.2 Assign a request reference number</div>
-<div class="d-item" id="feat-accounting-0-0-2">A1A1.3 Save progress before final submission</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+<li id="accounting-0-sop-0">Make the <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> before delivery: check past receivables and dues with the customer. (A5C1.1)</li>
+<li id="accounting-0-sop-1">If the customer has past dues, flag the upcoming order. (A5C1.1.1)</li>
+<li id="accounting-0-sop-2">If past dues are within a passable / supervisor-approved range, approve the upcoming order. (A5C1.1.2)</li>
+<li id="accounting-0-sop-3">If there are no past dues, approve the upcoming order directly. (A5C1.1.3)</li>
+<li id="accounting-0-sop-4">Update and close Receivables: <a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a> collects the signed <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> (DR) and <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> from the Delivery Team. (A5C2.1.1)</li>
+<li id="accounting-0-sop-5">Check the monthly summary table of invoices for collection. (A5C2.1.2)</li>
+<li id="accounting-0-sop-6">Print the summary of <a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a>. (A5C2.1.3)</li>
+<li id="accounting-0-sop-7">Check and print the summary of Write-off / Loss Accounts. (A5C2.1.4)</li>
+<li id="accounting-0-sop-8"><a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">Bank Reconciliation</a>: update and check the summary table of amounts for <a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">bank reconciliation</a>. (A5C3.1)</li>
+<li id="accounting-0-sop-9">Resolve customer disputes: refer to the Sales Order; submit the paper to a superior if unresolved. (A5C4.1-A5C4.2)</li>
+<li id="accounting-0-sop-10">Payroll Incentive: prepare the incentive in payroll on the 15th and 30th. (A5C5.1)</li>
+<li id="accounting-0-sop-11">Prepare the <a href="forms.html#form-incentive-template" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-incentive-template&#39;);return false" title="Form: Incentive Template">Incentive template</a> for Commercial and Retail using <a href="forms.html#form-lut-forms" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-lut-forms&#39;);return false" title="Form: LUT forms">LUT forms</a> (2.7kg, 11kg, 50kg) to balance empty and field cylinder data. (A5C5.2)</li>
+</ol>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">AUTO</div><div class="appr-name">Create request</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Fill intake details</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Validate completeness</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Request summary</div>
-<div class="d-item">Open intake queue</div>
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="accounting-0-gl-0">No <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> is issued before the past-dues check on the customer&#x27;s AR; only a supervisor-approved past-due balance clears an order that has outstanding receivables.</li>
+<li id="accounting-0-gl-1"><a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a> and Write-off/Loss summaries are printed monthly without exception, whether or not there&#x27;s a specific collection issue that period.</li>
+<li id="accounting-0-gl-2">Unresolved customer disputes are escalated by referring back to the original Sales Order and submitting to a superior - not settled informally at the collection desk.</li>
+<li id="accounting-0-gl-3">Payroll incentives are computed only after <a href="forms.html#form-lut-forms" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-lut-forms&#39;);return false" title="Form: LUT forms">LUT forms</a> balance empty vs field cylinders; incentives are not paid out ahead of that balance check.</li>
+</ul>
 </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">PLANNED</span>
-        <span class="pcard-name">A1A2 Qualification Review</span>
-        <span class="st-dot st-pending" title="In Build"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Template</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Replace Me</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">The team reviews fit, effort, and delivery timing.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-accounting-0-1-0">Record qualification notes</div>
-<div class="d-item" id="feat-accounting-0-1-1">Highlight blockers and dependencies</div>
-<div class="d-item" id="feat-accounting-0-1-2">Route to the next owner</div>
+    <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
+<tr><th>Transaction / Decision</th><th>Threshold</th><th>Initiator</th><th>Reviewer</th><th>Approver</th><th>Control Activity</th></tr>
+<tr><td><a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> issuance (past-dues check)</td><td>Supervisor override for passable past dues</td><td><a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a></td><td>Acctg Supervisor</td><td><b>Acctg Supervisor (orders with past dues)</b></td><td><span class="control-chip">AR check before invoice</span><span class="control-chip">3-way flag: none / passable / blocked</span></td></tr>
+<tr><td>Receivables close-out</td><td>-</td><td><a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a></td><td>Acctg Supervisor</td><td><b>Acctg Supervisor</b></td><td><span class="control-chip">Monthly Aged Receivables print</span><span class="control-chip">Write-off/Loss summary</span></td></tr>
+<tr><td><a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">Bank reconciliation</a></td><td>-</td><td><a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a></td><td>Acctg Supervisor</td><td><b>Acctg Manager</b></td><td><span class="control-chip">Summary table cross-check</span></td></tr>
+<tr><td>Payroll incentive (15th/30th)</td><td>-</td><td><a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a></td><td>Acctg Supervisor</td><td><b>Acctg Manager</b></td><td><span class="control-chip">LUT balance required before payout</span></td></tr>
+</table>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Prepare context</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve direction</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Qualified request list</div>
-<div class="d-item">Decision notes</div>
+    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
+  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="accounting-0-cur-0"><a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a> and Write-off summaries are printed, not dashboarded - a stale figure is possible between print runs.</li><li id="accounting-0-cur-1">Dispute resolution travels as a physical paper submission to a superior.</li></ul></div>
+  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="accounting-0-fut-0">Real-time AR aging visible on demand instead of a monthly print cycle.</li><li id="accounting-0-fut-1">Digital dispute log with status tracking instead of a paper hand-off.</li></ul></div>
 </div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-accounting-0-0"><span class="pain-icon">&#10005;</span><span>A5C1 Make <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> (before delivery):</span></div>
-          <div class="pain-row" id="pp-accounting-0-1"><span class="pain-icon">&#10005;</span><span>A5C1.1 Check past receivables and dues with the customer</span></div>
-          <div class="pain-row" id="pp-accounting-0-2"><span class="pain-icon">&#10005;</span><span>A5C1.1.1 If customer has past dues, flag the upcoming order</span></div>
-          <div class="pain-row" id="pp-accounting-0-3"><span class="pain-icon">&#10005;</span><span>A5C1.1.2 If with passable or supervisor-approved past dues, approve the upcoming order</span></div>
-          <div class="pain-row" id="pp-accounting-0-4"><span class="pain-icon">&#10005;</span><span>A5C1.1.3 If no past dues, approve the upcoming order</span></div>
-          <div class="pain-row" id="pp-accounting-0-5"><span class="pain-icon">&#10005;</span><span>A5C2 Update and close Receivables:</span></div>
-          <div class="pain-row" id="pp-accounting-0-6"><span class="pain-icon">&#10005;</span><span>A5C2.1.1 <a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a> collect signed DR and <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> from Delivery Team</span></div>
-          <div class="pain-row" id="pp-accounting-0-7"><span class="pain-icon">&#10005;</span><span>A5C2.1.2 Check monthly summary table of invoices for collection</span></div>
-          <div class="pain-row" id="pp-accounting-0-8"><span class="pain-icon">&#10005;</span><span>A5C2.1.3 Print summary of Aged Receivables</span></div>
-          <div class="pain-row" id="pp-accounting-0-9"><span class="pain-icon">&#10005;</span><span>A5C2.1.4 Check and print summary of Write-off/Loss Accounts</span></div>
-          <div class="pain-row" id="pp-accounting-0-10"><span class="pain-icon">&#10005;</span><span>A5C3 <a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">Bank Reconciliation</a>:</span></div>
-          <div class="pain-row" id="pp-accounting-0-11"><span class="pain-icon">&#10005;</span><span>A5C3.1 Update and check summary table of amounts for <a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">bank reconciliation</a></span></div>
-          <div class="pain-row" id="pp-accounting-0-12"><span class="pain-icon">&#10005;</span><span>A5C4 Resolve customer disputes</span></div>
-          <div class="pain-row" id="pp-accounting-0-13"><span class="pain-icon">&#10005;</span><span>A5C4.1 Refer to the Sales Order xxx</span></div>
-          <div class="pain-row" id="pp-accounting-0-14"><span class="pain-icon">&#10005;</span><span>A5C4.2 Submit paper to superior</span></div>
-          <div class="pain-row" id="pp-accounting-0-15"><span class="pain-icon">&#10005;</span><span>A5C5 Payroll Incentive:</span></div>
-          <div class="pain-row" id="pp-accounting-0-16"><span class="pain-icon">&#10005;</span><span>A5C5.1 Prepare Incentive in Payroll (15th and 30th):</span></div>
-          <div class="pain-row" id="pp-accounting-0-17"><span class="pain-icon">&#10005;</span><span>A5C5.2 Prepare Incentive template for Commercial and Retail. Use <a href="forms.html#form-lut-forms" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-lut-forms&#39;);return false" title="Form: LUT forms">LUT forms</a>, (check 2.7kg, 11kg, 50kg) to balance empty and field cylinders data.</span></div>
-          <div class="pain-row" id="pp-accounting-0-18"><span class="pain-icon">&#10005;</span><span>NIL</span></div>
-        </div>
-      </div>
-    </div></div>
+</div>
+    <div class="sources"><b>Sources:</b> Merged from Process Systemization Portal draft + source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting &gt; Commercial (A5C1-A5C5).</div>
+  </div>
 </section>
 
 <section class="stage-section" id="stage-2">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">2</span><span class="num-sub">OF 5</span></div>
     <div class="stage-info"><div class="stage-title">BULK</div><div class="stage-sub">Collection | Balance | Bank Recon</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+    <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">Partially confirmed — see gap note</span>
+    <span class="stage-arrow">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#DCEAF5;color:#1E4E79;border:1px solid #BFD6EB">ACTIVE</span>
-        <span class="pcard-name">A2A1 Same as Commercial</span>
-        <span class="card-tags"><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Core</span><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Reusable</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">A qualified item moves into planning.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-accounting-1-0-0">A2A1.1 Define milestones</div>
-<div class="d-item" id="feat-accounting-1-0-1">Assign owners</div>
-<div class="d-item" id="feat-accounting-1-0-2">Outline acceptance criteria</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+<li id="accounting-1-sop-0"><a href="subprocess.html#subprocess-invoicing" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-invoicing&#39;);return false" title="Subprocess: Invoicing">Invoicing</a>, receivables, <a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">bank reconciliation</a>, and payroll incentive steps follow the same procedure as Accounting &gt; Commercial (A5C1-A5C5), per company specification.</li>
+<li id="accounting-1-sop-1">Bulk-specific exceptions to that procedure are referenced but not documented in either source.</li>
+</ol>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Draft plan</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve scope</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Planning tracker</div>
-<div class="d-item">Milestone summary</div>
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="accounting-1-gl-0">Accounting &gt; Bulk explicitly inherits the Commercial A5C1-A5C5 procedure; the undocumented exceptions should be confirmed with Accounting before this is finalized, particularly whether per-truck (rather than per-cylinder) reconciliation changes any AR or bank-rec step.</li>
+</ul>
 </div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-accounting-1-0"><span class="pain-icon">&#10005;</span><span>A5C2 Same as Acctg Commercial A5C1-A5C5</span></div>
-          <div class="pain-row" id="pp-accounting-1-1"><span class="pain-icon">&#10005;</span><span>A5C2 Exceptions</span></div>
-        </div>
-      </div>
-    </div></div>
+    <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
+<tr><th>Transaction / Decision</th><th>Threshold</th><th>Initiator</th><th>Reviewer</th><th>Approver</th><th>Control Activity</th></tr>
+<tr><td>Bulk <a href="subprocess.html#subprocess-invoicing" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-invoicing&#39;);return false" title="Subprocess: Invoicing">invoicing</a> &amp; receivables (inherits Commercial)</td><td>-</td><td><a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a></td><td>Acctg Supervisor</td><td><b>Acctg Supervisor</b></td><td><span class="control-chip">Same as Commercial</span><span class="control-chip">Exceptions pending</span></td></tr>
+</table>
+</div>
+    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
+  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="accounting-1-cur-0">Bulk accounting handled as an unexceptioned copy of Commercial; per-truck reconciliation differences (Operations &gt; Industrial) are not reflected in the accounting procedure.</li></ul></div>
+  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="accounting-1-fut-0">Confirm and document whether per-truck gain computation requires a distinct AR/bank-rec step, then encode it explicitly.</li></ul></div>
+</div>
+</div>
+    <div class="doc-section gap-note-wrap"><div class="gap-note"><b>Data gap flagged for client confirmation</b>The source site flags this stage as &quot;Same as Acctg Commercial A5C1-A5C5&quot; plus &quot;Exceptions&quot;, but the exceptions field is blank, and the process manual does not cover Accounting &gt; Bulk separately. Recommend confirming with Accounting whether Bulk&#x27;s per-truck (not per-cylinder) fulfilment changes any receivables or reconciliation step.</div></div>
+    <div class="sources"><b>Sources:</b> Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting &gt; Bulk (placeholder). No corresponding section in &quot;MGC LPG Process Manual v2.docx&quot;.</div>
+  </div>
 </section>
 
 <section class="stage-section" id="stage-3">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">3</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">DEALER</div><div class="stage-sub">Collection | Balance | Bank Recon</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+    <div class="stage-info"><div class="stage-title">DEALER</div><div class="stage-sub">Collection (Charge/Installment/PDC) | Balance | Bank Recon</div></div>
+    <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
+    <span class="stage-arrow">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard checklist-card" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge checklist-badge">SECTION</span>
-        <span class="pcard-name">A3A1 Execution Checklist</span>
-        <span class="card-tags"><span class="card-tag checklist-tag">v1.0</span><span class="card-tag checklist-tag">Stage 3</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner checklist-inner">
-        <div class="check-note">This section block is optional. Use it when you want a detailed checklist inside the same stage layout.</div>
-        <div class="check-phase">
-          <div class="check-phase-title">PHASE 1: Pre-Launch Inputs</div>
-          <div class="check-group">
-            <div class="check-group-name">Content Requirements</div>
-            <div class="check-docs">
-              <div class="check-doc-row"><span class="check-doc-code">C1.1</span><span class="check-doc-name">Business summary</span></div>
-              <div class="check-doc-row"><span class="check-doc-code">C1.2</span><span class="check-doc-name">Approved copy blocks</span></div>
-            </div>
-          </div>
-          <div class="check-group">
-            <div class="check-group-name">Design Inputs</div>
-            <div class="check-docs">
-              <div class="check-doc-row"><span class="check-doc-code">C2.1</span><span class="check-doc-name">Brand palette</span></div>
-              <div class="check-doc-row"><span class="check-doc-code">C2.2</span><span class="check-doc-name">Typography direction</span></div>
-            </div>
-          </div>
-        </div>
-        <div class="check-phase">
-          <div class="check-phase-title">PHASE 2: Release Readiness</div>
-          <div class="check-group">
-            <div class="check-group-name">QA</div>
-            <div class="check-docs">
-              <div class="check-doc-row"><span class="check-doc-code">Q1.1</span><span class="check-doc-name">Checklist signoff</span></div>
-              <div class="check-doc-row"><span class="check-doc-code">Q1.2</span><span class="check-doc-name">Final approval notes</span></div>
-            </div>
-          </div>
-        </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">ACTIVE</span>
-        <span class="pcard-name">A3A1.1 Same as Commercial</span>
-        <span class="st-dot st-pending" title="In Build"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#EFE7FB;color:#6F3CC3;border:1px solid #6F3CC322">Checklist Compatible</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Sample</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">x.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-accounting-2-1-0">Track progress by milestone</div>
-<div class="d-item" id="feat-accounting-2-1-1">Log implementation notes</div>
-<div class="d-item" id="feat-accounting-2-1-2">Surface dependencies early</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+<li id="accounting-2-sop-0">Before approving the order, verify the dealer&#x27;s AR with CNC - check past dues and other factors first.</li>
+<li id="accounting-2-sop-1">Confirm the payment type: about 70% of dealers are on installment, about 30% are COD.</li>
+<li id="accounting-2-sop-2">For installment, collect <a href="forms.html#form-post-dated-checks" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-post-dated-checks&#39;);return false" title="Form: Post-Dated Checks">Post-Dated Checks</a> (PDCs) as payment security.</li>
+<li id="accounting-2-sop-3">If the dealer cannot issue PDCs, have them execute a <a href="forms.html#form-promissory-note" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-promissory-note&#39;);return false" title="Form: Promissory Note">Promissory Note</a> instead.</li>
+<li id="accounting-2-sop-4">Track the installment schedule in Google Sheets (due dates and payment completion dates).</li>
+<li id="accounting-2-sop-5">Issue the Charge <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> on terms and encode it in ACCPAC before sending to the client.</li>
+<li id="accounting-2-sop-6">File the countered hardcopy <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a>; CNC accounts stay at CNC and a messenger brings them to the client.</li>
+<li id="accounting-2-sop-7">Update and close receivables; check the monthly summary of invoices for collection.</li>
+<li id="accounting-2-sop-8">Print the <a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a> summary and check write-off/loss accounts.</li>
+<li id="accounting-2-sop-9">Perform <a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">bank reconciliation</a> and resolve dealer disputes (refer back to the Sales Order).</li>
+<li id="accounting-2-sop-10">Apply dealer pricing from the MGC Pricing Matrix (per-channel buffer and per-dealer adjustment).</li>
+</ol>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Build and update</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Review output</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Build status board</div>
-<div class="d-item">Readiness summary</div>
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="accounting-2-gl-0">Dealer AR is checked against CNC before any order is approved - this runs even for dealers presumed current, not only for flagged accounts.</li>
+<li id="accounting-2-gl-1">A dealer without PDCs is not simply denied credit - a <a href="forms.html#form-promissory-note" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-promissory-note&#39;);return false" title="Form: Promissory Note">Promissory Note</a> is the required fallback before COD is enforced.</li>
+<li id="accounting-2-gl-2">Installment schedules are tracked in a dedicated Google Sheet with due dates and completion dates; a missed due date should surface there, not only get noticed at the monthly <a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a> review.</li>
+<li id="accounting-2-gl-3">CNC-held accounts are physically couriered by messenger, matching the CNC filing convention already in place.</li>
+</ul>
 </div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-accounting-2-0"><span class="pain-icon">&#10005;</span><span>A5C3 Same as Acctg Commercial A5C1-A5C5</span></div>
-          <div class="pain-row" id="pp-accounting-2-1"><span class="pain-icon">&#10005;</span><span>A5C3 Exceptions</span></div>
-        </div>
-      </div>
-    </div></div>
+    <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
+<tr><th>Transaction / Decision</th><th>Threshold</th><th>Initiator</th><th>Reviewer</th><th>Approver</th><th>Control Activity</th></tr>
+<tr><td>Dealer credit approval (AR/CNC check)</td><td>~70% installment / ~30% COD</td><td><a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a> (AR)</td><td>Sales (<a href="personnel.html#personnel-mel" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-mel&#39;);return false" title="Personnel: Mel">Mel</a> - Sales/AR)</td><td><b>Acctg Supervisor</b></td><td><span class="control-chip">CNC past-dues check</span><span class="control-chip">PDC or Promissory Note required</span></td></tr>
+<tr><td>Charge <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> issuance</td><td>-</td><td><a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a></td><td>Acctg Supervisor</td><td><b>Acctg Supervisor</b></td><td><span class="control-chip">ACCPAC encoding before client send</span><span class="control-chip">Countered hardcopy filed</span></td></tr>
+<tr><td>Installment tracking &amp; collection</td><td>-</td><td><a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a></td><td>Acctg Supervisor</td><td><b>Acctg Manager</b></td><td><span class="control-chip">Google Sheets due-date tracker</span><span class="control-chip">Aged Receivables monthly print</span></td></tr>
+<tr><td>Dealer dispute resolution</td><td>-</td><td><a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a></td><td>Sales (refer to Sales Order)</td><td><b>Acctg Supervisor</b></td><td><span class="control-chip">Bank reconciliation cross-check</span></td></tr>
+</table>
+</div>
+    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
+  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="accounting-2-cur-0">Installment due dates tracked in a standalone Google Sheet, separate from ACCPAC and from the <a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a> print.</li><li id="accounting-2-cur-1">CNC accounts couriered physically by messenger rather than transmitted digitally.</li></ul></div>
+  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="accounting-2-fut-0">A single AR system linking PDC/<a href="forms.html#form-promissory-note" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-promissory-note&#39;);return false" title="Form: Promissory Note">Promissory Note</a> status, installment due dates, and ACCPAC <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> status, so a missed due date raises a flag automatically instead of waiting for the monthly <a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a> print.</li></ul></div>
+</div>
+</div>
+    <div class="sources"><b>Sources:</b> &quot;MGC LPG Process Manual v2.docx&quot; - Accounting &gt; Dealer (invoicing notes, dealer payment terms, Commercial accounting card cross-reference).</div>
+  </div>
 </section>
 
 <section class="stage-section" id="stage-4">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">4</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">RETAIL</div><div class="stage-sub">Collection | Balance | Bank Recon</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+    <div class="stage-info"><div class="stage-title">RETAIL</div><div class="stage-sub">Collection (Cash/COD) | Balance | Bank Recon</div></div>
+    <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
+    <span class="stage-arrow">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">A4A1 Same as Commercial</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Pending</span><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Replace Me</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">The team completes execution and requests release approval.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-accounting-3-0-0">Capture release notes</div>
-<div class="d-item" id="feat-accounting-3-0-1">Confirm handoff status</div>
-<div class="d-item" id="feat-accounting-3-0-2">Log go-live decision</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+<li id="accounting-3-sop-0">Issue the <a href="forms.html#form-entry-exit-slip" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-entry-exit-slip&#39;);return false" title="Form: Entry/Exit Slip">entry/exit slip</a> (EES) to the customer, encode it, and have the <a href="personnel.html#personnel-guard" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-guard&#39;);return false" title="Personnel: Guard">guard</a> validate the tank classification.</li>
+<li id="accounting-3-sop-1">After loading, the checker goes to Accounting; issue the <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a> a cash/charge <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> or DR.</li>
+<li id="accounting-3-sop-2"><a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">Cashier</a> collects the cash; the receipt (recibo) must match the empty and filled cylinders (the LUT contents).</li>
+<li id="accounting-3-sop-3">Checker encodes in AppSheet (= Refilling Report); AppSheet and the receipt must match (basis of the <a href="forms.html#form-grr" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-grr&#39;);return false" title="Form: GRR">GRR</a>).</li>
+<li id="accounting-3-sop-4">Forward retail cash invoices straight to the <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a> at Plant Accounting; collect cash and documents by 4-5pm.</li>
+<li id="accounting-3-sop-5">Balance sales and the LUT within the same day (2.7kg, 11kg, 50kg must be indicated and balance).</li>
+<li id="accounting-3-sop-6">Audit cash sales, collections, and returns from advances.</li>
+<li id="accounting-3-sop-7">Validate the cash collection report from the <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a> and check the deposit balancing at the bank.</li>
+<li id="accounting-3-sop-8">Prepare the payroll incentive (15th and 30th) using <a href="forms.html#form-lut-forms" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-lut-forms&#39;);return false" title="Form: LUT forms">LUT forms</a> to balance empty and field cylinders.</li>
+</ol>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Check release</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve launch</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Release history</div>
-<div class="d-item">Launch approval log</div>
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="accounting-3-gl-0">The recibo must match empty and filled cylinder counts (LUT contents) before cash is considered collected - a mismatch holds the transaction rather than being resolved by adjusting the receipt after the fact.</li>
+<li id="accounting-3-gl-1">AppSheet entry and the physical receipt must match in quantity, mirroring the same rule used in Operations &gt; Dealer refilling.</li>
+<li id="accounting-3-gl-2">Sales and the LUT are balanced same-day, not at month-end - this is a daily close, not a periodic one.</li>
+<li id="accounting-3-gl-3">Cash and documents are due to the Plant Accounting <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a> by 4-5pm; a late submission is an exception to flag, not a routine occurrence.</li>
+</ul>
 </div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-accounting-3-0"><span class="pain-icon">&#10005;</span><span>A5C4 Same as Acctg Commercial A5C1-A5C5</span></div>
-          <div class="pain-row" id="pp-accounting-3-1"><span class="pain-icon">&#10005;</span><span>A5C4 Exceptions</span></div>
-        </div>
-      </div>
-    </div></div>
+    <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
+<tr><th>Transaction / Decision</th><th>Threshold</th><th>Initiator</th><th>Reviewer</th><th>Approver</th><th>Control Activity</th></tr>
+<tr><td>Cash/charge <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> at loading</td><td>-</td><td>Checker</td><td><a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">Cashier</a></td><td><b>- (cash sale)</b></td><td><span class="control-chip">EES validated</span><span class="control-chip">LUT-matched recibo</span></td></tr>
+<tr><td>Daily cash &amp; LUT balancing</td><td>Same-day close</td><td><a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">Cashier</a></td><td><a href="personnel.html#personnel-vicky" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-vicky&#39;);return false" title="Personnel: Vicky">Vicky</a> (Acctg)</td><td><b><a href="personnel.html#personnel-vicky" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-vicky&#39;);return false" title="Personnel: Vicky">Vicky</a></b></td><td><span class="control-chip">2.7kg/11kg/50kg LUT balance</span><span class="control-chip">AppSheet = receipt match</span></td></tr>
+<tr><td>Bank deposit validation</td><td>-</td><td><a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">Cashier</a></td><td><a href="personnel.html#personnel-vicky" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-vicky&#39;);return false" title="Personnel: Vicky">Vicky</a></td><td><b>Acctg Manager</b></td><td><span class="control-chip">Cash collection report vs bank deposit</span></td></tr>
+</table>
+</div>
+    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
+  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="accounting-3-cur-0">Cash and documents are physically collected by a fixed 4-5pm cutoff, creating a hard daily bottleneck at the plant <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a>.</li><li id="accounting-3-cur-1">LUT balancing is done same-day but by hand against the AppSheet entry rather than system-matched.</li></ul></div>
+  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="accounting-3-fut-0">Automatic same-day LUT/AppSheet/receipt three-way match, flagging mismatches before the 4-5pm cutoff instead of during the manual audit.</li></ul></div>
+</div>
+</div>
+    <div class="sources"><b>Sources:</b> &quot;MGC LPG Process Manual v2.docx&quot; - Accounting &gt; Retail (plant-accounting duties, Commercial accounting card A5C cross-reference).</div>
+  </div>
 </section>
 
 <section class="stage-section" id="stage-5">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">5</span><span class="num-sub">OF 5</span></div>
     <div class="stage-info"><div class="stage-title">OVERALL</div><div class="stage-sub">Monitoring | Updates | Reports</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+    <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
+    <span class="stage-arrow">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">A5A1 Consolidate and check all relevant data</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Odoo Module</span><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Report</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Request Bi-monthly or Monthly Financial Statements</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-accounting-4-0-0">A5A1.1 Versatile, Multi-format 3 Financial Statements and Payroll Summary</div>
-<div class="d-item" id="feat-accounting-4-0-1">A5A1.2 Can drill into individual summary amounts</div>
-<div class="d-item" id="feat-accounting-4-0-2">A5A1.3 Instant pdf or excel for further analysis</div>
-<div class="d-item" id="feat-accounting-4-0-3">A5A1.4 Multi-data Comparison, Multi-channel data separation</div>
-<div class="d-item" id="feat-accounting-4-0-4">A5A1.5 Budget vs Actual Summaries</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+<li id="accounting-4-sop-0">Consolidate and check all relevant data on request - bi-monthly or monthly <a href="subprocess.html#subprocess-financial-statements" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-financial-statements&#39;);return false" title="Subprocess: Financial Statements">Financial Statements</a>. (A5A1)</li>
+<li id="accounting-4-sop-1">Produce versatile, multi-format <a href="subprocess.html#subprocess-financial-statements" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-financial-statements&#39;);return false" title="Subprocess: Financial Statements">financial statements</a> and payroll summary; drill into individual summary amounts. (A5A1.1-A5A1.2)</li>
+<li id="accounting-4-sop-2">Generate instant PDF or Excel exports for further analysis; separate data by channel; compare Budget vs Actual. (A5A1.3-A5A1.5)</li>
+<li id="accounting-4-sop-3">Profit and Loss Statement: ensure all entries are encoded, refresh the P&amp;L table, and print the monthly P&amp;L Statement. (A5C5.1.1)</li>
+<li id="accounting-4-sop-4">Cash Flow Statement: ensure all entries are encoded, refresh the Cash Flow table, and print the monthly CF Statement. (A5C5.1.2)</li>
+<li id="accounting-4-sop-5">Balance Sheet: ensure all entries are encoded, refresh the Balance Sheet table, and print the monthly BS Statement. (A5C5.1.3)</li>
+<li id="accounting-4-sop-6">Prepare the Payroll Summary, consolidating all incentive computations and salary data for the period. (A5C5.2)</li>
+<li id="accounting-4-sop-7"><a href="subprocess.html#subprocess-industrial-projects" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-industrial-projects&#39;);return false" title="Subprocess: Industrial Projects">Industrial Projects</a>: track Budget P&amp;L against Actual P&amp;L and timeline. (A5C5.3)</li>
+</ol>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Log findings</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Prioritize follow-up</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Monthly, Yearly or period-based 3 Financial Statements</div>
-<div class="d-item">Ledgers/accounts Reports</div>
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="accounting-4-gl-0">All three <a href="subprocess.html#subprocess-financial-statements" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-financial-statements&#39;);return false" title="Subprocess: Financial Statements">financial statements</a> (P&amp;L, Cash Flow, Balance Sheet) require full entry encoding before the monthly refresh - a partial encode is not printed as final.</li>
+<li id="accounting-4-gl-1"><a href="subprocess.html#subprocess-industrial-projects" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-industrial-projects&#39;);return false" title="Subprocess: Industrial Projects">Industrial Projects</a> are tracked with a Budget P&amp;L set at project start, compared against Actual P&amp;L throughout - variance review is continuous, not just at project close.</li>
+<li id="accounting-4-gl-2">The Payroll Summary is only finalized after the <a href="forms.html#form-incentive-template" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-incentive-template&#39;);return false" title="Form: Incentive Template">Incentive template</a> (LUT-balanced, see Commercial/Retail) is complete for the period.</li>
+</ul>
 </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">O1 Improvement Loop</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Iterative</span><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Reusable</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Feedback arrives after launch.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-accounting-4-1-0">Track enhancements</div>
-<div class="d-item" id="feat-accounting-4-1-1">Measure impact</div>
-<div class="d-item" id="feat-accounting-4-1-2">Feed new items into discovery</div>
+    <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
+<tr><th>Transaction / Decision</th><th>Threshold</th><th>Initiator</th><th>Reviewer</th><th>Approver</th><th>Control Activity</th></tr>
+<tr><td>Monthly financial statement close (P&amp;L / CF / BS)</td><td>-</td><td><a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a></td><td>Acctg Supervisor</td><td><b>Acctg Manager / Controller</b></td><td><span class="control-chip">Full entry encoding before refresh</span><span class="control-chip">Budget vs Actual comparison</span></td></tr>
+<tr><td>Payroll Summary consolidation</td><td>-</td><td><a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a></td><td>Acctg Supervisor</td><td><b>Acctg Manager</b></td><td><span class="control-chip">Depends on finalized Incentive template</span></td></tr>
+<tr><td><a href="subprocess.html#subprocess-industrial-projects" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-industrial-projects&#39;);return false" title="Subprocess: Industrial Projects">Industrial Projects</a> Budget vs Actual</td><td>-</td><td>Project Acctg</td><td>Industrial Engineer</td><td><b>Acctg Manager</b></td><td><span class="control-chip">Budget PNL vs Actual PNL</span><span class="control-chip">Timeline tracking</span></td></tr>
+</table>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Log findings</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Prioritize follow-up</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Improvement backlog</div>
-<div class="d-item">Outcome summary</div>
+    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
+  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="accounting-4-cur-0">Statements are printed monthly rather than continuously available; drill-down exists but the base refresh is still a manual, scheduled step.</li></ul></div>
+  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="accounting-4-fut-0">On-demand PDF/Excel exports with live drill-down (already specified as a target feature), so a mid-month check doesn&#x27;t wait for the scheduled refresh.</li></ul></div>
 </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#DCEAF5;color:#1E4E79;border:1px solid #BFD6EB">ACTIVE</span>
-        <span class="pcard-name">O1 Improvement Loop</span>
-        <span class="card-tags"><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Iterative</span><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Reusable</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Feedback arrives after launch.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-accounting-4-2-0">Track enhancements</div>
-<div class="d-item" id="feat-accounting-4-2-1">Measure impact</div>
-<div class="d-item" id="feat-accounting-4-2-2">Feed new items into discovery</div>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Log findings</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Prioritize follow-up</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Improvement backlog</div>
-<div class="d-item">Outcome summary</div>
-</div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">Manual workflow placeholders</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-accounting-4-0"><span class="pain-icon">&#10005;</span><span>A5C5.1 Finacial Statements:</span></div>
-          <div class="pain-row" id="pp-accounting-4-1"><span class="pain-icon">&#10005;</span><span>A5C5.1.1 Profit and Loss Statement:</span></div>
-          <div class="pain-row" id="pp-accounting-4-2"><span class="pain-icon">&#10005;</span><span>A5C5.1.1.1 Ensure that all entries above are encoded</span></div>
-          <div class="pain-row" id="pp-accounting-4-3"><span class="pain-icon">&#10005;</span><span>A5C5.1.1.2 Refresh the PNL Table to get the latest report. Print the monthly PNL Statement</span></div>
-          <div class="pain-row" id="pp-accounting-4-4"><span class="pain-icon">&#10005;</span><span>A5C5.1.2 Cash Flow Statement:</span></div>
-          <div class="pain-row" id="pp-accounting-4-5"><span class="pain-icon">&#10005;</span><span>A5C5.1.2.1 Ensure that all entries above are encoded</span></div>
-          <div class="pain-row" id="pp-accounting-4-6"><span class="pain-icon">&#10005;</span><span>A5C5.1.2.2 Refresh the Cash Flow Table to get the latest report. Print the monthly CF Statement</span></div>
-          <div class="pain-row" id="pp-accounting-4-7"><span class="pain-icon">&#10005;</span><span>A5C5.1.3 Balance Sheet</span></div>
-          <div class="pain-row" id="pp-accounting-4-8"><span class="pain-icon">&#10005;</span><span>A5C5.1.3.1 Ensure that all entries above are encoded</span></div>
-          <div class="pain-row" id="pp-accounting-4-9"><span class="pain-icon">&#10005;</span><span>A5C5.1.3.2 Refresh the Balance Sheet Table to get the latest report. Print the monthly BS Statement</span></div>
-          <div class="pain-row" id="pp-accounting-4-10"><span class="pain-icon">&#10005;</span><span>A5C5.2 Payroll</span></div>
-          <div class="pain-row" id="pp-accounting-4-11"><span class="pain-icon">&#10005;</span><span>A5C5.2.1 xxx Payroll Summary</span></div>
-          <div class="pain-row" id="pp-accounting-4-12"><span class="pain-icon">&#10005;</span><span>A5C5.3 <a href="subprocess.html#subprocess-industrial-projects" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-industrial-projects&#39;);return false" title="Subprocess: Industrial Projects">Industrial Projects</a></span></div>
-          <div class="pain-row" id="pp-accounting-4-13"><span class="pain-icon">&#10005;</span><span>A5C5.3.1 Budget PNL</span></div>
-          <div class="pain-row" id="pp-accounting-4-14"><span class="pain-icon">&#10005;</span><span>A5C5.3.2 Actual PNL</span></div>
-          <div class="pain-row" id="pp-accounting-4-15"><span class="pain-icon">&#10005;</span><span>A5C5.3.3 Timeline</span></div>
-        </div>
-      </div>
-    </div></div>
+    <div class="sources"><b>Sources:</b> Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting &gt; Overall (A5A1, A5C5.1-A5C5.3).</div>
+  </div>
 </section>
 
 <section class="cross-section" id="cross-stage">
   <div class="cross-banner" onclick="toggleStage(this)">
     <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>
-    <div class="stage-info"><div class="stage-title" style="color:#7030A0">CROSS-STAGE GOVERNANCE</div><div class="stage-sub" style="color:#7c3aed">Use this area for controls that affect all stages.</div></div>
+    <div class="stage-info"><div class="stage-title" style="color:#7030A0">CROSS-STAGE GOVERNANCE</div><div class="stage-sub" style="color:#7c3aed">Escalation and audit-trail rules that apply on top of every Accounting approval row above.</div></div>
     <span class="stage-arrow" style="color:#7030A0">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="cross-inner">
-      <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item">Track blockers across the full workflow</div>
-<div class="d-item">Maintain a shared audit trail</div>
-<div class="d-item">Standardize notifications and approvals</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="cross-gl-0">Any transaction blocked or disputed at its normal approval level escalates through the standard chain (System watch -&gt; Review -&gt; Manager) rather than being resolved informally between the two parties involved.</li>
+<li id="cross-gl-1">Sales Order Control Numbers, once assigned, are permanent and non-editable; a correction is made with a new document, never by editing the original control number.</li>
+<li id="cross-gl-2">The person who initiates a transaction is not the same person who posts it to the GL or reconciles it - segregation of duties applies at every posting step.</li>
+</ul>
 </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">AUTO</div><div class="appr-name">System watch</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Review updates</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve escalations</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Cross-stage status report</div>
-<div class="d-item">Escalation dashboard</div>
-</div>
-  </div></div>
+  </div>
 </section>
 
 <div class="metrics-strip">
-  <div class="metric"><div class="metric-val">5</div><div class="metric-lbl">Stages</div><div class="metric-sub">Editable sample structure</div></div>
-  <div class="metric"><div class="metric-val">1</div><div class="metric-lbl">Checklist Block</div><div class="metric-sub">Supported sectional format</div></div>
-  <div class="metric"><div class="metric-val">JSON</div><div class="metric-lbl">Content Source</div><div class="metric-sub">Easy to replace</div></div>
-  <div class="metric"><div class="metric-val">Pages</div><div class="metric-lbl">Deployment</div><div class="metric-sub">GitHub Pages ready</div></div>
+  <div class="metric"><div class="metric-val">5</div><div class="metric-lbl">Stages</div><div class="metric-sub">Commercial, Bulk, Dealer, Retail, Overall</div></div>
+  <div class="metric"><div class="metric-val">4</div><div class="metric-lbl">Confirmed</div><div class="metric-sub">Grounded in source data</div></div>
+  <div class="metric"><div class="metric-val">1</div><div class="metric-lbl">Partially Confirmed</div><div class="metric-sub">Bulk - gap flagged</div></div>
+  <div class="metric"><div class="metric-val">19</div><div class="metric-lbl">Personnel</div><div class="metric-sub">Named staff on roster</div></div>
 </div>
 
-<div class="footer"><div>Replace this footer text with your project name, owner, or release note.</div><button class="ctrl-btn" onclick="printShortBond()">&#128424; Print Short Bond</button></div>
+<div class="footer"><div>Masagana Gas Corporation - Accounting SOP - Merged from Process Systemization Portal + source site - Internal use only</div><button class="ctrl-btn" onclick="printShortBond()">&#128424; Print</button></div>
 
 <script>
 function toggleStage(el){var sec=el.closest('.stage-section')||el.closest('.cross-section');if(sec)sec.classList.toggle('open')}
-function toggleP(el){el.classList.toggle('open')}
-function expandAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.add('open')});document.querySelectorAll('.pcard').forEach(function(p){p.classList.add('open')})}
-function collapseAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.remove('open')});document.querySelectorAll('.pcard').forEach(function(p){p.classList.remove('open')})}
-function printShortBond(){var s=document.createElement('style');s.id='psb';s.innerHTML='@page{size:8.5in 13in;margin:0.4in 0.5in}';document.head.appendChild(s);window.print();setTimeout(function(){var e=document.getElementById('psb');if(e)e.remove()},1000)}
-function scrollToAnchor(id){var el=document.getElementById(id);if(!el)return;var stage=el.closest('.stage-section')||el.closest('.cross-section');if(stage)stage.classList.add('open');var pcard=el.closest('.pcard');if(pcard)pcard.classList.add('open');setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='2px solid var(--accent)';setTimeout(function(){el.style.outline=''},1800)},180)}
+function expandAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.add('open')})}
+function collapseAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.remove('open')})}
+function printShortBond(){var s=document.createElement('style');s.id='psb';s.innerHTML='@page{size:8.5in 14in;margin:0.5in 0.6in}';document.head.appendChild(s);expandAll();window.print();setTimeout(function(){var e=document.getElementById('psb');if(e)e.remove()},1000)}
+function scrollToAnchor(id){var el=document.getElementById(id);if(!el)return;var stage=el.closest('.stage-section')||el.closest('.cross-section');if(stage)stage.classList.add('open');setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='2px solid var(--accent)';setTimeout(function(){el.style.outline=''},1800)},180)}
 document.querySelectorAll('.topnav a').forEach(function(link){link.addEventListener('click',function(){var hash=link.getAttribute('href');if(!hash||!hash.startsWith('#'))return;var t=document.querySelector(hash);if(t)t.classList.add('open')});});
 </script>
 </body>

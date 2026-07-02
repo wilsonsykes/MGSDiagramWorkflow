@@ -76,100 +76,74 @@ def ensure_non_empty_str(errors: list[ValidationError], value: Any, path: str, f
     return False
 
 
-def is_section_block(entry: Any) -> bool:
-    return isinstance(entry, dict) and ("section" in entry and "phases" in entry)
+VALID_BADGES = {"confirmed", "pending"}
 
 
-def looks_like_card(entry: Any) -> bool:
-    return isinstance(entry, dict) and any(key in entry for key in ("id", "status", "name", "trigger"))
-
-
-def validate_card(card: Any, path: str, errors: list[ValidationError], file: Path) -> None:
-    if not expect_type(errors, card, dict, path, file):
+def validate_approval_matrix_row(row: Any, path: str, errors: list[ValidationError], file: Path) -> None:
+    if not expect_type(errors, row, dict, path, file):
         return
-    for key in ("id", "status", "name", "trigger"):
-        ensure_non_empty_str(errors, card.get(key), f"{path}.{key}", file)
-
-    if expect_type(errors, card.get("features"), list, f"{path}.features", file):
-        if not card["features"]:
-            errors.append(ValidationError(f"{path}.features must not be empty", file))
-        for i, feat in enumerate(card["features"]):
-            ensure_non_empty_str(errors, feat, f"{path}.features[{i}]", file)
-
-    if expect_type(errors, card.get("approval"), list, f"{path}.approval", file):
-        if not card["approval"]:
-            errors.append(ValidationError(f"{path}.approval must not be empty", file))
-        for i, appr in enumerate(card["approval"]):
-            ap = f"{path}.approval[{i}]"
-            if not expect_type(errors, appr, dict, ap, file):
-                continue
-            ensure_non_empty_str(errors, appr.get("role"), f"{ap}.role", file)
-            ensure_non_empty_str(errors, appr.get("label"), f"{ap}.label", file)
-
-    if expect_type(errors, card.get("data_outputs"), list, f"{path}.data_outputs", file):
-        if not card["data_outputs"]:
-            errors.append(ValidationError(f"{path}.data_outputs must not be empty", file))
-        for i, item in enumerate(card["data_outputs"]):
-            ensure_non_empty_str(errors, item, f"{path}.data_outputs[{i}]", file)
-
-    if expect_type(errors, card.get("tags"), list, f"{path}.tags", file):
-        if not card["tags"]:
-            errors.append(ValidationError(f"{path}.tags must not be empty", file))
-        for i, tag in enumerate(card["tags"]):
-            tp = f"{path}.tags[{i}]"
-            if not expect_type(errors, tag, dict, tp, file):
-                continue
-            missing = [k for k in ("text", "bg", "color") if k not in tag]
-            if missing:
-                errors.append(ValidationError(f"{tp} missing keys: {', '.join(missing)}", file))
-                continue
-            for key in ("text", "bg", "color"):
-                ensure_non_empty_str(errors, tag.get(key), f"{tp}.{key}", file)
+    for key in ("transaction", "initiator", "reviewer", "approver"):
+        ensure_non_empty_str(errors, row.get(key), f"{path}.{key}", file)
+    if "controls" in row and expect_type(errors, row.get("controls"), list, f"{path}.controls", file):
+        for i, c in enumerate(row["controls"]):
+            ensure_non_empty_str(errors, c, f"{path}.controls[{i}]", file)
 
 
-def validate_section_block(block: Any, path: str, errors: list[ValidationError], file: Path) -> None:
-    if not expect_type(errors, block, dict, path, file):
+def validate_current_future(cf: Any, path: str, errors: list[ValidationError], file: Path) -> None:
+    if not expect_type(errors, cf, dict, path, file):
         return
-    ensure_non_empty_str(errors, block.get("section"), f"{path}.section", file)
-    if "version" in block:
-        ensure_non_empty_str(errors, block.get("version"), f"{path}.version", file)
-    if "stage" in block and not isinstance(block.get("stage"), (int, str)):
-        errors.append(ValidationError(f"{path}.stage must be int or string", file))
-    if "note" in block:
-        ensure_non_empty_str(errors, block.get("note"), f"{path}.note", file)
+    for key in ("current", "future"):
+        if expect_type(errors, cf.get(key), list, f"{path}.{key}", file):
+            if not cf[key]:
+                errors.append(ValidationError(f"{path}.{key} must not be empty", file))
+            for i, item in enumerate(cf[key]):
+                ensure_non_empty_str(errors, item, f"{path}.{key}[{i}]", file)
 
-    if not expect_type(errors, block.get("phases"), list, f"{path}.phases", file):
+
+def validate_stage(stage: Any, path: str, errors: list[ValidationError], file: Path) -> None:
+    if not expect_type(errors, stage, dict, path, file):
         return
-    if not block["phases"]:
-        errors.append(ValidationError(f"{path}.phases must not be empty", file))
-    for pi, phase in enumerate(block["phases"]):
-        pp = f"{path}.phases[{pi}]"
-        if not expect_type(errors, phase, dict, pp, file):
-            continue
-        ensure_non_empty_str(errors, phase.get("title"), f"{pp}.title", file)
-        if "phase" in phase and not isinstance(phase.get("phase"), (int, str)):
-            errors.append(ValidationError(f"{pp}.phase must be int or string", file))
-        if "color" in phase:
-            ensure_non_empty_str(errors, phase.get("color"), f"{pp}.color", file)
-        if not expect_type(errors, phase.get("groups"), list, f"{pp}.groups", file):
-            continue
-        if not phase["groups"]:
-            errors.append(ValidationError(f"{pp}.groups must not be empty", file))
-        for gi, group in enumerate(phase["groups"]):
-            gp = f"{pp}.groups[{gi}]"
-            if not expect_type(errors, group, dict, gp, file):
-                continue
-            ensure_non_empty_str(errors, group.get("name"), f"{gp}.name", file)
-            if not expect_type(errors, group.get("documents"), list, f"{gp}.documents", file):
-                continue
-            if not group["documents"]:
-                errors.append(ValidationError(f"{gp}.documents must not be empty", file))
-            for di, doc in enumerate(group["documents"]):
-                dp = f"{gp}.documents[{di}]"
-                if not expect_type(errors, doc, dict, dp, file):
-                    continue
-                ensure_non_empty_str(errors, doc.get("code"), f"{dp}.code", file)
-                ensure_non_empty_str(errors, doc.get("name"), f"{dp}.name", file)
+    for key in ("romaji", "english"):
+        ensure_non_empty_str(errors, stage.get(key), f"{path}.{key}", file)
+
+    badge = stage.get("badge")
+    if badge is not None and badge not in VALID_BADGES:
+        errors.append(ValidationError(f"{path}.badge must be one of {sorted(VALID_BADGES)}, got {badge!r}", file))
+
+    if expect_type(errors, stage.get("sop_steps"), list, f"{path}.sop_steps", file):
+        if not stage["sop_steps"]:
+            errors.append(ValidationError(f"{path}.sop_steps must not be empty", file))
+        for i, step in enumerate(stage["sop_steps"]):
+            ensure_non_empty_str(errors, step, f"{path}.sop_steps[{i}]", file)
+
+    if expect_type(errors, stage.get("guidelines"), list, f"{path}.guidelines", file):
+        if not stage["guidelines"]:
+            errors.append(ValidationError(f"{path}.guidelines must not be empty", file))
+        for i, item in enumerate(stage["guidelines"]):
+            ensure_non_empty_str(errors, item, f"{path}.guidelines[{i}]", file)
+
+    if expect_type(errors, stage.get("approval_matrix"), list, f"{path}.approval_matrix", file):
+        if not stage["approval_matrix"]:
+            errors.append(ValidationError(f"{path}.approval_matrix must not be empty", file))
+        for i, row in enumerate(stage["approval_matrix"]):
+            validate_approval_matrix_row(row, f"{path}.approval_matrix[{i}]", errors, file)
+
+    validate_current_future(stage.get("current_future"), f"{path}.current_future", errors, file)
+
+    if "gap_note" in stage:
+        ensure_non_empty_str(errors, stage.get("gap_note"), f"{path}.gap_note", file)
+    if "sources" in stage:
+        ensure_non_empty_str(errors, stage.get("sources"), f"{path}.sources", file)
+
+
+def validate_cross_stage(cross: Any, path: str, errors: list[ValidationError], file: Path) -> None:
+    if not expect_type(errors, cross, dict, path, file):
+        return
+    ensure_non_empty_str(errors, cross.get("name"), f"{path}.name", file)
+    ensure_non_empty_str(errors, cross.get("description"), f"{path}.description", file)
+    if expect_type(errors, cross.get("guidelines"), list, f"{path}.guidelines", file):
+        for i, item in enumerate(cross["guidelines"]):
+            ensure_non_empty_str(errors, item, f"{path}.guidelines[{i}]", file)
 
 
 def validate_content(content: Any, file: Path) -> list[ValidationError]:
@@ -185,35 +159,10 @@ def validate_content(content: Any, file: Path) -> list[ValidationError]:
         if not content["stages"]:
             errors.append(ValidationError("$.stages must not be empty", file))
         for si, stage in enumerate(content["stages"]):
-            sp = f"$.stages[{si}]"
-            if not expect_type(errors, stage, dict, sp, file):
-                continue
-            for key in ("romaji", "english"):
-                ensure_non_empty_str(errors, stage.get(key), f"{sp}.{key}", file)
-            if expect_type(errors, stage.get("cards"), list, f"{sp}.cards", file):
-                if not stage["cards"]:
-                    errors.append(ValidationError(f"{sp}.cards must not be empty", file))
-                for ci, card in enumerate(stage["cards"]):
-                    cp = f"{sp}.cards[{ci}]"
-                    if is_section_block(card):
-                        validate_section_block(card, cp, errors, file)
-                    elif looks_like_card(card):
-                        validate_card(card, cp, errors, file)
-                    else:
-                        errors.append(ValidationError(f"{cp} must be either a standard card block or a checklist section block", file))
+            validate_stage(stage, f"$.stages[{si}]", errors, file)
 
-    if expect_type(errors, content.get("manual_stages"), list, "$.manual_stages", file):
-        if len(content["manual_stages"]) != len(content.get("stages", [])):
-            errors.append(ValidationError("$.manual_stages count must match $.stages count", file))
-        for mi, stage in enumerate(content["manual_stages"]):
-            mp = f"$.manual_stages[{mi}]"
-            if not expect_type(errors, stage, dict, mp, file):
-                continue
-            if expect_type(errors, stage.get("pain_points"), list, f"{mp}.pain_points", file):
-                if not stage["pain_points"]:
-                    errors.append(ValidationError(f"{mp}.pain_points must not be empty", file))
-                for pi, point in enumerate(stage["pain_points"]):
-                    ensure_non_empty_str(errors, point, f"{mp}.pain_points[{pi}]", file)
+    if "cross_stage" in content:
+        validate_cross_stage(content["cross_stage"], "$.cross_stage", errors, file)
     return errors
 
 

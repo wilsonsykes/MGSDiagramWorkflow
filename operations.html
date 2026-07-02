@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Workflow Process Diagram</title>
+<title>Operations SOP</title>
 <style>
 :root{--accent:#1E4E79;--accent-light:#DCEAF5;--accent-dark:#163A5A;--green:#2E6A3D;--green-light:#E3F0E6;--orange:#B96B13;--orange-light:#F9EEDC;--red:#B42318;--red-light:#FEE4E2;--purple:#6F3CC3;--purple-light:#EFE7FB;--teal:#0F766E;--teal-light:#DDF5F2;--bg:#FFFFFF;--bg-alt:#F6F8FB;--border:#D8DEE8;--border-light:#E8ECF2;--text:#142033;--text-mid:#445066;--text-light:#6B7484;--radius:10px;--shadow:0 1px 3px rgba(15,23,42,.06),0 1px 2px rgba(15,23,42,.04);--shadow-open:0 6px 20px rgba(15,23,42,.10)}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -27,80 +27,47 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .ctrl-btns{margin-left:auto;display:flex;gap:6px}
 .ctrl-btn{background:#fff;border:1px solid var(--border);color:var(--accent-dark);padding:5px 16px;border-radius:4px;font-size:11px;font-weight:600;font-family:inherit;cursor:pointer;letter-spacing:.4px;transition:all .12s}
 .ctrl-btn:hover{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
-.stage-section{margin:14px 48px 0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow);scroll-margin-top:80px}
-.stage-banner{background:linear-gradient(180deg,var(--accent-light) 0%,#c4d3ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;transition:background .2s ease;user-select:none}
+.stage-section,.cross-section{margin:14px 48px 0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow);scroll-margin-top:80px}
+.cross-section{background:#faf5ff;border:1px dashed #d8b4fe}
+.stage-banner,.cross-banner{background:linear-gradient(180deg,var(--accent-light) 0%,#c4d3ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;transition:background .2s ease;user-select:none}
 .stage-banner:hover{background:linear-gradient(180deg,#cddcf0 0%,#b8cbe5 100%)}
-.stage-section.open .stage-banner{border-bottom-color:var(--border)}
+.cross-banner{background:linear-gradient(180deg,#f0e6f6 0%,#e0d0ec 100%)}
+.cross-banner:hover{background:linear-gradient(180deg,#e8daf0 0%,#d6c4e6 100%)}
+.stage-section.open .stage-banner,.cross-section.open .cross-banner{border-bottom-color:var(--border)}
 .stage-num{width:60px;height:60px;border-radius:12px;background:var(--accent-dark);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;letter-spacing:.5px;font-size:9px;line-height:1.1;text-align:center}
 .num-big{font-size:24px;font-weight:800;line-height:1;margin-bottom:2px}.num-sub{font-size:9px;font-weight:800;letter-spacing:1.2px;opacity:.7}
 .cross-num{background:var(--purple)}
 .stage-info{flex-shrink:0;min-width:200px}
 .stage-title{font-size:22px;font-weight:800;color:var(--accent-dark);text-transform:uppercase;letter-spacing:-.3px;margin:0}
 .stage-sub{font-size:11px;font-weight:700;color:var(--accent);margin-top:2px;text-transform:uppercase;letter-spacing:1.5px}
-.stage-desc{flex:2;min-width:260px;color:#374151;font-size:13px;line-height:1.5}
-.stage-desc strong{color:var(--accent-dark)}
 .stage-arrow{font-size:22px;color:var(--accent-dark);font-weight:700;transition:transform .25s ease;flex-shrink:0;margin-left:auto}
-.stage-section.open .stage-arrow{transform:rotate(180deg)}
+.stage-section.open .stage-arrow,.cross-section.open .stage-arrow{transform:rotate(180deg)}
 .stage-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
-.stage-section.open .stage-body{max-height:8000px}
-.two-col{display:flex;gap:0;border-top:1px solid var(--border-light)}
-.future-col{flex:3;padding:18px 22px 22px;border-right:1px dashed var(--border-light);background:#fbfcfe}
-.manual-col{flex:2;padding:18px 22px 22px;background:#f3f4f6}
-.col-header{display:flex;align-items:center;gap:8px;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border-light)}
-.manual-col .col-header{border-bottom-color:#d1d5db}
-.col-dot{width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
-.future-dot{background:var(--green-light);color:#166534}.manual-dot{background:#e5e7eb;color:#4b5563}
-.col-title{font-size:11px;font-weight:800;letter-spacing:1.3px}
-.future-title{color:var(--accent-dark)}.manual-title{color:#4b5563}
-.col-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:999px;margin-left:auto;letter-spacing:.3px}
-.future-tag{background:#dbe7f6;color:var(--accent-dark);border:1px solid #B3CCE6}
-.manual-tag{background:#e5e7eb;color:#4b5563;border:1px solid #D1D5DB}
-.pcard{margin:8px 0;border-radius:6px;border:1px solid var(--border);background:#fff;overflow:hidden;cursor:pointer;box-shadow:var(--shadow);transition:border-color .15s,box-shadow .15s}
-.pcard:hover{box-shadow:0 3px 8px rgba(15,23,42,.08);border-color:#b7c7df}
-.pcard.open{border-color:var(--accent);box-shadow:var(--shadow-open)}
-.pcard-bar{display:flex;align-items:center;gap:8px;padding:9px 12px}
-.badge{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;letter-spacing:.3px}
-.pcard-name{font-size:12.5px;font-weight:600;color:#1f2937;flex:1;line-height:1.3}
-.st-dot{width:8px;height:8px;border-radius:50%;box-shadow:0 0 0 2px rgba(0,0,0,.06)}.st-active{background:var(--green)}.st-pending{background:var(--orange)}
-.pcard-arrow{font-size:11px;color:#9ca3af;transition:transform .18s ease;margin-left:2px}
-.pcard.open .pcard-arrow{transform:rotate(180deg);color:var(--accent-dark)}
-.pcard-body{max-height:0;overflow:hidden;transition:max-height .3s ease;border-top:0 solid transparent}
-.pcard.open .pcard-body{max-height:1800px;border-top:1px dashed var(--border-light)}
-.pcard-inner{padding:12px 14px 14px;background:var(--bg-alt)}
-.checklist-card{border-style:dashed}
-.checklist-badge{background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe}
-.checklist-tag{background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe}
-.checklist-inner{background:#fcfcff}
-.check-note{font-size:11px;color:#4b5563;padding:8px 10px;border:1px dashed #cbd5e1;border-radius:6px;background:#f8fafc;margin-bottom:10px}
-.check-phase{border:1px solid #e5e7eb;border-radius:8px;padding:8px 10px;margin:8px 0;background:#fff}
-.check-phase-title{font-size:11px;font-weight:800;color:#1e3a8a;letter-spacing:.4px;margin-bottom:6px;text-transform:uppercase}
-.check-group{margin:8px 0 6px}
-.check-group-name{font-size:11px;font-weight:700;color:#334155;margin-bottom:5px}
-.check-docs{display:grid;gap:4px}
-.check-doc-row{display:flex;gap:8px;font-size:11px;color:#334155;line-height:1.4}
-.check-doc-code{min-width:52px;font-weight:800;color:#0f766e}
-.check-doc-name{flex:1}
-.card-tags{display:flex;gap:5px;margin-left:auto;flex-shrink:0}
-.card-tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;white-space:nowrap;letter-spacing:.3px;text-transform:uppercase}
-.det-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}
-.d-group{margin-bottom:9px}.d-group:last-child{margin-bottom:0}
-.d-label{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:4px;color:var(--text-light)}
-.d-label.lbl-trigger{color:var(--orange)}.d-label.lbl-features{color:var(--teal)}.d-label.lbl-approval{color:var(--purple)}.d-label.lbl-data{color:var(--green)}
-.d-item{font-size:11.5px;color:#374151;line-height:1.55;padding-left:14px;position:relative}
-.d-item::before{content:'2';position:absolute;left:2px;color:var(--text-light);font-size:11px}
-.appr-flow{display:flex;gap:6px;flex-wrap:wrap;align-items:stretch;margin-top:6px}
-.appr-card{border:1px solid #cbd5e1;border-radius:6px;padding:6px 9px;background:#f8fafc;min-width:110px;flex:1;max-width:200px}
-.appr-role{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;margin-bottom:1px;color:#155e75}
-.appr-name{font-size:11.5px;font-weight:700;color:#1e293b;line-height:1.25;margin-bottom:2px}
-.arrow-sep{display:flex;align-items:center;color:#94a3b8;font-weight:800;font-size:16px;margin:0 2px}
-.pain-row{font-size:12px;color:#4b5563;line-height:1.55;padding:6px 0;display:flex;gap:8px;align-items:flex-start;border-bottom:1px dashed #d1d5db}
-.pain-row:last-child{border-bottom:none}
-.pain-icon{color:#6b7280;font-weight:800;font-size:11px;flex-shrink:0;margin-top:1px}
-.cross-section{margin:14px 48px 0;background:#faf5ff;border:1px dashed #d8b4fe;border-radius:var(--radius);overflow:hidden;scroll-margin-top:80px}
-.cross-banner{background:linear-gradient(180deg,#f0e6f6 0%,#e0d0ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;user-select:none}
-.cross-banner:hover{background:linear-gradient(180deg,#e8daf0 0%,#d6c4e6 100%)}
-.cross-section.open .cross-banner{border-bottom-color:#d0b8e0}
-.cross-inner{padding:20px 28px}
+.stage-section.open .stage-body,.cross-section.open .stage-body{max-height:12000px}
+.badge{font-size:10.5px;font-weight:800;padding:4px 11px;border-radius:999px;white-space:nowrap;letter-spacing:.3px;margin-left:auto}
+.doc-section{padding:18px 28px;border-top:1px dashed var(--border-light)}
+.doc-section:first-child{border-top:1px solid var(--border-light)}
+.doc-section h4{margin:0 0 12px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--accent-dark)}
+.doc-section h4 .n{display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--accent-dark);color:#fff;text-align:center;line-height:22px;font-size:12px;margin-right:8px}
+ol.sop{margin:0;padding-left:22px}
+ol.sop li{margin:0 0 9px;font-size:13px;line-height:1.55;color:#374151}
+.guide-list{margin:0;padding-left:20px}
+.guide-list li{font-size:13px;line-height:1.6;margin-bottom:8px;color:#374151}
+table.matrix{width:100%;border-collapse:collapse;font-size:12px;margin-top:2px}
+table.matrix th{background:var(--accent-dark);color:#fff;text-align:left;padding:8px 10px;font-size:10.5px;letter-spacing:.3px}
+table.matrix td{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#374151}
+table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
+.control-chip{display:inline-block;background:var(--accent-light);color:var(--accent-dark);border:1px solid #BFD6EB;border-radius:5px;padding:1px 7px;font-size:10.5px;margin:1px 4px 1px 0}
+.cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cf-col{border-radius:8px;padding:14px 16px}
+.cf-col.current{background:var(--orange-light);border:1px solid #E9CDA8}
+.cf-col.future{background:var(--green-light);border:1px solid #B7D8C4}
+.cf-col h5{margin:0 0 8px;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
+.cf-col.current h5{color:var(--orange)}.cf-col.future h5{color:var(--green)}
+.cf-col ul{margin:0;padding-left:18px}.cf-col li{font-size:12.5px;margin-bottom:6px;line-height:1.5;color:#374151}
+.gap-note{background:var(--red-light);border:1px solid #f0c9c9;color:var(--red);border-radius:8px;padding:12px 16px;font-size:12.5px}
+.gap-note b{display:block;margin-bottom:4px}
+.sources{font-size:11px;color:var(--text-light);padding:12px 28px;background:var(--bg-alt);border-top:1px solid var(--border-light)}
 .metrics-strip{margin:20px 48px;padding:18px 24px;border-radius:var(--radius);border:1px solid var(--border);background:#fff;box-shadow:var(--shadow);display:flex;justify-content:space-around;flex-wrap:wrap;gap:8px}
 .metric{text-align:center;padding:6px 14px}.metric-val{font-size:26px;font-weight:800;color:var(--accent-dark)}
 .metric-lbl{font-size:12px;font-weight:600;color:var(--text-mid);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
@@ -111,36 +78,46 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .xref-form{color:#0F766E}
 .xref-subprocess{color:#1E4E79}
 .xref-personnel{color:#6F3CC3}
-@media print{.topnav,.ctrl-btns,.footer button{display:none!important}.stage-body,.pcard-body{max-height:none!important}.stage-section,.cross-section{page-break-inside:avoid;box-shadow:none}}
-@media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.two-col{flex-direction:column}.future-col{border-right:none;border-bottom:1px dashed var(--border-light)}.det-grid{grid-template-columns:1fr}.topnav{gap:12px}.nav-link{font-size:10.5px}}
+@media print{
+  .topnav,.ctrl-btns,.footer button{display:none!important}
+  body{font-size:11.5px}
+  .stage-body,.cross-section .stage-body{max-height:none!important}
+  .stage-section,.cross-section{margin:0 0 16px;box-shadow:none;border:1px solid #999;page-break-inside:avoid}
+  .doc-section{page-break-inside:avoid}
+  .stage-banner,.cross-banner{background:#eef2f6!important;cursor:default}
+  .stage-arrow{display:none}
+  .cf-grid{grid-template-columns:1fr 1fr}
+  a.xref{color:inherit;text-decoration:none}
+  .legend-bar{page-break-after:avoid}
+}
+@media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.doc-section{padding-left:16px;padding-right:16px}.cf-grid{grid-template-columns:1fr}.topnav{gap:12px}.nav-link{font-size:10.5px}}
 </style>
 </head>
 <body>
 <nav class="topnav">
   <div class="nav-logo">Operations</div>
   <a href="#stage-1" class="nav-link">1 &middot; Commercial</a>
-  <a href="#stage-2" class="nav-link">2 &middot; Bulk</a>
+  <a href="#stage-2" class="nav-link">2 &middot; Industrial (Bulk)</a>
   <a href="#stage-3" class="nav-link">3 &middot; Dealer</a>
   <a href="#stage-4" class="nav-link">4 &middot; Retail</a>
-  <a href="#stage-5" class="nav-link">5 &middot; Overall</a>
+  <a href="#stage-5" class="nav-link">5 &middot; Company-Wide</a>
   <a href="#cross-stage" class="nav-link">Cross-Stage</a>
 </nav>
 
 <div class="header">
-  <div class="header-top"><div class="header-logo">Operations</div><span class="header-kanji">v1</span></div>
-  <h1>Workflow Process Diagram</h1>
-  <p>Legend: C-Current processes, A-Future processes, S - System features.</p>
+  <div class="header-top"><div class="header-logo">Operations</div><span class="header-kanji">SOP</span></div>
+  <h1>Operations SOP</h1>
+  <p>Truck loading, delivery, cylinder refilling, dealer swapping, and plant receiving - the physical movement of LPG from supplier to client and back.</p>
 </div>
 
 <div class="legend-bar">
-  <div class="legend-item"><div class="legend-dot" style="background:#2E6A3D"></div> Active</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#B96B13"></div> Planned / In Progress</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#6F3CC3"></div> Cross-Stage</div>
-  <div class="legend-item"><div class="legend-dot" style="background:#1E4E79"></div> Current / Manual</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#2E6A3D"></div> Confirmed with source data</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#B96B13"></div> Partially confirmed — see gap note</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#6F3CC3"></div> Cross-Stage Governance</div>
   <div class="ctrl-btns">
     <button class="ctrl-btn" onclick="expandAll()">Expand All</button>
     <button class="ctrl-btn" onclick="collapseAll()">Collapse All</button>
-    <button class="ctrl-btn" onclick="printShortBond()">&#128424; Print (Short Bond)</button>
+    <button class="ctrl-btn" onclick="printShortBond()">&#128424; Print</button>
   </div>
 </div>
 
@@ -148,600 +125,261 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">1</span><span class="num-sub">OF 5</span></div>
     <div class="stage-info"><div class="stage-title">COMMERCIAL</div><div class="stage-sub">Process Order | Delivery | Return to Plant</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+    <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
+    <span class="stage-arrow">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">I2A.1 Prepare and Ship Product from Sales Order</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">xx</span><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">xx</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Confirmed Sales Order.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-operations-0-0-0">I2A.1.1 Instant Pick List, Delivery Receipt, mobile-access</div>
-<div class="d-item" id="feat-operations-0-0-1">I2A.1.2 summary table and individual order formats</div>
-<div class="d-item" id="feat-operations-0-0-2">I2A.1.3 Multiple details like location, date timestamps, product S/N</div>
-<div class="d-item" id="feat-operations-0-0-3">I2A.1.4 Multi-level user</div>
-<div class="d-item" id="feat-operations-0-0-4">I2A.1.5 Gate Pass - manual</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+<li id="operations-0-sop-0">Receive the approved Sales Order; client orders 22kg or 50kg cylinder variants. (C1.1.1)</li>
+<li id="operations-0-sop-1"><a href="personnel.html#personnel-delivery-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-delivery-head&#39;);return false" title="Personnel: Delivery Head">Delivery Head</a> schedules the delivery - vehicle, capacity, route. (C1.2.1)</li>
+<li id="operations-0-sop-2">Warehouse generates the <a href="forms.html#form-picklist" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-picklist&#39;);return false" title="Form: Picklist">Picklist</a> and picks the LPG/products. (C1.1.2)</li>
+<li id="operations-0-sop-3">Warehouse generates the <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> - 2 DRs and 2 <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a> per delivery. (C1.1.3)</li>
+<li id="operations-0-sop-4">Warehouse submits the DR to Accounting to post <a href="forms.html#form-general-ledger" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-general-ledger&#39;);return false" title="Form: General Ledger">General Ledger</a> and Inventory entries. (C1.1.4.1)</li>
+<li id="operations-0-sop-5"><a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> collects the Delivery Receipts from Warehouse (may cover multiple clients on one route). (C1.1.4.2)</li>
+<li id="operations-0-sop-6"><a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> and <a href="personnel.html#personnel-pahinante" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-pahinante&#39;);return false" title="Personnel: Pahinante">Pahinante</a> proceed to client locations.</li>
+<li id="operations-0-sop-7">For pickup / no-delivery orders, Warehouse gives the DR to the customer for signature instead. (C1.1.4.3)</li>
+<li id="operations-0-sop-8">On site, <a href="personnel.html#personnel-pahinante" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-pahinante&#39;);return false" title="Personnel: Pahinante">Pahinante</a> weighs and records the cylinders, then delivers them. (C1.1.5.1)</li>
+<li id="operations-0-sop-9">Client signs the DR, receives the items, and returns the empty cylinders. (C1.1.5.2)</li>
+<li id="operations-0-sop-10">Check the 1-3kg residue threshold; round up or down and classify accordingly. (C1.1.5.3)</li>
+<li id="operations-0-sop-11">Provide <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a> to the client, recording cylinder serial number and weight residue. (C1.1.6)</li>
+<li id="operations-0-sop-12"><a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> returns to the plant and weighs the empty cylinders. (C1.1.7)</li>
+<li id="operations-0-sop-13"><a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> submits delivery records plus the signed DR and AR to Accounting. (C1.1.8)</li>
+<li id="operations-0-sop-14">Accounting reconciles the <a href="forms.html#form-general-ledger" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-general-ledger&#39;);return false" title="Form: General Ledger">General Ledger</a> against the signed DR and AR. (C1.1.9)</li>
+<li id="operations-0-sop-15"><a href="subprocess.html#subprocess-compute-commercial-gains" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-compute-commercial-gains&#39;);return false" title="Subprocess: Compute Commercial Gains">Compute Commercial Gains</a> - compare weigh-in vs weigh-out records from client site and plant.</li>
+<li id="operations-0-sop-16">Record results in Google Sheets and ACCPAC.</li>
+<li id="operations-0-sop-17">Compute commission and distribute to <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">driver</a>/helper/back-office team.</li>
+</ol>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Draft plan</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve scope</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Docs from system: Pick List, Delivery Receipt, Charge Invoice (softcopy and pdf formats)</div>
-<div class="d-item">Written docs: Gate pass</div>
-<div class="d-item">equivalent system data crawl in Inventory and Accounting modules</div>
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="operations-0-gl-0">The residue classification threshold is fixed at 1-3kg; deviations are escalated to the <a href="personnel.html#personnel-warehouse-supervisor" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-warehouse-supervisor&#39;);return false" title="Personnel: Warehouse Supervisor">Warehouse Supervisor</a>, not decided ad hoc by the <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">driver</a>.</li>
+<li id="operations-0-gl-1">Two DRs and two <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a> are mandatory per delivery (client copy + company copy); a delivery without a matching document pair is not closed in the GL.</li>
+<li id="operations-0-gl-2">No cylinder leaves the warehouse without a <a href="forms.html#form-picklist" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-picklist&#39;);return false" title="Form: Picklist">Picklist</a> reference; no GL/Inventory posting is made without a Warehouse-submitted DR.</li>
+<li id="operations-0-gl-3">Gains and commission are computed only from matched weigh-in/weigh-out pairs - unmatched records are held for investigation, never estimated.</li>
+</ul>
 </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#DCEAF5;color:#1E4E79;border:1px solid #BFD6EB">MANUAL</span>
-        <span class="pcard-name">I2A.1 Deliver Order, Return Lorry Tank, Signed Charge Invoice, Client Inventory Report</span>
-        <span class="card-tags"><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">xx</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">xx</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Printed DR, Charge Invoice with specified delivery date and team.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-operations-0-1-0">I2A.2.1 as is current</div>
-<div class="d-item" id="feat-operations-0-1-1">I2A.2.2 as is current</div>
-<div class="d-item" id="feat-operations-0-1-2">I2A.2.3 Client inventory monitor</div>
+    <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
+<tr><th>Transaction / Decision</th><th>Threshold</th><th>Initiator</th><th>Reviewer</th><th>Approver</th><th>Control Activity</th></tr>
+<tr><td>Sales Order -&gt; delivery scheduling</td><td>-</td><td><a href="personnel.html#personnel-sales-rep" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-rep&#39;);return false" title="Personnel: Sales Rep">Sales Rep</a></td><td><a href="personnel.html#personnel-delivery-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-delivery-head&#39;);return false" title="Personnel: Delivery Head">Delivery Head</a></td><td><b><a href="personnel.html#personnel-delivery-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-delivery-head&#39;);return false" title="Personnel: Delivery Head">Delivery Head</a></b></td><td><span class="control-chip">Route/capacity check</span></td></tr>
+<tr><td>Cylinder pick &amp; DR issuance</td><td>-</td><td>Warehouse Staff</td><td><a href="personnel.html#personnel-warehouse-supervisor" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-warehouse-supervisor&#39;);return false" title="Personnel: Warehouse Supervisor">Warehouse Supervisor</a></td><td><b><a href="personnel.html#personnel-warehouse-supervisor" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-warehouse-supervisor&#39;);return false" title="Personnel: Warehouse Supervisor">Warehouse Supervisor</a></b></td><td><span class="control-chip">Picklist match</span><span class="control-chip">2 DR / 2 CR rule</span></td></tr>
+<tr><td>GL &amp; Inventory posting</td><td>-</td><td>Warehouse (submits DR)</td><td><a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a></td><td><b><a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a></b></td><td><span class="control-chip">DR-GL reconciliation</span><span class="control-chip">Poster != picker</span></td></tr>
+<tr><td>Residue classification</td><td>1-3kg variance</td><td><a href="personnel.html#personnel-pahinante" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-pahinante&#39;);return false" title="Personnel: Pahinante">Pahinante</a> (weighs)</td><td><a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a></td><td><b><a href="personnel.html#personnel-warehouse-supervisor" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-warehouse-supervisor&#39;);return false" title="Personnel: Warehouse Supervisor">Warehouse Supervisor</a> (if disputed)</b></td><td><span class="control-chip">Dual weigh-in/out</span><span class="control-chip">Credit Note w/ serial #</span></td></tr>
+<tr><td>Commission computation &amp; payout</td><td>-</td><td><a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a></td><td><a href="personnel.html#personnel-warehouse-supervisor" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-warehouse-supervisor&#39;);return false" title="Personnel: Warehouse Supervisor">Warehouse Supervisor</a></td><td><b>Operations Manager</b></td><td><span class="control-chip">Weigh-in=weigh-out match</span><span class="control-chip">GSheet + ACCPAC cross-check</span></td></tr>
+</table>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Prepare context</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve direction</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">signed Delivery Receipt and Charge Invoice</div>
-<div class="d-item">other docs</div>
+    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
+  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="operations-0-cur-0">Paper DR/CR forms filled by hand at warehouse and client site.</li><li id="operations-0-cur-1">GL reconciled manually against physical DR/AR copies.</li><li id="operations-0-cur-2">Gains re-keyed twice - once to Google Sheets, once to ACCPAC.</li><li id="operations-0-cur-3">Residue judged by the <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">driver</a>/<a href="personnel.html#personnel-pahinante" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-pahinante&#39;);return false" title="Personnel: Pahinante">Pahinante</a> at point of delivery.</li></ul></div>
+  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="operations-0-fut-0">Odoo Sales Order auto-generates <a href="forms.html#form-picklist" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-picklist&#39;);return false" title="Form: Picklist">Picklist</a>, DR and CR.</li><li id="operations-0-fut-1">Digital client signature capture on delivery.</li><li id="operations-0-fut-2">Automatic weigh-in/weigh-out variance flag and residue computation.</li><li id="operations-0-fut-3">Single-entry GL posting, removing the GSheet/ACCPAC duplicate entry.</li></ul></div>
 </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">I3A.1 Return to Plant, signed Charge Invoice, monitor sheet</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Live</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Editable</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Client signs Charge Invoice and Delivery Receipt</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-operations-0-2-0">I2A.3 Driver returns to plant with signed Charge Invoice and Delivery Receipt</div>
-<div class="d-item" id="feat-operations-0-2-1">I2A.3 Acctg staff confirms Invoice entry, upon receiving signed Charge Invoice and Delivery Receipt Confirm from Delivery Driver</div>
-<div class="d-item" id="feat-operations-0-2-2">I2A.3 Review correct collection date and chart of account</div>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">AUTO</div><div class="appr-name">Create request</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Fill intake details</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Validate completeness</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Data</div>
-<div class="d-item">Open intake queue</div>
-</div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">MANUAL</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-operations-0-0"><span class="pain-icon">&#10005;</span><span><a href="subprocess.html#subprocess-process-order" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-process-order&#39;);return false" title="Subprocess: Process Order">Process Order</a>: C1.1.1 Client orders 22kg and 50kg cylinder variants.</span></div>
-          <div class="pain-row" id="pp-operations-0-1"><span class="pain-icon">&#10005;</span><span><a href="subprocess.html#subprocess-fulfil-order" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fulfil-order&#39;);return false" title="Subprocess: Fulfil Order">Fulfil Order</a>: C1.2.1 Using Sales Order, <a href="personnel.html#personnel-delivery-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-delivery-head&#39;);return false" title="Personnel: Delivery Head">Delivery Head</a> schedules delivery [vehicle, capacity, route].</span></div>
-          <div class="pain-row" id="pp-operations-0-2"><span class="pain-icon">&#10005;</span><span>C1.1.2 Warehouse generates <a href="forms.html#form-picklist" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-picklist&#39;);return false" title="Form: Picklist">Picklist</a> and picks LPG/products.</span></div>
-          <div class="pain-row" id="pp-operations-0-3"><span class="pain-icon">&#10005;</span><span>C1.1.3 Warehouse generates <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> (2 DRs and 2 CRs).</span></div>
-          <div class="pain-row" id="pp-operations-0-4"><span class="pain-icon">&#10005;</span><span>C1.1.4.1 Warehouse submits DR to Acctg to make <a href="forms.html#form-general-ledger" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-general-ledger&#39;);return false" title="Form: General Ledger">General Ledger</a> and Inventory.</span></div>
-          <div class="pain-row" id="pp-operations-0-5"><span class="pain-icon">&#10005;</span><span>C1.1.4.2 <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> gets <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> (DR) from Warehouse for multiple clients.</span></div>
-          <div class="pain-row" id="pp-operations-0-6"><span class="pain-icon">&#10005;</span><span><a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> and <a href="personnel.html#personnel-pahinante" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-pahinante&#39;);return false" title="Personnel: Pahinante">Pahinante</a> drive to client locations.</span></div>
-          <div class="pain-row" id="pp-operations-0-7"><span class="pain-icon">&#10005;</span><span>C1.1.4.3 No Delivery/For Pick up. Warehouse gives DR to customer for signature.</span></div>
-          <div class="pain-row" id="pp-operations-0-8"><span class="pain-icon">&#10005;</span><span>C1.1.5.1 On client site, <a href="personnel.html#personnel-pahinante" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-pahinante&#39;);return false" title="Personnel: Pahinante">Pahinante</a> weighs and records the cylinders, then delivers them.</span></div>
-          <div class="pain-row" id="pp-operations-0-9"><span class="pain-icon">&#10005;</span><span>C1.1.5.2 Client signs DR and picks up items and returns empty cylinder.</span></div>
-          <div class="pain-row" id="pp-operations-0-10"><span class="pain-icon">&#10005;</span><span>C1.1.5.3 Check threshold 1-3kg, above and below, roundup/down, classification.</span></div>
-          <div class="pain-row" id="pp-operations-0-11"><span class="pain-icon">&#10005;</span><span>C1.1.6 Provide <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a> to client with cylinder serial number and weight residue.</span></div>
-          <div class="pain-row" id="pp-operations-0-12"><span class="pain-icon">&#10005;</span><span>C1.1.7 <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> returns to Plant and weighs empty cylinders.</span></div>
-          <div class="pain-row" id="pp-operations-0-13"><span class="pain-icon">&#10005;</span><span>C1.1.8 <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> submits record and signed DR and AR to Acctg.</span></div>
-          <div class="pain-row" id="pp-operations-0-14"><span class="pain-icon">&#10005;</span><span>C1.1.9 <a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a> reconciles <a href="forms.html#form-general-ledger" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-general-ledger&#39;);return false" title="Form: General Ledger">General Ledger</a> with signed DR and AR.</span></div>
-          <div class="pain-row" id="pp-operations-0-15"><span class="pain-icon">&#10005;</span><span><a href="subprocess.html#subprocess-compute-commercial-gains" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-compute-commercial-gains&#39;);return false" title="Subprocess: Compute Commercial Gains">Compute Commercial Gains</a>: Gather weight in and weigh out records at Client and Plant.</span></div>
-          <div class="pain-row" id="pp-operations-0-16"><span class="pain-icon">&#10005;</span><span>Record in Gsheet and ACPAC.</span></div>
-          <div class="pain-row" id="pp-operations-0-17"><span class="pain-icon">&#10005;</span><span>Compute Commission and Distribute.</span></div>
-        </div>
-      </div>
-    </div></div>
+    <div class="sources"><b>Sources:</b> Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Operations &gt; Commercial (C1.1.1-C1.1.9); &quot;MGC LPG Process Manual v2.docx&quot; - Operations &gt; Commercial.</div>
+  </div>
 </section>
 
 <section class="stage-section" id="stage-2">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">2</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">BULK</div><div class="stage-sub">Process Order | Schedule and Delivery | Return to Plant</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+    <div class="stage-info"><div class="stage-title">INDUSTRIAL (BULK)</div><div class="stage-sub">Process Order | Delivery | Return to Plant</div></div>
+    <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
+    <span class="stage-arrow">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">I2A.1 Prepare and Ship Product from Sales Order</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">xx</span><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">xx</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Confirmed Sales Order.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-operations-1-0-0">I2A.1.1 Instant Pick List, Delivery Receipt, mobile-access</div>
-<div class="d-item" id="feat-operations-1-0-1">I2A.1.2 summary table and individual order formats</div>
-<div class="d-item" id="feat-operations-1-0-2">I2A.1.3 Multiple details like location, date timestamps, product S/N</div>
-<div class="d-item" id="feat-operations-1-0-3">I2A.1.4 Multi-level user</div>
-<div class="d-item" id="feat-operations-1-0-4">I2A.1.5 Gate Pass - manual</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+<li id="operations-1-sop-0">Receive the booked bulk Sales Order; the order must fill the 8-ton truck capacity.</li>
+<li id="operations-1-sop-1">Assign the lorry/trailer truck and load from the Storage Tank (<a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">stock transfer</a>, tank to truck - no cylinders involved).</li>
+<li id="operations-1-sop-2">Weigh the loaded truck at the plant truck scale (weigh-out).</li>
+<li id="operations-1-sop-3">Generate loading documents: <a href="forms.html#form-receiving-report" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-receiving-report&#39;);return false" title="Form: Receiving Report">Receiving Report</a>, Truck Scale slip, and DR - issued per lorry load, not per cylinder.</li>
+<li id="operations-1-sop-4">Deliver the bulk LPG to the industrial or commercial client site.</li>
+<li id="operations-1-sop-5">At the client site, measure the volume delivered via meter / pressure gauge.</li>
+<li id="operations-1-sop-6">Client receives the bulk LPG and signs the DR.</li>
+<li id="operations-1-sop-7">Truck returns to the plant and is weighed again (weigh-in).</li>
+<li id="operations-1-sop-8">Compute Bulk Gains per truck - compare weigh-out vs weigh-in; withdrawal should read the higher figure.</li>
+<li id="operations-1-sop-9">Record residue in the Commercial &amp; Bulk LPG Residue Summary, per truck.</li>
+<li id="operations-1-sop-10">Submit documents to Accounting; record in Google Sheets and ACCPAC.</li>
+</ol>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Draft plan</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve scope</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Docs from system: Pick List, Delivery Receipt, Charge Invoice (softcopy and pdf formats)</div>
-<div class="d-item">Written docs: Gate pass</div>
-<div class="d-item">equivalent system data crawl in Inventory and Accounting modules</div>
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="operations-1-gl-0">Bulk orders must fill the 8-ton truck capacity before dispatch is scheduled; a partial load requires <a href="personnel.html#personnel-delivery-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-delivery-head&#39;);return false" title="Personnel: Delivery Head">Delivery Head</a> sign-off as a documented exception.</li>
+<li id="operations-1-gl-1">Bulk uses truck-scale (plant) + meter/pressure-gauge (client) measurement instead of cylinder weigh-in/out; both readings are logged before the trip is closed.</li>
+<li id="operations-1-gl-2">Per-truck gain is computed only once both weigh-out and weigh-in are on file - a truck missing either reading stays open, it is not estimated.</li>
+</ul>
 </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#DCEAF5;color:#1E4E79;border:1px solid #BFD6EB">MANUAL</span>
-        <span class="pcard-name">I2A.1 Deliver Order, Return Lorry Tank, Signed Charge Invoice, Client Inventory Report</span>
-        <span class="card-tags"><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">xx</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">xx</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Printed DR, Charge Invoice with specified delivery date and team.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-operations-1-1-0">I2A.2.1 as is current</div>
-<div class="d-item" id="feat-operations-1-1-1">I2A.2.2 as is current</div>
-<div class="d-item" id="feat-operations-1-1-2">I2A.2.3 Client inventory monitor</div>
+    <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
+<tr><th>Transaction / Decision</th><th>Threshold</th><th>Initiator</th><th>Reviewer</th><th>Approver</th><th>Control Activity</th></tr>
+<tr><td>Bulk order load-out</td><td>Full 8-ton capacity (exception if partial)</td><td><a href="personnel.html#personnel-delivery-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-delivery-head&#39;);return false" title="Personnel: Delivery Head">Delivery Head</a></td><td><a href="personnel.html#personnel-plant-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-staff&#39;);return false" title="Personnel: Plant Staff">Plant Staff</a></td><td><b><a href="personnel.html#personnel-delivery-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-delivery-head&#39;);return false" title="Personnel: Delivery Head">Delivery Head</a></b></td><td><span class="control-chip">Truck-scale weigh-out</span><span class="control-chip">RR + DR + Truck Scale slip set</span></td></tr>
+<tr><td>Client-site volume delivery</td><td>-</td><td><a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a></td><td>Client (signs DR)</td><td><b>-</b></td><td><span class="control-chip">Meter/pressure-gauge reading logged</span></td></tr>
+<tr><td>Per-truck gain computation</td><td>-</td><td>Acctg / Warehouse Staff</td><td><a href="personnel.html#personnel-warehouse-supervisor" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-warehouse-supervisor&#39;);return false" title="Personnel: Warehouse Supervisor">Warehouse Supervisor</a></td><td><b>Operations Manager</b></td><td><span class="control-chip">Weigh-out vs weigh-in match</span><span class="control-chip">Residue Summary log</span></td></tr>
+</table>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Prepare context</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve direction</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">signed Delivery Receipt and Charge Invoice</div>
-<div class="d-item">other docs</div>
+    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
+  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="operations-1-cur-0">Truck-scale readings logged by hand on paper slips.</li><li id="operations-1-cur-1">Meter/gauge reading at client site manually copied onto the DR.</li><li id="operations-1-cur-2">Per-truck gain calculated by comparing two paper slips.</li></ul></div>
+  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="operations-1-fut-0">Odoo Inventory stock-transfer module logs tank-to-truck movement automatically.</li><li id="operations-1-fut-1">Digital truck-scale integration feeding the trip record directly.</li><li id="operations-1-fut-2">Auto-flagged gain/loss variance per truck, no manual comparison.</li></ul></div>
 </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">I3A.1 Return to Plant, signed Charge Invoice, monitor sheet</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Live</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Editable</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Client signs Charge Invoice and Delivery Receipt</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-operations-1-2-0">I2A.3 Driver returns to plant with signed Charge Invoice and Delivery Receipt</div>
-<div class="d-item" id="feat-operations-1-2-1">I2A.3 Acctg staff confirms Invoice entry, upon receiving signed Charge Invoice and Delivery Receipt Confirm from Delivery Driver</div>
-<div class="d-item" id="feat-operations-1-2-2">I2A.3 Review correct collection date and chart of account</div>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">AUTO</div><div class="appr-name">Create request</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Fill intake details</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Validate completeness</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Data</div>
-<div class="d-item">Open intake queue</div>
-</div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">MANUAL</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-operations-1-0"><span class="pain-icon">&#10005;</span><span>C2.1 <a href="subprocess.html#subprocess-process-order" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-process-order&#39;);return false" title="Subprocess: Process Order">Process Order</a>: Industrial clients orders selected cylinder tanks.</span></div>
-          <div class="pain-row" id="pp-operations-1-1"><span class="pain-icon">&#10005;</span><span>C2.2 <a href="subprocess.html#subprocess-fulfil-order" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fulfil-order&#39;);return false" title="Subprocess: Fulfil Order">Fulfil Order</a>: Check Industrial gains and order fulfillment procedures.</span></div>
-          <div class="pain-row" id="pp-operations-1-2"><span class="pain-icon">&#10005;</span><span>C2.3 Compute Gains: Commission calculations and distribution.</span></div>
-        </div>
-      </div>
-    </div></div>
+    <div class="sources"><b>Sources:</b> &quot;MGC LPG Process Manual v2.docx&quot; - Operations &gt; Bulk (adapted from Commercial). Source site (wilsonsykes.github.io/MGSDiagramWorkflow) Operations &gt; Industrial (C2.1-C2.3) was placeholder-only and is superseded by the process manual detail.</div>
+  </div>
 </section>
 
 <section class="stage-section" id="stage-3">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">3</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">DEALER</div><div class="stage-sub">Process Order | Delivery/Pickup | Invoice</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+    <div class="stage-info"><div class="stage-title">DEALER</div><div class="stage-sub">Process Order | Plant Refilling &amp; Swapping | Invoice</div></div>
+    <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
+    <span class="stage-arrow">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">I2A.1 Prepare and Ship Product from Sales Order</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">xx</span><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">xx</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Confirmed Sales Order.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-operations-2-0-0">I3A.1.1 Instant Pick List, Delivery Receipt, mobile-access</div>
-<div class="d-item" id="feat-operations-2-0-1">I3A.1.2 summary table and individual order formats</div>
-<div class="d-item" id="feat-operations-2-0-2">I3A.1.3 Multiple details like location, date timestamps, product S/N</div>
-<div class="d-item" id="feat-operations-2-0-3">I3A.1.4 Multi-level user</div>
-<div class="d-item" id="feat-operations-2-0-4">I3A.1.5 Gate Pass - manual</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+<li id="operations-2-sop-0">Dealer client orders 2.5kg or 11kg cylinder variants and is scheduled in advance; only confirmed appointments are accommodated. (C3.1)</li>
+<li id="operations-2-sop-1"><a href="personnel.html#personnel-sales-rep" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-rep&#39;);return false" title="Personnel: Sales Rep">Sales Rep</a> creates a <a href="forms.html#form-sales-order-form" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-sales-order-form&#39;);return false" title="Form: Sales Order Form">Sales Order Form</a> noting the delivery/pickup date. (C3.1.2)</li>
+<li id="operations-2-sop-2">Dealer arrives with empty cylinders; <a href="personnel.html#personnel-guard" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-guard&#39;);return false" title="Personnel: Guard">guard</a> records the vehicle entry.</li>
+<li id="operations-2-sop-3">Cylinder quantities are counted and the Entry/Exit Form (EEF/EES) is issued; <a href="personnel.html#personnel-guard" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-guard&#39;);return false" title="Personnel: Guard">guard</a> validates tank classification (e.g. 11kg, sulit).</li>
+<li id="operations-2-sop-4"><a href="personnel.html#personnel-guard" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-guard&#39;);return false" title="Personnel: Guard">Guard</a> radios the Production Team; the checker collects the EEF.</li>
+<li id="operations-2-sop-5">Cylinders are refilled at the refilling area (typically ~8 tons, about 2-3 hours).</li>
+<li id="operations-2-sop-6">Checker encodes the transaction in AppSheet - this is the Refilling Report and the basis of the <a href="forms.html#form-grr" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-grr&#39;);return false" title="Form: GRR">GRR</a> (General Refilling Report).</li>
+<li id="operations-2-sop-7">Entry Sheet is completed and the LUT is issued by the checker together with the delivery team.</li>
+<li id="operations-2-sop-8"><a href="personnel.html#personnel-joseph" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-joseph&#39;);return false" title="Personnel: Joseph">Joseph</a> (Plant Operations Officer) reviews and confirms the transaction and records it in inventory.</li>
+<li id="operations-2-sop-9">Accounting verifies via AppSheet against the official receipt.</li>
+<li id="operations-2-sop-10">Checker verifies the receipt; quantity must match before release.</li>
+<li id="operations-2-sop-11">Dealer proceeds to final inspection; <a href="personnel.html#personnel-guard" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-guard&#39;);return false" title="Personnel: Guard">guard</a> performs final exit verification before release. (covers pickup-with-terms, pickup-with-payment, and delivery-with-terms variants, C3.1.2.1-C3.1.2.3)</li>
+<li id="operations-2-sop-12">Cylinder Swapping (allied brands only - Taon Gas, Eco Cylinder, Sulit Gas): dealer submits a swap request via messaging; customer approval is secured.</li>
+<li id="operations-2-sop-13">Cylinder photos are taken and sent to the designated group chat.</li>
+<li id="operations-2-sop-14"><a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a> reviews and approves before the swap proceeds.</li>
+<li id="operations-2-sop-15"><a href="personnel.html#personnel-edmond" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-edmond&#39;);return false" title="Personnel: Edmond">Edmond</a> (Warehouse and Quality Supervisor) handles the physical swap and keeps records; dealers must provide their own customer database.</li>
+<li id="operations-2-sop-16">Operations keeps a monthly record of cylinders swapped, plus treatment and disposition.</li>
+</ol>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Draft plan</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve scope</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Docs from system: Pick List, Delivery Receipt, Charge Invoice (softcopy and pdf formats)</div>
-<div class="d-item">Written docs: Gate pass</div>
-<div class="d-item">equivalent system data crawl in Inventory and Accounting modules</div>
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="operations-2-gl-0">Only confirmed, scheduled appointments are accommodated at the plant - walk-in dealer refills are not processed without a prior booking.</li>
+<li id="operations-2-gl-1">AppSheet entry and the official receipt must match in quantity before a transaction is released; a mismatch holds the release rather than being overridden at the gate.</li>
+<li id="operations-2-gl-2">Cylinder swapping is restricted to approved allied brands only and requires <a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a>&#x27;s photo-based approval before any physical swap - no swap proceeds on verbal agreement alone.</li>
+<li id="operations-2-gl-3">Dealers must maintain their own customer database on file with Operations for swap traceability.</li>
+</ul>
 </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#DCEAF5;color:#1E4E79;border:1px solid #BFD6EB">MANUAL</span>
-        <span class="pcard-name">I3A.2 Deliver Order, Return Lorry Tank, Signed Charge Invoice, Client Inventory Report</span>
-        <span class="card-tags"><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">xx</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">xx</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Printed DR, Charge Invoice with specified delivery date and team.</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-operations-2-1-0">I3A.2.1 as is current</div>
-<div class="d-item" id="feat-operations-2-1-1">I3A.2.2 as is current</div>
-<div class="d-item" id="feat-operations-2-1-2">I3A.2.3 Client inventory monitor</div>
+    <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
+<tr><th>Transaction / Decision</th><th>Threshold</th><th>Initiator</th><th>Reviewer</th><th>Approver</th><th>Control Activity</th></tr>
+<tr><td>Plant refill scheduling</td><td>-</td><td><a href="personnel.html#personnel-sales-rep" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-rep&#39;);return false" title="Personnel: Sales Rep">Sales Rep</a></td><td><a href="personnel.html#personnel-delivery-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-delivery-head&#39;);return false" title="Personnel: Delivery Head">Delivery Head</a> / <a href="personnel.html#personnel-guard" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-guard&#39;);return false" title="Personnel: Guard">Guard</a></td><td><b>Confirmed-booking gate (no separate approver)</b></td><td><span class="control-chip">Confirmed-appointment-only rule</span></td></tr>
+<tr><td>Cylinder refill &amp; <a href="forms.html#form-grr" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-grr&#39;);return false" title="Form: GRR">GRR</a> posting</td><td>-</td><td>Checker</td><td><a href="personnel.html#personnel-joseph" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-joseph&#39;);return false" title="Personnel: Joseph">Joseph</a> (Plant Operations Officer)</td><td><b>Accounting (via AppSheet)</b></td><td><span class="control-chip">AppSheet = receipt quantity match</span><span class="control-chip">EEF / LUT paired documents</span></td></tr>
+<tr><td>Cylinder swap (allied brands only)</td><td>Allied-brand list only</td><td>Dealer (request)</td><td><a href="personnel.html#personnel-edmond" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-edmond&#39;);return false" title="Personnel: Edmond">Edmond</a> (Warehouse &amp; Quality Supervisor)</td><td><b><a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a></b></td><td><span class="control-chip">Photo evidence</span><span class="control-chip">Group-chat approval trail</span><span class="control-chip">Monthly swap log</span></td></tr>
+</table>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Prepare context</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve direction</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">signed Delivery Receipt and Charge Invoice</div>
-<div class="d-item">other docs</div>
+    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
+  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="operations-2-cur-0">Paper EEF/LUT slips at the gate and refilling area.</li><li id="operations-2-cur-1"><a href="personnel.html#personnel-guard" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-guard&#39;);return false" title="Personnel: Guard">Guard</a> radio call to Production to trigger refilling.</li><li id="operations-2-cur-2">AppSheet is semi-digital but still reconciled by hand against paper receipts.</li><li id="operations-2-cur-3">Swap approval runs through ad hoc chat screenshots.</li></ul></div>
+  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="operations-2-fut-0">One mobile app covers booking -&gt; gate entry -&gt; refill logging -&gt; accounting verification in a single record.</li><li id="operations-2-fut-1">Swap approvals become a structured digital workflow instead of chat threads, with automatic allied-brand validation.</li></ul></div>
 </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">I3A.3 Return to Plant, signed Charge Invoice, monitor sheet</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #2E6A3D22">Live</span><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Editable</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Client signs Charge Invoice and Delivery Receipt</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-operations-2-2-0">I3A.3 Driver returns to plant with signed Charge Invoice and Delivery Receipt</div>
-<div class="d-item" id="feat-operations-2-2-1">I3A.3 Acctg staff confirms Invoice entry, upon receiving signed Charge Invoice and Delivery Receipt Confirm from Delivery Driver</div>
-<div class="d-item" id="feat-operations-2-2-2">I3A.3 Review correct collection date and chart of account</div>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">AUTO</div><div class="appr-name">Create request</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#1E4E79">OWNER</div><div class="appr-name">Fill intake details</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Validate completeness</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Data</div>
-<div class="d-item">Open intake queue</div>
-</div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">MANUAL</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-operations-2-0"><span class="pain-icon">&#10005;</span><span>C3.1 <a href="subprocess.html#subprocess-process-order" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-process-order&#39;);return false" title="Subprocess: Process Order">Process Order</a>: Client orders 2.5kg and 11kg cylinder variants.</span></div>
-          <div class="pain-row" id="pp-operations-2-1"><span class="pain-icon">&#10005;</span><span>C3.1.2 <a href="personnel.html#personnel-sales-rep" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-rep&#39;);return false" title="Personnel: Sales Rep">Sales Rep</a> creates a <a href="forms.html#form-sales-order-form" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-sales-order-form&#39;);return false" title="Form: Sales Order Form">Sales Order form</a> with delivery/pickup date.</span></div>
-          <div class="pain-row" id="pp-operations-2-2"><span class="pain-icon">&#10005;</span><span>C3.1.2.1 IF PICKUP and with TERMS: Client comes to pickup and signs the <a href="forms.html#form-sales-order-form" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-sales-order-form&#39;);return false" title="Form: Sales Order Form">Sales Order Form</a>.</span></div>
-          <div class="pain-row" id="pp-operations-2-3"><span class="pain-icon">&#10005;</span><span>C3.1.2.2 IF PICKUP and PAYMENT: Client comes to pickup and pays.</span></div>
-          <div class="pain-row" id="pp-operations-2-4"><span class="pain-icon">&#10005;</span><span>C3.1.2.3 IF DELIVERY and with TERMS: <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> checks schedule and delivers with DR.</span></div>
-          <div class="pain-row" id="pp-operations-2-5"><span class="pain-icon">&#10005;</span><span>C3.1.2.3.1 <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> gets empty cylinder, weighs and records with customer signature.</span></div>
-          <div class="pain-row" id="pp-operations-2-6"><span class="pain-icon">&#10005;</span><span>C3.2 <a href="subprocess.html#subprocess-fulfil-order" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fulfil-order&#39;);return false" title="Subprocess: Fulfil Order">Fulfil Order</a>: Order fulfillment procedures and delivery logistics.</span></div>
-          <div class="pain-row" id="pp-operations-2-7"><span class="pain-icon">&#10005;</span><span>C3.3 <a href="subprocess.html#subprocess-compute-operational-gains" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-compute-operational-gains&#39;);return false" title="Subprocess: Compute Operational Gains">Compute Operational Gains</a>: Commission calculations and tracking.</span></div>
-          <div class="pain-row" id="pp-operations-2-8"><span class="pain-icon">&#10005;</span><span>ALERT: Cylinder brand switching considerations.</span></div>
-        </div>
-      </div>
-    </div></div>
+    <div class="sources"><b>Sources:</b> &quot;MGC LPG Process Manual v2.docx&quot; - Operations &gt; Dealer (Plant Refilling &amp; Cylinder Swapping). Source site (wilsonsykes.github.io/MGSDiagramWorkflow) Operations &gt; Dealer (C3.1-C3.3) provided the order-intake framing.</div>
+  </div>
 </section>
 
 <section class="stage-section" id="stage-4">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">4</span><span class="num-sub">OF 5</span></div>
     <div class="stage-info"><div class="stage-title">RETAIL</div><div class="stage-sub">Process Order | Delivery/Pickup | Collect Payment</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+    <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">Partially confirmed — see gap note</span>
+    <span class="stage-arrow">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">I4A.1 </span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#F9EEDC;color:#B96B13;border:1px solid #B96B1322">Pending</span><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Replace Me</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Sets quantity for floor stocks for key periods</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-operations-3-0-0">I4A.1.1 </div>
-<div class="d-item" id="feat-operations-3-0-1">I4A.1.2 </div>
-<div class="d-item" id="feat-operations-3-0-2">I4A.1.3 </div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+<li id="operations-3-sop-0">Retail/semi-dealer client orders 11kg or 2.5kg cylinders on a retail scale (smaller quantities than Dealer). (per source site: &quot;same as Dealer steps&quot;)</li>
+<li id="operations-3-sop-1">Order intake and refill/delivery fulfilment follow the same plant-refilling flow documented for Dealer, scaled to retail order volumes.</li>
+<li id="operations-3-sop-2">Payment is collected via cash/COD at point of delivery or pickup rather than dealer credit terms - see Accounting &gt; Retail for the cash-handling procedure.</li>
+<li id="operations-3-sop-3">Commission/gains computation follows the same weigh-in/weigh-out and LUT-balancing logic used for Commercial and Dealer.</li>
+</ol>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Check release</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve launch</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Release history</div>
-<div class="d-item">Launch approval log</div>
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="operations-3-gl-0">Retail fulfilment is explicitly modeled on the Dealer plant-refilling process per company specification; any retail-specific exception to that process is not yet documented.</li>
+<li id="operations-3-gl-1">Retail is COD by default; credit/terms sales are the exception and require the same past-dues check used in Accounting &gt; Dealer before release.</li>
+</ul>
 </div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">MANUAL</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-operations-3-0"><span class="pain-icon">&#10005;</span><span>C4.1 <a href="subprocess.html#subprocess-process-order" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-process-order&#39;);return false" title="Subprocess: Process Order">Process Order</a>: Client order processing and validation.</span></div>
-          <div class="pain-row" id="pp-operations-3-1"><span class="pain-icon">&#10005;</span><span>C4.2 <a href="subprocess.html#subprocess-fulfil-order" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fulfil-order&#39;);return false" title="Subprocess: Fulfil Order">Fulfil Order</a>: Order fulfillment procedures and delivery.</span></div>
-          <div class="pain-row" id="pp-operations-3-2"><span class="pain-icon">&#10005;</span><span>C4.3 Compute Gains: Commission calculations and reconciliation.</span></div>
-          <div class="pain-row" id="pp-operations-3-3"><span class="pain-icon">&#10005;</span><span>Same as above Dealer steps</span></div>
-        </div>
-      </div>
-    </div></div>
+    <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
+<tr><th>Transaction / Decision</th><th>Threshold</th><th>Initiator</th><th>Reviewer</th><th>Approver</th><th>Control Activity</th></tr>
+<tr><td>Retail order fulfilment</td><td>-</td><td><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a></td><td>Warehouse / Checker</td><td><b>- (COD, no credit approval needed)</b></td><td><span class="control-chip">Cash collected before/at release</span></td></tr>
+</table>
+</div>
+    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
+  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="operations-3-cur-0">Retail delivery/pickup handled as a scaled-down copy of the Dealer process, with no dedicated documentation on file - inconsistent handling risk across staff.</li></ul></div>
+  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="operations-3-fut-0">A dedicated Retail SOP variant inside the same Odoo/AppSheet system, with COD-specific checkpoints built in rather than informally inherited from Dealer.</li></ul></div>
+</div>
+</div>
+    <div class="doc-section gap-note-wrap"><div class="gap-note"><b>Data gap flagged for client confirmation</b>Neither source separately documents Operations for Retail - both point to it following the Dealer plant-refilling process, scaled down. Recommend a short walkthrough with a Retail-channel <a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a> to confirm whether any retail-specific step (e.g. cash-before-release sequencing) differs from Dealer before this is finalized as approved SOP.</div></div>
+    <div class="sources"><b>Sources:</b> Source site (wilsonsykes.github.io/MGSDiagramWorkflow) Operations &gt; Retail (C4.1-C4.3, &quot;same as Dealer steps&quot;). No corresponding section in &quot;MGC LPG Process Manual v2.docx&quot;.</div>
+  </div>
 </section>
 
 <section class="stage-section" id="stage-5">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">5</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">OVERALL</div><div class="stage-sub">Reports | Monitoring | Compliance | Variance Sanctions and Adjustments</div></div>
-    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>
+    <div class="stage-info"><div class="stage-title">COMPANY-WIDE</div><div class="stage-sub">Purchase Order | Stock Transfer | Refill | Floor Stock</div></div>
+    <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
+    <span class="stage-arrow">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="two-col">
-      <div class="future-col">
-        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">Platforms: Replace with your stack</span></div>
-        <div class="cards-list">
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">I5A.1 Inventory Monitoring Report</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#791e76;color:#ffffff;border:1px solid #ffffff22">Odoo Module</span><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">xx</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Daily data input of warehouse and floor stock location (from/to), customer, transaction (in and out), scheduled/actual timestamps, vehicle, driver, helper</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-operations-4-0-0">I5A.1.1 Daily/Weekly/Monthly instant, consolidated data</div>
-<div class="d-item" id="feat-operations-4-0-1">I5A.1.2 versatile multi-view reports</div>
-<div class="d-item" id="feat-operations-4-0-2">I5A.1.3 Mobile-friendly data input</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+<li id="operations-4-sop-0"><a href="personnel.html#personnel-purchaser" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-purchaser&#39;);return false" title="Personnel: Purchaser">Purchaser</a> forwards the <a href="forms.html#form-purchase-order" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-purchase-order&#39;);return false" title="Form: Purchase Order">Purchase Order</a> to the Refinery Supplier and schedules the inbound Lorry Truck delivery. (C5.1.1)</li>
+<li id="operations-4-sop-1"><a href="personnel.html#personnel-plant-manager" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-manager&#39;);return false" title="Personnel: Plant Manager">Plant Manager</a> receives the Lorry Trucks and collects the DR and <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> from the delivery team.</li>
+<li id="operations-4-sop-2"><a href="personnel.html#personnel-plant-manager" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-manager&#39;);return false" title="Personnel: Plant Manager">Plant Manager</a> fills out the <a href="forms.html#form-receiving-report" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-receiving-report&#39;);return false" title="Form: Receiving Report">Receiving Report</a> (RR) and unloads contents to the Storage Tank. (C5.1.2)</li>
+<li id="operations-4-sop-3"><a href="personnel.html#personnel-plant-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-staff&#39;);return false" title="Personnel: Plant Staff">Plant Staff</a> measures the content volume using a gauge and documents the reading. (C5.1.3)</li>
+<li id="operations-4-sop-4">Any quantity changes discovered after the RR are reported and logged as a separate entry. (C5.1.3.1)</li>
+<li id="operations-4-sop-5"><a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">Stock Transfer</a>: gas is refilled from the Storage Tank to cylinders following <a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a>. (C5.1.4)</li>
+<li id="operations-4-sop-6">Refilling is tracked using the Google Sheets/AppSheet tools already in use for cylinder refilling. (C5.1.5)</li>
+<li id="operations-4-sop-7">Storage is split across two locations, Tank 1 and Tank 2; residue is tracked in two categories, Regular and WIWO, both affecting inventory and billing.</li>
+<li id="operations-4-sop-8">Pull-out schedules and dates at client sites are tracked against a company Pull-out Calendar.</li>
+<li id="operations-4-sop-9">Cylinders are purchased annually with individual serial numbers. (C5.3.1)</li>
+<li id="operations-4-sop-10">Cylinders have a defined lifespan requiring repaint and re-testing, tracked by batch number. (C5.3.2)</li>
+</ol>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">OPTNS SUPERVISOR</div><div class="appr-name">Input Storage Tanks Opening and Closing Readings</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">SENIOR PLANT SUPERVISOR</div><div class="appr-name">Input Sold Cylinders for the Day</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">INDUSTRIAL ENGR</div><div class="appr-name">Consolidate and account for variances</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">PLANT OPERATION OFFICER</div><div class="appr-name">Review and Approve report</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">SIR RY</div><div class="appr-name">Review and Approve report</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">I5A.1.1 Inventory per location/per transaction/per period reports</div>
-<div class="d-item">I5A.1.1 Inv Variances and Adjustment Monthly Summary</div>
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="operations-4-gl-0">Storage Tank <a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">stock transfer</a> to cylinders must follow <a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a>; no batch is filled out of sequence without <a href="personnel.html#personnel-plant-manager" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-manager&#39;);return false" title="Personnel: Plant Manager">Plant Manager</a> sign-off.</li>
+<li id="operations-4-gl-1">Any quantity variance discovered after the <a href="forms.html#form-receiving-report" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-receiving-report&#39;);return false" title="Form: Receiving Report">Receiving Report</a> is logged as a separate exception entry, never folded silently into the original RR figure.</li>
+<li id="operations-4-gl-2">Cylinder serials and batch numbers are tracked for their full lifespan (purchase through repaint/retest cycles); a cylinder without a traceable batch number does not re-enter circulation.</li>
+</ul>
 </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">I5A.2 Inventory Planning and Forecast</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#dbe302;color:#2E6A3D;border:1px solid #2E6A3D22">Dashboard Module</span><span class="card-tag" style="background:#791e76;color:#ffffff;border:1px solid #ffffff22">Odoo Module</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Daily data input of inventory + Sales Target Budget per week per sales avenue</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-operations-4-1-0">I5A.2.1 Weekly/Monthly real-time data</div>
-<div class="d-item" id="feat-operations-4-1-1">I5A.2.2 versatile multi-view reports</div>
-<div class="d-item" id="feat-operations-4-1-2">I5A.2.3 PC data Input</div>
+    <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
+<tr><th>Transaction / Decision</th><th>Threshold</th><th>Initiator</th><th>Reviewer</th><th>Approver</th><th>Control Activity</th></tr>
+<tr><td>Inbound PO &amp; Lorry Truck receiving</td><td>-</td><td><a href="personnel.html#personnel-purchaser" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-purchaser&#39;);return false" title="Personnel: Purchaser">Purchaser</a></td><td><a href="personnel.html#personnel-plant-manager" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-manager&#39;);return false" title="Personnel: Plant Manager">Plant Manager</a></td><td><b><a href="personnel.html#personnel-plant-manager" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-manager&#39;);return false" title="Personnel: Plant Manager">Plant Manager</a></b></td><td><span class="control-chip">RR filled before unload</span><span class="control-chip">DR + Invoice matched to PO</span></td></tr>
+<tr><td>Storage Tank <a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">stock transfer</a> to cylinders</td><td>FIFO sequence</td><td><a href="personnel.html#personnel-plant-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-staff&#39;);return false" title="Personnel: Plant Staff">Plant Staff</a></td><td><a href="personnel.html#personnel-plant-manager" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-manager&#39;);return false" title="Personnel: Plant Manager">Plant Manager</a></td><td><b><a href="personnel.html#personnel-plant-manager" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-manager&#39;);return false" title="Personnel: Plant Manager">Plant Manager</a></b></td><td><span class="control-chip">Tank 1 / Tank 2 gauge log</span><span class="control-chip">FIFO batch order</span></td></tr>
+<tr><td>Cylinder lifecycle (repaint/retest)</td><td>Per DOE lifespan schedule</td><td><a href="personnel.html#personnel-plant-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-staff&#39;);return false" title="Personnel: Plant Staff">Plant Staff</a></td><td><a href="personnel.html#personnel-plant-manager" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-manager&#39;);return false" title="Personnel: Plant Manager">Plant Manager</a></td><td><b><a href="personnel.html#personnel-plant-manager" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-manager&#39;);return false" title="Personnel: Plant Manager">Plant Manager</a></b></td><td><span class="control-chip">Serial + batch number tracking</span></td></tr>
+</table>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">SENIOR OPERATIONS SUPERVISOR</div><div class="appr-name">Daily data source</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">SALES AVP</div><div class="appr-name">Recommend sales target</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">INDUSTRIAL ENGINEER</div><div class="appr-name">Set Budget and Review forecast data</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">SIR RY</div><div class="appr-name">Review Forecast and Approve order</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">PURCHASER/DISPATCHER</div><div class="appr-name">Prepare and forward Purchase Orders</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">I5A.2.1 Weekly/Monthly Inventory Forecast Report</div>
-<div class="d-item">I5A.2.1 auto-draft Purchased Orders</div>
+    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
+  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="operations-4-cur-0">Gauge readings and RR logged on paper / Google Sheets.</li><li id="operations-4-cur-1"><a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a> sequencing tracked manually by staff log sheets.</li><li id="operations-4-cur-2">Cylinder lifespan tracked in a spreadsheet separate from the refilling records.</li></ul></div>
+  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="operations-4-fut-0">Digital tank-gauge integration feeding directly into the Odoo Inventory module.</li><li id="operations-4-fut-1">Automatic <a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a> enforcement at the point of stock-transfer entry.</li><li id="operations-4-fut-2">A single cylinder-asset register linking serial number, batch, refill history, and lifecycle status.</li></ul></div>
 </div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">I5A.3 Variance Monitoring and Resolving</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#791e76;color:#ffffff;border:1px solid #ffffff22">Odoo Module</span><span class="card-tag" style="background:#dbe302;color:#1E4E79;border:1px solid #1E4E7922">Dashboard Module</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Weekly and Daily</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-operations-4-2-0">I5A.3.1 Daily/Weekly/Monthly instant, consolidated data</div>
-<div class="d-item" id="feat-operations-4-2-1">I5A.3.2 versatile multi-view reports</div>
-<div class="d-item" id="feat-operations-4-2-2">I5A.3.3 Mobile-friendly data input</div>
 </div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">SENIOR PLANT SUPERVISOR</div><div class="appr-name">Review and resolve variances</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">OPERATIONS OFFICER</div><div class="appr-name">Resolve and adjust variances</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">SIR RY</div><div class="appr-name">Review extent of variances</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">ACCOUNTING MANAGER</div><div class="appr-name">Verify adjustments and close</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Inv Variance per Location/per period Summary</div>
-<div class="d-item">Inv Adjustment per location/per period Summary</div>
-</div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">I5A.4 Cylinder Qty, State and Variance Monitoring</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#791e76;color:#ffffff;border:1px solid #ffffff22">Odoo Module</span><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">xx</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">Daily data input of warehouse and floor stock location (from/to), S/N, Size, Qty, Tare Weight, and Painting State, Customers/Locations</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-operations-4-3-0">I5A.4.1 Daily/Weekly/Monthly instant, consolidated data per user</div>
-<div class="d-item" id="feat-operations-4-3-1">I5A.4.2 Versatile multi-view, multi-period summaries for updating groups/ for reviewing qty</div>
-<div class="d-item" id="feat-operations-4-3-2">I5A.4.3 Versatile Cylinder Qty and State Reports</div>
-<div class="d-item" id="feat-operations-4-3-3">I5A.4.4 Mobile-friendly data input</div>
-</div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">WAREHOUSE AND QUALITY SUPERVISOR</div><div class="appr-name">Count qty,size and state of cylinders, Grind and Label</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">INVENTORY SUPERVISOR</div><div class="appr-name">Encode qty,size and state of cylinders</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">SALES ASSISTANT</div><div class="appr-name">Review cylinder swapping transactions</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">OPERATIONS OFFICER</div><div class="appr-name">Resolve and adjust variances</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">SIR RY</div><div class="appr-name">Review extent of cylinder state, qty and variances</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">I5A.4.5 Cylinder Inventory and State Report</div>
-<div class="d-item">I5A.4.6 Cylinder Variance per Location/per period Summary</div>
-<div class="d-item">I5A.4.7 Cylinder Adjustment per location/per period Summary</div>
-</div>
-      </div></div>
-    </div>
-    <div class="pcard" onclick="toggleP(this)">
-      <div class="pcard-bar">
-        <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">ACTIVE</span>
-        <span class="pcard-name">I5A.5 xx</span>
-        <span class="st-dot st-active" title="Active"></span>
-        <span class="card-tags"><span class="card-tag" style="background:#791e76;color:#ffffff;border:1px solid #ffffff22">Odoo Module</span><span class="card-tag" style="background:#DCEAF5;color:#1E4E79;border:1px solid #1E4E7922">Reusable</span></span>
-        <span class="pcard-arrow">&#9662;</span>
-      </div>
-      <div class="pcard-body"><div class="pcard-inner">
-      <div class="det-grid">
-        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">TBD</div></div>
-        <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item" id="feat-operations-4-4-0">I5A.5.1 Daily/Weekly/Monthly instant, consolidated data</div>
-<div class="d-item" id="feat-operations-4-4-1">I5A.5.2 versatile multi-view reports</div>
-<div class="d-item" id="feat-operations-4-4-2">I5A.5.3 Mobile-friendly data input</div>
-</div>
-      </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">SENIOR PLANT SUPERVISOR</div><div class="appr-name">Review and resolve variances</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">OPERATIONS OFFICER</div><div class="appr-name">Resolve and adjust variances</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#0F766E">SIR RY</div><div class="appr-name">Review extent of variances</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">I5A.5.4 Inv Variance per Location/per period Summary</div>
-<div class="d-item">I5A.5.5 Inv Adjustment per location/per period Summary</div>
-</div>
-      </div></div>
-    </div>
-        </div>
-      </div>
-      <div class="manual-col">
-        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">MANUAL</span></div>
-        <div class="pain-list">
-          <div class="pain-row" id="pp-operations-4-0"><span class="pain-icon">&#10005;</span><span>C5.1.1 <a href="personnel.html#personnel-purchaser" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-purchaser&#39;);return false" title="Personnel: Purchaser">Purchaser</a> forwards PO to Refinery Supplier and schedules delivery.</span></div>
-          <div class="pain-row" id="pp-operations-4-1"><span class="pain-icon">&#10005;</span><span><a href="personnel.html#personnel-plant-manager" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-manager&#39;);return false" title="Personnel: Plant Manager">Plant Manager</a> receives the Purchased Lorry Trucks and gets the DR and <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> from delivery team.</span></div>
-          <div class="pain-row" id="pp-operations-4-2"><span class="pain-icon">&#10005;</span><span>C5.1.2 <a href="personnel.html#personnel-plant-manager" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-manager&#39;);return false" title="Personnel: Plant Manager">Plant Manager</a> fills Receiving Report (RR) and unloads contents to Storage Tank.</span></div>
-          <div class="pain-row" id="pp-operations-4-3"><span class="pain-icon">&#10005;</span><span>C5.1.3 <a href="personnel.html#personnel-plant-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-staff&#39;);return false" title="Personnel: Plant Staff">Plant Staff</a> measures content volume using gauge and documents.</span></div>
-          <div class="pain-row" id="pp-operations-4-4"><span class="pain-icon">&#10005;</span><span>C5.1.3.1 Changes in the qty are reported after the Receiving Report.</span></div>
-          <div class="pain-row" id="pp-operations-4-5"><span class="pain-icon">&#10005;</span><span>C5.1.4 <a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">Stock Transfer</a>: Gas content is refilled from Storage Tank to cylinders following <a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a> process.</span></div>
-          <div class="pain-row" id="pp-operations-4-6"><span class="pain-icon">&#10005;</span><span>C5.1.5 Use Google apps for refilling cylinders.</span></div>
-          <div class="pain-row" id="pp-operations-4-7"><span class="pain-icon">&#10005;</span><span>2 Storage Locations: Tank 1 and Tank 2.</span></div>
-          <div class="pain-row" id="pp-operations-4-8"><span class="pain-icon">&#10005;</span><span>2 Types of Residue: Regular and WIWO affecting inventory and billing.</span></div>
-          <div class="pain-row" id="pp-operations-4-9"><span class="pain-icon">&#10005;</span><span>Schedule and follow Pull-out Calendar and Pull-out Dates at client sites.</span></div>
-          <div class="pain-row" id="pp-operations-4-10"><span class="pain-icon">&#10005;</span><span>C5.3.1 Cylinders purchased annually with individual serial numbers.</span></div>
-          <div class="pain-row" id="pp-operations-4-11"><span class="pain-icon">&#10005;</span><span>C5.3.2 Cylinders have lifespan requiring Repaint and testing with batch number.</span></div>
-        </div>
-      </div>
-    </div></div>
+    <div class="sources"><b>Sources:</b> Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Operations &gt; Company-Wide (C5.1.1-C5.3.2).</div>
+  </div>
 </section>
 
 <section class="cross-section" id="cross-stage">
   <div class="cross-banner" onclick="toggleStage(this)">
     <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>
-    <div class="stage-info"><div class="stage-title" style="color:#7030A0">OVERALL</div><div class="stage-sub" style="color:#7c3aed">Processes involving Company-wide operations.</div></div>
+    <div class="stage-info"><div class="stage-title" style="color:#7030A0">CROSS-STAGE GOVERNANCE</div><div class="stage-sub" style="color:#7c3aed">Escalation and traceability rules that apply on top of every Operations approval row above.</div></div>
     <span class="stage-arrow" style="color:#7030A0">&#9662;</span>
   </div>
-  <div class="stage-body"><div class="cross-inner">
-      <div class="d-group"><div class="d-label lbl-features">System Features</div><div class="d-item">Track blockers across the full workflow</div>
-<div class="d-item">Maintain a shared audit trail</div>
-<div class="d-item">Standardize notifications and approvals</div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="cross-gl-0">The 1-3kg residue threshold for cylinder classification is fixed company policy; a <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">driver</a> or <a href="personnel.html#personnel-pahinante" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-pahinante&#39;);return false" title="Personnel: Pahinante">Pahinante</a> does not have discretion to round outside that band without <a href="personnel.html#personnel-warehouse-supervisor" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-warehouse-supervisor&#39;);return false" title="Personnel: Warehouse Supervisor">Warehouse Supervisor</a> escalation.</li>
+<li id="cross-gl-1">Gains, losses, and commission are computed only from a matched pair of weigh-in and weigh-out readings. An unmatched reading is held for investigation, never estimated.</li>
+<li id="cross-gl-2">Every cylinder is tracked by serial number and batch number for its full lifecycle, including repaint/retest - a cylinder without a traceable batch number does not re-enter circulation.</li>
+</ul>
 </div>
-      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow"><div class="appr-card"><div class="appr-role" style="color:#0F766E">AUTO</div><div class="appr-name">System watch</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#6F3CC3">REVIEW</div><div class="appr-name">Review updates</div></div>
-<span class="arrow-sep">&rarr;</span>
-<div class="appr-card"><div class="appr-role" style="color:#2E6A3D">MANAGER</div><div class="appr-name">Approve escalations</div></div>
-</div></div>
-      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div><div class="d-item">Cross-stage status report</div>
-<div class="d-item">Escalation dashboard</div>
-</div>
-  </div></div>
+  </div>
 </section>
 
 <div class="metrics-strip">
-  <div class="metric"><div class="metric-val">5</div><div class="metric-lbl">Stages</div><div class="metric-sub">Editable sample structure</div></div>
-  <div class="metric"><div class="metric-val">1</div><div class="metric-lbl">Checklist Block</div><div class="metric-sub">Supported sectional format</div></div>
-  <div class="metric"><div class="metric-val">JSON</div><div class="metric-lbl">Content Source</div><div class="metric-sub">Easy to replace</div></div>
-  <div class="metric"><div class="metric-val">Pages</div><div class="metric-lbl">Deployment</div><div class="metric-sub">GitHub Pages ready</div></div>
+  <div class="metric"><div class="metric-val">5</div><div class="metric-lbl">Stages</div><div class="metric-sub">Commercial, Industrial, Dealer, Retail, Company-Wide</div></div>
+  <div class="metric"><div class="metric-val">4</div><div class="metric-lbl">Confirmed</div><div class="metric-sub">Grounded in source data</div></div>
+  <div class="metric"><div class="metric-val">1</div><div class="metric-lbl">Partially Confirmed</div><div class="metric-sub">Retail - gap flagged</div></div>
+  <div class="metric"><div class="metric-val">19</div><div class="metric-lbl">Personnel</div><div class="metric-sub">Named staff on roster</div></div>
 </div>
 
-<div class="footer"><div>Release Notes v 1.1.</div><button class="ctrl-btn" onclick="printShortBond()">&#128424; Print Short Bond</button></div>
+<div class="footer"><div>Masagana Gas Corporation - Operations SOP - Merged from Process Systemization Portal + source site - Internal use only</div><button class="ctrl-btn" onclick="printShortBond()">&#128424; Print</button></div>
 
 <script>
 function toggleStage(el){var sec=el.closest('.stage-section')||el.closest('.cross-section');if(sec)sec.classList.toggle('open')}
-function toggleP(el){el.classList.toggle('open')}
-function expandAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.add('open')});document.querySelectorAll('.pcard').forEach(function(p){p.classList.add('open')})}
-function collapseAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.remove('open')});document.querySelectorAll('.pcard').forEach(function(p){p.classList.remove('open')})}
-function printShortBond(){var s=document.createElement('style');s.id='psb';s.innerHTML='@page{size:8.5in 13in;margin:0.4in 0.5in}';document.head.appendChild(s);window.print();setTimeout(function(){var e=document.getElementById('psb');if(e)e.remove()},1000)}
-function scrollToAnchor(id){var el=document.getElementById(id);if(!el)return;var stage=el.closest('.stage-section')||el.closest('.cross-section');if(stage)stage.classList.add('open');var pcard=el.closest('.pcard');if(pcard)pcard.classList.add('open');setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='2px solid var(--accent)';setTimeout(function(){el.style.outline=''},1800)},180)}
+function expandAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.add('open')})}
+function collapseAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.remove('open')})}
+function printShortBond(){var s=document.createElement('style');s.id='psb';s.innerHTML='@page{size:8.5in 14in;margin:0.5in 0.6in}';document.head.appendChild(s);expandAll();window.print();setTimeout(function(){var e=document.getElementById('psb');if(e)e.remove()},1000)}
+function scrollToAnchor(id){var el=document.getElementById(id);if(!el)return;var stage=el.closest('.stage-section')||el.closest('.cross-section');if(stage)stage.classList.add('open');setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='2px solid var(--accent)';setTimeout(function(){el.style.outline=''},1800)},180)}
 document.querySelectorAll('.topnav a').forEach(function(link){link.addEventListener('click',function(){var hash=link.getAttribute('href');if(!hash||!hash.startsWith('#'))return;var t=document.querySelector(hash);if(t)t.classList.add('open')});});
 </script>
 </body>

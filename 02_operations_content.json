@@ -1,533 +1,237 @@
 {
   "header": {
     "logo": "Operations",
-    "kanji": "v1",
-    "title": "Workflow Process Diagram",
-    "subtitle": "Legend: C-Current processes, A-Future processes, S - System features."
-  },
-  "hoshi_section": {
-    "title": "Delivery Pipeline",
-    "tag": "Platforms: Replace with your stack",
-    "subtitle": "Reusable static workflow layout with JSON-driven content"
+    "kanji": "SOP",
+    "title": "Operations SOP",
+    "subtitle": "Truck loading, delivery, cylinder refilling, dealer swapping, and plant receiving - the physical movement of LPG from supplier to client and back."
   },
   "stages": [
     {
-      "kanji": "",
       "romaji": "Commercial",
       "english": "Process Order | Delivery | Return to Plant",
-      "cards": [
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "I2A.1 Prepare and Ship Product from Sales Order",
-          "trigger": "Confirmed Sales Order.",
-          "features": [
-            "I2A.1.1 Instant Pick List, Delivery Receipt, mobile-access",
-            "I2A.1.2 summary table and individual order formats",
-            "I2A.1.3 Multiple details like location, date timestamps, product S/N",
-            "I2A.1.4 Multi-level user",
-            "I2A.1.5 Gate Pass - manual"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Draft plan" },
-            { "role": "manager", "label": "Approve scope" }
-          ],
-          "data_outputs": [
-            "Docs from system: Pick List, Delivery Receipt, Charge Invoice (softcopy and pdf formats)",
-            "Written docs: Gate pass",
-            "equivalent system data crawl in Inventory and Accounting modules"
-          ],
-          "tags": [
-            { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" },
-            { "text": "xx", "bg": "#E3F0E6", "color": "#2E6A3D" }
-          ]
-        },
-        {
-          "id": "MANUAL",
-          "status": "core",
-          "name": "I2A.1 Deliver Order, Return Lorry Tank, Signed Charge Invoice, Client Inventory Report",
-          "trigger": "Printed DR, Charge Invoice with specified delivery date and team.",
-          "features": [
-            "I2A.2.1 as is current",
-            "I2A.2.2 as is current",
-            "I2A.2.3 Client inventory monitor"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Prepare context" },
-            { "role": "manager", "label": "Approve direction" }
-          ],
-          "data_outputs": [
-            "signed Delivery Receipt and Charge Invoice",
-            "other docs"
-          ],
-          "tags": [
-            { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" },
-            { "text": "xx", "bg": "#F9EEDC", "color": "#B96B13" }
-          ]
-        },
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "I3A.1 Return to Plant, signed Charge Invoice, monitor sheet",
-          "trigger": "Client signs Charge Invoice and Delivery Receipt",
-          "features": [
-            "I2A.3 Driver returns to plant with signed Charge Invoice and Delivery Receipt",
-            "I2A.3 Acctg staff confirms Invoice entry, upon receiving signed Charge Invoice and Delivery Receipt Confirm from Delivery Driver",
-            "I2A.3 Review correct collection date and chart of account"
-          ],
-          "approval": [
-            { "role": "auto", "label": "Create request" },
-            { "role": "owner", "label": "Fill intake details" },
-            { "role": "review", "label": "Validate completeness" }
-          ],
-          "data_outputs": [
-            "Data",
-            "Open intake queue"
-          ],
-          "tags": [
-            { "text": "Live", "bg": "#E3F0E6", "color": "#2E6A3D" },
-            { "text": "Editable", "bg": "#F9EEDC", "color": "#B96B13" }
-          ]
-        }
-      ]
+      "badge": "confirmed",
+      "sop_steps": [
+        "Receive the approved Sales Order; client orders 22kg or 50kg cylinder variants. (C1.1.1)",
+        "Delivery Head schedules the delivery - vehicle, capacity, route. (C1.2.1)",
+        "Warehouse generates the Picklist and picks the LPG/products. (C1.1.2)",
+        "Warehouse generates the Delivery Receipt - 2 DRs and 2 Credit Notes per delivery. (C1.1.3)",
+        "Warehouse submits the DR to Accounting to post General Ledger and Inventory entries. (C1.1.4.1)",
+        "Driver collects the Delivery Receipts from Warehouse (may cover multiple clients on one route). (C1.1.4.2)",
+        "Driver and Pahinante proceed to client locations.",
+        "For pickup / no-delivery orders, Warehouse gives the DR to the customer for signature instead. (C1.1.4.3)",
+        "On site, Pahinante weighs and records the cylinders, then delivers them. (C1.1.5.1)",
+        "Client signs the DR, receives the items, and returns the empty cylinders. (C1.1.5.2)",
+        "Check the 1-3kg residue threshold; round up or down and classify accordingly. (C1.1.5.3)",
+        "Provide Credit Notes to the client, recording cylinder serial number and weight residue. (C1.1.6)",
+        "Driver returns to the plant and weighs the empty cylinders. (C1.1.7)",
+        "Driver submits delivery records plus the signed DR and AR to Accounting. (C1.1.8)",
+        "Accounting reconciles the General Ledger against the signed DR and AR. (C1.1.9)",
+        "Compute Commercial Gains - compare weigh-in vs weigh-out records from client site and plant.",
+        "Record results in Google Sheets and ACCPAC.",
+        "Compute commission and distribute to driver/helper/back-office team."
+      ],
+      "guidelines": [
+        "The residue classification threshold is fixed at 1-3kg; deviations are escalated to the Warehouse Supervisor, not decided ad hoc by the driver.",
+        "Two DRs and two Credit Notes are mandatory per delivery (client copy + company copy); a delivery without a matching document pair is not closed in the GL.",
+        "No cylinder leaves the warehouse without a Picklist reference; no GL/Inventory posting is made without a Warehouse-submitted DR.",
+        "Gains and commission are computed only from matched weigh-in/weigh-out pairs - unmatched records are held for investigation, never estimated."
+      ],
+      "approval_matrix": [
+        { "transaction": "Sales Order -> delivery scheduling", "threshold": "-", "initiator": "Sales Rep", "reviewer": "Delivery Head", "approver": "Delivery Head", "controls": ["Route/capacity check"] },
+        { "transaction": "Cylinder pick & DR issuance", "threshold": "-", "initiator": "Warehouse Staff", "reviewer": "Warehouse Supervisor", "approver": "Warehouse Supervisor", "controls": ["Picklist match", "2 DR / 2 CR rule"] },
+        { "transaction": "GL & Inventory posting", "threshold": "-", "initiator": "Warehouse (submits DR)", "reviewer": "Acctg Staff", "approver": "Acctg Staff", "controls": ["DR-GL reconciliation", "Poster != picker"] },
+        { "transaction": "Residue classification", "threshold": "1-3kg variance", "initiator": "Pahinante (weighs)", "reviewer": "Driver", "approver": "Warehouse Supervisor (if disputed)", "controls": ["Dual weigh-in/out", "Credit Note w/ serial #"] },
+        { "transaction": "Commission computation & payout", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Warehouse Supervisor", "approver": "Operations Manager", "controls": ["Weigh-in=weigh-out match", "GSheet + ACCPAC cross-check"] }
+      ],
+      "current_future": {
+        "current": [
+          "Paper DR/CR forms filled by hand at warehouse and client site.",
+          "GL reconciled manually against physical DR/AR copies.",
+          "Gains re-keyed twice - once to Google Sheets, once to ACCPAC.",
+          "Residue judged by the driver/Pahinante at point of delivery."
+        ],
+        "future": [
+          "Odoo Sales Order auto-generates Picklist, DR and CR.",
+          "Digital client signature capture on delivery.",
+          "Automatic weigh-in/weigh-out variance flag and residue computation.",
+          "Single-entry GL posting, removing the GSheet/ACCPAC duplicate entry."
+        ]
+      },
+      "sources": "Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Operations > Commercial (C1.1.1-C1.1.9); \"MGC LPG Process Manual v2.docx\" - Operations > Commercial."
     },
     {
-      "kanji": "",
-      "romaji": "Bulk",
-      "english": "Process Order | Schedule and Delivery | Return to Plant",
-      "cards": [
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "I2A.1 Prepare and Ship Product from Sales Order",
-          "trigger": "Confirmed Sales Order.",
-          "features": [
-            "I2A.1.1 Instant Pick List, Delivery Receipt, mobile-access",
-            "I2A.1.2 summary table and individual order formats",
-            "I2A.1.3 Multiple details like location, date timestamps, product S/N",
-            "I2A.1.4 Multi-level user",
-            "I2A.1.5 Gate Pass - manual"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Draft plan" },
-            { "role": "manager", "label": "Approve scope" }
-          ],
-          "data_outputs": [
-            "Docs from system: Pick List, Delivery Receipt, Charge Invoice (softcopy and pdf formats)",
-            "Written docs: Gate pass",
-            "equivalent system data crawl in Inventory and Accounting modules"
-          ],
-          "tags": [
-            { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" },
-            { "text": "xx", "bg": "#E3F0E6", "color": "#2E6A3D" }
-          ]
-        },
-        {
-          "id": "MANUAL",
-          "status": "core",
-          "name": "I2A.1 Deliver Order, Return Lorry Tank, Signed Charge Invoice, Client Inventory Report",
-          "trigger": "Printed DR, Charge Invoice with specified delivery date and team.",
-          "features": [
-            "I2A.2.1 as is current",
-            "I2A.2.2 as is current",
-            "I2A.2.3 Client inventory monitor"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Prepare context" },
-            { "role": "manager", "label": "Approve direction" }
-          ],
-          "data_outputs": [
-            "signed Delivery Receipt and Charge Invoice",
-            "other docs"
-          ],
-          "tags": [
-            { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" },
-            { "text": "xx", "bg": "#F9EEDC", "color": "#B96B13" }
-          ]
-        },
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "I3A.1 Return to Plant, signed Charge Invoice, monitor sheet",
-          "trigger": "Client signs Charge Invoice and Delivery Receipt",
-          "features": [
-            "I2A.3 Driver returns to plant with signed Charge Invoice and Delivery Receipt",
-            "I2A.3 Acctg staff confirms Invoice entry, upon receiving signed Charge Invoice and Delivery Receipt Confirm from Delivery Driver",
-            "I2A.3 Review correct collection date and chart of account"
-          ],
-          "approval": [
-            { "role": "auto", "label": "Create request" },
-            { "role": "owner", "label": "Fill intake details" },
-            { "role": "review", "label": "Validate completeness" }
-          ],
-          "data_outputs": [
-            "Data",
-            "Open intake queue"
-          ],
-          "tags": [
-            { "text": "Live", "bg": "#E3F0E6", "color": "#2E6A3D" },
-            { "text": "Editable", "bg": "#F9EEDC", "color": "#B96B13" }
-          ]
-        }
-      ]
+      "romaji": "Industrial (Bulk)",
+      "english": "Process Order | Delivery | Return to Plant",
+      "badge": "confirmed",
+      "sop_steps": [
+        "Receive the booked bulk Sales Order; the order must fill the 8-ton truck capacity.",
+        "Assign the lorry/trailer truck and load from the Storage Tank (stock transfer, tank to truck - no cylinders involved).",
+        "Weigh the loaded truck at the plant truck scale (weigh-out).",
+        "Generate loading documents: Receiving Report, Truck Scale slip, and DR - issued per lorry load, not per cylinder.",
+        "Deliver the bulk LPG to the industrial or commercial client site.",
+        "At the client site, measure the volume delivered via meter / pressure gauge.",
+        "Client receives the bulk LPG and signs the DR.",
+        "Truck returns to the plant and is weighed again (weigh-in).",
+        "Compute Bulk Gains per truck - compare weigh-out vs weigh-in; withdrawal should read the higher figure.",
+        "Record residue in the Commercial & Bulk LPG Residue Summary, per truck.",
+        "Submit documents to Accounting; record in Google Sheets and ACCPAC."
+      ],
+      "guidelines": [
+        "Bulk orders must fill the 8-ton truck capacity before dispatch is scheduled; a partial load requires Delivery Head sign-off as a documented exception.",
+        "Bulk uses truck-scale (plant) + meter/pressure-gauge (client) measurement instead of cylinder weigh-in/out; both readings are logged before the trip is closed.",
+        "Per-truck gain is computed only once both weigh-out and weigh-in are on file - a truck missing either reading stays open, it is not estimated."
+      ],
+      "approval_matrix": [
+        { "transaction": "Bulk order load-out", "threshold": "Full 8-ton capacity (exception if partial)", "initiator": "Delivery Head", "reviewer": "Plant Staff", "approver": "Delivery Head", "controls": ["Truck-scale weigh-out", "RR + DR + Truck Scale slip set"] },
+        { "transaction": "Client-site volume delivery", "threshold": "-", "initiator": "Driver", "reviewer": "Client (signs DR)", "approver": "-", "controls": ["Meter/pressure-gauge reading logged"] },
+        { "transaction": "Per-truck gain computation", "threshold": "-", "initiator": "Acctg / Warehouse Staff", "reviewer": "Warehouse Supervisor", "approver": "Operations Manager", "controls": ["Weigh-out vs weigh-in match", "Residue Summary log"] }
+      ],
+      "current_future": {
+        "current": [
+          "Truck-scale readings logged by hand on paper slips.",
+          "Meter/gauge reading at client site manually copied onto the DR.",
+          "Per-truck gain calculated by comparing two paper slips."
+        ],
+        "future": [
+          "Odoo Inventory stock-transfer module logs tank-to-truck movement automatically.",
+          "Digital truck-scale integration feeding the trip record directly.",
+          "Auto-flagged gain/loss variance per truck, no manual comparison."
+        ]
+      },
+      "sources": "\"MGC LPG Process Manual v2.docx\" - Operations > Bulk (adapted from Commercial). Source site (wilsonsykes.github.io/MGSDiagramWorkflow) Operations > Industrial (C2.1-C2.3) was placeholder-only and is superseded by the process manual detail."
     },
     {
-      "kanji": "",
       "romaji": "Dealer",
-      "english": "Process Order | Delivery/Pickup | Invoice",
-      "cards": [
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "I2A.1 Prepare and Ship Product from Sales Order",
-          "trigger": "Confirmed Sales Order.",
-          "features": [
-            "I3A.1.1 Instant Pick List, Delivery Receipt, mobile-access",
-            "I3A.1.2 summary table and individual order formats",
-            "I3A.1.3 Multiple details like location, date timestamps, product S/N",
-            "I3A.1.4 Multi-level user",
-            "I3A.1.5 Gate Pass - manual"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Draft plan" },
-            { "role": "manager", "label": "Approve scope" }
-          ],
-          "data_outputs": [
-            "Docs from system: Pick List, Delivery Receipt, Charge Invoice (softcopy and pdf formats)",
-            "Written docs: Gate pass",
-            "equivalent system data crawl in Inventory and Accounting modules"
-          ],
-          "tags": [
-            { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" },
-            { "text": "xx", "bg": "#E3F0E6", "color": "#2E6A3D" }
-          ]
-        },
-        {
-          "id": "MANUAL",
-          "status": "core",
-          "name": "I3A.2 Deliver Order, Return Lorry Tank, Signed Charge Invoice, Client Inventory Report",
-          "trigger": "Printed DR, Charge Invoice with specified delivery date and team.",
-          "features": [
-            "I3A.2.1 as is current",
-            "I3A.2.2 as is current",
-            "I3A.2.3 Client inventory monitor"
-          ],
-          "approval": [
-            { "role": "owner", "label": "Prepare context" },
-            { "role": "manager", "label": "Approve direction" }
-          ],
-          "data_outputs": [
-            "signed Delivery Receipt and Charge Invoice",
-            "other docs"
-          ],
-          "tags": [
-            { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" },
-            { "text": "xx", "bg": "#F9EEDC", "color": "#B96B13" }
-          ]
-        },
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "I3A.3 Return to Plant, signed Charge Invoice, monitor sheet",
-          "trigger": "Client signs Charge Invoice and Delivery Receipt",
-          "features": [
-            "I3A.3 Driver returns to plant with signed Charge Invoice and Delivery Receipt",
-            "I3A.3 Acctg staff confirms Invoice entry, upon receiving signed Charge Invoice and Delivery Receipt Confirm from Delivery Driver",
-            "I3A.3 Review correct collection date and chart of account"
-          ],
-          "approval": [
-            { "role": "auto", "label": "Create request" },
-            { "role": "owner", "label": "Fill intake details" },
-            { "role": "review", "label": "Validate completeness" }
-          ],
-          "data_outputs": [
-            "Data",
-            "Open intake queue"
-          ],
-          "tags": [
-            { "text": "Live", "bg": "#E3F0E6", "color": "#2E6A3D" },
-            { "text": "Editable", "bg": "#F9EEDC", "color": "#B96B13" }
-          ]
-        }
-      ]
+      "english": "Process Order | Plant Refilling & Swapping | Invoice",
+      "badge": "confirmed",
+      "sop_steps": [
+        "Dealer client orders 2.5kg or 11kg cylinder variants and is scheduled in advance; only confirmed appointments are accommodated. (C3.1)",
+        "Sales Rep creates a Sales Order Form noting the delivery/pickup date. (C3.1.2)",
+        "Dealer arrives with empty cylinders; guard records the vehicle entry.",
+        "Cylinder quantities are counted and the Entry/Exit Form (EEF/EES) is issued; guard validates tank classification (e.g. 11kg, sulit).",
+        "Guard radios the Production Team; the checker collects the EEF.",
+        "Cylinders are refilled at the refilling area (typically ~8 tons, about 2-3 hours).",
+        "Checker encodes the transaction in AppSheet - this is the Refilling Report and the basis of the GRR (General Refilling Report).",
+        "Entry Sheet is completed and the LUT is issued by the checker together with the delivery team.",
+        "Joseph (Plant Operations Officer) reviews and confirms the transaction and records it in inventory.",
+        "Accounting verifies via AppSheet against the official receipt.",
+        "Checker verifies the receipt; quantity must match before release.",
+        "Dealer proceeds to final inspection; guard performs final exit verification before release. (covers pickup-with-terms, pickup-with-payment, and delivery-with-terms variants, C3.1.2.1-C3.1.2.3)",
+        "Cylinder Swapping (allied brands only - Taon Gas, Eco Cylinder, Sulit Gas): dealer submits a swap request via messaging; customer approval is secured.",
+        "Cylinder photos are taken and sent to the designated group chat.",
+        "Sir RY reviews and approves before the swap proceeds.",
+        "Edmond (Warehouse and Quality Supervisor) handles the physical swap and keeps records; dealers must provide their own customer database.",
+        "Operations keeps a monthly record of cylinders swapped, plus treatment and disposition."
+      ],
+      "guidelines": [
+        "Only confirmed, scheduled appointments are accommodated at the plant - walk-in dealer refills are not processed without a prior booking.",
+        "AppSheet entry and the official receipt must match in quantity before a transaction is released; a mismatch holds the release rather than being overridden at the gate.",
+        "Cylinder swapping is restricted to approved allied brands only and requires Sir RY's photo-based approval before any physical swap - no swap proceeds on verbal agreement alone.",
+        "Dealers must maintain their own customer database on file with Operations for swap traceability."
+      ],
+      "approval_matrix": [
+        { "transaction": "Plant refill scheduling", "threshold": "-", "initiator": "Sales Rep", "reviewer": "Delivery Head / Guard", "approver": "Confirmed-booking gate (no separate approver)", "controls": ["Confirmed-appointment-only rule"] },
+        { "transaction": "Cylinder refill & GRR posting", "threshold": "-", "initiator": "Checker", "reviewer": "Joseph (Plant Operations Officer)", "approver": "Accounting (via AppSheet)", "controls": ["AppSheet = receipt quantity match", "EEF / LUT paired documents"] },
+        { "transaction": "Cylinder swap (allied brands only)", "threshold": "Allied-brand list only", "initiator": "Dealer (request)", "reviewer": "Edmond (Warehouse & Quality Supervisor)", "approver": "Sir RY", "controls": ["Photo evidence", "Group-chat approval trail", "Monthly swap log"] }
+      ],
+      "current_future": {
+        "current": [
+          "Paper EEF/LUT slips at the gate and refilling area.",
+          "Guard radio call to Production to trigger refilling.",
+          "AppSheet is semi-digital but still reconciled by hand against paper receipts.",
+          "Swap approval runs through ad hoc chat screenshots."
+        ],
+        "future": [
+          "One mobile app covers booking -> gate entry -> refill logging -> accounting verification in a single record.",
+          "Swap approvals become a structured digital workflow instead of chat threads, with automatic allied-brand validation."
+        ]
+      },
+      "sources": "\"MGC LPG Process Manual v2.docx\" - Operations > Dealer (Plant Refilling & Cylinder Swapping). Source site (wilsonsykes.github.io/MGSDiagramWorkflow) Operations > Dealer (C3.1-C3.3) provided the order-intake framing."
     },
     {
-      "kanji": "",
       "romaji": "Retail",
       "english": "Process Order | Delivery/Pickup | Collect Payment",
-      "cards": [
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "I4A.1 ",
-          "trigger": "Sets quantity for floor stocks for key periods",
-          "features": [
-            "I4A.1.1 ",
-            "I4A.1.2 ",
-            "I4A.1.3 "
-          ],
-          "approval": [
-            { "role": "review", "label": "Check release" },
-            { "role": "manager", "label": "Approve launch" }
-          ],
-          "data_outputs": [
-            "Release history",
-            "Launch approval log"
-          ],
-          "tags": [
-            { "text": "Pending", "bg": "#F9EEDC", "color": "#B96B13" },
-            { "text": "Replace Me", "bg": "#DCEAF5", "color": "#1E4E79" }
-          ]
-        }
-      ]
+      "badge": "pending",
+      "sop_steps": [
+        "Retail/semi-dealer client orders 11kg or 2.5kg cylinders on a retail scale (smaller quantities than Dealer). (per source site: \"same as Dealer steps\")",
+        "Order intake and refill/delivery fulfilment follow the same plant-refilling flow documented for Dealer, scaled to retail order volumes.",
+        "Payment is collected via cash/COD at point of delivery or pickup rather than dealer credit terms - see Accounting > Retail for the cash-handling procedure.",
+        "Commission/gains computation follows the same weigh-in/weigh-out and LUT-balancing logic used for Commercial and Dealer."
+      ],
+      "guidelines": [
+        "Retail fulfilment is explicitly modeled on the Dealer plant-refilling process per company specification; any retail-specific exception to that process is not yet documented.",
+        "Retail is COD by default; credit/terms sales are the exception and require the same past-dues check used in Accounting > Dealer before release."
+      ],
+      "approval_matrix": [
+        { "transaction": "Retail order fulfilment", "threshold": "-", "initiator": "Sales Assistant", "reviewer": "Warehouse / Checker", "approver": "- (COD, no credit approval needed)", "controls": ["Cash collected before/at release"] }
+      ],
+      "current_future": {
+        "current": [
+          "Retail delivery/pickup handled as a scaled-down copy of the Dealer process, with no dedicated documentation on file - inconsistent handling risk across staff."
+        ],
+        "future": [
+          "A dedicated Retail SOP variant inside the same Odoo/AppSheet system, with COD-specific checkpoints built in rather than informally inherited from Dealer."
+        ]
+      },
+      "gap_note": "Neither source separately documents Operations for Retail - both point to it following the Dealer plant-refilling process, scaled down. Recommend a short walkthrough with a Retail-channel Sales Assistant to confirm whether any retail-specific step (e.g. cash-before-release sequencing) differs from Dealer before this is finalized as approved SOP.",
+      "sources": "Source site (wilsonsykes.github.io/MGSDiagramWorkflow) Operations > Retail (C4.1-C4.3, \"same as Dealer steps\"). No corresponding section in \"MGC LPG Process Manual v2.docx\"."
     },
     {
-      "kanji": "",
-      "romaji": "Overall",
-      "english": "Reports | Monitoring | Compliance | Variance Sanctions and Adjustments",
-      "cards": [
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "I5A.1 Inventory Monitoring Report",
-          "trigger": "Daily data input of warehouse and floor stock location (from/to), customer, transaction (in and out), scheduled/actual timestamps, vehicle, driver, helper",
-          "features": [
-            "I5A.1.1 Daily/Weekly/Monthly instant, consolidated data",
-            "I5A.1.2 versatile multi-view reports",
-            "I5A.1.3 Mobile-friendly data input"
-          ],
-          "approval": [
-            { "role": "Optns Supervisor", "label": "Input Storage Tanks Opening and Closing Readings" },
-            { "role": "Senior Plant Supervisor", "label": "Input Sold Cylinders for the Day" },
-            { "role": "Industrial Engr", "label": "Consolidate and account for variances" },
-            { "role": "Plant Operation Officer", "label": "Review and Approve report" },
-            { "role": "Sir RY", "label": "Review and Approve report" }
-          ],
-          "data_outputs": [
-            "I5A.1.1 Inventory per location/per transaction/per period reports",
-            "I5A.1.1 Inv Variances and Adjustment Monthly Summary"
-          ],
-          "tags": [
-            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
-            { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" }
-          ]
-        },
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "I5A.2 Inventory Planning and Forecast",
-          "trigger": "Daily data input of inventory + Sales Target Budget per week per sales avenue",
-          "features": [
-            "I5A.2.1 Weekly/Monthly real-time data",
-            "I5A.2.2 versatile multi-view reports",                                    
-            "I5A.2.3 PC data Input"
-          ],
-          "approval": [
-            { "role": "Senior Operations Supervisor", "label": "Daily data source" },
-            { "role": "Sales AVP", "label": "Recommend sales target" },
-            { "role": "Industrial Engineer", "label": "Set Budget and Review forecast data" },
-            { "role": "Sir RY", "label": "Review Forecast and Approve order" },
-            { "role": "Purchaser/Dispatcher", "label": "Prepare and forward Purchase Orders" }
-          ],                                          
-          "data_outputs": [
-            "I5A.2.1 Weekly/Monthly Inventory Forecast Report",
-            "I5A.2.1 auto-draft Purchased Orders"
-          ],
-          "tags": [
-            { "text": "Dashboard Module", "bg": "#dbe302", "color": "#2E6A3D" },
-            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" }
-          ]
-        },
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "I5A.3 Variance Monitoring and Resolving",
-          "trigger": "Weekly and Daily",
-          "features": [
-            "I5A.3.1 Daily/Weekly/Monthly instant, consolidated data",
-            "I5A.3.2 versatile multi-view reports",
-            "I5A.3.3 Mobile-friendly data input"
-          ],
-          "approval": [
-            { "role": "Senior Plant Supervisor", "label": "Review and resolve variances" },
-            { "role": "Operations Officer", "label": "Resolve and adjust variances" },
-            { "role": "Sir RY", "label": "Review extent of variances" },
-            { "role": "Accounting Manager", "label": "Verify adjustments and close" }
-          ],
-          "data_outputs": [
-            "Inv Variance per Location/per period Summary",
-            "Inv Adjustment per location/per period Summary"
-          ],
-          "tags": [
-            { "text": "Odoo Module", "bg":  "#791e76", "color": "#ffffff" },
-            { "text": "Dashboard Module", "bg": "#dbe302", "color": "#1E4E79" }
-          ]
-        },
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "I5A.4 Cylinder Qty, State and Variance Monitoring",
-          "trigger": "Daily data input of warehouse and floor stock location (from/to), S/N, Size, Qty, Tare Weight, and Painting State, Customers/Locations",
-          "features": [
-            "I5A.4.1 Daily/Weekly/Monthly instant, consolidated data per user",
-            "I5A.4.2 Versatile multi-view, multi-period summaries for updating groups/ for reviewing qty",
-            "I5A.4.3 Versatile Cylinder Qty and State Reports",
-            "I5A.4.4 Mobile-friendly data input"
-          ],
-          "approval": [
-            { "role": "Warehouse and Quality Supervisor", "label": "Count qty,size and state of cylinders, Grind and Label" },
-            { "role": "Inventory Supervisor", "label": "Encode qty,size and state of cylinders" },
-            { "role": "Sales Assistant", "label": "Review cylinder swapping transactions" },
-            { "role": "Operations Officer", "label": "Resolve and adjust variances" },
-            { "role": "Sir RY", "label": "Review extent of cylinder state, qty and variances" }
-          ],
-          "data_outputs": [
-            "I5A.4.5 Cylinder Inventory and State Report",
-            "I5A.4.6 Cylinder Variance per Location/per period Summary",
-            "I5A.4.7 Cylinder Adjustment per location/per period Summary"
-          ],
-          "tags": [
-            { "text": "Odoo Module", "bg":  "#791e76", "color": "#ffffff" },
-            { "text": "xx", "bg": "#DCEAF5", "color": "#1E4E79" }
-          ]
-        },
-        {
-          "id": "ACTIVE",
-          "status": "active",
-          "name": "I5A.5 xx",
-          "trigger": "TBD",
-          "features": [
-            "I5A.5.1 Daily/Weekly/Monthly instant, consolidated data",
-            "I5A.5.2 versatile multi-view reports",
-            "I5A.5.3 Mobile-friendly data input"
-          ],
-          "approval": [
-            { "role": "Senior Plant Supervisor", "label": "Review and resolve variances" },
-            { "role": "Operations Officer", "label": "Resolve and adjust variances" },
-            { "role": "Sir RY", "label": "Review extent of variances" }
-          ],
-          "data_outputs": [
-            "I5A.5.4 Inv Variance per Location/per period Summary",
-            "I5A.5.5 Inv Adjustment per location/per period Summary"
-          ],
-          "tags": [
-            { "text": "Odoo Module", "bg": "#791e76", "color": "#ffffff" },
-            { "text": "Reusable", "bg": "#DCEAF5", "color": "#1E4E79" }
-          ]
-        }
-      ]
+      "romaji": "Company-Wide",
+      "english": "Purchase Order | Stock Transfer | Refill | Floor Stock",
+      "badge": "confirmed",
+      "sop_steps": [
+        "Purchaser forwards the Purchase Order to the Refinery Supplier and schedules the inbound Lorry Truck delivery. (C5.1.1)",
+        "Plant Manager receives the Lorry Trucks and collects the DR and Invoice from the delivery team.",
+        "Plant Manager fills out the Receiving Report (RR) and unloads contents to the Storage Tank. (C5.1.2)",
+        "Plant Staff measures the content volume using a gauge and documents the reading. (C5.1.3)",
+        "Any quantity changes discovered after the RR are reported and logged as a separate entry. (C5.1.3.1)",
+        "Stock Transfer: gas is refilled from the Storage Tank to cylinders following FIFO. (C5.1.4)",
+        "Refilling is tracked using the Google Sheets/AppSheet tools already in use for cylinder refilling. (C5.1.5)",
+        "Storage is split across two locations, Tank 1 and Tank 2; residue is tracked in two categories, Regular and WIWO, both affecting inventory and billing.",
+        "Pull-out schedules and dates at client sites are tracked against a company Pull-out Calendar.",
+        "Cylinders are purchased annually with individual serial numbers. (C5.3.1)",
+        "Cylinders have a defined lifespan requiring repaint and re-testing, tracked by batch number. (C5.3.2)"
+      ],
+      "guidelines": [
+        "Storage Tank stock transfer to cylinders must follow FIFO; no batch is filled out of sequence without Plant Manager sign-off.",
+        "Any quantity variance discovered after the Receiving Report is logged as a separate exception entry, never folded silently into the original RR figure.",
+        "Cylinder serials and batch numbers are tracked for their full lifespan (purchase through repaint/retest cycles); a cylinder without a traceable batch number does not re-enter circulation."
+      ],
+      "approval_matrix": [
+        { "transaction": "Inbound PO & Lorry Truck receiving", "threshold": "-", "initiator": "Purchaser", "reviewer": "Plant Manager", "approver": "Plant Manager", "controls": ["RR filled before unload", "DR + Invoice matched to PO"] },
+        { "transaction": "Storage Tank stock transfer to cylinders", "threshold": "FIFO sequence", "initiator": "Plant Staff", "reviewer": "Plant Manager", "approver": "Plant Manager", "controls": ["Tank 1 / Tank 2 gauge log", "FIFO batch order"] },
+        { "transaction": "Cylinder lifecycle (repaint/retest)", "threshold": "Per DOE lifespan schedule", "initiator": "Plant Staff", "reviewer": "Plant Manager", "approver": "Plant Manager", "controls": ["Serial + batch number tracking"] }
+      ],
+      "current_future": {
+        "current": [
+          "Gauge readings and RR logged on paper / Google Sheets.",
+          "FIFO sequencing tracked manually by staff log sheets.",
+          "Cylinder lifespan tracked in a spreadsheet separate from the refilling records."
+        ],
+        "future": [
+          "Digital tank-gauge integration feeding directly into the Odoo Inventory module.",
+          "Automatic FIFO enforcement at the point of stock-transfer entry.",
+          "A single cylinder-asset register linking serial number, batch, refill history, and lifecycle status."
+        ]
+      },
+      "sources": "Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Operations > Company-Wide (C5.1.1-C5.3.2)."
     }
   ],
   "cross_stage": {
-    "id": "X1",
-    "name": "Overall",
-    "description": "Processes involving Company-wide operations.",
-    "features": [
-      "Track blockers across the full workflow",
-      "Maintain a shared audit trail",
-      "Standardize notifications and approvals"
-    ],
-    "approval": [
-      { "role": "auto", "label": "System watch" },
-      { "role": "review", "label": "Review updates" },
-      { "role": "manager", "label": "Approve escalations" }
-    ],
-    "data_outputs": [
-      "Cross-stage status report",
-      "Escalation dashboard"
-    ],
-    "tags": [
-      { "text": "Shared", "bg": "#EFE7FB", "color": "#6F3CC3" },
-      { "text": "Optional", "bg": "#DCEAF5", "color": "#1E4E79" }
+    "name": "Cross-Stage Governance",
+    "description": "Escalation and traceability rules that apply on top of every Operations approval row above.",
+    "guidelines": [
+      "The 1-3kg residue threshold for cylinder classification is fixed company policy; a driver or Pahinante does not have discretion to round outside that band without Warehouse Supervisor escalation.",
+      "Gains, losses, and commission are computed only from a matched pair of weigh-in and weigh-out readings. An unmatched reading is held for investigation, never estimated.",
+      "Every cylinder is tracked by serial number and batch number for its full lifecycle, including repaint/retest - a cylinder without a traceable batch number does not re-enter circulation."
     ]
   },
-  "manual_section": {
-    "title": "Current Workflows",
-    "tag": "MANUAL"
-  },
-  "manual_stages": [
-    {
-      "english": "Commercial pain points",
-      "kanji": "",
-      "pain_points": [
-        "Process Order: C1.1.1 Client orders 22kg and 50kg cylinder variants.",
-        "Fulfil Order: C1.2.1 Using Sales Order, Delivery Head schedules delivery [vehicle, capacity, route].",
-        "C1.1.2 Warehouse generates Picklist and picks LPG/products.",
-        "C1.1.3 Warehouse generates Delivery Receipt (2 DRs and 2 CRs).",
-        "C1.1.4.1 Warehouse submits DR to Acctg to make General Ledger and Inventory.",
-        "C1.1.4.2 Driver gets Delivery Receipt (DR) from Warehouse for multiple clients.",
-        "Driver and Pahinante drive to client locations.",
-        "C1.1.4.3 No Delivery/For Pick up. Warehouse gives DR to customer for signature.",
-        "C1.1.5.1 On client site, Pahinante weighs and records the cylinders, then delivers them.",
-        "C1.1.5.2 Client signs DR and picks up items and returns empty cylinder.",
-        "C1.1.5.3 Check threshold 1-3kg, above and below, roundup/down, classification.",
-        "C1.1.6 Provide Credit Notes to client with cylinder serial number and weight residue.",
-        "C1.1.7 Driver returns to Plant and weighs empty cylinders.",
-        "C1.1.8 Driver submits record and signed DR and AR to Acctg.",
-        "C1.1.9 Acctg Staff reconciles General Ledger with signed DR and AR.",
-        "Compute Commercial Gains: Gather weight in and weigh out records at Client and Plant.",
-        "Record in Gsheet and ACPAC.",
-        "Compute Commission and Distribute."
-      ]
-    },
-    {
-      "english": "Bulk pain points",
-      "kanji": "",
-      "pain_points": [
-        "C2.1 Process Order: Industrial clients orders selected cylinder tanks.",
-        "C2.2 Fulfil Order: Check Industrial gains and order fulfillment procedures.",
-        "C2.3 Compute Gains: Commission calculations and distribution."
-      ]
-    },
-    {
-      "english": "Dealer pain points",
-      "kanji": "",
-      "pain_points": [
-        "C3.1 Process Order: Client orders 2.5kg and 11kg cylinder variants.",
-        "C3.1.2 Sales Rep creates a Sales Order form with delivery/pickup date.",
-        "C3.1.2.1 IF PICKUP and with TERMS: Client comes to pickup and signs the Sales Order Form.",
-        "C3.1.2.2 IF PICKUP and PAYMENT: Client comes to pickup and pays.",
-        "C3.1.2.3 IF DELIVERY and with TERMS: Driver checks schedule and delivers with DR.",
-        "C3.1.2.3.1 Driver gets empty cylinder, weighs and records with customer signature.",
-        "C3.2 Fulfil Order: Order fulfillment procedures and delivery logistics.",
-        "C3.3 Compute Operational Gains: Commission calculations and tracking.",
-        "ALERT: Cylinder brand switching considerations."
-      ]
-    },
-    {
-      "english": "Retail pain points",
-      "kanji": "",
-      "pain_points": [
-        "C4.1 Process Order: Client order processing and validation.",
-        "C4.2 Fulfil Order: Order fulfillment procedures and delivery.",
-        "C4.3 Compute Gains: Commission calculations and reconciliation.",
-        "Same as above Dealer steps"
-      ]
-    },
-    {
-      "english": "Company-Wide pain points",
-      "kanji": "",
-      "pain_points": [
-        "C5.1.1 Purchaser forwards PO to Refinery Supplier and schedules delivery.",
-        "Plant Manager receives the Purchased Lorry Trucks and gets the DR and Invoice from delivery team.",
-        "C5.1.2 Plant Manager fills Receiving Report (RR) and unloads contents to Storage Tank.",
-        "C5.1.3 Plant Staff measures content volume using gauge and documents.",
-        "C5.1.3.1 Changes in the qty are reported after the Receiving Report.",
-        "C5.1.4 Stock Transfer: Gas content is refilled from Storage Tank to cylinders following FIFO process.",
-        "C5.1.5 Use Google apps for refilling cylinders.",
-        "2 Storage Locations: Tank 1 and Tank 2.",
-        "2 Types of Residue: Regular and WIWO affecting inventory and billing.",
-        "Schedule and follow Pull-out Calendar and Pull-out Dates at client sites.",
-        "C5.3.1 Cylinders purchased annually with individual serial numbers.",
-        "C5.3.2 Cylinders have lifespan requiring Repaint and testing with batch number."
-      ]
-    }
-  ],
   "metrics": [
-    { "value": "5", "label": "Stages", "detail": "Editable sample structure" },
-    { "value": "1", "label": "Checklist Block", "detail": "Supported sectional format" },
-    { "value": "JSON", "label": "Content Source", "detail": "Easy to replace" },
-    { "value": "Pages", "label": "Deployment", "detail": "GitHub Pages ready" }
+    { "value": "5", "label": "Stages", "detail": "Commercial, Industrial, Dealer, Retail, Company-Wide" },
+    { "value": "4", "label": "Confirmed", "detail": "Grounded in source data" },
+    { "value": "1", "label": "Partially Confirmed", "detail": "Retail - gap flagged" },
+    { "value": "19", "label": "Personnel", "detail": "Named staff on roster" }
   ],
-  "footer": "Release Notes v 1.1."
+  "footer": "Masagana Gas Corporation - Operations SOP - Merged from Process Systemization Portal + source site - Internal use only"
 }

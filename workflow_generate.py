@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """
-Static workflow HTML generator.
+Static SOP portal HTML generator.
 Reads workflow_pages.json + workflow_control.json and produces one HTML page per content JSON.
+Each stage renders as a stacked 4-section SOP document:
+  (1) SOP Manual, (2) Operational Guidelines, (3) Approval Matrix & Controls, (4) Current vs. Future Workflow.
 Run with: python workflow_generate.py
 Optional: python workflow_generate.py <page-key>
 """
@@ -123,119 +125,123 @@ def resolve_color(val, colors):
     return val
 
 
-def get_badge_style(status, badge_styles, colors):
-    bs = badge_styles.get(status, badge_styles.get('core', {}))
-    bg = resolve_color(bs.get('bg', '#eee'), colors)
-    text = resolve_color(bs.get('text', '#333'), colors)
-    border = resolve_color(bs.get('border', '#ccc'), colors)
+def get_badge_style(badge, colors):
+    if badge == 'pending':
+        bg, text, border = colors.get('orange_light', '#F9EEDC'), colors.get('orange', '#B96B13'), '#E9CDA8'
+    else:
+        bg, text, border = colors.get('green_light', '#E3F0E6'), colors.get('green', '#2E6A3D'), '#B7D8C4'
     return f'background:{bg};color:{text};border:1px solid {border}'
 
 
-def get_chip_style(role, chip_colors, colors):
-    role_lower = str(role).lower().strip()
-    for key, val in chip_colors.items():
-        if key in role_lower:
-            return f'color:{resolve_color(val["text"], colors)}'
-    return f'color:{colors.get("teal", "#0B7285")}'
-
-
-def render_tags(tags):
-    if not tags:
-        return ''
-    h = '<span class="card-tags">'
-    for tag in tags:
-        bg = tag.get('bg', '#E8E9ED')
-        color = tag.get('color', '#444B5A')
-        h += f'<span class="card-tag" style="background:{bg};color:{color};border:1px solid {color}22">{esc(tag.get("text", ""))}</span>'
-    return h + '</span>'
-
-
-def render_card(card, badge_styles, chip_colors, colors, feat_id_prefix=''):
-    h = '    <div class="pcard" onclick="toggleP(this)">\n      <div class="pcard-bar">\n'
-    h += f'        <span class="badge" style="{get_badge_style(card["status"], badge_styles, colors)}">{esc(card["id"])}</span>\n'
-    h += f'        <span class="pcard-name">{esc(card["name"])}</span>\n'
-    if card.get('status') == 'pending':
-        h += '        <span class="st-dot st-pending" title="In Build"></span>\n'
-    elif card.get('status') == 'active':
-        h += '        <span class="st-dot st-active" title="Active"></span>\n'
-    if card.get('tags'):
-        h += f'        {render_tags(card["tags"])}\n'
-    h += '        <span class="pcard-arrow">&#9662;</span>\n      </div>\n'
-    h += '      <div class="pcard-body"><div class="pcard-inner">\n      <div class="det-grid">\n'
-    h += f'        <div class="d-group"><div class="d-label lbl-trigger">Trigger</div><div class="d-item">{esc(card.get("trigger", ""))}</div></div>\n'
-    h += '        <div class="d-group"><div class="d-label lbl-features">System Features</div>'
-    for fi, feat in enumerate(card.get('features', [])):
-        id_attr = f' id="{feat_id_prefix}-{fi}"' if feat_id_prefix else ''
-        h += f'<div class="d-item"{id_attr}>{esc(feat)}</div>\n'
-    h += '</div>\n      </div>\n'
-    h += '      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow">'
-    for i, appr in enumerate(card.get('approval', [])):
-        if i > 0:
-            h += '<span class="arrow-sep">&rarr;</span>\n'
-        style = get_chip_style(appr.get('role', ''), chip_colors, colors)
-        h += f'<div class="appr-card"><div class="appr-role" style="{style}">{esc(appr.get("role", "").upper())}</div><div class="appr-name">{esc(appr.get("label", ""))}</div></div>\n'
-    h += '</div></div>\n'
-    h += '      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div>'
-    for item in card.get('data_outputs', []):
-        h += f'<div class="d-item">{esc(item)}</div>\n'
-    h += '</div>\n      </div></div>\n    </div>\n'
+def render_sop(steps, cross_terms, id_prefix):
+    h = '<ol class="sop">\n'
+    for i, step in enumerate(steps or []):
+        h += f'<li id="{id_prefix}-sop-{i}">{link_and_esc(step, cross_terms)}</li>\n'
+    h += '</ol>\n'
     return h
 
 
-def is_section_block(entry):
-    return isinstance(entry, dict) and ('section' in entry and 'phases' in entry)
+def render_guidelines(items, cross_terms, id_prefix):
+    h = '<ul class="guide-list">\n'
+    for i, item in enumerate(items or []):
+        h += f'<li id="{id_prefix}-gl-{i}">{link_and_esc(item, cross_terms)}</li>\n'
+    h += '</ul>\n'
+    return h
 
 
-def render_section_block(block):
-    h = '    <div class="pcard checklist-card" onclick="toggleP(this)">\n      <div class="pcard-bar">\n'
-    h += '        <span class="badge checklist-badge">SECTION</span>\n'
-    h += f'        <span class="pcard-name">{esc(block.get("section", "Checklist"))}</span>\n'
-    tags = []
-    if block.get('version'):
-        tags.append(f'v{esc(block.get("version"))}')
-    if block.get('stage') is not None:
-        tags.append(f'Stage {esc(block.get("stage"))}')
-    if tags:
-        h += '        <span class="card-tags">'
-        for tag in tags:
-            h += f'<span class="card-tag checklist-tag">{tag}</span>'
-        h += '</span>\n'
-    h += '        <span class="pcard-arrow">&#9662;</span>\n      </div>\n'
-    h += '      <div class="pcard-body"><div class="pcard-inner checklist-inner">\n'
-    if block.get('note'):
-        h += f'        <div class="check-note">{esc(block.get("note"))}</div>\n'
-    for phase in block.get('phases', []):
-        h += '        <div class="check-phase">\n'
-        h += f'          <div class="check-phase-title">PHASE {esc(phase.get("phase", ""))}: {esc(phase.get("title", ""))}</div>\n'
-        for group in phase.get('groups', []):
-            h += '          <div class="check-group">\n'
-            h += f'            <div class="check-group-name">{esc(group.get("name", ""))}</div>\n'
-            docs = group.get('documents', [])
-            if docs:
-                h += '            <div class="check-docs">\n'
-                for doc in docs:
-                    h += f'              <div class="check-doc-row"><span class="check-doc-code">{esc(doc.get("code", ""))}</span><span class="check-doc-name">{esc(doc.get("name", ""))}</span></div>\n'
-                h += '            </div>\n'
-            h += '          </div>\n'
-        h += '        </div>\n'
-    h += '      </div></div>\n    </div>\n'
+def render_approval_matrix(rows, columns, cross_terms):
+    h = '<table class="matrix">\n<tr>' + ''.join(f'<th>{esc(c)}</th>' for c in columns) + '</tr>\n'
+    for row in rows or []:
+        controls = row.get('controls', [])
+        control_html = ''.join(f'<span class="control-chip">{esc(c)}</span>' for c in controls)
+        h += (
+            '<tr>'
+            f'<td>{link_and_esc(row.get("transaction", ""), cross_terms)}</td>'
+            f'<td>{esc(row.get("threshold", "—"))}</td>'
+            f'<td>{link_and_esc(row.get("initiator", ""), cross_terms)}</td>'
+            f'<td>{link_and_esc(row.get("reviewer", ""), cross_terms)}</td>'
+            f'<td><b>{link_and_esc(row.get("approver", ""), cross_terms)}</b></td>'
+            f'<td>{control_html}</td>'
+            '</tr>\n'
+        )
+    h += '</table>\n'
+    return h
+
+
+def render_current_future(cf, cross_terms, id_prefix, current_label, future_label):
+    current = cf.get('current', []) if cf else []
+    future = cf.get('future', []) if cf else []
+    h = '<div class="cf-grid">\n'
+    h += f'  <div class="cf-col current"><h5>{esc(current_label)}</h5><ul>'
+    for i, item in enumerate(current):
+        h += f'<li id="{id_prefix}-cur-{i}">{link_and_esc(item, cross_terms)}</li>'
+    h += '</ul></div>\n'
+    h += f'  <div class="cf-col future"><h5>{esc(future_label)}</h5><ul>'
+    for i, item in enumerate(future):
+        h += f'<li id="{id_prefix}-fut-{i}">{link_and_esc(item, cross_terms)}</li>'
+    h += '</ul></div>\n'
+    h += '</div>\n'
+    return h
+
+
+def render_stage(stage, control, cross_terms, page_key, si, total):
+    colors = control.get('colors', {})
+    labels = control.get('section_labels', {})
+    matrix_cols = control.get('approval_matrix_columns',
+                               ["Transaction / Decision", "Threshold", "Initiator", "Reviewer", "Approver", "Control Activity"])
+    current_label = control.get('current_label', 'Current — Traditional / Manual')
+    future_label = control.get('future_label', 'Future — Target / Automated')
+
+    i = si + 1
+    id_prefix = f'{page_key}-{si}'
+    badge = stage.get('badge', 'confirmed')
+    default_label = 'Confirmed with source data' if badge == 'confirmed' else 'Partially confirmed — see gap note'
+    badge_label = stage.get('badge_label', default_label)
+
+    h = f'<section class="stage-section" id="stage-{i}">\n'
+    h += f'  <div class="stage-banner" onclick="toggleStage(this)">\n'
+    h += f'    <div class="stage-num"><span class="num-big">{i}</span><span class="num-sub">OF {total}</span></div>\n'
+    h += f'    <div class="stage-info"><div class="stage-title">{esc(stage.get("romaji", "").upper())}</div><div class="stage-sub">{esc(stage.get("english", ""))}</div></div>\n'
+    h += f'    <span class="badge" style="{get_badge_style(badge, colors)}">{esc(badge_label)}</span>\n'
+    h += '    <span class="stage-arrow">&#9662;</span>\n  </div>\n'
+    h += '  <div class="stage-body">\n'
+
+    h += f'    <div class="doc-section"><h4><span class="n">1</span>{labels.get("sop", "SOP Manual")}</h4>{render_sop(stage.get("sop_steps"), cross_terms, id_prefix)}</div>\n'
+    h += f'    <div class="doc-section"><h4><span class="n">2</span>{labels.get("guidelines", "Operational Guidelines")}</h4>{render_guidelines(stage.get("guidelines"), cross_terms, id_prefix)}</div>\n'
+    h += f'    <div class="doc-section"><h4><span class="n">3</span>{labels.get("approval", "Approval Matrix &amp; Controls")}</h4>{render_approval_matrix(stage.get("approval_matrix"), matrix_cols, cross_terms)}</div>\n'
+    h += f'    <div class="doc-section"><h4><span class="n">4</span>{labels.get("current_future", "Current vs. Future Workflow")}</h4>{render_current_future(stage.get("current_future"), cross_terms, id_prefix, current_label, future_label)}</div>\n'
+
+    if stage.get('gap_note'):
+        h += f'    <div class="doc-section gap-note-wrap"><div class="gap-note"><b>Data gap flagged for client confirmation</b>{link_and_esc(stage["gap_note"], cross_terms)}</div></div>\n'
+    if stage.get('sources'):
+        h += f'    <div class="sources"><b>Sources:</b> {esc(stage["sources"])}</div>\n'
+
+    h += '  </div>\n</section>\n\n'
+    return h
+
+
+def render_cross_stage(cross, control, cross_terms):
+    if not cross:
+        return ''
+    labels = control.get('section_labels', {})
+    h = '<section class="cross-section" id="cross-stage">\n  <div class="cross-banner" onclick="toggleStage(this)">\n'
+    h += '    <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>\n'
+    h += f'    <div class="stage-info"><div class="stage-title" style="color:#7030A0">{esc(cross.get("name", "").upper())}</div><div class="stage-sub" style="color:#7c3aed">{esc(cross.get("description", ""))}</div></div>\n'
+    h += '    <span class="stage-arrow" style="color:#7030A0">&#9662;</span>\n  </div>\n  <div class="stage-body">\n'
+    h += f'    <div class="doc-section"><h4><span class="n">2</span>{labels.get("guidelines", "Operational Guidelines")}</h4>{render_guidelines(cross.get("guidelines"), cross_terms, "cross")}</div>\n'
+    h += '  </div>\n</section>\n\n'
     return h
 
 
 def render_html(content, control, cross_terms=None, page_key='page'):
     colors = control.get('colors', {})
-    chip_colors = control.get('chip_colors', {})
-    badge_styles = control.get('badge_styles', {})
     stages = content.get('stages', [])
-    manual_stages = content.get('manual_stages', [])
     cross = content.get('cross_stage', {})
     metrics = content.get('metrics', [])
-    hoshi = content.get('hoshi_section', {})
-    manual_sec = content.get('manual_section', {})
     header = content.get('header', {})
 
-    print_size = control.get('print_page_size', '8.5in 13in')
-    print_margin = control.get('print_page_margin', '0.4in 0.5in')
+    print_size = control.get('print_page_size', '8.5in 14in')
+    print_margin = control.get('print_page_margin', '0.5in 0.6in')
     shadow = '0 1px 3px rgba(15,23,42,.06),0 1px 2px rgba(15,23,42,.04)'
     shadow_open = '0 6px 20px rgba(15,23,42,.10)'
 
@@ -244,9 +250,9 @@ def render_html(content, control, cross_terms=None, page_key='page'):
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{esc(header.get("title", "Workflow Template"))}</title>
+<title>{esc(header.get("title", "SOP Portal"))}</title>
 <style>
-:root{{--accent:{colors.get("accent", "#2B579A")};--accent-light:{colors.get("accent_light", "#D6E4F0")};--accent-dark:{colors.get("accent_dark", "#1B3A65")};--green:{colors.get("green", "#217346")};--green-light:{colors.get("green_light", "#E2F0E8")};--orange:{colors.get("orange", "#C45911")};--orange-light:{colors.get("orange_light", "#FDF0E6")};--red:{colors.get("red", "#C00000")};--red-light:{colors.get("red_light", "#FCE8E8")};--purple:{colors.get("purple", "#7030A0")};--purple-light:{colors.get("purple_light", "#F0E6F6")};--teal:{colors.get("teal", "#0B7285")};--teal-light:{colors.get("teal_light", "#E6F4F7")};--bg:{colors.get("background", "#FFFFFF")};--bg-alt:{colors.get("background_alt", "#F7F8FA")};--border:{colors.get("border", "#D9DDE4")};--border-light:{colors.get("border_light", "#EBEDF0")};--text:{colors.get("text", "#1A1A2E")};--text-mid:{colors.get("text_mid", "#444B5A")};--text-light:{colors.get("text_light", "#727A8C")};--radius:10px;--shadow:{shadow};--shadow-open:{shadow_open}}}
+:root{{--accent:{colors.get("accent", "#1E4E79")};--accent-light:{colors.get("accent_light", "#DCEAF5")};--accent-dark:{colors.get("accent_dark", "#163A5A")};--green:{colors.get("green", "#2E6A3D")};--green-light:{colors.get("green_light", "#E3F0E6")};--orange:{colors.get("orange", "#B96B13")};--orange-light:{colors.get("orange_light", "#F9EEDC")};--red:{colors.get("red", "#B42318")};--red-light:{colors.get("red_light", "#FEE4E2")};--purple:{colors.get("purple", "#6F3CC3")};--purple-light:{colors.get("purple_light", "#EFE7FB")};--teal:{colors.get("teal", "#0F766E")};--teal-light:{colors.get("teal_light", "#DDF5F2")};--bg:{colors.get("background", "#FFFFFF")};--bg-alt:{colors.get("background_alt", "#F6F8FB")};--border:{colors.get("border", "#D8DEE8")};--border-light:{colors.get("border_light", "#E8ECF2")};--text:{colors.get("text", "#142033")};--text-mid:{colors.get("text_mid", "#445066")};--text-light:{colors.get("text_light", "#6B7484")};--radius:10px;--shadow:{shadow};--shadow-open:{shadow_open}}}
 *{{margin:0;padding:0;box-sizing:border-box}}
 html,body{{scroll-behavior:smooth}}
 body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}}
@@ -268,80 +274,47 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica 
 .ctrl-btns{{margin-left:auto;display:flex;gap:6px}}
 .ctrl-btn{{background:#fff;border:1px solid var(--border);color:var(--accent-dark);padding:5px 16px;border-radius:4px;font-size:11px;font-weight:600;font-family:inherit;cursor:pointer;letter-spacing:.4px;transition:all .12s}}
 .ctrl-btn:hover{{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}}
-.stage-section{{margin:14px 48px 0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow);scroll-margin-top:80px}}
-.stage-banner{{background:linear-gradient(180deg,var(--accent-light) 0%,#c4d3ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;transition:background .2s ease;user-select:none}}
+.stage-section,.cross-section{{margin:14px 48px 0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow);scroll-margin-top:80px}}
+.cross-section{{background:#faf5ff;border:1px dashed #d8b4fe}}
+.stage-banner,.cross-banner{{background:linear-gradient(180deg,var(--accent-light) 0%,#c4d3ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;transition:background .2s ease;user-select:none}}
 .stage-banner:hover{{background:linear-gradient(180deg,#cddcf0 0%,#b8cbe5 100%)}}
-.stage-section.open .stage-banner{{border-bottom-color:var(--border)}}
+.cross-banner{{background:linear-gradient(180deg,#f0e6f6 0%,#e0d0ec 100%)}}
+.cross-banner:hover{{background:linear-gradient(180deg,#e8daf0 0%,#d6c4e6 100%)}}
+.stage-section.open .stage-banner,.cross-section.open .cross-banner{{border-bottom-color:var(--border)}}
 .stage-num{{width:60px;height:60px;border-radius:12px;background:var(--accent-dark);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;letter-spacing:.5px;font-size:9px;line-height:1.1;text-align:center}}
 .num-big{{font-size:24px;font-weight:800;line-height:1;margin-bottom:2px}}.num-sub{{font-size:9px;font-weight:800;letter-spacing:1.2px;opacity:.7}}
 .cross-num{{background:var(--purple)}}
 .stage-info{{flex-shrink:0;min-width:200px}}
 .stage-title{{font-size:22px;font-weight:800;color:var(--accent-dark);text-transform:uppercase;letter-spacing:-.3px;margin:0}}
 .stage-sub{{font-size:11px;font-weight:700;color:var(--accent);margin-top:2px;text-transform:uppercase;letter-spacing:1.5px}}
-.stage-desc{{flex:2;min-width:260px;color:#374151;font-size:13px;line-height:1.5}}
-.stage-desc strong{{color:var(--accent-dark)}}
 .stage-arrow{{font-size:22px;color:var(--accent-dark);font-weight:700;transition:transform .25s ease;flex-shrink:0;margin-left:auto}}
-.stage-section.open .stage-arrow{{transform:rotate(180deg)}}
+.stage-section.open .stage-arrow,.cross-section.open .stage-arrow{{transform:rotate(180deg)}}
 .stage-body{{max-height:0;overflow:hidden;transition:max-height .4s ease}}
-.stage-section.open .stage-body{{max-height:8000px}}
-.two-col{{display:flex;gap:0;border-top:1px solid var(--border-light)}}
-.future-col{{flex:3;padding:18px 22px 22px;border-right:1px dashed var(--border-light);background:#fbfcfe}}
-.manual-col{{flex:2;padding:18px 22px 22px;background:#f3f4f6}}
-.col-header{{display:flex;align-items:center;gap:8px;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border-light)}}
-.manual-col .col-header{{border-bottom-color:#d1d5db}}
-.col-dot{{width:22px;height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}}
-.future-dot{{background:var(--green-light);color:#166534}}.manual-dot{{background:#e5e7eb;color:#4b5563}}
-.col-title{{font-size:11px;font-weight:800;letter-spacing:1.3px}}
-.future-title{{color:var(--accent-dark)}}.manual-title{{color:#4b5563}}
-.col-tag{{font-size:10px;font-weight:600;padding:2px 8px;border-radius:999px;margin-left:auto;letter-spacing:.3px}}
-.future-tag{{background:#dbe7f6;color:var(--accent-dark);border:1px solid #B3CCE6}}
-.manual-tag{{background:#e5e7eb;color:#4b5563;border:1px solid #D1D5DB}}
-.pcard{{margin:8px 0;border-radius:6px;border:1px solid var(--border);background:#fff;overflow:hidden;cursor:pointer;box-shadow:var(--shadow);transition:border-color .15s,box-shadow .15s}}
-.pcard:hover{{box-shadow:0 3px 8px rgba(15,23,42,.08);border-color:#b7c7df}}
-.pcard.open{{border-color:var(--accent);box-shadow:var(--shadow-open)}}
-.pcard-bar{{display:flex;align-items:center;gap:8px;padding:9px 12px}}
-.badge{{font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;white-space:nowrap;letter-spacing:.3px}}
-.pcard-name{{font-size:12.5px;font-weight:600;color:#1f2937;flex:1;line-height:1.3}}
-.st-dot{{width:8px;height:8px;border-radius:50%;box-shadow:0 0 0 2px rgba(0,0,0,.06)}}.st-active{{background:var(--green)}}.st-pending{{background:var(--orange)}}
-.pcard-arrow{{font-size:11px;color:#9ca3af;transition:transform .18s ease;margin-left:2px}}
-.pcard.open .pcard-arrow{{transform:rotate(180deg);color:var(--accent-dark)}}
-.pcard-body{{max-height:0;overflow:hidden;transition:max-height .3s ease;border-top:0 solid transparent}}
-.pcard.open .pcard-body{{max-height:1800px;border-top:1px dashed var(--border-light)}}
-.pcard-inner{{padding:12px 14px 14px;background:var(--bg-alt)}}
-.checklist-card{{border-style:dashed}}
-.checklist-badge{{background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe}}
-.checklist-tag{{background:#eef2ff;color:#3730a3;border:1px solid #c7d2fe}}
-.checklist-inner{{background:#fcfcff}}
-.check-note{{font-size:11px;color:#4b5563;padding:8px 10px;border:1px dashed #cbd5e1;border-radius:6px;background:#f8fafc;margin-bottom:10px}}
-.check-phase{{border:1px solid #e5e7eb;border-radius:8px;padding:8px 10px;margin:8px 0;background:#fff}}
-.check-phase-title{{font-size:11px;font-weight:800;color:#1e3a8a;letter-spacing:.4px;margin-bottom:6px;text-transform:uppercase}}
-.check-group{{margin:8px 0 6px}}
-.check-group-name{{font-size:11px;font-weight:700;color:#334155;margin-bottom:5px}}
-.check-docs{{display:grid;gap:4px}}
-.check-doc-row{{display:flex;gap:8px;font-size:11px;color:#334155;line-height:1.4}}
-.check-doc-code{{min-width:52px;font-weight:800;color:#0f766e}}
-.check-doc-name{{flex:1}}
-.card-tags{{display:flex;gap:5px;margin-left:auto;flex-shrink:0}}
-.card-tag{{font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;white-space:nowrap;letter-spacing:.3px;text-transform:uppercase}}
-.det-grid{{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px}}
-.d-group{{margin-bottom:9px}}.d-group:last-child{{margin-bottom:0}}
-.d-label{{font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:4px;color:var(--text-light)}}
-.d-label.lbl-trigger{{color:var(--orange)}}.d-label.lbl-features{{color:var(--teal)}}.d-label.lbl-approval{{color:var(--purple)}}.d-label.lbl-data{{color:var(--green)}}
-.d-item{{font-size:11.5px;color:#374151;line-height:1.55;padding-left:14px;position:relative}}
-.d-item::before{{content:'\2022';position:absolute;left:2px;color:var(--text-light);font-size:11px}}
-.appr-flow{{display:flex;gap:6px;flex-wrap:wrap;align-items:stretch;margin-top:6px}}
-.appr-card{{border:1px solid #cbd5e1;border-radius:6px;padding:6px 9px;background:#f8fafc;min-width:110px;flex:1;max-width:200px}}
-.appr-role{{font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;margin-bottom:1px;color:#155e75}}
-.appr-name{{font-size:11.5px;font-weight:700;color:#1e293b;line-height:1.25;margin-bottom:2px}}
-.arrow-sep{{display:flex;align-items:center;color:#94a3b8;font-weight:800;font-size:16px;margin:0 2px}}
-.pain-row{{font-size:12px;color:#4b5563;line-height:1.55;padding:6px 0;display:flex;gap:8px;align-items:flex-start;border-bottom:1px dashed #d1d5db}}
-.pain-row:last-child{{border-bottom:none}}
-.pain-icon{{color:#6b7280;font-weight:800;font-size:11px;flex-shrink:0;margin-top:1px}}
-.cross-section{{margin:14px 48px 0;background:#faf5ff;border:1px dashed #d8b4fe;border-radius:var(--radius);overflow:hidden;scroll-margin-top:80px}}
-.cross-banner{{background:linear-gradient(180deg,#f0e6f6 0%,#e0d0ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;user-select:none}}
-.cross-banner:hover{{background:linear-gradient(180deg,#e8daf0 0%,#d6c4e6 100%)}}
-.cross-section.open .cross-banner{{border-bottom-color:#d0b8e0}}
-.cross-inner{{padding:20px 28px}}
+.stage-section.open .stage-body,.cross-section.open .stage-body{{max-height:12000px}}
+.badge{{font-size:10.5px;font-weight:800;padding:4px 11px;border-radius:999px;white-space:nowrap;letter-spacing:.3px;margin-left:auto}}
+.doc-section{{padding:18px 28px;border-top:1px dashed var(--border-light)}}
+.doc-section:first-child{{border-top:1px solid var(--border-light)}}
+.doc-section h4{{margin:0 0 12px;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--accent-dark)}}
+.doc-section h4 .n{{display:inline-block;width:22px;height:22px;border-radius:50%;background:var(--accent-dark);color:#fff;text-align:center;line-height:22px;font-size:12px;margin-right:8px}}
+ol.sop{{margin:0;padding-left:22px}}
+ol.sop li{{margin:0 0 9px;font-size:13px;line-height:1.55;color:#374151}}
+.guide-list{{margin:0;padding-left:20px}}
+.guide-list li{{font-size:13px;line-height:1.6;margin-bottom:8px;color:#374151}}
+table.matrix{{width:100%;border-collapse:collapse;font-size:12px;margin-top:2px}}
+table.matrix th{{background:var(--accent-dark);color:#fff;text-align:left;padding:8px 10px;font-size:10.5px;letter-spacing:.3px}}
+table.matrix td{{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#374151}}
+table.matrix tr:nth-child(even) td{{background:var(--bg-alt)}}
+.control-chip{{display:inline-block;background:var(--accent-light);color:var(--accent-dark);border:1px solid #BFD6EB;border-radius:5px;padding:1px 7px;font-size:10.5px;margin:1px 4px 1px 0}}
+.cf-grid{{display:grid;grid-template-columns:1fr 1fr;gap:16px}}
+.cf-col{{border-radius:8px;padding:14px 16px}}
+.cf-col.current{{background:var(--orange-light);border:1px solid #E9CDA8}}
+.cf-col.future{{background:var(--green-light);border:1px solid #B7D8C4}}
+.cf-col h5{{margin:0 0 8px;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}}
+.cf-col.current h5{{color:var(--orange)}}.cf-col.future h5{{color:var(--green)}}
+.cf-col ul{{margin:0;padding-left:18px}}.cf-col li{{font-size:12.5px;margin-bottom:6px;line-height:1.5;color:#374151}}
+.gap-note{{background:var(--red-light);border:1px solid #f0c9c9;color:var(--red);border-radius:8px;padding:12px 16px;font-size:12.5px}}
+.gap-note b{{display:block;margin-bottom:4px}}
+.sources{{font-size:11px;color:var(--text-light);padding:12px 28px;background:var(--bg-alt);border-top:1px solid var(--border-light)}}
 .metrics-strip{{margin:20px 48px;padding:18px 24px;border-radius:var(--radius);border:1px solid var(--border);background:#fff;box-shadow:var(--shadow);display:flex;justify-content:space-around;flex-wrap:wrap;gap:8px}}
 .metric{{text-align:center;padding:6px 14px}}.metric-val{{font-size:26px;font-weight:800;color:var(--accent-dark)}}
 .metric-lbl{{font-size:12px;font-weight:600;color:var(--text-mid);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}}
@@ -352,18 +325,31 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica 
 .xref-form{{color:#0F766E}}
 .xref-subprocess{{color:#1E4E79}}
 .xref-personnel{{color:#6F3CC3}}
-@media print{{.topnav,.ctrl-btns,.footer button{{display:none!important}}.stage-body,.pcard-body{{max-height:none!important}}.stage-section,.cross-section{{page-break-inside:avoid;box-shadow:none}}}}
-@media(max-width:900px){{.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}}.two-col{{flex-direction:column}}.future-col{{border-right:none;border-bottom:1px dashed var(--border-light)}}.det-grid{{grid-template-columns:1fr}}.topnav{{gap:12px}}.nav-link{{font-size:10.5px}}}}
+@media print{{
+  .topnav,.ctrl-btns,.footer button{{display:none!important}}
+  body{{font-size:11.5px}}
+  .stage-body,.cross-section .stage-body{{max-height:none!important}}
+  .stage-section,.cross-section{{margin:0 0 16px;box-shadow:none;border:1px solid #999;page-break-inside:avoid}}
+  .doc-section{{page-break-inside:avoid}}
+  .stage-banner,.cross-banner{{background:#eef2f6!important;cursor:default}}
+  .stage-arrow{{display:none}}
+  .cf-grid{{grid-template-columns:1fr 1fr}}
+  a.xref{{color:inherit;text-decoration:none}}
+  .legend-bar{{page-break-after:avoid}}
+}}
+@media(max-width:900px){{.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}}.doc-section{{padding-left:16px;padding-right:16px}}.cf-grid{{grid-template-columns:1fr}}.topnav{{gap:12px}}.nav-link{{font-size:10.5px}}}}
 </style>
 </head>
 <body>
 '''
 
     out += '<nav class="topnav">\n'
-    out += f'  <div class="nav-logo">{esc(header.get("logo", "WORKFLOW"))}</div>\n'
+    out += f'  <div class="nav-logo">{esc(header.get("logo", "SOP"))}</div>\n'
     for i, stage in enumerate(stages, 1):
         out += f'  <a href="#stage-{i}" class="nav-link">{i} &middot; {esc(stage.get("romaji", ""))}</a>\n'
-    out += '  <a href="#cross-stage" class="nav-link">Cross-Stage</a>\n</nav>\n\n'
+    if cross:
+        out += '  <a href="#cross-stage" class="nav-link">Cross-Stage</a>\n'
+    out += '</nav>\n\n'
 
     out += f'<div class="header">\n  <div class="header-top"><div class="header-logo">{esc(header.get("logo", ""))}</div><span class="header-kanji">{esc(header.get("kanji", ""))}</span></div>\n'
     out += f'  <h1>{esc(header.get("title", ""))}</h1>\n  <p>{esc(header.get("subtitle", ""))}</p>\n</div>\n\n'
@@ -373,42 +359,12 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica 
         color = resolve_color(item.get('color', '#999'), colors)
         out += f'  <div class="legend-item"><div class="legend-dot" style="background:{color}"></div> {esc(item.get("label", ""))}</div>\n'
     out += '  <div class="ctrl-btns">\n    <button class="ctrl-btn" onclick="expandAll()">Expand All</button>\n    <button class="ctrl-btn" onclick="collapseAll()">Collapse All</button>\n'
-    out += '    <button class="ctrl-btn" onclick="printShortBond()">&#128424; Print (Short Bond)</button>\n  </div>\n</div>\n\n'
+    out += '    <button class="ctrl-btn" onclick="printShortBond()">&#128424; Print</button>\n  </div>\n</div>\n\n'
 
-    for i, stage in enumerate(stages, 1):
-        si = i - 1
-        out += f'<section class="stage-section" id="stage-{i}">\n  <div class="stage-banner" onclick="toggleStage(this)">\n'
-        out += f'    <div class="stage-num"><span class="num-big">{i}</span><span class="num-sub">OF {len(stages)}</span></div>\n'
-        out += f'    <div class="stage-info"><div class="stage-title">{esc(stage.get("romaji", "").upper())}</div><div class="stage-sub">{esc(stage.get("english", ""))}</div></div>\n'
-        out += '    <div class="stage-desc"></div><span class="stage-arrow">&#9662;</span>\n  </div>\n  <div class="stage-body"><div class="two-col">\n'
-        out += f'      <div class="future-col">\n        <div class="col-header future-header"><span class="col-dot future-dot">+</span><span class="col-title future-title">FUTURE &mdash; AUTOMATED</span><span class="col-tag future-tag">{esc(hoshi.get("tag", ""))}</span></div>\n        <div class="cards-list">\n'
-        for ci, card in enumerate(stage.get('cards', [])):
-            feat_prefix = f'feat-{page_key}-{si}-{ci}'
-            out += render_section_block(card) if is_section_block(card) else render_card(card, badge_styles, chip_colors, colors, feat_prefix)
-        out += '        </div>\n      </div>\n'
-        out += f'      <div class="manual-col">\n        <div class="col-header manual-header"><span class="col-dot manual-dot">&#9998;</span><span class="col-title manual-title">CURRENT &mdash; TRADITIONAL</span><span class="col-tag manual-tag">{esc(manual_sec.get("tag", ""))}</span></div>\n        <div class="pain-list">\n'
-        if si < len(manual_stages):
-            for pi, pp in enumerate(manual_stages[si].get('pain_points', [])):
-                pp_id = f'pp-{page_key}-{si}-{pi}'
-                out += f'          <div class="pain-row" id="{pp_id}"><span class="pain-icon">&#10005;</span><span>{link_and_esc(pp, cross_terms)}</span></div>\n'
-        out += '        </div>\n      </div>\n    </div></div>\n</section>\n\n'
+    for si, stage in enumerate(stages):
+        out += render_stage(stage, control, cross_terms, page_key, si, len(stages))
 
-    if cross:
-        out += '<section class="cross-section" id="cross-stage">\n  <div class="cross-banner" onclick="toggleStage(this)">\n'
-        out += f'    <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>\n    <div class="stage-info"><div class="stage-title" style="color:#7030A0">{esc(cross.get("name", "").upper())}</div><div class="stage-sub" style="color:#7c3aed">{esc(cross.get("description", ""))}</div></div>\n    <span class="stage-arrow" style="color:#7030A0">&#9662;</span>\n  </div>\n  <div class="stage-body"><div class="cross-inner">\n'
-        out += '      <div class="d-group"><div class="d-label lbl-features">System Features</div>'
-        for feat in cross.get('features', []):
-            out += f'<div class="d-item">{esc(feat)}</div>\n'
-        out += '</div>\n      <div class="d-group"><div class="d-label lbl-approval">Approval Matrix</div><div class="appr-flow">'
-        for i, appr in enumerate(cross.get('approval', [])):
-            if i > 0:
-                out += '<span class="arrow-sep">&rarr;</span>\n'
-            style = get_chip_style(appr.get('role', ''), chip_colors, colors)
-            out += f'<div class="appr-card"><div class="appr-role" style="{style}">{esc(appr.get("role", "").upper())}</div><div class="appr-name">{esc(appr.get("label", ""))}</div></div>\n'
-        out += '</div></div>\n      <div class="d-group"><div class="d-label lbl-data">Data Outputs</div>'
-        for item in cross.get('data_outputs', []):
-            out += f'<div class="d-item">{esc(item)}</div>\n'
-        out += '</div>\n  </div></div>\n</section>\n\n'
+    out += render_cross_stage(cross, control, cross_terms)
 
     if metrics:
         out += '<div class="metrics-strip">\n'
@@ -416,14 +372,13 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica 
             out += f'  <div class="metric"><div class="metric-val">{esc(metric.get("value", ""))}</div><div class="metric-lbl">{esc(metric.get("label", ""))}</div><div class="metric-sub">{esc(metric.get("detail", ""))}</div></div>\n'
         out += '</div>\n\n'
 
-    out += f'<div class="footer"><div>{esc(content.get("footer", ""))}</div><button class="ctrl-btn" onclick="printShortBond()">&#128424; Print Short Bond</button></div>\n\n'
+    out += f'<div class="footer"><div>{esc(content.get("footer", ""))}</div><button class="ctrl-btn" onclick="printShortBond()">&#128424; Print</button></div>\n\n'
     out += f'''<script>
 function toggleStage(el){{var sec=el.closest('.stage-section')||el.closest('.cross-section');if(sec)sec.classList.toggle('open')}}
-function toggleP(el){{el.classList.toggle('open')}}
-function expandAll(){{document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){{s.classList.add('open')}});document.querySelectorAll('.pcard').forEach(function(p){{p.classList.add('open')}})}}
-function collapseAll(){{document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){{s.classList.remove('open')}});document.querySelectorAll('.pcard').forEach(function(p){{p.classList.remove('open')}})}}
-function printShortBond(){{var s=document.createElement('style');s.id='psb';s.innerHTML='@page{{size:{print_size};margin:{print_margin}}}';document.head.appendChild(s);window.print();setTimeout(function(){{var e=document.getElementById('psb');if(e)e.remove()}},1000)}}
-function scrollToAnchor(id){{var el=document.getElementById(id);if(!el)return;var stage=el.closest('.stage-section')||el.closest('.cross-section');if(stage)stage.classList.add('open');var pcard=el.closest('.pcard');if(pcard)pcard.classList.add('open');setTimeout(function(){{el.scrollIntoView({{behavior:'smooth',block:'center'}});el.style.outline='2px solid var(--accent)';setTimeout(function(){{el.style.outline=''}},1800)}},180)}}
+function expandAll(){{document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){{s.classList.add('open')}})}}
+function collapseAll(){{document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){{s.classList.remove('open')}})}}
+function printShortBond(){{var s=document.createElement('style');s.id='psb';s.innerHTML='@page{{size:{print_size};margin:{print_margin}}}';document.head.appendChild(s);expandAll();window.print();setTimeout(function(){{var e=document.getElementById('psb');if(e)e.remove()}},1000)}}
+function scrollToAnchor(id){{var el=document.getElementById(id);if(!el)return;var stage=el.closest('.stage-section')||el.closest('.cross-section');if(stage)stage.classList.add('open');setTimeout(function(){{el.scrollIntoView({{behavior:'smooth',block:'center'}});el.style.outline='2px solid var(--accent)';setTimeout(function(){{el.style.outline=''}},1800)}},180)}}
 document.querySelectorAll('.topnav a').forEach(function(link){{link.addEventListener('click',function(){{var hash=link.getAttribute('href');if(!hash||!hash.startsWith('#'))return;var t=document.querySelector(hash);if(t)t.classList.add('open')}});}});
 </script>
 </body>
@@ -439,7 +394,7 @@ def load_pages_config():
 
 def generate(selected_key=None):
     print("\n" + "=" * 60)
-    print("  Static Workflow HTML Generator")
+    print("  Static SOP Portal HTML Generator")
     print("=" * 60)
     print(f"  Reading from: {SCRIPT_DIR}\n")
 
@@ -498,13 +453,12 @@ def generate(selected_key=None):
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(html)
         stages = content.get('stages', [])
-        total_cards = sum(len(s.get('cards', [])) for s in stages)
-        generated.append((output_file, len(stages), total_cards, len(content.get('metrics', [])), len(html)))
+        generated.append((output_file, len(stages), len(content.get('metrics', [])), len(html)))
 
     print()
-    for output_file, stage_count, card_count, metric_count, size in generated:
+    for output_file, stage_count, metric_count, size in generated:
         print(f"  [OK] Generated: {output_file}")
-        print(f"       {stage_count} stages, {card_count} cards, {metric_count} metrics")
+        print(f"       {stage_count} stages, {metric_count} metrics")
         print(f"       Size: {size:,} chars")
     print(f"       Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60 + "\n")
