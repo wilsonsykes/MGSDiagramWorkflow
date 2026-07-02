@@ -450,47 +450,47 @@
       "english": "Commercial pain points",
       "kanji": "",
       "pain_points": [
-        "Process Order: C1.1.1 Client orders 22kg and 50kg cylinder variants.",
-        "Fulfil Order: C1.2.1 Using Sales Order, Delivery Head schedules delivery [vehicle, capacity, route].",
-        "C1.1.2 Warehouse generates Picklist and picks LPG/products.",
-        "C1.1.3 Warehouse generates Delivery Receipt (2 DRs and 2 CRs).",
-        "C1.1.4.1 Warehouse submits DR to Acctg to make General Ledger and Inventory.",
-        "C1.1.4.2 Driver gets Delivery Receipt (DR) from Warehouse for multiple clients.",
-        "Driver and Pahinante drive to client locations.",
-        "C1.1.4.3 No Delivery/For Pick up. Warehouse gives DR to customer for signature.",
-        "C1.1.5.1 On client site, Pahinante weighs and records the cylinders, then delivers them.",
-        "C1.1.5.2 Client signs DR and picks up items and returns empty cylinder.",
-        "C1.1.5.3 Check threshold 1-3kg, above and below, roundup/down, classification.",
-        "C1.1.6 Provide Credit Notes to client with cylinder serial number and weight residue.",
-        "C1.1.7 Driver returns to Plant and weighs empty cylinders.",
-        "C1.1.8 Driver submits record and signed DR and AR to Acctg.",
-        "C1.1.9 Acctg Staff reconciles General Ledger with signed DR and AR.",
-        "Compute Commercial Gains: Gather weight in and weigh out records at Client and Plant.",
-        "Record in Gsheet and ACPAC.",
-        "Compute Commission and Distribute."
+        "Process Order: OC1.1 Client orders 22kg and 50kg cylinder variants.",
+        "Fulfil Order: OC1.2 Using Sales Order, Delivery Head schedules delivery [vehicle, capacity, route].",
+        "OC1.2.1 Warehouse generates Picklist and picks LPG/products.",
+        "OC1.2.2 Warehouse generates Delivery Receipt (2 DRs and 2 CRs).",
+        "OC1.2.3 Warehouse submits DR to Acctg to make General Ledger and Inventory.",
+        "OC1.2.3.1 Driver gets Delivery Receipt (DR) from Warehouse for multiple clients.",
+        "OC1.2.3.2 Driver and Pahinante drive to client locations.",
+        "OC1.2.3.3 No Delivery/For Pick up. Warehouse gives DR to customer for signature.",
+        "OC1.2.4 On client site, Pahinante weighs and records the cylinders, then delivers them.",
+        "OC1.2.4.1 Client signs DR and picks up items and returns empty cylinder.",
+        "OC1.2.4.2 Check threshold 1-3kg, above and below, roundup/down, classification.",
+        "OC1.2.5 Provide Credit Notes to client with cylinder serial number and weight residue.",
+        "OC1.2.6 Driver returns to Plant and weighs empty cylinders.",
+        "OC1.2.7 Driver submits record and signed DR and AR to Acctg.",
+        "OC1.2.8 Acctg Staff reconciles General Ledger with signed DR and AR.",
+        "OC1.2.9 Compute Commercial Gains: Gather weight in and weigh out records at Client and Plant.",
+        "OC1.2.10 Record in Gsheet and ACPAC.",
+        "OC1.2.11 Compute Commission and Distribute."
       ]
     },
     {
       "english": "Bulk pain points",
       "kanji": "",
       "pain_points": [
-        "C2.1 Process Order: Industrial clients orders selected cylinder tanks.",
-        "C2.2 Fulfil Order: Check Industrial gains and order fulfillment procedures.",
-        "C2.3 Compute Gains: Commission calculations and distribution."
+        "OC2.1 Process Order: Industrial clients orders selected cylinder tanks.",
+        "OC2.2 Fulfil Order: Check Industrial gains and order fulfillment procedures.",
+        "OC2.3 Compute Gains: Commission calculations and distribution."
       ]
     },
     {
       "english": "Dealer pain points",
       "kanji": "",
       "pain_points": [
-        "C3.1 Process Order: Client orders 2.5kg and 11kg cylinder variants.",
-        "C3.1.2 Sales Rep creates a Sales Order form with delivery/pickup date.",
-        "C3.1.2.1 IF PICKUP and with TERMS: Client comes to pickup and signs the Sales Order Form.",
-        "C3.1.2.2 IF PICKUP and PAYMENT: Client comes to pickup and pays.",
-        "C3.1.2.3 IF DELIVERY and with TERMS: Driver checks schedule and delivers with DR.",
-        "C3.1.2.3.1 Driver gets empty cylinder, weighs and records with customer signature.",
-        "C3.2 Fulfil Order: Order fulfillment procedures and delivery logistics.",
-        "C3.3 Compute Operational Gains: Commission calculations and tracking.",
+        "OC3.1 Process Order: Client orders 2.5kg and 11kg cylinder variants.",
+        "OC3.1.2 Sales Rep creates a Sales Order form with delivery/pickup date.",
+        "OC3.1.2.1 IF PICKUP and with TERMS: Client comes to pickup and signs the Sales Order Form.",
+        "OC3.1.2.2 IF PICKUP and PAYMENT: Client comes to pickup and pays.",
+        "OC3.1.2.3 IF DELIVERY and with TERMS: Driver checks schedule and delivers with DR.",
+        "OC3.1.2.3.1 Driver gets empty cylinder, weighs and records with customer signature.",
+        "OC3.2 Fulfil Order: Order fulfillment procedures and delivery logistics.",
+        "OC3.3 Compute Operational Gains: Commission calculations and tracking.",
         "ALERT: Cylinder brand switching considerations."
       ]
     },
@@ -498,9 +498,9 @@
       "english": "Retail pain points",
       "kanji": "",
       "pain_points": [
-        "C4.1 Process Order: Client order processing and validation.",
-        "C4.2 Fulfil Order: Order fulfillment procedures and delivery.",
-        "C4.3 Compute Gains: Commission calculations and reconciliation.",
+        "OC4.1 Process Order: Client order processing and validation.",
+        "OC4.2 Fulfil Order: Order fulfillment procedures and delivery.",
+        "OC4.3 Compute Gains: Commission calculations and reconciliation.",
         "Same as above Dealer steps"
       ]
     },
@@ -508,18 +508,18 @@
       "english": "Company-Wide pain points",
       "kanji": "",
       "pain_points": [
-        "C5.1.1 Purchaser forwards PO to Refinery Supplier and schedules delivery.",
-        "Plant Manager receives the Purchased Lorry Trucks and gets the DR and Invoice from delivery team.",
-        "C5.1.2 Plant Manager fills Receiving Report (RR) and unloads contents to Storage Tank.",
-        "C5.1.3 Plant Staff measures content volume using gauge and documents.",
-        "C5.1.3.1 Changes in the qty are reported after the Receiving Report.",
-        "C5.1.4 Stock Transfer: Gas content is refilled from Storage Tank to cylinders following FIFO process.",
-        "C5.1.5 Use Google apps for refilling cylinders.",
-        "2 Storage Locations: Tank 1 and Tank 2.",
-        "2 Types of Residue: Regular and WIWO affecting inventory and billing.",
-        "Schedule and follow Pull-out Calendar and Pull-out Dates at client sites.",
-        "C5.3.1 Cylinders purchased annually with individual serial numbers.",
-        "C5.3.2 Cylinders have lifespan requiring Repaint and testing with batch number."
+        "OC5.1 Purchaser forwards PO to Refinery Supplier and schedules delivery.",
+        "OC5.2 Plant Manager receives the Purchased Lorry Trucks and gets the DR and Invoice from delivery team.",
+        "OC5.2.1 Plant Manager fills Receiving Report (RR) and unloads contents to Storage Tank.",
+        "OC5.2.2 Plant Staff measures content volume using gauge and documents.",
+        "OC5.3 Changes in the qty are reported after the Receiving Report.",
+        "OC5.4 Stock Transfer: Gas content is refilled from Storage Tank to cylinders following FIFO process.",
+        "OC5.4.1 Use Google apps for refilling cylinders.",
+        "OC5.4.2 Two Storage Locations: Tank 1 and Tank 2.",
+        "OC5.5 Two Types of Residue: Regular and WIWO affecting inventory and billing.",
+        "OC5.6 Schedule and follow Pull-out Calendar and Pull-out Dates at client sites.",
+        "OC5.7 Cylinders purchased annually with individual serial numbers.",
+        "OC5.7.1 Cylinders have lifespan requiring Repaint and testing with batch number."
       ]
     }
   ],
