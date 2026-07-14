@@ -3,66 +3,116 @@
     "logo": "Operations",
     "kanji": "SOP",
     "title": "Operations SOP",
-    "subtitle": "Truck loading, delivery, cylinder refilling, dealer swapping, and plant receiving - the physical movement of LPG from supplier to client and back."
+    "subtitle": "Fulfill Sales, Truck loading, delivery, refilling, cylinder swapping, and receiving"
   },
   "stages": [
     {
       "romaji": "Commercial",
       "english": "Process Order | Delivery | Return to Plant",
       "badge": "confirmed",
+      "badge_label": "Confirmed with source data",
       "sop_steps": [
         "Receive the approved Sales Order; client orders 22kg or 50kg cylinder variants. (C1.1.1)",
-        "Delivery Head schedules the delivery - vehicle, capacity, route. (C1.2.1)",
-        "Warehouse generates the Picklist and picks the LPG/products. (C1.1.2)",
-        "Warehouse generates the Delivery Receipt - 2 DRs and 2 Credit Notes per delivery. (C1.1.3)",
-        "Warehouse submits the DR to Accounting to post General Ledger and Inventory entries. (C1.1.4.1)",
-        "Driver collects the Delivery Receipts from Warehouse (may cover multiple clients on one route). (C1.1.4.2)",
-        "Driver and Pahinante proceed to client locations.",
-        "For pickup / no-delivery orders, Warehouse gives the DR to the customer for signature instead. (C1.1.4.3)",
-        "On site, Pahinante weighs and records the cylinders, then delivers them. (C1.1.5.1)",
-        "Client signs the DR, receives the items, and returns the empty cylinders. (C1.1.5.2)",
-        "Check the 1-3kg residue threshold; round up or down and classify accordingly. (C1.1.5.3)",
-        "Provide Credit Notes to the client, recording cylinder serial number and weight residue. (C1.1.6)",
-        "Driver returns to the plant and weighs the empty cylinders. (C1.1.7)",
-        "Driver submits delivery records plus the signed DR and AR to Accounting. (C1.1.8)",
-        "Accounting reconciles the General Ledger against the signed DR and AR. (C1.1.9)",
-        "Compute Commercial Gains - compare weigh-in vs weigh-out records from client site and plant.",
-        "Record results in Google Sheets and ACCPAC.",
-        "Compute commission and distribute to driver/helper/back-office team."
+        "Logistics Officer schedules the delivery - vehicle, capacity, route. (C1.2.1)",
+        "XXX generates the Picklist and YYY picks the LPG/products. (C1.1.2)",
+        "XXX generates the Delivery Receipt (DR) - 2 DRs and 2 Credit Notes per delivery. (C1.1.3)",
+        "XXX submits the DR to Accounting to post General Ledger and Inventory entries. (C1.1.4.1)",
+        "Helper collects the Delivery Receipts from XXX in Warehouse (may cover multiple clients on one route). (C1.1.4.2)",
+        "Driver and Helper proceed to client locations. (C1.1.4.3)",
+        "For pickup / no-delivery orders, Warehouse gives the DR to the customer for signature instead. (C1.1.4.4)",
+        "In client site, Helper weighs and records the cylinders with the client (Weigh In), then carries them to area. (C1.1.5.1)",
+        "Client representative signs the DR, receives the new cylinders, and returns the empty cylinders. (C1.1.5.2)",
+        "Helper weighs the returned cylinders (Weigh Out) in the present of Client Rep, classifies the 1-3kg residue threshold; round up or down. (C1.1.5.3)",
+        "Helper provides Credit Notes to the Client, with client representative’s countersignature, recording cylinder serial number and weight residue. (C1.1.5.4)",
+        "Driver and Helper return to the plant and weighs the empty cylinders, checks the 1-3kg residue threshold again. (C1.1.6.1)",
+        "Driver submits the signed DR, signed Credit Notes and other records to YYY Accounting. (C1.1.6.2)",
+        "YYY in Accounting reconciles the General Ledger against the signed DR and Credit Notes. (C1.1.7.1)",
+        "Compute Commercial Gains - compare weigh-in vs weigh-out records from client site and plant. (C1.1.7.2)",
+        "Industrial Engineer and YYY record results in Google Sheets and ACCPAC. (C1.1.7.3)",
+        "Industrial Engineer submits Computation Sheet for CEO’s approval (C1.1.7.4)",
+        "OIC-Accounting distribute incentives via Payroll to the involved members. (C1.1.7.5)"
       ],
       "guidelines": [
-        "The residue classification threshold is fixed at 1-3kg; deviations are escalated to the Warehouse Supervisor, not decided ad hoc by the driver.",
+        "The Commercial residue classification threshold is fixed between 1-3kg; deviations are escalated to the Warehouse Supervisor, not decided ad hoc by the driver.",
         "Two DRs and two Credit Notes are mandatory per delivery (client copy + company copy); a delivery without a matching document pair is not closed in the GL.",
-        "No cylinder leaves the warehouse without a Picklist reference; no GL/Inventory posting is made without a Warehouse-submitted DR.",
-        "Gains and commission are computed only from matched weigh-in/weigh-out pairs - unmatched records are held for investigation, never estimated."
+        "No cylinder leaves the warehouse without a Picklist form; no GL/Inventory posting is made without a Warehouse-submitted DR.",
+        "Incentive Gains are computed only from matched weigh-in/weigh-out pairs - unmatched records are held for investigation, never estimated."
       ],
       "approval_matrix": [
-        { "transaction": "Sales Order -> delivery scheduling", "threshold": "-", "initiator": "Sales Rep", "reviewer": "Delivery Head", "approver": "Delivery Head", "controls": ["Route/capacity check"] },
-        { "transaction": "Cylinder pick & DR issuance", "threshold": "-", "initiator": "Warehouse Staff", "reviewer": "Warehouse Supervisor", "approver": "Warehouse Supervisor", "controls": ["Picklist match", "2 DR / 2 CR rule"] },
-        { "transaction": "GL & Inventory posting", "threshold": "-", "initiator": "Warehouse (submits DR)", "reviewer": "Acctg Staff", "approver": "Acctg Staff", "controls": ["DR-GL reconciliation", "Poster != picker"] },
-        { "transaction": "Residue classification", "threshold": "1-3kg variance", "initiator": "Pahinante (weighs)", "reviewer": "Driver", "approver": "Warehouse Supervisor (if disputed)", "controls": ["Dual weigh-in/out", "Credit Note w/ serial #"] },
-        { "transaction": "Commission computation & payout", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Warehouse Supervisor", "approver": "Operations Manager", "controls": ["Weigh-in=weigh-out match", "GSheet + ACCPAC cross-check"] }
+        {
+          "transaction": "Sales Order -> delivery scheduling",
+          "threshold": "Commercial client’s past AR dues",
+          "initiator": "Sales Rep",
+          "reviewer": "Logistics Officer",
+          "approver": "Logistics Officer",
+          "controls": [
+            "Route/qty order check"
+          ]
+        },
+        {
+          "transaction": "Cylinder pick & DR issuance",
+          "threshold": "-",
+          "initiator": "Warehouse Staff",
+          "reviewer": "Senior Plant Supervisor",
+          "approver": "Senior Plant Supervisor",
+          "controls": [
+            "Picklist match",
+            "2 DR / 2 Credit Notes rule"
+          ]
+        },
+        {
+          "transaction": "GL & Inventory posting",
+          "threshold": "-",
+          "initiator": "Warehouse Staff (submits DR)",
+          "reviewer": "Operations Supervisor",
+          "approver": "Operations Supervisor",
+          "controls": [
+            "DR-GL reconciliation"
+          ]
+        },
+        {
+          "transaction": "Residue classification",
+          "threshold": "1-3kg variance",
+          "initiator": "Helper (weighs)",
+          "reviewer": "Driver",
+          "approver": "Senior Plant Supervisor (if disputed)",
+          "controls": [
+            "Dual weigh-in/out",
+            "Credit Note w/ control #"
+          ]
+        },
+        {
+          "transaction": "Commission computation & payout",
+          "threshold": "-",
+          "initiator": "Industrial Engineer",
+          "reviewer": "Industrial Engineer",
+          "approver": "CEO",
+          "controls": [
+            "Weigh-in=weigh-out match",
+            "GSheet"
+          ]
+        }
       ],
       "current_future": {
         "current": [
           "Paper DR/CR forms filled by hand at warehouse and client site.",
-          "GL reconciled manually against physical DR/AR copies.",
-          "Gains re-keyed twice - once to Google Sheets, once to ACCPAC.",
-          "Residue judged by the driver/Pahinante at point of delivery."
+          "GL reconciled manually against physical DR/CR copies.",
+          "Gains keyed manually - once to Google Sheets, formula and total reviews needed",
+          "Residue judged by the driver/helper at point of delivery."
         ],
         "future": [
-          "Odoo Sales Order auto-generates Picklist, DR and CR.",
-          "Digital client signature capture on delivery.",
-          "Automatic weigh-in/weigh-out variance flag and residue computation.",
+          "Odoo Sales Order auto-generates Sales Quotation, Picklist, DR. Add the Invoice, Client’s Credit Notes and Team’s Incentive (also under Credit Notes) and GL, in one continuous workflow.",
+          "Paper DR and CR with client signature (same as current)",
+          "Gains keyed once in Odoo Sales Order. Auto-computes gains for summary, and team incentive.",
           "Single-entry GL posting, removing the GSheet/ACCPAC duplicate entry."
         ]
-      },
-      "sources": "Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Operations > Commercial (C1.1.1-C1.1.9); \"MGC LPG Process Manual v2.docx\" - Operations > Commercial."
+      }
     },
     {
-      "romaji": "Industrial (Bulk)",
+      "romaji": "Bulk",
       "english": "Process Order | Delivery | Return to Plant",
       "badge": "confirmed",
+      "badge_label": "Confirmed with source data",
       "sop_steps": [
         "Receive the booked bulk Sales Order; the order must fill the 8-ton truck capacity.",
         "Assign the lorry/trailer truck and load from the Storage Tank (stock transfer, tank to truck - no cylinders involved).",
@@ -82,9 +132,38 @@
         "Per-truck gain is computed only once both weigh-out and weigh-in are on file - a truck missing either reading stays open, it is not estimated."
       ],
       "approval_matrix": [
-        { "transaction": "Bulk order load-out", "threshold": "Full 8-ton capacity (exception if partial)", "initiator": "Delivery Head", "reviewer": "Plant Staff", "approver": "Delivery Head", "controls": ["Truck-scale weigh-out", "RR + DR + Truck Scale slip set"] },
-        { "transaction": "Client-site volume delivery", "threshold": "-", "initiator": "Driver", "reviewer": "Client (signs DR)", "approver": "-", "controls": ["Meter/pressure-gauge reading logged"] },
-        { "transaction": "Per-truck gain computation", "threshold": "-", "initiator": "Acctg / Warehouse Staff", "reviewer": "Warehouse Supervisor", "approver": "Operations Manager", "controls": ["Weigh-out vs weigh-in match", "Residue Summary log"] }
+        {
+          "transaction": "Bulk order load-out",
+          "threshold": "Full 8-ton capacity (exception if partial)",
+          "initiator": "Delivery Head",
+          "reviewer": "Plant Staff",
+          "approver": "Delivery Head",
+          "controls": [
+            "Truck-scale weigh-out",
+            "RR + DR + Truck Scale slip set"
+          ]
+        },
+        {
+          "transaction": "Client-site volume delivery",
+          "threshold": "-",
+          "initiator": "Driver",
+          "reviewer": "Client (signs DR)",
+          "approver": "-",
+          "controls": [
+            "Meter/pressure-gauge reading logged"
+          ]
+        },
+        {
+          "transaction": "Per-truck gain computation",
+          "threshold": "-",
+          "initiator": "Acctg / Warehouse Staff",
+          "reviewer": "Warehouse Supervisor",
+          "approver": "Operations Manager",
+          "controls": [
+            "Weigh-out vs weigh-in match",
+            "Residue Summary log"
+          ]
+        }
       ],
       "current_future": {
         "current": [
@@ -104,6 +183,7 @@
       "romaji": "Dealer",
       "english": "Process Order | Plant Refilling & Swapping | Invoice",
       "badge": "confirmed",
+      "badge_label": "Confirmed with source data",
       "sop_steps": [
         "Dealer client orders 2.5kg or 11kg cylinder variants and is scheduled in advance; only confirmed appointments are accommodated. (C3.1)",
         "Sales Rep creates a Sales Order Form noting the delivery/pickup date. (C3.1.2)",
@@ -130,9 +210,39 @@
         "Dealers must maintain their own customer database on file with Operations for swap traceability."
       ],
       "approval_matrix": [
-        { "transaction": "Plant refill scheduling", "threshold": "-", "initiator": "Sales Rep", "reviewer": "Delivery Head / Guard", "approver": "Confirmed-booking gate (no separate approver)", "controls": ["Confirmed-appointment-only rule"] },
-        { "transaction": "Cylinder refill & GRR posting", "threshold": "-", "initiator": "Checker", "reviewer": "Joseph (Plant Operations Officer)", "approver": "Accounting (via AppSheet)", "controls": ["AppSheet = receipt quantity match", "EEF / LUT paired documents"] },
-        { "transaction": "Cylinder swap (allied brands only)", "threshold": "Allied-brand list only", "initiator": "Dealer (request)", "reviewer": "Edmond (Warehouse & Quality Supervisor)", "approver": "Sir RY", "controls": ["Photo evidence", "Group-chat approval trail", "Monthly swap log"] }
+        {
+          "transaction": "Plant refill scheduling",
+          "threshold": "-",
+          "initiator": "Sales Rep",
+          "reviewer": "Delivery Head / Guard",
+          "approver": "Confirmed-booking gate (no separate approver)",
+          "controls": [
+            "Confirmed-appointment-only rule"
+          ]
+        },
+        {
+          "transaction": "Cylinder refill & GRR posting",
+          "threshold": "-",
+          "initiator": "Checker",
+          "reviewer": "Joseph (Plant Operations Officer)",
+          "approver": "Accounting (via AppSheet)",
+          "controls": [
+            "AppSheet = receipt quantity match",
+            "EEF / LUT paired documents"
+          ]
+        },
+        {
+          "transaction": "Cylinder swap (allied brands only)",
+          "threshold": "Allied-brand list only",
+          "initiator": "Dealer (request)",
+          "reviewer": "Edmond (Warehouse & Quality Supervisor)",
+          "approver": "Sir RY",
+          "controls": [
+            "Photo evidence",
+            "Group-chat approval trail",
+            "Monthly swap log"
+          ]
+        }
       ],
       "current_future": {
         "current": [
@@ -149,37 +259,48 @@
       "sources": "\"MGC LPG Process Manual v2.docx\" - Operations > Dealer (Plant Refilling & Cylinder Swapping). Source site (wilsonsykes.github.io/MGSDiagramWorkflow) Operations > Dealer (C3.1-C3.3) provided the order-intake framing."
     },
     {
-      "romaji": "Retail",
+      "romaji": "Semi-dealer",
       "english": "Process Order | Delivery/Pickup | Collect Payment",
       "badge": "pending",
+      "badge_label": "Partially confirmed - see gap note",
       "sop_steps": [
-        "Retail/semi-dealer client orders 11kg or 2.5kg cylinders on a retail scale (smaller quantities than Dealer). (per source site: \"same as Dealer steps\")",
-        "Order intake and refill/delivery fulfilment follow the same plant-refilling flow documented for Dealer, scaled to retail order volumes.",
-        "Payment is collected via cash/COD at point of delivery or pickup rather than dealer credit terms - see Accounting > Retail for the cash-handling procedure.",
+        "Semi-dealer/semi-dealer client orders 11kg or 2.5kg cylinders on a Semi-dealer scale (smaller quantities than Dealer). (per source site: \"same as Dealer steps\")",
+        "Order intake and refill/delivery fulfilment follow the same plant-refilling flow documented for Dealer, scaled to Semi-dealer order volumes.",
+        "Payment is collected via cash/COD at point of delivery or pickup rather than dealer credit terms - see Accounting > Semi-dealer for the cash-handling procedure.",
         "Commission/gains computation follows the same weigh-in/weigh-out and LUT-balancing logic used for Commercial and Dealer."
       ],
       "guidelines": [
-        "Retail fulfilment is explicitly modeled on the Dealer plant-refilling process per company specification; any retail-specific exception to that process is not yet documented.",
-        "Retail is COD by default; credit/terms sales are the exception and require the same past-dues check used in Accounting > Dealer before release."
+        "Semi-dealer fulfilment is explicitly modeled on the Dealer plant-refilling process per company specification; any Semi-dealer-specific exception to that process is not yet documented.",
+        "Semi-dealer is COD by default; credit/terms sales are the exception and require the same past-dues check used in Accounting > Dealer before release."
       ],
       "approval_matrix": [
-        { "transaction": "Retail order fulfilment", "threshold": "-", "initiator": "Sales Assistant", "reviewer": "Warehouse / Checker", "approver": "- (COD, no credit approval needed)", "controls": ["Cash collected before/at release"] }
+        {
+          "transaction": "Semi-dealer order fulfilment",
+          "threshold": "-",
+          "initiator": "Sales Assistant",
+          "reviewer": "Warehouse / Checker",
+          "approver": "- (COD, no credit approval needed)",
+          "controls": [
+            "Cash collected before/at release"
+          ]
+        }
       ],
       "current_future": {
         "current": [
-          "Retail delivery/pickup handled as a scaled-down copy of the Dealer process, with no dedicated documentation on file - inconsistent handling risk across staff."
+          "Semi-dealer delivery/pickup handled as a scaled-down copy of the Dealer process, with no dedicated documentation on file - inconsistent handling risk across staff."
         ],
         "future": [
-          "A dedicated Retail SOP variant inside the same Odoo/AppSheet system, with COD-specific checkpoints built in rather than informally inherited from Dealer."
+          "A dedicated Semi-dealer SOP variant inside the same Odoo/AppSheet system, with COD-specific checkpoints built in rather than informally inherited from Dealer."
         ]
       },
-      "gap_note": "Neither source separately documents Operations for Retail - both point to it following the Dealer plant-refilling process, scaled down. Recommend a short walkthrough with a Retail-channel Sales Assistant to confirm whether any retail-specific step (e.g. cash-before-release sequencing) differs from Dealer before this is finalized as approved SOP.",
-      "sources": "Source site (wilsonsykes.github.io/MGSDiagramWorkflow) Operations > Retail (C4.1-C4.3, \"same as Dealer steps\"). No corresponding section in \"MGC LPG Process Manual v2.docx\"."
+      "gap_note": "Neither source separately documents Operations for Semi-dealer - both point to it following the Dealer plant-refilling process, scaled down. Recommend a short walkthrough with a Semi-dealer-channel Sales Assistant to confirm whether any Semi-dealer-specific step (e.g. cash-before-release sequencing) differs from Dealer before this is finalized as approved SOP.",
+      "sources": "Source site (wilsonsykes.github.io/MGSDiagramWorkflow) Operations > Semi-dealer (C4.1-C4.3, \"same as Dealer steps\"). No corresponding section in \"MGC LPG Process Manual v2.docx\"."
     },
     {
       "romaji": "Company-Wide",
       "english": "Purchase Order | Stock Transfer | Refill | Floor Stock",
       "badge": "confirmed",
+      "badge_label": "Confirmed with source data",
       "sop_steps": [
         "Purchaser forwards the Purchase Order to the Refinery Supplier and schedules the inbound Lorry Truck delivery. (C5.1.1)",
         "Plant Manager receives the Lorry Trucks and collects the DR and Invoice from the delivery team.",
@@ -199,9 +320,38 @@
         "Cylinder serials and batch numbers are tracked for their full lifespan (purchase through repaint/retest cycles); a cylinder without a traceable batch number does not re-enter circulation."
       ],
       "approval_matrix": [
-        { "transaction": "Inbound PO & Lorry Truck receiving", "threshold": "-", "initiator": "Purchaser", "reviewer": "Plant Manager", "approver": "Plant Manager", "controls": ["RR filled before unload", "DR + Invoice matched to PO"] },
-        { "transaction": "Storage Tank stock transfer to cylinders", "threshold": "FIFO sequence", "initiator": "Plant Staff", "reviewer": "Plant Manager", "approver": "Plant Manager", "controls": ["Tank 1 / Tank 2 gauge log", "FIFO batch order"] },
-        { "transaction": "Cylinder lifecycle (repaint/retest)", "threshold": "Per DOE lifespan schedule", "initiator": "Plant Staff", "reviewer": "Plant Manager", "approver": "Plant Manager", "controls": ["Serial + batch number tracking"] }
+        {
+          "transaction": "Inbound PO & Lorry Truck receiving",
+          "threshold": "-",
+          "initiator": "Purchaser",
+          "reviewer": "Plant Manager",
+          "approver": "Plant Manager",
+          "controls": [
+            "RR filled before unload",
+            "DR + Invoice matched to PO"
+          ]
+        },
+        {
+          "transaction": "Storage Tank stock transfer to cylinders",
+          "threshold": "FIFO sequence",
+          "initiator": "Plant Staff",
+          "reviewer": "Plant Manager",
+          "approver": "Plant Manager",
+          "controls": [
+            "Tank 1 / Tank 2 gauge log",
+            "FIFO batch order"
+          ]
+        },
+        {
+          "transaction": "Cylinder lifecycle (repaint/retest)",
+          "threshold": "Per DOE lifespan schedule",
+          "initiator": "Plant Staff",
+          "reviewer": "Plant Manager",
+          "approver": "Plant Manager",
+          "controls": [
+            "Serial + batch number tracking"
+          ]
+        }
       ],
       "current_future": {
         "current": [
@@ -228,10 +378,26 @@
     ]
   },
   "metrics": [
-    { "value": "5", "label": "Stages", "detail": "Commercial, Industrial, Dealer, Retail, Company-Wide" },
-    { "value": "4", "label": "Confirmed", "detail": "Grounded in source data" },
-    { "value": "1", "label": "Partially Confirmed", "detail": "Retail - gap flagged" },
-    { "value": "19", "label": "Personnel", "detail": "Named staff on roster" }
+    {
+      "value": "5",
+      "label": "Stages",
+      "detail": "Commercial, Bulk, Dealer, Semi-Dealer, Company-Wide"
+    },
+    {
+      "value": "4",
+      "label": "Confirmed",
+      "detail": "Grounded in source data"
+    },
+    {
+      "value": "1",
+      "label": "Partially Confirmed",
+      "detail": "Semi-dealer - gap flagged"
+    },
+    {
+      "value": "19",
+      "label": "Personnel",
+      "detail": "Named staff on roster"
+    }
   ],
   "footer": "Masagana Gas Corporation - Operations SOP - Merged from Process Systemization Portal + source site - Internal use only"
 }

@@ -99,7 +99,7 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
   <a href="#stage-1" class="nav-link">1 &middot; Commercial</a>
   <a href="#stage-2" class="nav-link">2 &middot; Bulk</a>
   <a href="#stage-3" class="nav-link">3 &middot; Dealer</a>
-  <a href="#stage-4" class="nav-link">4 &middot; Retail</a>
+  <a href="#stage-4" class="nav-link">4 &middot; Semi-dealer</a>
   <a href="#stage-5" class="nav-link">5 &middot; Overall</a>
   <a href="#cross-stage" class="nav-link">Cross-Stage</a>
 </nav>
@@ -107,7 +107,7 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <div class="header">
   <div class="header-top"><div class="header-logo">Accounting</div><span class="header-kanji">SOP</span></div>
   <h1>Accounting SOP</h1>
-  <p>Invoicing, cash and receivables, bank reconciliation, and payroll/incentives across the Commercial, Bulk, Dealer, Retail, and Overall channels.</p>
+  <p>Invoicing, cash and receivables, bank reconciliation, and payroll/incentives across the Commercial, Bulk, Dealer, Semi-dealer, and Overall channels.</p>
 </div>
 
 <div class="legend-bar">
@@ -141,7 +141,7 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <li id="accounting-0-sop-8"><a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">Bank Reconciliation</a>: update and check the summary table of amounts for <a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">bank reconciliation</a>. (A5C3.1)</li>
 <li id="accounting-0-sop-9">Resolve customer disputes: refer to the Sales Order; submit the paper to a superior if unresolved. (A5C4.1-A5C4.2)</li>
 <li id="accounting-0-sop-10">Payroll Incentive: prepare the incentive in payroll on the 15th and 30th. (A5C5.1)</li>
-<li id="accounting-0-sop-11">Prepare the <a href="forms.html#form-incentive-template" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-incentive-template&#39;);return false" title="Form: Incentive Template">Incentive template</a> for Commercial and Retail using <a href="forms.html#form-lut-forms" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-lut-forms&#39;);return false" title="Form: LUT forms">LUT forms</a> (2.7kg, 11kg, 50kg) to balance empty and field cylinder data. (A5C5.2)</li>
+<li id="accounting-0-sop-11">Prepare the <a href="forms.html#form-incentive-template" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-incentive-template&#39;);return false" title="Form: Incentive Template">Incentive template</a> for Commercial and Semi-dealer using <a href="forms.html#form-lut-forms" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-lut-forms&#39;);return false" title="Form: LUT forms">LUT forms</a> (2.7kg, 11kg, 50kg) to balance empty and field cylinder data. (A5C5.2)</li>
 </ol>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
@@ -172,7 +172,7 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">2</span><span class="num-sub">OF 5</span></div>
     <div class="stage-info"><div class="stage-title">BULK</div><div class="stage-sub">Collection | Balance | Bank Recon</div></div>
-    <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">Partially confirmed — see gap note</span>
+    <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">Partially confirmed - see gap note</span>
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
@@ -191,7 +191,7 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 </table>
 </div>
     <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
-  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="accounting-1-cur-0">Bulk accounting handled as an unexceptioned copy of Commercial; per-truck reconciliation differences (Operations &gt; Industrial) are not reflected in the accounting procedure.</li></ul></div>
+  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="accounting-1-cur-0">Bulk accounting handled as an unexceptioned copy of Commercial; per-truck reconciliation differences (Operations &gt; Bulk) are not reflected in the accounting procedure.</li></ul></div>
   <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="accounting-1-fut-0">Confirm and document whether per-truck gain computation requires a distinct AR/bank-rec step, then encode it explicitly.</li></ul></div>
 </div>
 </div>
@@ -249,7 +249,7 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <section class="stage-section" id="stage-4">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">4</span><span class="num-sub">OF 5</span></div>
-    <div class="stage-info"><div class="stage-title">RETAIL</div><div class="stage-sub">Collection (Cash/COD) | Balance | Bank Recon</div></div>
+    <div class="stage-info"><div class="stage-title">SEMI-DEALER</div><div class="stage-sub">Collection (Cash/COD) | Balance | Bank Recon</div></div>
     <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
     <span class="stage-arrow">&#9662;</span>
   </div>
@@ -259,7 +259,7 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <li id="accounting-3-sop-1">After loading, the checker goes to Accounting; issue the <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a> a cash/charge <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> or DR.</li>
 <li id="accounting-3-sop-2"><a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">Cashier</a> collects the cash; the receipt (recibo) must match the empty and filled cylinders (the LUT contents).</li>
 <li id="accounting-3-sop-3">Checker encodes in AppSheet (= Refilling Report); AppSheet and the receipt must match (basis of the <a href="forms.html#form-grr" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-grr&#39;);return false" title="Form: GRR">GRR</a>).</li>
-<li id="accounting-3-sop-4">Forward retail cash invoices straight to the <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a> at Plant Accounting; collect cash and documents by 4-5pm.</li>
+<li id="accounting-3-sop-4">Forward Semi-dealer cash invoices straight to the <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a> at Plant Accounting; collect cash and documents by 4-5pm.</li>
 <li id="accounting-3-sop-5">Balance sales and the LUT within the same day (2.7kg, 11kg, 50kg must be indicated and balance).</li>
 <li id="accounting-3-sop-6">Audit cash sales, collections, and returns from advances.</li>
 <li id="accounting-3-sop-7">Validate the cash collection report from the <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a> and check the deposit balancing at the bank.</li>
@@ -285,7 +285,7 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
   <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="accounting-3-fut-0">Automatic same-day LUT/AppSheet/receipt three-way match, flagging mismatches before the 4-5pm cutoff instead of during the manual audit.</li></ul></div>
 </div>
 </div>
-    <div class="sources"><b>Sources:</b> &quot;MGC LPG Process Manual v2.docx&quot; - Accounting &gt; Retail (plant-accounting duties, Commercial accounting card A5C cross-reference).</div>
+    <div class="sources"><b>Sources:</b> &quot;MGC LPG Process Manual v2.docx&quot; - Accounting &gt; Semi-dealer (plant-accounting duties, Commercial accounting card A5C cross-reference).</div>
   </div>
 </section>
 
@@ -311,7 +311,7 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="accounting-4-gl-0">All three <a href="subprocess.html#subprocess-financial-statements" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-financial-statements&#39;);return false" title="Subprocess: Financial Statements">financial statements</a> (P&amp;L, Cash Flow, Balance Sheet) require full entry encoding before the monthly refresh - a partial encode is not printed as final.</li>
 <li id="accounting-4-gl-1"><a href="subprocess.html#subprocess-industrial-projects" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-industrial-projects&#39;);return false" title="Subprocess: Industrial Projects">Industrial Projects</a> are tracked with a Budget P&amp;L set at project start, compared against Actual P&amp;L throughout - variance review is continuous, not just at project close.</li>
-<li id="accounting-4-gl-2">The Payroll Summary is only finalized after the <a href="forms.html#form-incentive-template" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-incentive-template&#39;);return false" title="Form: Incentive Template">Incentive template</a> (LUT-balanced, see Commercial/Retail) is complete for the period.</li>
+<li id="accounting-4-gl-2">The Payroll Summary is only finalized after the <a href="forms.html#form-incentive-template" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-incentive-template&#39;);return false" title="Form: Incentive Template">Incentive template</a> (LUT-balanced, see Commercial/Semi-dealer) is complete for the period.</li>
 </ul>
 </div>
     <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
@@ -347,7 +347,7 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 </section>
 
 <div class="metrics-strip">
-  <div class="metric"><div class="metric-val">5</div><div class="metric-lbl">Stages</div><div class="metric-sub">Commercial, Bulk, Dealer, Retail, Overall</div></div>
+  <div class="metric"><div class="metric-val">5</div><div class="metric-lbl">Stages</div><div class="metric-sub">Commercial, Bulk, Dealer, Semi-dealer, Overall</div></div>
   <div class="metric"><div class="metric-val">4</div><div class="metric-lbl">Confirmed</div><div class="metric-sub">Grounded in source data</div></div>
   <div class="metric"><div class="metric-val">1</div><div class="metric-lbl">Partially Confirmed</div><div class="metric-sub">Bulk - gap flagged</div></div>
   <div class="metric"><div class="metric-val">19</div><div class="metric-lbl">Personnel</div><div class="metric-sub">Named staff on roster</div></div>

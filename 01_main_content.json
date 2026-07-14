@@ -3,20 +3,22 @@
     "logo": "MGC SOP Portal",
     "kanji": "SOP",
     "title": "Masagana Gas Corporation - SOP Portal",
-    "subtitle": "SOP Manual, Operational Guidelines, Approval Matrix & Controls, and Current vs. Future Workflow for Masagana Gas Corporation - covering Operations, Sales, and Accounting across the Commercial, Industrial/Bulk, Dealer, Retail, and Company-Wide/Overall channels."
+    "subtitle": "SOP Manual, Operational Guidelines, Approval Matrix & Controls, and Current vs. Future Workflow for Masagana Gas Corporation - covering Operations, Sales, and Accounting across the Commercial, Bulk, Dealer, Semi-dealer, and Company-Wide/Overall channels."
   },
   "stages": [
     {
       "romaji": "Overview",
       "english": "How This Portal Works",
       "badge": "confirmed",
+      "badge_label": "Confirmed with source data",
       "sop_steps": [
-        "Each department page (Operations, Sales, Accounting) is organized in the same four-part order: SOP Manual, Operational Guidelines, Approval Matrix & Controls, and Current vs. Future Workflow.",
-        "Start with the SOP Manual - the numbered, step-by-step procedure for how work actually gets done today.",
-        "Read the Operational Guidelines next - the policy rules that govern how those steps are applied and where staff discretion ends.",
-        "Check the Approval Matrix & Controls - who is authorized to initiate, review, and approve each transaction, and what control activity is in place.",
-        "Finish with Current vs. Future Workflow - today's manual/paper reality next to the target automated state.",
-        "A green \"Confirmed with source data\" badge means the stage is grounded in real, Masagana-specific source data; an amber \"Partially confirmed\" badge means part of that stage is still a placeholder, with the gap called out explicitly in a gap note.",
+        "Each department page (Sales, Operations, Accounting) follows a four-part order:",
+        "SOP Manual - step-by-step procedure of each work",
+        "Operational Guidelines - policy rules and where staff discretion ends",
+        "Approval Matrix & Controls - authorized to initiate, review, approve, and control",
+        "Current vs. Future Workflow",
+        "\"Confirmed with source data\" badge - the stage is grounded in real",
+        "\"Partially confirmed\" badge - the stage is still a placeholder, with gaps",
         "Cross-linked terms (personnel names, forms, subprocesses) are underlined - click one to jump to its entry in the Personnel, Forms, or Subprocess tab."
       ],
       "guidelines": [
@@ -26,8 +28,27 @@
         "Documentation & Reconciliation: the person who initiates a transaction is not the same person who posts it to the GL or reconciles it - segregation of duties applies at every posting step."
       ],
       "approval_matrix": [
-        { "transaction": "Company-wide pricing decision", "threshold": "1-3x per month, General Meeting", "initiator": "Regional Sales Manager (sets up matrix)", "reviewer": "-", "approver": "Sir RY", "controls": ["Audit log by IT Head", "Channel cascade checklist"] },
-        { "transaction": "Cross-department dispute escalation", "threshold": "-", "initiator": "Any stage owner", "reviewer": "Supervisor / Manager", "approver": "Department Manager", "controls": ["System watch -> Review -> Manager chain"] }
+        {
+          "transaction": "Company-wide pricing decision",
+          "threshold": "1-3x per month, General Meeting",
+          "initiator": "Regional Sales Manager (sets up matrix)",
+          "reviewer": "-",
+          "approver": "Sir RY",
+          "controls": [
+            "Audit log by IT Head",
+            "Channel cascade checklist"
+          ]
+        },
+        {
+          "transaction": "Cross-department dispute escalation",
+          "threshold": "-",
+          "initiator": "Any stage owner",
+          "reviewer": "Supervisor / Manager",
+          "approver": "Department Manager",
+          "controls": [
+            "System watch -> Review -> Manager chain"
+          ]
+        }
       ],
       "current_future": {
         "current": [
@@ -44,17 +65,33 @@
     "name": "Portal-Wide Governance",
     "description": "The four cross-cutting policy themes that apply across every department, detailed further inside each stage's Operational Guidelines section.",
     "guidelines": [
-      "Financial Controls & Credit Policy - Accounting > Commercial, Dealer, Retail.",
+      "Financial Controls & Credit Policy - Accounting > Commercial, Dealer, Semi-dealer.",
       "Weighing, Residue & Inventory Integrity - Operations > Commercial, Bulk, Company-Wide.",
       "Approval & Escalation Discipline - Sales > Dealer, Operations > Dealer, Cross-Stage Governance.",
-      "Documentation & Reconciliation - Operations > Commercial, Dealer; Accounting > Retail."
+      "Documentation & Reconciliation - Operations > Commercial, Dealer; Accounting > Semi-dealer."
     ]
   },
   "metrics": [
-    { "value": "3", "label": "SOP Tabs", "detail": "Operations, Sales, Accounting" },
-    { "value": "12 of 15", "label": "Confirmed Stages", "detail": "Fully grounded in source data" },
-    { "value": "3 of 15", "label": "Partially Confirmed", "detail": "Gap notes flagged for client confirmation" },
-    { "value": "19", "label": "Personnel", "detail": "Named staff on roster" }
+    {
+      "value": "3",
+      "label": "SOP Tabs",
+      "detail": "Operations, Sales, Accounting"
+    },
+    {
+      "value": "12 of 15",
+      "label": "Confirmed Stages",
+      "detail": "Fully grounded in source data"
+    },
+    {
+      "value": "3 of 15",
+      "label": "Partially Confirmed",
+      "detail": "Gap notes flagged for client confirmation"
+    },
+    {
+      "value": "19",
+      "label": "Personnel",
+      "detail": "Named staff on roster"
+    }
   ],
   "footer": "Masagana Gas Corporation - SOP Portal - Merged from Process Systemization Portal + source site - Internal use only"
 }

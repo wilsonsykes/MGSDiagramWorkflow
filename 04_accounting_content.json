@@ -3,13 +3,14 @@
     "logo": "Accounting",
     "kanji": "SOP",
     "title": "Accounting SOP",
-    "subtitle": "Invoicing, cash and receivables, bank reconciliation, and payroll/incentives across the Commercial, Bulk, Dealer, Retail, and Overall channels."
+    "subtitle": "Invoicing, cash and receivables, bank reconciliation, and payroll/incentives across the Commercial, Bulk, Dealer, Semi-dealer, and Overall channels."
   },
   "stages": [
     {
       "romaji": "Commercial",
       "english": "Collection | Balance | Bank Recon",
       "badge": "confirmed",
+      "badge_label": "Confirmed with source data",
       "sop_steps": [
         "Make the Invoice before delivery: check past receivables and dues with the customer. (A5C1.1)",
         "If the customer has past dues, flag the upcoming order. (A5C1.1.1)",
@@ -22,7 +23,7 @@
         "Bank Reconciliation: update and check the summary table of amounts for bank reconciliation. (A5C3.1)",
         "Resolve customer disputes: refer to the Sales Order; submit the paper to a superior if unresolved. (A5C4.1-A5C4.2)",
         "Payroll Incentive: prepare the incentive in payroll on the 15th and 30th. (A5C5.1)",
-        "Prepare the Incentive template for Commercial and Retail using LUT forms (2.7kg, 11kg, 50kg) to balance empty and field cylinder data. (A5C5.2)"
+        "Prepare the Incentive template for Commercial and Semi-dealer using LUT forms (2.7kg, 11kg, 50kg) to balance empty and field cylinder data. (A5C5.2)"
       ],
       "guidelines": [
         "No invoice is issued before the past-dues check on the customer's AR; only a supervisor-approved past-due balance clears an order that has outstanding receivables.",
@@ -31,10 +32,48 @@
         "Payroll incentives are computed only after LUT forms balance empty vs field cylinders; incentives are not paid out ahead of that balance check."
       ],
       "approval_matrix": [
-        { "transaction": "Invoice issuance (past-dues check)", "threshold": "Supervisor override for passable past dues", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Supervisor (orders with past dues)", "controls": ["AR check before invoice", "3-way flag: none / passable / blocked"] },
-        { "transaction": "Receivables close-out", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Supervisor", "controls": ["Monthly Aged Receivables print", "Write-off/Loss summary"] },
-        { "transaction": "Bank reconciliation", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Manager", "controls": ["Summary table cross-check"] },
-        { "transaction": "Payroll incentive (15th/30th)", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Manager", "controls": ["LUT balance required before payout"] }
+        {
+          "transaction": "Invoice issuance (past-dues check)",
+          "threshold": "Supervisor override for passable past dues",
+          "initiator": "Acctg Staff",
+          "reviewer": "Acctg Supervisor",
+          "approver": "Acctg Supervisor (orders with past dues)",
+          "controls": [
+            "AR check before invoice",
+            "3-way flag: none / passable / blocked"
+          ]
+        },
+        {
+          "transaction": "Receivables close-out",
+          "threshold": "-",
+          "initiator": "Acctg Staff",
+          "reviewer": "Acctg Supervisor",
+          "approver": "Acctg Supervisor",
+          "controls": [
+            "Monthly Aged Receivables print",
+            "Write-off/Loss summary"
+          ]
+        },
+        {
+          "transaction": "Bank reconciliation",
+          "threshold": "-",
+          "initiator": "Acctg Staff",
+          "reviewer": "Acctg Supervisor",
+          "approver": "Acctg Manager",
+          "controls": [
+            "Summary table cross-check"
+          ]
+        },
+        {
+          "transaction": "Payroll incentive (15th/30th)",
+          "threshold": "-",
+          "initiator": "Acctg Staff",
+          "reviewer": "Acctg Supervisor",
+          "approver": "Acctg Manager",
+          "controls": [
+            "LUT balance required before payout"
+          ]
+        }
       ],
       "current_future": {
         "current": [
@@ -52,6 +91,7 @@
       "romaji": "Bulk",
       "english": "Collection | Balance | Bank Recon",
       "badge": "pending",
+      "badge_label": "Partially confirmed - see gap note",
       "sop_steps": [
         "Invoicing, receivables, bank reconciliation, and payroll incentive steps follow the same procedure as Accounting > Commercial (A5C1-A5C5), per company specification.",
         "Bulk-specific exceptions to that procedure are referenced but not documented in either source."
@@ -60,11 +100,21 @@
         "Accounting > Bulk explicitly inherits the Commercial A5C1-A5C5 procedure; the undocumented exceptions should be confirmed with Accounting before this is finalized, particularly whether per-truck (rather than per-cylinder) reconciliation changes any AR or bank-rec step."
       ],
       "approval_matrix": [
-        { "transaction": "Bulk invoicing & receivables (inherits Commercial)", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Supervisor", "controls": ["Same as Commercial", "Exceptions pending"] }
+        {
+          "transaction": "Bulk invoicing & receivables (inherits Commercial)",
+          "threshold": "-",
+          "initiator": "Acctg Staff",
+          "reviewer": "Acctg Supervisor",
+          "approver": "Acctg Supervisor",
+          "controls": [
+            "Same as Commercial",
+            "Exceptions pending"
+          ]
+        }
       ],
       "current_future": {
         "current": [
-          "Bulk accounting handled as an unexceptioned copy of Commercial; per-truck reconciliation differences (Operations > Industrial) are not reflected in the accounting procedure."
+          "Bulk accounting handled as an unexceptioned copy of Commercial; per-truck reconciliation differences (Operations > Bulk) are not reflected in the accounting procedure."
         ],
         "future": [
           "Confirm and document whether per-truck gain computation requires a distinct AR/bank-rec step, then encode it explicitly."
@@ -77,6 +127,7 @@
       "romaji": "Dealer",
       "english": "Collection (Charge/Installment/PDC) | Balance | Bank Recon",
       "badge": "confirmed",
+      "badge_label": "Confirmed with source data",
       "sop_steps": [
         "Before approving the order, verify the dealer's AR with CNC - check past dues and other factors first.",
         "Confirm the payment type: about 70% of dealers are on installment, about 30% are COD.",
@@ -97,10 +148,49 @@
         "CNC-held accounts are physically couriered by messenger, matching the CNC filing convention already in place."
       ],
       "approval_matrix": [
-        { "transaction": "Dealer credit approval (AR/CNC check)", "threshold": "~70% installment / ~30% COD", "initiator": "Acctg Staff (AR)", "reviewer": "Sales (Mel - Sales/AR)", "approver": "Acctg Supervisor", "controls": ["CNC past-dues check", "PDC or Promissory Note required"] },
-        { "transaction": "Charge Invoice issuance", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Supervisor", "controls": ["ACCPAC encoding before client send", "Countered hardcopy filed"] },
-        { "transaction": "Installment tracking & collection", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Manager", "controls": ["Google Sheets due-date tracker", "Aged Receivables monthly print"] },
-        { "transaction": "Dealer dispute resolution", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Sales (refer to Sales Order)", "approver": "Acctg Supervisor", "controls": ["Bank reconciliation cross-check"] }
+        {
+          "transaction": "Dealer credit approval (AR/CNC check)",
+          "threshold": "~70% installment / ~30% COD",
+          "initiator": "Acctg Staff (AR)",
+          "reviewer": "Sales (Mel - Sales/AR)",
+          "approver": "Acctg Supervisor",
+          "controls": [
+            "CNC past-dues check",
+            "PDC or Promissory Note required"
+          ]
+        },
+        {
+          "transaction": "Charge Invoice issuance",
+          "threshold": "-",
+          "initiator": "Acctg Staff",
+          "reviewer": "Acctg Supervisor",
+          "approver": "Acctg Supervisor",
+          "controls": [
+            "ACCPAC encoding before client send",
+            "Countered hardcopy filed"
+          ]
+        },
+        {
+          "transaction": "Installment tracking & collection",
+          "threshold": "-",
+          "initiator": "Acctg Staff",
+          "reviewer": "Acctg Supervisor",
+          "approver": "Acctg Manager",
+          "controls": [
+            "Google Sheets due-date tracker",
+            "Aged Receivables monthly print"
+          ]
+        },
+        {
+          "transaction": "Dealer dispute resolution",
+          "threshold": "-",
+          "initiator": "Acctg Staff",
+          "reviewer": "Sales (refer to Sales Order)",
+          "approver": "Acctg Supervisor",
+          "controls": [
+            "Bank reconciliation cross-check"
+          ]
+        }
       ],
       "current_future": {
         "current": [
@@ -114,15 +204,16 @@
       "sources": "\"MGC LPG Process Manual v2.docx\" - Accounting > Dealer (invoicing notes, dealer payment terms, Commercial accounting card cross-reference)."
     },
     {
-      "romaji": "Retail",
+      "romaji": "Semi-dealer",
       "english": "Collection (Cash/COD) | Balance | Bank Recon",
       "badge": "confirmed",
+      "badge_label": "Confirmed with source data",
       "sop_steps": [
         "Issue the entry/exit slip (EES) to the customer, encode it, and have the guard validate the tank classification.",
         "After loading, the checker goes to Accounting; issue the cashier a cash/charge invoice or DR.",
         "Cashier collects the cash; the receipt (recibo) must match the empty and filled cylinders (the LUT contents).",
         "Checker encodes in AppSheet (= Refilling Report); AppSheet and the receipt must match (basis of the GRR).",
-        "Forward retail cash invoices straight to the cashier at Plant Accounting; collect cash and documents by 4-5pm.",
+        "Forward Semi-dealer cash invoices straight to the cashier at Plant Accounting; collect cash and documents by 4-5pm.",
         "Balance sales and the LUT within the same day (2.7kg, 11kg, 50kg must be indicated and balance).",
         "Audit cash sales, collections, and returns from advances.",
         "Validate the cash collection report from the cashier and check the deposit balancing at the bank.",
@@ -135,9 +226,38 @@
         "Cash and documents are due to the Plant Accounting cashier by 4-5pm; a late submission is an exception to flag, not a routine occurrence."
       ],
       "approval_matrix": [
-        { "transaction": "Cash/charge invoice at loading", "threshold": "-", "initiator": "Checker", "reviewer": "Cashier", "approver": "- (cash sale)", "controls": ["EES validated", "LUT-matched recibo"] },
-        { "transaction": "Daily cash & LUT balancing", "threshold": "Same-day close", "initiator": "Cashier", "reviewer": "Vicky (Acctg)", "approver": "Vicky", "controls": ["2.7kg/11kg/50kg LUT balance", "AppSheet = receipt match"] },
-        { "transaction": "Bank deposit validation", "threshold": "-", "initiator": "Cashier", "reviewer": "Vicky", "approver": "Acctg Manager", "controls": ["Cash collection report vs bank deposit"] }
+        {
+          "transaction": "Cash/charge invoice at loading",
+          "threshold": "-",
+          "initiator": "Checker",
+          "reviewer": "Cashier",
+          "approver": "- (cash sale)",
+          "controls": [
+            "EES validated",
+            "LUT-matched recibo"
+          ]
+        },
+        {
+          "transaction": "Daily cash & LUT balancing",
+          "threshold": "Same-day close",
+          "initiator": "Cashier",
+          "reviewer": "Vicky (Acctg)",
+          "approver": "Vicky",
+          "controls": [
+            "2.7kg/11kg/50kg LUT balance",
+            "AppSheet = receipt match"
+          ]
+        },
+        {
+          "transaction": "Bank deposit validation",
+          "threshold": "-",
+          "initiator": "Cashier",
+          "reviewer": "Vicky",
+          "approver": "Acctg Manager",
+          "controls": [
+            "Cash collection report vs bank deposit"
+          ]
+        }
       ],
       "current_future": {
         "current": [
@@ -148,12 +268,13 @@
           "Automatic same-day LUT/AppSheet/receipt three-way match, flagging mismatches before the 4-5pm cutoff instead of during the manual audit."
         ]
       },
-      "sources": "\"MGC LPG Process Manual v2.docx\" - Accounting > Retail (plant-accounting duties, Commercial accounting card A5C cross-reference)."
+      "sources": "\"MGC LPG Process Manual v2.docx\" - Accounting > Semi-dealer (plant-accounting duties, Commercial accounting card A5C cross-reference)."
     },
     {
       "romaji": "Overall",
       "english": "Monitoring | Updates | Reports",
       "badge": "confirmed",
+      "badge_label": "Confirmed with source data",
       "sop_steps": [
         "Consolidate and check all relevant data on request - bi-monthly or monthly Financial Statements. (A5A1)",
         "Produce versatile, multi-format financial statements and payroll summary; drill into individual summary amounts. (A5A1.1-A5A1.2)",
@@ -167,12 +288,41 @@
       "guidelines": [
         "All three financial statements (P&L, Cash Flow, Balance Sheet) require full entry encoding before the monthly refresh - a partial encode is not printed as final.",
         "Industrial Projects are tracked with a Budget P&L set at project start, compared against Actual P&L throughout - variance review is continuous, not just at project close.",
-        "The Payroll Summary is only finalized after the Incentive template (LUT-balanced, see Commercial/Retail) is complete for the period."
+        "The Payroll Summary is only finalized after the Incentive template (LUT-balanced, see Commercial/Semi-dealer) is complete for the period."
       ],
       "approval_matrix": [
-        { "transaction": "Monthly financial statement close (P&L / CF / BS)", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Manager / Controller", "controls": ["Full entry encoding before refresh", "Budget vs Actual comparison"] },
-        { "transaction": "Payroll Summary consolidation", "threshold": "-", "initiator": "Acctg Staff", "reviewer": "Acctg Supervisor", "approver": "Acctg Manager", "controls": ["Depends on finalized Incentive template"] },
-        { "transaction": "Industrial Projects Budget vs Actual", "threshold": "-", "initiator": "Project Acctg", "reviewer": "Industrial Engineer", "approver": "Acctg Manager", "controls": ["Budget PNL vs Actual PNL", "Timeline tracking"] }
+        {
+          "transaction": "Monthly financial statement close (P&L / CF / BS)",
+          "threshold": "-",
+          "initiator": "Acctg Staff",
+          "reviewer": "Acctg Supervisor",
+          "approver": "Acctg Manager / Controller",
+          "controls": [
+            "Full entry encoding before refresh",
+            "Budget vs Actual comparison"
+          ]
+        },
+        {
+          "transaction": "Payroll Summary consolidation",
+          "threshold": "-",
+          "initiator": "Acctg Staff",
+          "reviewer": "Acctg Supervisor",
+          "approver": "Acctg Manager",
+          "controls": [
+            "Depends on finalized Incentive template"
+          ]
+        },
+        {
+          "transaction": "Industrial Projects Budget vs Actual",
+          "threshold": "-",
+          "initiator": "Project Acctg",
+          "reviewer": "Industrial Engineer",
+          "approver": "Acctg Manager",
+          "controls": [
+            "Budget PNL vs Actual PNL",
+            "Timeline tracking"
+          ]
+        }
       ],
       "current_future": {
         "current": [
@@ -195,10 +345,26 @@
     ]
   },
   "metrics": [
-    { "value": "5", "label": "Stages", "detail": "Commercial, Bulk, Dealer, Retail, Overall" },
-    { "value": "4", "label": "Confirmed", "detail": "Grounded in source data" },
-    { "value": "1", "label": "Partially Confirmed", "detail": "Bulk - gap flagged" },
-    { "value": "19", "label": "Personnel", "detail": "Named staff on roster" }
+    {
+      "value": "5",
+      "label": "Stages",
+      "detail": "Commercial, Bulk, Dealer, Semi-dealer, Overall"
+    },
+    {
+      "value": "4",
+      "label": "Confirmed",
+      "detail": "Grounded in source data"
+    },
+    {
+      "value": "1",
+      "label": "Partially Confirmed",
+      "detail": "Bulk - gap flagged"
+    },
+    {
+      "value": "19",
+      "label": "Personnel",
+      "detail": "Named staff on roster"
+    }
   ],
   "footer": "Masagana Gas Corporation - Accounting SOP - Merged from Process Systemization Portal + source site - Internal use only"
 }
