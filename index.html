@@ -41,11 +41,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 #ln-close:hover{color:var(--text);background:var(--border-light)}
 .ln-scroll{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
 .ln-lbl-sm{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-light);display:block;margin-bottom:3px}
-#ln-login{display:flex;flex-direction:column;gap:8px}
-#ln-login select,#ln-login input[type=password],.ln-add textarea,#ln-newpw{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;background:#fff;color:var(--text);outline:none;box-sizing:border-box}
-#ln-login select:focus,#ln-login input:focus,.ln-add textarea:focus,#ln-newpw:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(30,78,121,.08)}
+#ln-connect-form{display:flex;flex-direction:column;gap:8px}
+#ln-token-input,.ln-add textarea{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:inherit;background:#fff;color:var(--text);outline:none;box-sizing:border-box}
+#ln-token-input:focus,.ln-add textarea:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(30,78,121,.08)}
 .ln-btn{padding:7px 13px;border:none;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;transition:opacity .15s;font-family:inherit;line-height:1.3}
 .ln-btn:hover{opacity:.82}
+.ln-btn:disabled{opacity:.45;cursor:not-allowed}
 .ln-btn-primary{background:var(--accent-dark);color:#fff}
 .ln-btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text-mid)}
 .ln-btn-xs{padding:4px 9px;font-size:10px;border-radius:6px}
@@ -53,10 +54,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .ln-ok{color:#15803d;font-size:11px;min-height:13px;margin:0}
 .ln-user-bar{display:flex;align-items:center;gap:6px;padding:8px 10px;background:var(--accent-light);border-radius:8px}
 .ln-cur-user{font-size:13px;font-weight:900;color:var(--accent-dark);flex:1}
-#ln-pw-panel{display:none;flex-direction:column;gap:7px;padding:10px;background:var(--surface-soft);border-radius:8px;border:1px solid var(--border-light)}
-.ln-pw-row{display:flex;gap:6px}
-.ln-pw-row .ln-btn{flex:1}
 .ln-divider{height:1px;background:var(--border-light);flex-shrink:0}
+.ln-hint{font-size:11px;color:var(--text-mid);line-height:1.5;margin:0 0 4px}
+.ln-hint a{color:var(--accent-dark);font-weight:700}
+.ln-add textarea:disabled{opacity:.6;cursor:not-allowed}
 .ln-add{display:flex;flex-direction:column;gap:6px}
 .ln-add textarea{resize:vertical;min-height:74px;line-height:1.5}
 .ln-section-hdr{display:flex;align-items:center;justify-content:space-between;padding:2px 0}
@@ -116,69 +117,48 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
   </div>
   <div class="ln-scroll">
 
-    <!-- Login form -->
-    <div id="ln-login">
-      <label class="ln-lbl-sm" for="ln-user-sel">User</label>
-      <select id="ln-user-sel">
-        <option value="RY">RY</option>
-        <option value="CDV">CDV</option>
-        <option value="JAS">JAS</option>
-      </select>
-      <label class="ln-lbl-sm" for="ln-pw-input">Password</label>
-      <input type="password" id="ln-pw-input" placeholder="Enter password" autocomplete="current-password" />
-      <p id="ln-login-err" class="ln-err"></p>
-      <button id="ln-login-btn" class="ln-btn ln-btn-primary">Sign In</button>
+    <!-- Connect form (shown when no valid GitHub token is stored) -->
+    <div id="ln-connect-form">
+      <p class="ln-hint">Notes are stored as GitHub Issues on this repo, so everyone can read them without signing in. Connect a GitHub token to add or resolve notes as yourself.</p>
+      <label class="ln-lbl-sm" for="ln-token-input">GitHub Personal Access Token</label>
+      <input type="password" id="ln-token-input" placeholder="github_pat_..." autocomplete="off" />
+      <p id="ln-connect-err" class="ln-err"></p>
+      <button id="ln-connect-btn" class="ln-btn ln-btn-primary">Connect</button>
+      <p class="ln-hint">Create a <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">fine-grained token</a> scoped to Issues (read/write) on this repo only, then paste it here. It's stored only in your own browser.</p>
     </div>
 
-    <!-- Logged-in section -->
-    <div id="ln-session" style="display:none;flex-direction:column;gap:10px">
-
-      <!-- User bar -->
-      <div class="ln-user-bar">
-        <span id="ln-cur-user" class="ln-cur-user"></span>
-        <button id="ln-chpw-btn" class="ln-btn ln-btn-ghost ln-btn-xs">Change PW</button>
-        <button id="ln-logout-btn" class="ln-btn ln-btn-ghost ln-btn-xs">Sign Out</button>
-      </div>
-
-      <!-- Change password -->
-      <div id="ln-pw-panel">
-        <label class="ln-lbl-sm" for="ln-newpw">New Password</label>
-        <input type="password" id="ln-newpw" placeholder="Min 3 characters" autocomplete="new-password" />
-        <div class="ln-pw-row">
-          <button id="ln-savepw-btn" class="ln-btn ln-btn-primary">Save</button>
-          <button id="ln-cancelpw-btn" class="ln-btn ln-btn-ghost">Cancel</button>
-        </div>
-        <p id="ln-pw-err" class="ln-err"></p>
-        <p id="ln-pw-ok" class="ln-ok"></p>
-      </div>
-
-      <div class="ln-divider"></div>
-
-      <!-- Add note -->
-      <div class="ln-add">
-        <label class="ln-lbl-sm" for="ln-note-text">New Note</label>
-        <textarea id="ln-note-text" placeholder="Write a note… (Ctrl+Enter to save)" rows="3"></textarea>
-        <button id="ln-save-note-btn" class="ln-btn ln-btn-primary">Save Note</button>
-      </div>
-
-      <div class="ln-divider"></div>
-
-      <!-- Open notes -->
-      <div class="ln-section-hdr">
-        <span class="ln-section-title">Open</span>
-        <span id="ln-open-cnt" class="ln-section-title"></span>
-      </div>
-      <div id="ln-open-list"></div>
-
-      <!-- Resolved notes toggle -->
-      <div class="ln-res-toggle-row">
-        <button id="ln-resolved-toggle" class="ln-btn ln-btn-ghost ln-btn-xs" style="display:flex;align-items:center;gap:4px">
-          <span id="ln-arrow">▶</span>&nbsp;Resolved&nbsp;<span id="ln-resolved-cnt"></span>
-        </button>
-      </div>
-      <div id="ln-resolved-list" style="display:none"></div>
-
+    <!-- Connected bar (shown once a token is validated) -->
+    <div id="ln-connected-bar" class="ln-user-bar" style="display:none">
+      <span id="ln-cur-user" class="ln-cur-user"></span>
+      <button id="ln-disconnect-btn" class="ln-btn ln-btn-ghost ln-btn-xs">Disconnect</button>
     </div>
+
+    <div class="ln-divider"></div>
+
+    <!-- Add note -->
+    <div class="ln-add">
+      <label class="ln-lbl-sm" for="ln-note-text">New Note</label>
+      <textarea id="ln-note-text" placeholder="Connect a token above to add a note…" rows="3" disabled></textarea>
+      <button id="ln-save-note-btn" class="ln-btn ln-btn-primary" disabled>Save Note</button>
+    </div>
+
+    <div class="ln-divider"></div>
+
+    <!-- Open notes -->
+    <div class="ln-section-hdr">
+      <span class="ln-section-title">Open</span>
+      <span id="ln-open-cnt" class="ln-section-title"></span>
+    </div>
+    <div id="ln-open-list"><p class="ln-empty">Loading…</p></div>
+
+    <!-- Resolved notes toggle -->
+    <div class="ln-res-toggle-row">
+      <button id="ln-resolved-toggle" class="ln-btn ln-btn-ghost ln-btn-xs" style="display:flex;align-items:center;gap:4px">
+        <span id="ln-arrow">▶</span>&nbsp;Resolved&nbsp;<span id="ln-resolved-cnt"></span>
+      </button>
+    </div>
+    <div id="ln-resolved-list" style="display:none"></div>
+
   </div>
 </div>
 
@@ -233,224 +213,216 @@ window.addEventListener('hashchange',function(){var key=(window.location.hash||'
 tabs.forEach(function(tab){tab.addEventListener('click',function(){activateTab(tab,true)})});
 activateTab(pageLookup[(window.location.hash||'#main').slice(1)]||pageLookup.main,false);
 
-/* ── Log Notes System ── */
+/* -- Log Notes System (backed by GitHub Issues on this repo) -- */
 (function(){
-  var KEY_USERS   = 'mgcwf_users';
-  var KEY_NOTES   = 'mgcwf_notes';
-  var KEY_SESSION = 'mgcwf_session';
+  var OWNER = 'wilsonsykes';
+  var REPO  = 'MGSDiagramWorkflow';
+  var LABEL = 'log-note';
+  var API   = 'https://api.github.com/repos/' + OWNER + '/' + REPO;
+  var KEY_TOKEN = 'mgcwf_gh_token';
+  var KEY_USER  = 'mgcwf_gh_user';
 
-  var DEFAULTS = { RY:'ry123', CDV:'cdv123', JAS:'jas123' };
+  var token = localStorage.getItem(KEY_TOKEN) || null;
+  var ghUser = null;
+  try { ghUser = JSON.parse(localStorage.getItem(KEY_USER) || 'null'); } catch(e){ ghUser = null; }
 
-  function getUsers(){try{return JSON.parse(localStorage.getItem(KEY_USERS));}catch(e){return null;}}
-  function saveUsers(u){localStorage.setItem(KEY_USERS,JSON.stringify(u));}
-  function getNotes(){try{return JSON.parse(localStorage.getItem(KEY_NOTES))||[];}catch(e){return[];}}
-  function saveNotes(n){localStorage.setItem(KEY_NOTES,JSON.stringify(n));}
-  function getSession(){try{return sessionStorage.getItem(KEY_SESSION);}catch(e){return null;}}
-  function setSession(u){if(u)sessionStorage.setItem(KEY_SESSION,u);else sessionStorage.removeItem(KEY_SESSION);}
+  var panelEl      = document.getElementById('ln-panel');
+  var toggleBtn    = document.getElementById('ln-toggle');
+  var closeBtn     = document.getElementById('ln-close');
+  var connectForm  = document.getElementById('ln-connect-form');
+  var connectedBar = document.getElementById('ln-connected-bar');
+  var curUserEl    = document.getElementById('ln-cur-user');
+  var tokenInput   = document.getElementById('ln-token-input');
+  var connectErr   = document.getElementById('ln-connect-err');
+  var noteText     = document.getElementById('ln-note-text');
+  var saveBtn      = document.getElementById('ln-save-note-btn');
+  var openList     = document.getElementById('ln-open-list');
+  var resList      = document.getElementById('ln-resolved-list');
+  var openCnt      = document.getElementById('ln-open-cnt');
+  var resCnt       = document.getElementById('ln-resolved-cnt');
+  var arrowEl      = document.getElementById('ln-arrow');
 
-  /* init users on first visit */
-  var users=getUsers();
-  if(!users){
-    users={};
-    Object.keys(DEFAULTS).forEach(function(k){users[k]={password:DEFAULTS[k]};});
-    saveUsers(users);
+  var notesLoaded = false;
+  toggleBtn.addEventListener('click', function(){
+    panelEl.classList.toggle('open');
+    if(panelEl.classList.contains('open') && !notesLoaded) loadNotes();
+  });
+  closeBtn.addEventListener('click', function(){ panelEl.classList.remove('open'); });
+
+  function ghHeaders(){
+    var h = { 'Accept':'application/vnd.github+json' };
+    if(token) h['Authorization'] = 'Bearer ' + token;
+    return h;
   }
 
-  var currentUser=null;
-
-  /* elements */
-  var panelEl    = document.getElementById('ln-panel');
-  var toggleBtn  = document.getElementById('ln-toggle');
-  var closeBtn   = document.getElementById('ln-close');
-  var loginSec   = document.getElementById('ln-login');
-  var sessionSec = document.getElementById('ln-session');
-  var loginErr   = document.getElementById('ln-login-err');
-  var pwPanel    = document.getElementById('ln-pw-panel');
-  var pwErr      = document.getElementById('ln-pw-err');
-  var pwOk       = document.getElementById('ln-pw-ok');
-  var openList   = document.getElementById('ln-open-list');
-  var resList    = document.getElementById('ln-resolved-list');
-  var resCnt     = document.getElementById('ln-resolved-cnt');
-  var openCnt    = document.getElementById('ln-open-cnt');
-  var arrowEl    = document.getElementById('ln-arrow');
-
-  /* panel open/close */
-  toggleBtn.addEventListener('click',function(){panelEl.classList.toggle('open');});
-  closeBtn.addEventListener('click',function(){panelEl.classList.remove('open');});
-
-  /* login */
-  document.getElementById('ln-login-btn').addEventListener('click',doLogin);
-  document.getElementById('ln-pw-input').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
-
-  function doLogin(){
-    var user = document.getElementById('ln-user-sel').value;
-    var pw   = document.getElementById('ln-pw-input').value;
-    var u    = getUsers();
-    if(u[user]&&u[user].password===pw){
-      setSession(user);
-      currentUser=user;
-      document.getElementById('ln-pw-input').value='';
-      loginErr.textContent='';
-      render();
-    } else {
-      loginErr.textContent='Incorrect password.';
-    }
+  function setConnectedUI(user){
+    ghUser = user;
+    localStorage.setItem(KEY_USER, JSON.stringify(user));
+    connectForm.style.display = 'none';
+    connectedBar.style.display = 'flex';
+    curUserEl.textContent = '@' + user.login;
+    noteText.disabled = false;
+    saveBtn.disabled = false;
+    noteText.placeholder = 'Write a note... (Ctrl+Enter to save)';
   }
 
-  /* logout */
-  document.getElementById('ln-logout-btn').addEventListener('click',function(){
-    setSession(null); currentUser=null; render();
-  });
-
-  /* change password */
-  document.getElementById('ln-chpw-btn').addEventListener('click',function(){
-    var shown=pwPanel.style.display==='flex';
-    pwPanel.style.display=shown?'none':'flex';
-    pwErr.textContent=''; pwOk.textContent='';
-  });
-  document.getElementById('ln-cancelpw-btn').addEventListener('click',function(){
-    pwPanel.style.display='none';
-    document.getElementById('ln-newpw').value='';
-    pwErr.textContent='';
-  });
-  document.getElementById('ln-savepw-btn').addEventListener('click',function(){
-    var np=document.getElementById('ln-newpw').value.trim();
-    if(!np||np.length<3){pwErr.textContent='Min 3 characters.';return;}
-    var u=getUsers(); u[currentUser].password=np; saveUsers(u);
-    document.getElementById('ln-newpw').value='';
-    pwErr.textContent=''; pwOk.textContent='Password updated!';
-    pwPanel.style.display='none';
-    setTimeout(function(){pwOk.textContent='';},2500);
-  });
-
-  /* save note */
-  document.getElementById('ln-save-note-btn').addEventListener('click',saveNote);
-  document.getElementById('ln-note-text').addEventListener('keydown',function(e){
-    if(e.key==='Enter'&&(e.ctrlKey||e.metaKey))saveNote();
-  });
-
-  function saveNote(){
-    var text=document.getElementById('ln-note-text').value.trim();
-    if(!text)return;
-    var notes=getNotes();
-    notes.unshift({
-      id: Date.now().toString(36)+Math.random().toString(36).slice(2),
-      user: currentUser,
-      text: text,
-      ts:   new Date().toISOString(),
-      resolved:   false,
-      resolvedBy: null,
-      resolvedTs: null
-    });
-    saveNotes(notes);
-    document.getElementById('ln-note-text').value='';
-    renderNotes();
+  function setDisconnectedUI(){
+    token = null; ghUser = null;
+    localStorage.removeItem(KEY_TOKEN);
+    localStorage.removeItem(KEY_USER);
+    connectForm.style.display = '';
+    connectedBar.style.display = 'none';
+    noteText.disabled = true;
+    saveBtn.disabled = true;
+    noteText.value = '';
+    noteText.placeholder = 'Connect a token above to add a note...';
   }
 
-  /* resolved toggle */
-  document.getElementById('ln-resolved-toggle').addEventListener('click',function(){
-    var hidden=resList.style.display==='none';
-    resList.style.display=hidden?'':'none';
-    arrowEl.textContent=hidden?'▼':'▶';
-  });
-
-  /* render */
-  function render(){
-    currentUser=getSession();
-    if(currentUser){
-      loginSec.style.display='none';
-      sessionSec.style.display='flex';
-      document.getElementById('ln-cur-user').textContent=currentUser;
-      renderNotes();
-    } else {
-      loginSec.style.display='';
-      sessionSec.style.display='none';
-    }
+  function connect(){
+    var t = tokenInput.value.trim();
+    if(!t){ connectErr.textContent = 'Paste a token first.'; return; }
+    connectErr.textContent = 'Connecting...';
+    fetch('https://api.github.com/user', { headers: { 'Authorization':'Bearer '+t, 'Accept':'application/vnd.github+json' } })
+      .then(function(r){ if(!r.ok) throw new Error('Invalid or expired token.'); return r.json(); })
+      .then(function(user){
+        token = t;
+        localStorage.setItem(KEY_TOKEN, token);
+        tokenInput.value = '';
+        connectErr.textContent = '';
+        setConnectedUI(user);
+        loadNotes();
+      })
+      .catch(function(e){ connectErr.textContent = e.message; });
   }
+  document.getElementById('ln-connect-btn').addEventListener('click', connect);
+  tokenInput.addEventListener('keydown', function(e){ if(e.key==='Enter') connect(); });
+  document.getElementById('ln-disconnect-btn').addEventListener('click', function(){
+    setDisconnectedUI();
+    loadNotes();
+  });
 
   function fmt(iso){
-    if(!iso)return'';
-    var d=new Date(iso);
-    return d.toLocaleDateString('en-US',{month:'short',day:'numeric'})+
-      ' '+d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+    if(!iso) return '';
+    var d = new Date(iso);
+    return d.toLocaleDateString('en-US',{month:'short',day:'numeric'}) + ' ' + d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
   }
 
-  function renderNotes(){
-    var notes=getNotes();
-    var open=notes.filter(function(n){return!n.resolved;});
-    var resolved=notes.filter(function(n){return n.resolved;});
+  function buildCard(issue){
+    var resolved = issue.state === 'closed';
+    var card = document.createElement('div');
+    card.className = 'ln-card' + (resolved ? ' ln-resolved' : '');
 
-    openCnt.textContent=open.length?'('+open.length+')':'';
-    resCnt.textContent=resolved.length?'('+resolved.length+')':'';
-
-    openList.innerHTML='';
-    if(open.length===0){
-      var emp=document.createElement('p');
-      emp.className='ln-empty'; emp.textContent='No open notes yet.';
-      openList.appendChild(emp);
-    } else {
-      open.forEach(function(n){openList.appendChild(buildCard(n));});
-    }
-
-    resList.innerHTML='';
-    resolved.forEach(function(n){resList.appendChild(buildCard(n));});
-  }
-
-  function buildCard(note){
-    var card=document.createElement('div');
-    card.className='ln-card'+(note.resolved?' ln-resolved':'');
-
-    var meta=document.createElement('div');
-    meta.className='ln-meta';
-
-    var badge=document.createElement('span');
-    badge.className='ln-badge';
-    badge.textContent=note.user;
-
-    var ts=document.createElement('span');
-    ts.className='ln-ts';
-    ts.textContent=fmt(note.ts);
-
-    meta.appendChild(badge);
-    meta.appendChild(ts);
+    var meta = document.createElement('div');
+    meta.className = 'ln-meta';
+    var badge = document.createElement('span');
+    badge.className = 'ln-badge';
+    badge.textContent = issue.user ? ('@' + issue.user.login) : 'unknown';
+    var ts = document.createElement('span');
+    ts.className = 'ln-ts';
+    ts.textContent = fmt(issue.created_at);
+    meta.appendChild(badge); meta.appendChild(ts);
     card.appendChild(meta);
 
-    var body=document.createElement('div');
-    body.className='ln-text';
-    body.textContent=note.text;
+    var body = document.createElement('div');
+    body.className = 'ln-text';
+    body.textContent = issue.body || issue.title;
     card.appendChild(body);
 
-    if(note.resolved){
-      var rb=document.createElement('div');
-      rb.className='ln-res-label';
-      rb.textContent='✓ Resolved by '+note.resolvedBy+' · '+fmt(note.resolvedTs);
+    if(resolved){
+      var rb = document.createElement('div');
+      rb.className = 'ln-res-label';
+      rb.textContent = '✓ Resolved' + (issue.closed_by ? ' by @'+issue.closed_by.login : '') + ' · ' + fmt(issue.closed_at);
       card.appendChild(rb);
-    } else {
-      var btn=document.createElement('button');
-      btn.className='ln-btn ln-btn-ghost ln-btn-xs';
-      btn.textContent='Resolve';
-      btn.style.marginTop='2px';
-      btn.style.alignSelf='flex-start';
-      (function(n){
-        btn.addEventListener('click',function(){
-          var notes=getNotes();
-          var i=notes.findIndex(function(x){return x.id===n.id;});
-          if(i!==-1){
-            notes[i].resolved=true;
-            notes[i].resolvedBy=currentUser;
-            notes[i].resolvedTs=new Date().toISOString();
-            saveNotes(notes);
-            renderNotes();
-          }
-        });
-      })(note);
+    } else if(token) {
+      var btn = document.createElement('button');
+      btn.className = 'ln-btn ln-btn-ghost ln-btn-xs';
+      btn.textContent = 'Resolve';
+      btn.style.marginTop = '2px';
+      btn.style.alignSelf = 'flex-start';
+      btn.addEventListener('click', function(){ resolveNote(issue.number, btn); });
       card.appendChild(btn);
     }
-
     return card;
   }
 
-  render();
+  function renderNotes(issues){
+    var open = issues.filter(function(i){ return i.state === 'open'; });
+    var resolved = issues.filter(function(i){ return i.state === 'closed'; });
+    openCnt.textContent = open.length ? '('+open.length+')' : '';
+    resCnt.textContent = resolved.length ? '('+resolved.length+')' : '';
+
+    openList.innerHTML = '';
+    if(open.length === 0){
+      var emp = document.createElement('p'); emp.className='ln-empty'; emp.textContent='No open notes yet.';
+      openList.appendChild(emp);
+    } else {
+      open.forEach(function(i){ openList.appendChild(buildCard(i)); });
+    }
+    resList.innerHTML = '';
+    resolved.forEach(function(i){ resList.appendChild(buildCard(i)); });
+  }
+
+  function loadNotes(){
+    openList.innerHTML = '<p class="ln-empty">Loading...</p>';
+    Promise.all([
+      fetch(API + '/issues?labels='+LABEL+'&state=open&per_page=100', { headers: ghHeaders() }).then(function(r){ return r.ok ? r.json() : []; }),
+      fetch(API + '/issues?labels='+LABEL+'&state=closed&per_page=100', { headers: ghHeaders() }).then(function(r){ return r.ok ? r.json() : []; })
+    ]).then(function(results){
+      var all = results[0].concat(results[1]);
+      renderNotes(all);
+      notesLoaded = true;
+    }).catch(function(){
+      openList.innerHTML = '<p class="ln-empty">Could not load notes -- check your connection.</p>';
+    });
+  }
+
+  function saveNote(){
+    var text = noteText.value.trim();
+    if(!text || !token) return;
+    saveBtn.disabled = true;
+    var title = text.length > 60 ? text.slice(0,57)+'...' : text;
+    fetch(API + '/issues', {
+      method: 'POST',
+      headers: Object.assign({'Content-Type':'application/json'}, ghHeaders()),
+      body: JSON.stringify({ title: title, body: text, labels: [LABEL] })
+    }).then(function(r){
+      if(!r.ok) throw new Error('Could not save note (check token permissions).');
+      return r.json();
+    }).then(function(){
+      noteText.value = '';
+      loadNotes();
+    }).catch(function(e){ alert(e.message); })
+      .finally(function(){ saveBtn.disabled = false; });
+  }
+  saveBtn.addEventListener('click', saveNote);
+  noteText.addEventListener('keydown', function(e){ if(e.key==='Enter' && (e.ctrlKey||e.metaKey)) saveNote(); });
+
+  function resolveNote(number, btn){
+    btn.disabled = true; btn.textContent = 'Resolving...';
+    fetch(API + '/issues/' + number, {
+      method: 'PATCH',
+      headers: Object.assign({'Content-Type':'application/json'}, ghHeaders()),
+      body: JSON.stringify({ state: 'closed' })
+    }).then(function(r){
+      if(!r.ok) throw new Error('Could not resolve (check token permissions).');
+      return r.json();
+    }).then(function(){ loadNotes(); })
+      .catch(function(e){ alert(e.message); btn.disabled=false; btn.textContent='Resolve'; });
+  }
+
+  document.getElementById('ln-resolved-toggle').addEventListener('click', function(){
+    var hidden = resList.style.display === 'none';
+    resList.style.display = hidden ? '' : 'none';
+    arrowEl.textContent = hidden ? '▼' : '▶';
+  });
+
+  /* init */
+  if(token && ghUser){
+    setConnectedUI(ghUser);
+  } else {
+    setDisconnectedUI();
+  }
+  loadNotes();
 })();
 </script>
 </body>
