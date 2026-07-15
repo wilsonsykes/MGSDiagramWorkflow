@@ -84,7 +84,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 
 <div class="terms-list" id="terms-list">
 
-  <div class="term-card" id="form-delivery-receipt">
+  <div class="term-card" id="form-delivery-receipt-dr">
     <div class="term-bar" onclick="toggle(this)">
       <span class="term-name">Delivery Receipt (DR)</span>
       <span class="term-tag">Form</span>
@@ -110,19 +110,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="form-sales-order">
-    <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Sales Order</span>
-      <span class="term-tag">Form</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span><span class="ref-chip ref-acg">ACG</span></span>
-      <span class="term-arrow">&#9662;</span>
-    </div>
-    <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Description</div><div class="td-value">Primary commercial order document. The Delivery Head reads the Sales Order to schedule vehicle, capacity, and route. Also collected by Accounting together with the DR and Invoice for receivables reconciliation.</div></div>
-      <div><div class="td-label">Usage</div><div class="td-value">Delivery Head uses Sales Order to schedule delivery · Accounting collects Sales Order + DR + Invoice for reconciliation</div></div>
-    </div></div>
-  </div>
-
   <div class="term-card" id="form-picklist">
     <div class="term-bar" onclick="toggle(this)">
       <span class="term-name">Picklist</span>
@@ -136,7 +123,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="form-credit-notes">
+  <div class="term-card" id="form-credit-notes-cr">
     <div class="term-bar" onclick="toggle(this)">
       <span class="term-name">Credit Notes (CR)</span>
       <span class="term-tag">Form</span>
@@ -149,11 +136,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="form-general-ledger">
+  <div class="term-card" id="form-general-ledger-gl">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">General Ledger</span>
+      <span class="term-name">General Ledger (GL)</span>
       <span class="term-tag">Form</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span><span class="ref-chip ref-acg">ACG</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -162,7 +148,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="form-receiving-report">
+  <div class="term-card" id="form-receiving-report-rr">
     <div class="term-bar" onclick="toggle(this)">
       <span class="term-name">Receiving Report (RR)</span>
       <span class="term-tag">Form</span>
@@ -175,7 +161,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="form-purchase-order">
+  <div class="term-card" id="form-purchase-order-po">
     <div class="term-bar" onclick="toggle(this)">
       <span class="term-name">Purchase Order (PO)</span>
       <span class="term-tag">Form</span>
@@ -201,7 +187,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="form-sales-performance-report">
+  <div class="term-card" id="form-sales-performance-report-spr">
     <div class="term-bar" onclick="toggle(this)">
       <span class="term-name">Sales Performance Report (SPR)</span>
       <span class="term-tag">Form</span>
@@ -214,15 +200,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="form-lut-forms">
+  <a id="form-lut-forms" style="position:relative;top:-90px" aria-hidden="true"></a>
+  <div class="term-card" id="form-loading-unloading-truck-forms-lut">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">LUT Forms</span>
+      <span class="term-name">Loading/Unloading Truck Forms (LUT)</span>
       <span class="term-tag">Form</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-acg">ACG</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Description</div><div class="td-value">Look-Up Table forms used for incentive computation. Cover cylinder sizes 2.7 kg, 11 kg, and 50 kg. Used to balance empty and field cylinder data when preparing the Incentive template for payroll.</div></div>
+      <div><div class="td-label">Description</div><div class="td-value">Cover cylinder sizes 2.7 kg, 11 kg, and 50 kg. Used to balance empty and field cylinder data when preparing the Incentive template for payroll.</div></div>
       <div><div class="td-label">Usage</div><div class="td-value">Accounting uses LUT forms (check 2.7kg, 11kg, 50kg) to balance empty and field cylinders · Feeds into Incentive template · Used for Commercial and Retail payroll</div></div>
     </div></div>
   </div>
@@ -318,7 +304,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="form-post-dated-checks">
+  <div class="term-card" id="form-post-dated-checks-pdc">
     <div class="term-bar" onclick="toggle(this)">
       <span class="term-name">Post-Dated Checks (PDC)</span>
       <span class="term-tag">Form</span>
@@ -331,11 +317,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="form-entry-exit-slip">
+  <div class="term-card" id="form-entry-exit-slip-ees">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Entry/Exit Slip (EES/EEF)</span>
+      <span class="term-name">Entry/Exit Slip (EES)</span>
       <span class="term-tag">Form</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -344,15 +329,15 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="form-grr">
+  <a id="form-grr" style="position:relative;top:-90px" aria-hidden="true"></a>
+  <div class="term-card" id="form-general-refilling-report-grr">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">GRR / AppSheet Refilling Report</span>
+      <span class="term-name">General Refilling Report (GRR)</span>
       <span class="term-tag">Form</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Description</div><div class="td-value">General Refilling Report generated from the Checker's AppSheet entry after a Dealer plant refill. AppSheet quantities must match the official receipt before release, and Accounting verifies it against that receipt.</div></div>
+      <div><div class="td-label">Description</div><div class="td-value">generated from the Checker's AppSheet entry after a Dealer plant refill. AppSheet quantities must match the official receipt before release, and Accounting verifies it against that receipt.</div></div>
       <div><div class="td-label">Usage</div><div class="td-value">Checker encodes transaction in AppSheet · Basis of the GRR · Accounting verifies AppSheet vs. official receipt before release</div></div>
     </div></div>
   </div>

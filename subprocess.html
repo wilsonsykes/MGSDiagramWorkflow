@@ -85,11 +85,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 
 <div class="terms-list" id="terms-list">
 
-  <div class="term-card" id="subprocess-process-order">
+  <a id="subprocess-process-order" style="position:relative;top:-90px" aria-hidden="true"></a>
+  <div class="term-card" id="subprocess-schedule-sales-order">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Process Order</span>
+      <span class="term-name">Schedule Sales Order</span>
       <span class="term-tag">Subprocess</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span><span class="ref-chip ref-sal">SAL</span><span class="ref-chip ref-acg">ACG</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -98,11 +98,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="subprocess-fulfil-order">
+  <a id="subprocess-fulfil-order" style="position:relative;top:-90px" aria-hidden="true"></a>
+  <div class="term-card" id="subprocess-fulfil-sales-order">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Fulfil Order</span>
+      <span class="term-name">Fulfil Sales Order</span>
       <span class="term-tag">Subprocess</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span><span class="ref-chip ref-sal">SAL</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -124,11 +124,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="subprocess-compute-commercial-gains">
+  <a id="subprocess-compute-commercial-gains" style="position:relative;top:-90px" aria-hidden="true"></a>
+  <div class="term-card" id="subprocess-commercial-gains">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Compute Commercial Gains</span>
+      <span class="term-name">Commercial Gains</span>
       <span class="term-tag">Subprocess</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -137,11 +137,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="subprocess-compute-operational-gains">
+  <a id="subprocess-compute-operational-gains" style="position:relative;top:-90px" aria-hidden="true"></a>
+  <div class="term-card" id="subprocess-operational-gains">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Compute Operational Gains</span>
+      <span class="term-name">Operational Gains</span>
       <span class="term-tag">Subprocess</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -158,21 +158,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Description</div><div class="td-value">General commission and gains computation covering all sales channels. Used as a summary step for reconciling total gains per delivery cycle.</div></div>
+      <div><div class="td-label">Description</div><div class="td-value">General commission and gains computation covering all sales channels. Used as a summary step for reconciling total gains per delivery cycle. Distribution.</div></div>
       <div><div class="td-label">Key Steps</div><div class="td-value">Aggregate delivery records · Apply commission formula · Generate gains summary</div></div>
-    </div></div>
-  </div>
-
-  <div class="term-card" id="subprocess-commission-distribution">
-    <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Commission Distribution</span>
-      <span class="term-tag">Subprocess</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span><span class="ref-chip ref-sal">SAL</span></span>
-      <span class="term-arrow">&#9662;</span>
-    </div>
-    <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Description</div><div class="td-value">Calculation and distribution of commissions to field staff and sales personnel. Follows the gains computation step and precedes payroll encoding.</div></div>
-      <div><div class="td-label">Key Steps</div><div class="td-value">Calculate per-person commission · Validate totals · Encode in payroll · Distribute</div></div>
     </div></div>
   </div>
 
@@ -228,11 +215,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="subprocess-pricing-matrix">
+  <div class="term-card" id="subprocess-discuss-pricing-matrix">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Pricing Matrix</span>
+      <span class="term-name">Discuss Pricing Matrix</span>
       <span class="term-tag">Subprocess</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -250,7 +236,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div>
     <div class="term-body"><div class="term-inner">
       <div><div class="td-label">Description</div><div class="td-value">Pricing change communication and rollout to all relevant contacts and channels. Mel emails the updates; Jabert logs audit records; each staff member cascades to their assigned client/channel.</div></div>
-      <div><div class="td-label">Contacts</div><div class="td-value">Mel → email update · Jabert → audit log, CODO, contact centers/marketing/cashiers · Mel &amp; Lou → Comm/Bulk · Claire → Retail · Jen → Makati</div></div>
     </div></div>
   </div>
 
@@ -262,7 +247,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Description</div><div class="td-value">SRP and competitor pricing comparison process. Mel and Jabert (IT Head) regularly update competitor prices; the result informs End-User SRP decisions in the Pricing Matrix dashboard.</div></div>
+      <div><div class="td-label">Description</div><div class="td-value">SRP and competitor pricing comparison process. Mel and Jabert regularly update competitor prices; the result informs End-User SRP decisions in the Pricing Matrix dashboard.</div></div>
       <div><div class="td-label">Key Steps</div><div class="td-value">Mel and Jabert gather competitor prices · Update comparison dashboard · Feed into Pricing Matrix meeting</div></div>
     </div></div>
   </div>
