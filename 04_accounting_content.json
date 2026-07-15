@@ -12,10 +12,8 @@
       "badge": "confirmed",
       "badge_label": "Confirmed with source data",
       "sop_steps": [
-        "Make the Invoice before delivery: check past receivables and dues with the customer. (A5C1.1)",
-        "If the customer has past dues, flag the upcoming order. (A5C1.1.1)",
-        "If past dues are within a passable / supervisor-approved range, approve the upcoming order. (A5C1.1.2)",
-        "If there are no past dues, approve the upcoming order directly. (A5C1.1.3)",
+        "Make the Invoice before delivery: check past receivables and dues with the customer. (A5O1.1)",
+        "If the customer has past dues, flag the upcoming order. If past dues are within a passable / supervisor-approved range, approve the upcoming order. If there are no past dues, approve the upcoming order directly. (A5O1.1.1)",
         "Update and close Receivables: Acctg Staff collects the signed Delivery Receipt (DR) and Invoice from the Delivery Team. (A5C2.1.1)",
         "Check the monthly summary table of invoices for collection. (A5C2.1.2)",
         "Print the summary of Aged Receivables. (A5C2.1.3)",
@@ -85,7 +83,7 @@
           "Digital dispute log with status tracking instead of a paper hand-off."
         ]
       },
-      "sources": "Merged from Process Systemization Portal draft + source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting > Commercial (A5C1-A5C5)."
+      "sources": "Merged from Process Systemization Portal draft + source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting > Commercial (A5O1-A5C5)."
     },
     {
       "romaji": "Bulk",
@@ -93,11 +91,11 @@
       "badge": "pending",
       "badge_label": "Partially confirmed - see gap note",
       "sop_steps": [
-        "Invoicing, receivables, bank reconciliation, and payroll incentive steps follow the same procedure as Accounting > Commercial (A5C1-A5C5), per company specification.",
+        "Invoicing, receivables, bank reconciliation, and payroll incentive steps follow the same procedure as Accounting > Commercial (A5O1-A5C5), per company specification.",
         "Bulk-specific exceptions to that procedure are referenced but not documented in either source."
       ],
       "guidelines": [
-        "Accounting > Bulk explicitly inherits the Commercial A5C1-A5C5 procedure; the undocumented exceptions should be confirmed with Accounting before this is finalized, particularly whether per-truck (rather than per-cylinder) reconciliation changes any AR or bank-rec step."
+        "Accounting > Bulk explicitly inherits the Commercial A5O1-A5C5 procedure; the undocumented exceptions should be confirmed with Accounting before this is finalized, particularly whether per-truck (rather than per-cylinder) reconciliation changes any AR or bank-rec step."
       ],
       "approval_matrix": [
         {
@@ -120,7 +118,7 @@
           "Confirm and document whether per-truck gain computation requires a distinct AR/bank-rec step, then encode it explicitly."
         ]
       },
-      "gap_note": "The source site flags this stage as \"Same as Acctg Commercial A5C1-A5C5\" plus \"Exceptions\", but the exceptions field is blank, and the process manual does not cover Accounting > Bulk separately. Recommend confirming with Accounting whether Bulk's per-truck (not per-cylinder) fulfilment changes any receivables or reconciliation step.",
+      "gap_note": "The source site flags this stage as \"Same as Acctg Commercial A5O1-A5C5\" plus \"Exceptions\", but the exceptions field is blank, and the process manual does not cover Accounting > Bulk separately. Recommend confirming with Accounting whether Bulk's per-truck (not per-cylinder) fulfilment changes any receivables or reconciliation step.",
       "sources": "Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting > Bulk (placeholder). No corresponding section in \"MGC LPG Process Manual v2.docx\"."
     },
     {
@@ -365,6 +363,5 @@
       "label": "Personnel",
       "detail": "Named staff on roster"
     }
-  ],
-  "footer": "Masagana Gas Corporation - Accounting SOP - Merged from Process Systemization Portal + source site - Internal use only"
+  ]
 }
