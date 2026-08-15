@@ -1,0 +1,68 @@
+name: Publish Site From Content TSV
+
+# Pilot: covers Operations > Commercial and the Subprocess index only.
+# Runs on any branch so a feature branch can be previewed before merging.
+
+on:
+  push:
+    paths:
+      - "content/**"
+      - content_generate.py
+      - workflow_generate.py
+      - scripts/validate_workflow_json.py
+      - scripts/validate_index_html.py
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-publish:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install beautifulsoup4
+
+      - name: Regenerate content from TSV (patches 02_operations_content.json + subprocess.html)
+        run: |
+          python content_generate.py
+
+      - name: Validate JSON structure and content
+        run: |
+          python scripts/validate_workflow_json.py
+
+      - name: Generate HTML from JSON
+        run: |
+          python workflow_generate.py < /dev/null
+
+      - name: Validate generated HTML files
+        run: |
+          python scripts/validate_index_html.py index.html
+          python scripts/validate_index_html.py main.html
+          python scripts/validate_index_html.py operations.html
+          python scripts/validate_index_html.py sales.html
+          python scripts/validate_index_html.py accounting.html
+          python scripts/validate_index_html.py subprocess.html
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 02_operations_content.json subprocess.html main.html operations.html sales.html accounting.html
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit."
+            exit 0
+          fi
+          git commit -m "Auto-generate site from content/*.tsv"
+          git push

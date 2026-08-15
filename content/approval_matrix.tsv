@@ -1,0 +1,6 @@
+Tab	Stage	Order	Transaction	Threshold	Initiator	Reviewer	Approver	Controls
+Operations	Commercial	1	Sales Order -> delivery scheduling	Commercial client’s past AR dues	Sales Rep	Logistics Officer	Logistics Officer	Route/qty order check
+Operations	Commercial	2	Cylinder pick & DR issuance	-	Warehouse Staff	Senior Plant Supervisor	Senior Plant Supervisor	Picklist match | 2 DR / 2 Credit Notes rule
+Operations	Commercial	3	GL & Inventory posting	-	Warehouse Staff (submits DR)	Operations Supervisor	Operations Supervisor	DR-GL reconciliation
+Operations	Commercial	4	Residue classification	1-3kg variance	Helper (weighs)	Driver	Senior Plant Supervisor (if disputed)	Dual weigh-in/out | Credit Note w/ control #
+Operations	Commercial	5	Incentive computation & payout	-	Industrial Engineer	Industrial Engineer	CEO	Weigh-in=weigh-out match | GSheet

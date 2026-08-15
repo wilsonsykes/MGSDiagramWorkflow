@@ -10,7 +10,6 @@
       "romaji": "Commercial",
       "english": "Process Order | Delivery | Return to Plant",
       "badge": "confirmed",
-      "badge_label": "Confirmed with source data",
       "sop_steps": [
         "Receive the approved Sales Order; client orders 22kg or 50kg cylinder variants. (O1.1.1)",
         "Logistics Officer schedules the delivery - vehicle, capacity, route. (O1.2.1)",

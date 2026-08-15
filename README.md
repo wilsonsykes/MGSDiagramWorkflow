@@ -47,6 +47,21 @@ Current setup:
 - `gap_note`, `sources`: optional footer text per stage
 - Optional top-level `cross_stage`: `{name, description, guidelines}` rendered as a shared section below all stages
 
+## Editing via Codespaces (pilot)
+
+For **Operations > Commercial** and the **Subprocess** index only, you can now skip editing JSON/HTML directly and instead edit plain tab-separated files in `content/`:
+
+- `content/stages.tsv` — stage badge, subtitle, gap note, sources (one row)
+- `content/items.tsv` — SOP steps, guidelines, and Current/Future bullets (one row per line item)
+- `content/approval_matrix.tsv` — Approval Matrix & Controls rows
+- `content/subprocess.tsv` — every Subprocess index entry
+
+Open this repo in a **GitHub Codespace**, edit the relevant row(s) in these files (any text editor or a CSV/TSV grid extension works — the delimiter is a tab, not a comma, so plain sentences with commas are safe to type), then commit and push. The `Publish Site From Content TSV` GitHub Action (`.github/workflows/publish-from-content.yml`) picks it up automatically, regenerates `02_operations_content.json`, `subprocess.html`, and all four tab pages, validates them, and commits the result back — no local Python needed.
+
+Requires write access to this repo (ask to be added as a collaborator if you don't have it).
+
+This is a pilot covering just these two pieces; the rest of the site (other stages, Sales, Accounting, Main, Personnel, Forms) is still edited the old way for now.
+
 ## GitHub automation
 
 - `.github/workflows/json-guard.yml`: validates JSON changes
