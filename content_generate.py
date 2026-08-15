@@ -178,6 +178,7 @@ def regenerate_subprocess_html():
 def main():
     patch_operations_commercial()
     regenerate_subprocess_html()
+    print("content_generate.py done.")
 
 
 if __name__ == "__main__":
