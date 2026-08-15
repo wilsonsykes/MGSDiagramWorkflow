@@ -58,13 +58,7 @@ table.matrix th{background:var(--accent-dark);color:#fff;text-align:left;padding
 table.matrix td{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#374151}
 table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 .control-chip{display:inline-block;background:var(--accent-light);color:var(--accent-dark);border:1px solid #BFD6EB;border-radius:5px;padding:1px 7px;font-size:10.5px;margin:1px 4px 1px 0}
-.cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.cf-col{border-radius:8px;padding:14px 16px}
-.cf-col.current{background:var(--orange-light);border:1px solid #E9CDA8}
-.cf-col.future{background:var(--green-light);border:1px solid #B7D8C4}
-.cf-col h5{margin:0 0 8px;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
-.cf-col.current h5{color:var(--orange)}.cf-col.future h5{color:var(--green)}
-.cf-col ul{margin:0;padding-left:18px}.cf-col li{font-size:12.5px;margin-bottom:6px;line-height:1.5;color:#374151}
+.cf-print-only{display:none}
 .gap-note{background:var(--red-light);border:1px solid #f0c9c9;color:var(--red);border-radius:8px;padding:12px 16px;font-size:12.5px}
 .gap-note b{display:block;margin-bottom:4px}
 .sources{font-size:11px;color:var(--text-light);padding:12px 28px;background:var(--bg-alt);border-top:1px solid var(--border-light)}
@@ -86,11 +80,16 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
   .doc-section{page-break-inside:avoid}
   .stage-banner,.cross-banner{background:#eef2f6!important;cursor:default}
   .stage-arrow{display:none}
-  .cf-grid{grid-template-columns:1fr 1fr}
   a.xref{color:inherit;text-decoration:none}
   .legend-bar{page-break-after:avoid}
+  .cf-print-only{display:block;page-break-before:always;padding:24px 48px}
+  .cf-print-title{font-size:14px;font-weight:800;color:var(--accent-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+  .cf-print-table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .cf-print-table th{background:var(--accent-dark);color:#fff;text-align:left;padding:8px 10px;font-size:11px;width:50%}
+  .cf-print-table td{padding:8px 10px;border:1px solid #ccc;vertical-align:top;font-size:11px;line-height:1.5;word-wrap:break-word}
+  .cf-print-table tr:nth-child(even) td{background:#f6f8fb}
 }
-@media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.doc-section{padding-left:16px;padding-right:16px}.cf-grid{grid-template-columns:1fr}.topnav{gap:12px}.nav-link{font-size:10.5px}}
+@media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.doc-section{padding-left:16px;padding-right:16px}.topnav{gap:12px}.nav-link{font-size:10.5px}}
 </style>
 </head>
 <body>
@@ -153,13 +152,15 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <tr><td>Cross-department dispute escalation</td><td>-</td><td>Any stage owner</td><td>Supervisor / Manager</td><td><b>Department Manager</b></td><td><span class="control-chip">System watch -&gt; Review -&gt; Manager chain</span></td></tr>
 </table>
 </div>
-    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
-  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="main-0-cur-0">Process knowledge for Operations, Sales, and Accounting lives across separate documents, transcripts, memory, plus different tools (Monday, Google Sheets, ACCPAC, AppSheet, Whatsapp, Telegram).</li></ul></div>
-  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="main-0-fut-0">One SOP portal - GitHub-hosted, JSON-driven, and cross-linked to Personnel/Forms/Subprocess - as the single source of truth for how MGC actually runs, with a clear owner for each transaction.</li></ul></div>
-</div>
-</div>
   </div>
 </section>
+<div class="cf-print-only" aria-hidden="true">
+  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Overview</h4>
+  <table class="cf-print-table">
+    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
+    <tr><td id="main-0-cur-0">Process knowledge for Operations, Sales, and Accounting lives across separate documents, transcripts, memory, plus different tools (Monday, Google Sheets, ACCPAC, AppSheet, Whatsapp, Telegram).</td><td id="main-0-fut-0">One SOP portal - GitHub-hosted, JSON-driven, and cross-linked to Personnel/Forms/Subprocess - as the single source of truth for how MGC actually runs, with a clear owner for each transaction.</td></tr>
+  </table>
+</div>
 
 <section class="cross-section" id="cross-stage">
   <div class="cross-banner" onclick="toggleStage(this)">

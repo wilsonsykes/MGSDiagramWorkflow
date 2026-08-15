@@ -58,13 +58,7 @@ table.matrix th{background:var(--accent-dark);color:#fff;text-align:left;padding
 table.matrix td{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#374151}
 table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 .control-chip{display:inline-block;background:var(--accent-light);color:var(--accent-dark);border:1px solid #BFD6EB;border-radius:5px;padding:1px 7px;font-size:10.5px;margin:1px 4px 1px 0}
-.cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.cf-col{border-radius:8px;padding:14px 16px}
-.cf-col.current{background:var(--orange-light);border:1px solid #E9CDA8}
-.cf-col.future{background:var(--green-light);border:1px solid #B7D8C4}
-.cf-col h5{margin:0 0 8px;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
-.cf-col.current h5{color:var(--orange)}.cf-col.future h5{color:var(--green)}
-.cf-col ul{margin:0;padding-left:18px}.cf-col li{font-size:12.5px;margin-bottom:6px;line-height:1.5;color:#374151}
+.cf-print-only{display:none}
 .gap-note{background:var(--red-light);border:1px solid #f0c9c9;color:var(--red);border-radius:8px;padding:12px 16px;font-size:12.5px}
 .gap-note b{display:block;margin-bottom:4px}
 .sources{font-size:11px;color:var(--text-light);padding:12px 28px;background:var(--bg-alt);border-top:1px solid var(--border-light)}
@@ -86,11 +80,16 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
   .doc-section{page-break-inside:avoid}
   .stage-banner,.cross-banner{background:#eef2f6!important;cursor:default}
   .stage-arrow{display:none}
-  .cf-grid{grid-template-columns:1fr 1fr}
   a.xref{color:inherit;text-decoration:none}
   .legend-bar{page-break-after:avoid}
+  .cf-print-only{display:block;page-break-before:always;padding:24px 48px}
+  .cf-print-title{font-size:14px;font-weight:800;color:var(--accent-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+  .cf-print-table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .cf-print-table th{background:var(--accent-dark);color:#fff;text-align:left;padding:8px 10px;font-size:11px;width:50%}
+  .cf-print-table td{padding:8px 10px;border:1px solid #ccc;vertical-align:top;font-size:11px;line-height:1.5;word-wrap:break-word}
+  .cf-print-table tr:nth-child(even) td{background:#f6f8fb}
 }
-@media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.doc-section{padding-left:16px;padding-right:16px}.cf-grid{grid-template-columns:1fr}.topnav{gap:12px}.nav-link{font-size:10.5px}}
+@media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.doc-section{padding-left:16px;padding-right:16px}.topnav{gap:12px}.nav-link{font-size:10.5px}}
 </style>
 </head>
 <body>
@@ -167,13 +166,18 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <tr><td>Incentive computation &amp; payout</td><td>-</td><td>Industrial Engineer</td><td>Industrial Engineer</td><td><b>CEO</b></td><td><span class="control-chip">Weigh-in=weigh-out match</span><span class="control-chip">GSheet</span></td></tr>
 </table>
 </div>
-    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
-  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="operations-0-cur-0">Paper DR/CR forms filled by hand at warehouse and client site.</li><li id="operations-0-cur-1">GL reconciled manually against physical DR/CR copies.</li><li id="operations-0-cur-2">Gains keyed manually - once to Google Sheets, formula and total reviews needed</li><li id="operations-0-cur-3">Residue judged by the <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">driver</a>/helper at point of delivery.</li></ul></div>
-  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="operations-0-fut-0">Odoo Sales Order auto-generates Sales Quotation, <a href="forms.html#form-picklist" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-picklist&#39;);return false" title="Form: Picklist">Picklist</a>, DR. Add the <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a>, Client’s <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a> and Team’s Incentive (also under <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a>) and GL, in one continuous workflow.</li><li id="operations-0-fut-1">Paper DR and CR with client signature (same as current)</li><li id="operations-0-fut-2">Gains keyed once in Odoo Sales Order. Auto-computes gains for summary, and team incentive.</li><li id="operations-0-fut-3">Single-entry GL posting, removing the GSheet/ACCPAC duplicate entry.</li></ul></div>
-</div>
-</div>
   </div>
 </section>
+<div class="cf-print-only" aria-hidden="true">
+  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Commercial</h4>
+  <table class="cf-print-table">
+    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
+    <tr><td id="operations-0-cur-0">Paper DR/CR forms filled by hand at warehouse and client site.</td><td id="operations-0-fut-0">Odoo Sales Order auto-generates Sales Quotation, <a href="forms.html#form-picklist" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-picklist&#39;);return false" title="Form: Picklist">Picklist</a>, DR. Add the <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a>, Client’s <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a> and Team’s Incentive (also under <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a>) and GL, in one continuous workflow.</td></tr>
+    <tr><td id="operations-0-cur-1">GL reconciled manually against physical DR/CR copies.</td><td id="operations-0-fut-1">Paper DR and CR with client signature (same as current)</td></tr>
+    <tr><td id="operations-0-cur-2">Gains keyed manually - once to Google Sheets, formula and total reviews needed</td><td id="operations-0-fut-2">Gains keyed once in Odoo Sales Order. Auto-computes gains for summary, and team incentive.</td></tr>
+    <tr><td id="operations-0-cur-3">Residue judged by the <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">driver</a>/helper at point of delivery.</td><td id="operations-0-fut-3">Single-entry GL posting, removing the GSheet/ACCPAC duplicate entry.</td></tr>
+  </table>
+</div>
 
 <section class="stage-section" id="stage-2">
   <div class="stage-banner" onclick="toggleStage(this)">
@@ -211,13 +215,18 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <tr><td>Per-truck gain computation</td><td>-</td><td>Industrial Engineer</td><td>Acctg Manager</td><td><b>CEO</b></td><td><span class="control-chip">Weigh-out vs weigh-in match</span><span class="control-chip">Residue Summary log</span></td></tr>
 </table>
 </div>
-    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
-  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="operations-1-cur-0">Truck-scale readings and Meter/gauge reading logged by hand on paper slips.</li><li id="operations-1-cur-1">Per-truck gain calculated by comparing two paper slips.</li></ul></div>
-  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="operations-1-fut-0">Odoo Inventory stock-transfer module logs tank-to-truck and truck-to-tank movements with digital/hardcopy/summary/individual versions.</li><li id="operations-1-fut-1">Gains and residue computations summary are automatic from individual transactions.</li><li id="operations-1-fut-2">Gains per sales order are encoded as <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a>, smooth gains computation.</li><li id="operations-1-fut-3">Auto-flagged gain/loss variance per truck, no manual comparison.</li></ul></div>
-</div>
-</div>
   </div>
 </section>
+<div class="cf-print-only" aria-hidden="true">
+  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Bulk</h4>
+  <table class="cf-print-table">
+    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
+    <tr><td id="operations-1-cur-0">Truck-scale readings and Meter/gauge reading logged by hand on paper slips.</td><td id="operations-1-fut-0">Odoo Inventory stock-transfer module logs tank-to-truck and truck-to-tank movements with digital/hardcopy/summary/individual versions.</td></tr>
+    <tr><td id="operations-1-cur-1">Per-truck gain calculated by comparing two paper slips.</td><td id="operations-1-fut-1">Gains and residue computations summary are automatic from individual transactions.</td></tr>
+    <tr><td></td><td id="operations-1-fut-2">Gains per sales order are encoded as <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a>, smooth gains computation.</td></tr>
+    <tr><td></td><td id="operations-1-fut-3">Auto-flagged gain/loss variance per truck, no manual comparison.</td></tr>
+  </table>
+</div>
 
 <section class="stage-section" id="stage-3">
   <div class="stage-banner" onclick="toggleStage(this)">
@@ -264,13 +273,18 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <tr><td>Cylinder swap (allied brands only)</td><td>Allied-brand list only</td><td>Dealer (request)</td><td>Warehouse &amp; Quality Supervisor</td><td><b><a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a></b></td><td><span class="control-chip">Photo evidence</span><span class="control-chip">Group-chat approval trail</span><span class="control-chip">Monthly swap log</span></td></tr>
 </table>
 </div>
-    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
-  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="operations-2-cur-0">Paper EES/LUT slips at the gate and refilling area.</li><li id="operations-2-cur-1"><a href="personnel.html#personnel-guard" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-guard&#39;);return false" title="Personnel: Guard">Guard</a> radio call to Production to trigger refilling.</li><li id="operations-2-cur-2">AppSheet is semi-digital but still reconciled by hand against paper receipts.</li><li id="operations-2-cur-3">Swap approval runs through ad hoc chat screenshots.</li></ul></div>
-  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="operations-2-fut-0">One mobile app covers booking -&gt; gate entry -&gt; refill logging -&gt; accounting verification in a single record.</li><li id="operations-2-fut-1">Swap approvals become a structured digital workflow instead of chat threads, with automatic allied-brand validation.</li></ul></div>
-</div>
-</div>
   </div>
 </section>
+<div class="cf-print-only" aria-hidden="true">
+  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Dealer</h4>
+  <table class="cf-print-table">
+    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
+    <tr><td id="operations-2-cur-0">Paper EES/LUT slips at the gate and refilling area.</td><td id="operations-2-fut-0">One mobile app covers booking -&gt; gate entry -&gt; refill logging -&gt; accounting verification in a single record.</td></tr>
+    <tr><td id="operations-2-cur-1"><a href="personnel.html#personnel-guard" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-guard&#39;);return false" title="Personnel: Guard">Guard</a> radio call to Production to trigger refilling.</td><td id="operations-2-fut-1">Swap approvals become a structured digital workflow instead of chat threads, with automatic allied-brand validation.</td></tr>
+    <tr><td id="operations-2-cur-2">AppSheet is semi-digital but still reconciled by hand against paper receipts.</td><td></td></tr>
+    <tr><td id="operations-2-cur-3">Swap approval runs through ad hoc chat screenshots.</td><td></td></tr>
+  </table>
+</div>
 
 <section class="stage-section" id="stage-4">
   <div class="stage-banner" onclick="toggleStage(this)">
@@ -302,14 +316,16 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <tr><td>Semi-dealer order payments</td><td>-</td><td>Helper</td><td>OIC-Accounting</td><td><b>Accounting Manager</b></td><td><span class="control-chip">Cash tallies with Cash Invoices</span></td></tr>
 </table>
 </div>
-    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
-  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="operations-3-cur-0">xxx</li></ul></div>
-  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="operations-3-fut-0">xxx</li></ul></div>
-</div>
-</div>
     <div class="doc-section gap-note-wrap"><div class="gap-note"><b>Data gap flagged for client confirmation</b>xxx</div></div>
   </div>
 </section>
+<div class="cf-print-only" aria-hidden="true">
+  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Semi-dealer</h4>
+  <table class="cf-print-table">
+    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
+    <tr><td id="operations-3-cur-0">xxx</td><td id="operations-3-fut-0">xxx</td></tr>
+  </table>
+</div>
 
 <section class="stage-section" id="stage-5">
   <div class="stage-banner" onclick="toggleStage(this)">
@@ -348,13 +364,19 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <tr><td>Cylinder lifecycle (repaint/retest)</td><td>Per DOE lifespan schedule</td><td>Warehouse and Quality Supervisor</td><td>xxx</td><td><b><a href="personnel.html#personnel-plant-manager" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-manager&#39;);return false" title="Personnel: Plant Manager">Plant Manager</a></b></td><td><span class="control-chip">Serial + batch number tracking</span></td></tr>
 </table>
 </div>
-    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
-  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="operations-4-cur-0">Gauge readings and RR logged on paper / Google Sheets.</li><li id="operations-4-cur-1"><a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a> sequencing tracked manually by staff log sheets.</li><li id="operations-4-cur-2">Cylinder lifespan tracked in a spreadsheet separate from the refilling records.</li></ul></div>
-  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="operations-4-fut-0">Gauge readings mobile-encoded, into the Odoo Inventory module.</li><li id="operations-4-fut-1">A single cylinder-asset register linking serial number, batch, refill history, and lifecycle status.</li><li id="operations-4-fut-2"><a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">Stock Transfer</a> from Storage Tank to cylinders are mobile-encoded into Odoo Inventory</li><li id="operations-4-fut-3">Cylinder lifespan tracked in Odoo Manufacturing/Inventory modules.</li><li id="operations-4-fut-4"><a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a> sequencing tracked manually by staff log sheets.</li></ul></div>
-</div>
-</div>
   </div>
 </section>
+<div class="cf-print-only" aria-hidden="true">
+  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Overall</h4>
+  <table class="cf-print-table">
+    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
+    <tr><td id="operations-4-cur-0">Gauge readings and RR logged on paper / Google Sheets.</td><td id="operations-4-fut-0">Gauge readings mobile-encoded, into the Odoo Inventory module.</td></tr>
+    <tr><td id="operations-4-cur-1"><a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a> sequencing tracked manually by staff log sheets.</td><td id="operations-4-fut-1">A single cylinder-asset register linking serial number, batch, refill history, and lifecycle status.</td></tr>
+    <tr><td id="operations-4-cur-2">Cylinder lifespan tracked in a spreadsheet separate from the refilling records.</td><td id="operations-4-fut-2"><a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">Stock Transfer</a> from Storage Tank to cylinders are mobile-encoded into Odoo Inventory</td></tr>
+    <tr><td></td><td id="operations-4-fut-3">Cylinder lifespan tracked in Odoo Manufacturing/Inventory modules.</td></tr>
+    <tr><td></td><td id="operations-4-fut-4"><a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a> sequencing tracked manually by staff log sheets.</td></tr>
+  </table>
+</div>
 
 <section class="cross-section" id="cross-stage">
   <div class="cross-banner" onclick="toggleStage(this)">

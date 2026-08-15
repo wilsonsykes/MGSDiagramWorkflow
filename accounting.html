@@ -58,13 +58,7 @@ table.matrix th{background:var(--accent-dark);color:#fff;text-align:left;padding
 table.matrix td{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#374151}
 table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 .control-chip{display:inline-block;background:var(--accent-light);color:var(--accent-dark);border:1px solid #BFD6EB;border-radius:5px;padding:1px 7px;font-size:10.5px;margin:1px 4px 1px 0}
-.cf-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.cf-col{border-radius:8px;padding:14px 16px}
-.cf-col.current{background:var(--orange-light);border:1px solid #E9CDA8}
-.cf-col.future{background:var(--green-light);border:1px solid #B7D8C4}
-.cf-col h5{margin:0 0 8px;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
-.cf-col.current h5{color:var(--orange)}.cf-col.future h5{color:var(--green)}
-.cf-col ul{margin:0;padding-left:18px}.cf-col li{font-size:12.5px;margin-bottom:6px;line-height:1.5;color:#374151}
+.cf-print-only{display:none}
 .gap-note{background:var(--red-light);border:1px solid #f0c9c9;color:var(--red);border-radius:8px;padding:12px 16px;font-size:12.5px}
 .gap-note b{display:block;margin-bottom:4px}
 .sources{font-size:11px;color:var(--text-light);padding:12px 28px;background:var(--bg-alt);border-top:1px solid var(--border-light)}
@@ -86,11 +80,16 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
   .doc-section{page-break-inside:avoid}
   .stage-banner,.cross-banner{background:#eef2f6!important;cursor:default}
   .stage-arrow{display:none}
-  .cf-grid{grid-template-columns:1fr 1fr}
   a.xref{color:inherit;text-decoration:none}
   .legend-bar{page-break-after:avoid}
+  .cf-print-only{display:block;page-break-before:always;padding:24px 48px}
+  .cf-print-title{font-size:14px;font-weight:800;color:var(--accent-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
+  .cf-print-table{width:100%;border-collapse:collapse;table-layout:fixed}
+  .cf-print-table th{background:var(--accent-dark);color:#fff;text-align:left;padding:8px 10px;font-size:11px;width:50%}
+  .cf-print-table td{padding:8px 10px;border:1px solid #ccc;vertical-align:top;font-size:11px;line-height:1.5;word-wrap:break-word}
+  .cf-print-table tr:nth-child(even) td{background:#f6f8fb}
 }
-@media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.doc-section{padding-left:16px;padding-right:16px}.cf-grid{grid-template-columns:1fr}.topnav{gap:12px}.nav-link{font-size:10.5px}}
+@media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.doc-section{padding-left:16px;padding-right:16px}.topnav{gap:12px}.nav-link{font-size:10.5px}}
 </style>
 </head>
 <body>
@@ -157,14 +156,17 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <tr><td>Payroll incentive (15th/30th)</td><td>-</td><td><a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a></td><td>Acctg Supervisor</td><td><b>Acctg Manager</b></td><td><span class="control-chip">LUT balance required before payout</span></td></tr>
 </table>
 </div>
-    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
-  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="accounting-0-cur-0"><a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a> and Write-off summaries are printed, not dashboarded - a stale figure is possible between print runs.</li><li id="accounting-0-cur-1">Dispute resolution travels as a physical paper submission to a superior.</li></ul></div>
-  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="accounting-0-fut-0">Real-time AR aging visible on demand instead of a monthly print cycle.</li><li id="accounting-0-fut-1">Digital dispute log with status tracking instead of a paper hand-off.</li></ul></div>
-</div>
-</div>
     <div class="sources"><b>Sources:</b> Merged from Process Systemization Portal draft + source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting &gt; Commercial (A5O1-A5C5).</div>
   </div>
 </section>
+<div class="cf-print-only" aria-hidden="true">
+  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Commercial</h4>
+  <table class="cf-print-table">
+    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
+    <tr><td id="accounting-0-cur-0"><a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a> and Write-off summaries are printed, not dashboarded - a stale figure is possible between print runs.</td><td id="accounting-0-fut-0">Real-time AR aging visible on demand instead of a monthly print cycle.</td></tr>
+    <tr><td id="accounting-0-cur-1">Dispute resolution travels as a physical paper submission to a superior.</td><td id="accounting-0-fut-1">Digital dispute log with status tracking instead of a paper hand-off.</td></tr>
+  </table>
+</div>
 
 <section class="stage-section" id="stage-2">
   <div class="stage-banner" onclick="toggleStage(this)">
@@ -188,15 +190,17 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <tr><td>Bulk <a href="subprocess.html#subprocess-invoicing" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-invoicing&#39;);return false" title="Subprocess: Invoicing">invoicing</a> &amp; receivables (inherits Commercial)</td><td>-</td><td><a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a></td><td>Acctg Supervisor</td><td><b>Acctg Supervisor</b></td><td><span class="control-chip">Same as Commercial</span><span class="control-chip">Exceptions pending</span></td></tr>
 </table>
 </div>
-    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
-  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="accounting-1-cur-0">Bulk accounting handled as an unexceptioned copy of Commercial; per-truck reconciliation differences (Operations &gt; Bulk) are not reflected in the accounting procedure.</li></ul></div>
-  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="accounting-1-fut-0">Confirm and document whether per-truck gain computation requires a distinct AR/bank-rec step, then encode it explicitly.</li></ul></div>
-</div>
-</div>
     <div class="doc-section gap-note-wrap"><div class="gap-note"><b>Data gap flagged for client confirmation</b>The source site flags this stage as &quot;Same as Acctg Commercial A5O1-A5C5&quot; plus &quot;Exceptions&quot;, but the exceptions field is blank, and the process manual does not cover Accounting &gt; Bulk separately. Recommend confirming with Accounting whether Bulk&#x27;s per-truck (not per-cylinder) fulfilment changes any receivables or reconciliation step.</div></div>
     <div class="sources"><b>Sources:</b> Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting &gt; Bulk (placeholder). No corresponding section in &quot;MGC LPG Process Manual v2.docx&quot;.</div>
   </div>
 </section>
+<div class="cf-print-only" aria-hidden="true">
+  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Bulk</h4>
+  <table class="cf-print-table">
+    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
+    <tr><td id="accounting-1-cur-0">Bulk accounting handled as an unexceptioned copy of Commercial; per-truck reconciliation differences (Operations &gt; Bulk) are not reflected in the accounting procedure.</td><td id="accounting-1-fut-0">Confirm and document whether per-truck gain computation requires a distinct AR/bank-rec step, then encode it explicitly.</td></tr>
+  </table>
+</div>
 
 <section class="stage-section" id="stage-3">
   <div class="stage-banner" onclick="toggleStage(this)">
@@ -235,14 +239,17 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <tr><td>Dealer dispute resolution</td><td>-</td><td><a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a></td><td>Sales (refer to Sales Order)</td><td><b>Acctg Supervisor</b></td><td><span class="control-chip">Bank reconciliation cross-check</span></td></tr>
 </table>
 </div>
-    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
-  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="accounting-2-cur-0">Installment due dates tracked in a standalone Google Sheet, separate from ACCPAC and from the <a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a> print.</li><li id="accounting-2-cur-1">CNC accounts couriered physically by messenger rather than transmitted digitally.</li></ul></div>
-  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="accounting-2-fut-0">A single AR system linking PDC/<a href="forms.html#form-promissory-note" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-promissory-note&#39;);return false" title="Form: Promissory Note">Promissory Note</a> status, installment due dates, and ACCPAC <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> status, so a missed due date raises a flag automatically instead of waiting for the monthly <a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a> print.</li></ul></div>
-</div>
-</div>
     <div class="sources"><b>Sources:</b> &quot;MGC LPG Process Manual v2.docx&quot; - Accounting &gt; Dealer (invoicing notes, dealer payment terms, Commercial accounting card cross-reference).</div>
   </div>
 </section>
+<div class="cf-print-only" aria-hidden="true">
+  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Dealer</h4>
+  <table class="cf-print-table">
+    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
+    <tr><td id="accounting-2-cur-0">Installment due dates tracked in a standalone Google Sheet, separate from ACCPAC and from the <a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a> print.</td><td id="accounting-2-fut-0">A single AR system linking PDC/<a href="forms.html#form-promissory-note" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-promissory-note&#39;);return false" title="Form: Promissory Note">Promissory Note</a> status, installment due dates, and ACCPAC <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> status, so a missed due date raises a flag automatically instead of waiting for the monthly <a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a> print.</td></tr>
+    <tr><td id="accounting-2-cur-1">CNC accounts couriered physically by messenger rather than transmitted digitally.</td><td></td></tr>
+  </table>
+</div>
 
 <section class="stage-section" id="stage-4">
   <div class="stage-banner" onclick="toggleStage(this)">
@@ -278,14 +285,17 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <tr><td>Bank deposit validation</td><td>-</td><td><a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">Cashier</a></td><td><a href="personnel.html#personnel-vicky" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-vicky&#39;);return false" title="Personnel: Vicky">Vicky</a></td><td><b>Acctg Manager</b></td><td><span class="control-chip">Cash collection report vs bank deposit</span></td></tr>
 </table>
 </div>
-    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
-  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="accounting-3-cur-0">Cash and documents are physically collected by a fixed 4-5pm cutoff, creating a hard daily bottleneck at the plant <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a>.</li><li id="accounting-3-cur-1">LUT balancing is done same-day but by hand against the AppSheet entry rather than system-matched.</li></ul></div>
-  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="accounting-3-fut-0">Automatic same-day LUT/AppSheet/receipt three-way match, flagging mismatches before the 4-5pm cutoff instead of during the manual audit.</li></ul></div>
-</div>
-</div>
     <div class="sources"><b>Sources:</b> &quot;MGC LPG Process Manual v2.docx&quot; - Accounting &gt; Semi-dealer (plant-accounting duties, Commercial accounting card A5C cross-reference).</div>
   </div>
 </section>
+<div class="cf-print-only" aria-hidden="true">
+  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Semi-dealer</h4>
+  <table class="cf-print-table">
+    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
+    <tr><td id="accounting-3-cur-0">Cash and documents are physically collected by a fixed 4-5pm cutoff, creating a hard daily bottleneck at the plant <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a>.</td><td id="accounting-3-fut-0">Automatic same-day LUT/AppSheet/receipt three-way match, flagging mismatches before the 4-5pm cutoff instead of during the manual audit.</td></tr>
+    <tr><td id="accounting-3-cur-1">LUT balancing is done same-day but by hand against the AppSheet entry rather than system-matched.</td><td></td></tr>
+  </table>
+</div>
 
 <section class="stage-section" id="stage-5">
   <div class="stage-banner" onclick="toggleStage(this)">
@@ -319,14 +329,16 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <tr><td><a href="subprocess.html#subprocess-industrial-projects" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-industrial-projects&#39;);return false" title="Subprocess: Industrial Projects">Industrial Projects</a> Budget vs Actual</td><td>-</td><td>Project Acctg</td><td>Industrial Engineer</td><td><b>Acctg Manager</b></td><td><span class="control-chip">Budget PNL vs Actual PNL</span><span class="control-chip">Timeline tracking</span></td></tr>
 </table>
 </div>
-    <div class="doc-section"><h4><span class="n">4</span>Current vs. Future Workflow</h4><div class="cf-grid">
-  <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="accounting-4-cur-0">Statements are printed monthly rather than continuously available; drill-down exists but the base refresh is still a manual, scheduled step.</li></ul></div>
-  <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="accounting-4-fut-0">On-demand PDF/Excel exports with live drill-down (already specified as a target feature), so a mid-month check doesn&#x27;t wait for the scheduled refresh.</li></ul></div>
-</div>
-</div>
     <div class="sources"><b>Sources:</b> Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting &gt; Overall (A5A1, A5C5.1-A5C5.3).</div>
   </div>
 </section>
+<div class="cf-print-only" aria-hidden="true">
+  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Overall</h4>
+  <table class="cf-print-table">
+    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
+    <tr><td id="accounting-4-cur-0">Statements are printed monthly rather than continuously available; drill-down exists but the base refresh is still a manual, scheduled step.</td><td id="accounting-4-fut-0">On-demand PDF/Excel exports with live drill-down (already specified as a target feature), so a mid-month check doesn&#x27;t wait for the scheduled refresh.</td></tr>
+  </table>
+</div>
 
 <section class="cross-section" id="cross-stage">
   <div class="cross-banner" onclick="toggleStage(this)">

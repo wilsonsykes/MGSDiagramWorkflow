@@ -168,19 +168,23 @@ def render_approval_matrix(rows, columns, cross_terms):
     return h
 
 
-def render_current_future(cf, cross_terms, id_prefix, current_label, future_label):
+def render_current_future_print(cf, cross_terms, id_prefix, current_label, future_label, stage_title):
+    """Print-only Current/Future comparison: rows sit side by side so the
+    printed page can be read/compared left-to-right. Not shown on screen."""
     current = cf.get('current', []) if cf else []
     future = cf.get('future', []) if cf else []
-    h = '<div class="cf-grid">\n'
-    h += f'  <div class="cf-col current"><h5>{esc(current_label)}</h5><ul>'
-    for i, item in enumerate(current):
-        h += f'<li id="{id_prefix}-cur-{i}">{link_and_esc(item, cross_terms)}</li>'
-    h += '</ul></div>\n'
-    h += f'  <div class="cf-col future"><h5>{esc(future_label)}</h5><ul>'
-    for i, item in enumerate(future):
-        h += f'<li id="{id_prefix}-fut-{i}">{link_and_esc(item, cross_terms)}</li>'
-    h += '</ul></div>\n'
-    h += '</div>\n'
+    if not current and not future:
+        return ''
+    h = f'<div class="cf-print-only" aria-hidden="true">\n'
+    h += f'  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; {esc(stage_title)}</h4>\n'
+    h += f'  <table class="cf-print-table">\n    <tr><th>{esc(current_label)}</th><th>{esc(future_label)}</th></tr>\n'
+    for i in range(max(len(current), len(future))):
+        cur_item = current[i] if i < len(current) else ''
+        fut_item = future[i] if i < len(future) else ''
+        cur_id = f' id="{id_prefix}-cur-{i}"' if cur_item else ''
+        fut_id = f' id="{id_prefix}-fut-{i}"' if fut_item else ''
+        h += f'    <tr><td{cur_id}>{link_and_esc(cur_item, cross_terms)}</td><td{fut_id}>{link_and_esc(fut_item, cross_terms)}</td></tr>\n'
+    h += '  </table>\n</div>\n'
     return h
 
 
@@ -209,14 +213,17 @@ def render_stage(stage, control, cross_terms, page_key, si, total):
     h += f'    <div class="doc-section"><h4><span class="n">1</span>{labels.get("sop", "SOP Manual")}</h4>{render_sop(stage.get("sop_steps"), cross_terms, id_prefix)}</div>\n'
     h += f'    <div class="doc-section"><h4><span class="n">2</span>{labels.get("guidelines", "Operational Guidelines")}</h4>{render_guidelines(stage.get("guidelines"), cross_terms, id_prefix)}</div>\n'
     h += f'    <div class="doc-section"><h4><span class="n">3</span>{labels.get("approval", "Approval Matrix &amp; Controls")}</h4>{render_approval_matrix(stage.get("approval_matrix"), matrix_cols, cross_terms)}</div>\n'
-    h += f'    <div class="doc-section"><h4><span class="n">4</span>{labels.get("current_future", "Current vs. Future Workflow")}</h4>{render_current_future(stage.get("current_future"), cross_terms, id_prefix, current_label, future_label)}</div>\n'
 
     if stage.get('gap_note'):
         h += f'    <div class="doc-section gap-note-wrap"><div class="gap-note"><b>Data gap flagged for client confirmation</b>{link_and_esc(stage["gap_note"], cross_terms)}</div></div>\n'
     if stage.get('sources'):
         h += f'    <div class="sources"><b>Sources:</b> {esc(stage["sources"])}</div>\n'
 
-    h += '  </div>\n</section>\n\n'
+    h += '  </div>\n</section>\n'
+    # Print-only Current/Future comparison lives OUTSIDE the stage-section so its
+    # forced page-break-before isn't fought by the section's page-break-inside:avoid.
+    h += render_current_future_print(stage.get("current_future"), cross_terms, id_prefix, current_label, future_label, stage.get("romaji", ""))
+    h += '\n'
     return h
 
 
@@ -305,13 +312,7 @@ table.matrix th{{background:var(--accent-dark);color:#fff;text-align:left;paddin
 table.matrix td{{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#374151}}
 table.matrix tr:nth-child(even) td{{background:var(--bg-alt)}}
 .control-chip{{display:inline-block;background:var(--accent-light);color:var(--accent-dark);border:1px solid #BFD6EB;border-radius:5px;padding:1px 7px;font-size:10.5px;margin:1px 4px 1px 0}}
-.cf-grid{{display:grid;grid-template-columns:1fr 1fr;gap:16px}}
-.cf-col{{border-radius:8px;padding:14px 16px}}
-.cf-col.current{{background:var(--orange-light);border:1px solid #E9CDA8}}
-.cf-col.future{{background:var(--green-light);border:1px solid #B7D8C4}}
-.cf-col h5{{margin:0 0 8px;font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}}
-.cf-col.current h5{{color:var(--orange)}}.cf-col.future h5{{color:var(--green)}}
-.cf-col ul{{margin:0;padding-left:18px}}.cf-col li{{font-size:12.5px;margin-bottom:6px;line-height:1.5;color:#374151}}
+.cf-print-only{{display:none}}
 .gap-note{{background:var(--red-light);border:1px solid #f0c9c9;color:var(--red);border-radius:8px;padding:12px 16px;font-size:12.5px}}
 .gap-note b{{display:block;margin-bottom:4px}}
 .sources{{font-size:11px;color:var(--text-light);padding:12px 28px;background:var(--bg-alt);border-top:1px solid var(--border-light)}}
@@ -333,11 +334,16 @@ table.matrix tr:nth-child(even) td{{background:var(--bg-alt)}}
   .doc-section{{page-break-inside:avoid}}
   .stage-banner,.cross-banner{{background:#eef2f6!important;cursor:default}}
   .stage-arrow{{display:none}}
-  .cf-grid{{grid-template-columns:1fr 1fr}}
   a.xref{{color:inherit;text-decoration:none}}
   .legend-bar{{page-break-after:avoid}}
+  .cf-print-only{{display:block;page-break-before:always;padding:24px 48px}}
+  .cf-print-title{{font-size:14px;font-weight:800;color:var(--accent-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}}
+  .cf-print-table{{width:100%;border-collapse:collapse;table-layout:fixed}}
+  .cf-print-table th{{background:var(--accent-dark);color:#fff;text-align:left;padding:8px 10px;font-size:11px;width:50%}}
+  .cf-print-table td{{padding:8px 10px;border:1px solid #ccc;vertical-align:top;font-size:11px;line-height:1.5;word-wrap:break-word}}
+  .cf-print-table tr:nth-child(even) td{{background:#f6f8fb}}
 }}
-@media(max-width:900px){{.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}}.doc-section{{padding-left:16px;padding-right:16px}}.cf-grid{{grid-template-columns:1fr}}.topnav{{gap:12px}}.nav-link{{font-size:10.5px}}}}
+@media(max-width:900px){{.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}}.doc-section{{padding-left:16px;padding-right:16px}}.topnav{{gap:12px}}.nav-link{{font-size:10.5px}}}}
 </style>
 </head>
 <body>

@@ -18,6 +18,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 CONTENT_DIR = ROOT / "content"
+sys.path.insert(0, str(ROOT))
+from workflow_generate import load_cross_terms, link_and_esc  # reuse the same cross-term linker as the SOP tabs
+
+TERMS_FILE = ROOT / "cross_reference_terms.txt"
 
 # Known renames: current entry Name -> extra anchor id(s) to keep old
 # cross_reference_terms.txt wording resolving to the right (renamed) card.
@@ -65,7 +69,11 @@ def build_stage_from_tsv(tab, stage_name):
     items.sort(key=lambda r: int(r["Order"]))
 
     def section(name):
-        return [r["Text"] for r in items if r["Section"] == name]
+        return [r["Text"] for r in items if r["Section"] == name and r["Text"].strip()]
+
+    current_rows = [r for r in items if r["Section"] == "Current"]
+    current_list = [r["Text"] for r in current_rows if r["Text"].strip()]
+    future_list = [r.get("Future", "") for r in current_rows if r.get("Future", "").strip()]
 
     appr_rows = [r for r in read_tsv(CONTENT_DIR / "approval_matrix.tsv")
                  if r["Tab"] == tab and r["Stage"] == stage_name]
@@ -90,7 +98,7 @@ def build_stage_from_tsv(tab, stage_name):
         "sop_steps": section("SOP"),
         "guidelines": section("Guidelines"),
         "approval_matrix": approval_matrix,
-        "current_future": {"current": section("Current"), "future": section("Future")},
+        "current_future": {"current": current_list, "future": future_list},
     }
     if meta.get("GapNote"):
         stage["gap_note"] = meta["GapNote"]
@@ -140,6 +148,7 @@ def regenerate_subprocess_html():
         return
 
     old_chips = build_refchip_lookup("subprocess.html")
+    all_cross_terms = load_cross_terms(str(TERMS_FILE))
 
     path = ROOT / "subprocess.html"
     with open(path, encoding="utf-8") as f:
@@ -162,11 +171,14 @@ def regenerate_subprocess_html():
         if chips:
             body += f'      {chips}\n'
         body += '      <span class="term-arrow">&#9662;</span>\n    </div>\n'
+        # Don't let a card's own name link to itself when it appears in its own text.
+        card_cross_terms = [t for t in all_cross_terms if t['term'].lower() != name.lower()]
+
         body += '    <div class="term-body"><div class="term-inner">\n'
         for label_key, value_key in (("Field1Label", "Field1Value"), ("Field2Label", "Field2Value")):
             label, value = row.get(label_key, ""), row.get(value_key, "")
             if label and value:
-                body += f'      <div><div class="td-label">{esc(label)}</div><div class="td-value">{esc(value)}</div></div>\n'
+                body += f'      <div><div class="td-label">{esc(label)}</div><div class="td-value">{link_and_esc(value, card_cross_terms)}</div></div>\n'
         body += '    </div></div>\n  </div>\n\n'
     body += '</div><!-- /terms-list -->\n\n'
 

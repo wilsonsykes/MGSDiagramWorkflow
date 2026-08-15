@@ -51,9 +51,9 @@
       var stageLabel = stage.romaji || ('Stage ' + (si + 1));
       scanList(stage.sop_steps, 'current', 'sop', stageLabel + ' · SOP Manual');
       scanList(stage.guidelines, 'current', 'gl', stageLabel + ' · Operational Guidelines');
-      var cf = stage.current_future || {};
-      scanList(cf.current, 'current', 'cur', stageLabel + ' · Current Workflow');
-      scanList(cf.future, 'future', 'fut', stageLabel + ' · Future Workflow');
+      // Current/Future workflow bullets are print-only (no on-screen section as
+      // of the Current/Future redesign), so they're intentionally not scanned
+      // here -- a Workflow Mentions link should always land somewhere visible.
     });
 
     return results;

@@ -1,32 +1,28 @@
-Tab	Stage	Section	Order	Text
-Operations	Commercial	SOP	1	Receive the approved Sales Order; client orders 22kg or 50kg cylinder variants. (O1.1.1)
-Operations	Commercial	SOP	2	Logistics Officer schedules the delivery - vehicle, capacity, route. (O1.2.1)
-Operations	Commercial	SOP	3	XXX generates the Picklist and YYY picks the LPG/products. (O1.1.2)
-Operations	Commercial	SOP	4	XXX generates the Delivery Receipt (DR) - 2 DRs and 2 Credit Notes per delivery. (O1.1.3)
-Operations	Commercial	SOP	5	XXX submits the DR to Accounting to post General Ledger and Inventory entries. (O1.1.4.1)
-Operations	Commercial	SOP	6	Helper collects the Delivery Receipts from XXX in Warehouse (may cover multiple clients on one route). (O1.1.4.2)
-Operations	Commercial	SOP	7	Driver and Helper proceed to client locations. (O1.1.4.3)
-Operations	Commercial	SOP	8	For pickup / no-delivery orders, Warehouse gives the DR to the customer for signature instead. (O1.1.4.4)
-Operations	Commercial	SOP	9	In client site, Helper weighs and records the cylinders with the client (Weigh In), then carries them to area. (O1.1.5.1)
-Operations	Commercial	SOP	10	Client representative signs the DR, receives the new cylinders, and returns the empty cylinders. (O1.1.5.2)
-Operations	Commercial	SOP	11	Helper weighs the returned cylinders (Weigh Out) in the present of Client Rep, classifies the 1-3kg residue threshold; round up or down. (O1.1.5.3)
-Operations	Commercial	SOP	12	Helper provides Credit Notes to the Client, with client representative’s countersignature, recording cylinder serial number and weight residue. (O1.1.5.4)
-Operations	Commercial	SOP	13	Driver and Helper return to the plant and weighs the empty cylinders, checks the 1-3kg residue threshold again. (O1.1.6.1)
-Operations	Commercial	SOP	14	Driver submits the signed DR, signed Credit Notes and other records to YYY Accounting. (O1.1.6.2)
-Operations	Commercial	SOP	15	YYY in Accounting reconciles the General Ledger against the signed Delivery Receipt and Credit Notes. (O1.1.7.1)
-Operations	Commercial	SOP	16	Compute Commercial Gains - compare weigh-in vs weigh-out records from client site and plant. (O1.1.7.2)
-Operations	Commercial	SOP	17	Industrial Engineer and YYY record results in Google Sheets and ACCPAC. (O1.1.7.3)
-Operations	Commercial	SOP	18	Industrial Engineer submits Computation Sheet for CEO’s approval (O1.1.7.4)
-Operations	Commercial	SOP	19	OIC-Accounting distribute incentives via Payroll to the involved members. (O1.1.7.5)
-Operations	Commercial	Guidelines	1	The Commercial residue classification threshold is fixed between 1-3kg; deviations are escalated to the Warehouse Supervisor, not decided ad hoc by the driver.
-Operations	Commercial	Guidelines	2	Two DRs and two Credit Notes are mandatory per delivery (client copy + company copy); a delivery without a matching document pair is not closed in the GL.
-Operations	Commercial	Guidelines	3	No cylinder leaves the warehouse without a Picklist form; no GL/Inventory posting is made without a Warehouse-submitted DR.
-Operations	Commercial	Guidelines	4	Incentive Gains are computed only from matched weigh-in/weigh-out pairs - unmatched records are held for investigation, never estimated.
-Operations	Commercial	Current	1	Paper DR/CR forms filled by hand at warehouse and client site.
-Operations	Commercial	Current	2	GL reconciled manually against physical DR/CR copies.
-Operations	Commercial	Current	3	Gains keyed manually - once to Google Sheets, formula and total reviews needed
-Operations	Commercial	Current	4	Residue judged by the driver/helper at point of delivery.
-Operations	Commercial	Future	1	Odoo Sales Order auto-generates Sales Quotation, Picklist, DR. Add the Invoice, Client’s Credit Notes and Team’s Incentive (also under Credit Notes) and GL, in one continuous workflow.
-Operations	Commercial	Future	2	Paper DR and CR with client signature (same as current)
-Operations	Commercial	Future	3	Gains keyed once in Odoo Sales Order. Auto-computes gains for summary, and team incentive.
-Operations	Commercial	Future	4	Single-entry GL posting, removing the GSheet/ACCPAC duplicate entry.
+Tab	Stage	Section	Order	Text	Future
+Operations	Commercial	SOP	1	Receive the approved Sales Order; client orders 22kg or 50kg cylinder variants. (O1.1.1)	
+Operations	Commercial	SOP	2	Logistics Officer schedules the delivery - vehicle, capacity, route. (O1.2.1)	
+Operations	Commercial	SOP	3	XXX generates the Picklist and YYY picks the LPG/products. (O1.1.2)	
+Operations	Commercial	SOP	4	XXX generates the Delivery Receipt (DR) - 2 DRs and 2 Credit Notes per delivery. (O1.1.3)	
+Operations	Commercial	SOP	5	XXX submits the DR to Accounting to post General Ledger and Inventory entries. (O1.1.4.1)	
+Operations	Commercial	SOP	6	Helper collects the Delivery Receipts from XXX in Warehouse (may cover multiple clients on one route). (O1.1.4.2)	
+Operations	Commercial	SOP	7	Driver and Helper proceed to client locations. (O1.1.4.3)	
+Operations	Commercial	SOP	8	For pickup / no-delivery orders, Warehouse gives the DR to the customer for signature instead. (O1.1.4.4)	
+Operations	Commercial	SOP	9	In client site, Helper weighs and records the cylinders with the client (Weigh In), then carries them to area. (O1.1.5.1)	
+Operations	Commercial	SOP	10	Client representative signs the DR, receives the new cylinders, and returns the empty cylinders. (O1.1.5.2)	
+Operations	Commercial	SOP	11	Helper weighs the returned cylinders (Weigh Out) in the present of Client Rep, classifies the 1-3kg residue threshold; round up or down. (O1.1.5.3)	
+Operations	Commercial	SOP	12	Helper provides Credit Notes to the Client, with client representative’s countersignature, recording cylinder serial number and weight residue. (O1.1.5.4)	
+Operations	Commercial	SOP	13	Driver and Helper return to the plant and weighs the empty cylinders, checks the 1-3kg residue threshold again. (O1.1.6.1)	
+Operations	Commercial	SOP	14	Driver submits the signed DR, signed Credit Notes and other records to YYY Accounting. (O1.1.6.2)	
+Operations	Commercial	SOP	15	YYY in Accounting reconciles the General Ledger against the signed Delivery Receipt and Credit Notes. (O1.1.7.1)	
+Operations	Commercial	SOP	16	Compute Commercial Gains - compare weigh-in vs weigh-out records from client site and plant. (O1.1.7.2)	
+Operations	Commercial	SOP	17	Industrial Engineer and YYY record results in Google Sheets and ACCPAC. (O1.1.7.3)	
+Operations	Commercial	SOP	18	Industrial Engineer submits Computation Sheet for CEO’s approval (O1.1.7.4)	
+Operations	Commercial	SOP	19	OIC-Accounting distribute incentives via Payroll to the involved members. (O1.1.7.5)	
+Operations	Commercial	Guidelines	1	The Commercial residue classification threshold is fixed between 1-3kg; deviations are escalated to the Warehouse Supervisor, not decided ad hoc by the driver.	
+Operations	Commercial	Guidelines	2	Two DRs and two Credit Notes are mandatory per delivery (client copy + company copy); a delivery without a matching document pair is not closed in the GL.	
+Operations	Commercial	Guidelines	3	No cylinder leaves the warehouse without a Picklist form; no GL/Inventory posting is made without a Warehouse-submitted DR.	
+Operations	Commercial	Guidelines	4	Incentive Gains are computed only from matched weigh-in/weigh-out pairs - unmatched records are held for investigation, never estimated.	
+Operations	Commercial	Current	1	Paper DR/CR forms filled by hand at warehouse and client site.	Odoo Sales Order auto-generates Sales Quotation, Picklist, DR. Add the Invoice, Client’s Credit Notes and Team’s Incentive (also under Credit Notes) and GL, in one continuous workflow.
+Operations	Commercial	Current	2	GL reconciled manually against physical DR/CR copies.	Paper DR and CR with client signature (same as current)
+Operations	Commercial	Current	3	Gains keyed manually - once to Google Sheets, formula and total reviews needed	Gains keyed once in Odoo Sales Order. Auto-computes gains for summary, and team incentive.
+Operations	Commercial	Current	4	Residue judged by the driver/helper at point of delivery.	Single-entry GL posting, removing the GSheet/ACCPAC duplicate entry.

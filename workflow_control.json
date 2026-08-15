@@ -58,8 +58,7 @@
   "section_labels": {
     "sop": "SOP Manual — Step-by-Step Procedure",
     "guidelines": "Operational Guidelines",
-    "approval": "Approval Matrix &amp; Controls",
-    "current_future": "Current vs. Future Workflow"
+    "approval": "Approval Matrix &amp; Controls"
   },
   "approval_matrix_columns": ["Transaction / Decision", "Threshold", "Initiator", "Reviewer", "Approver", "Control Activity"],
   "current_label": "Current — Traditional / Manual",
