@@ -53,7 +53,24 @@ jobs:
           python scripts/validate_index_html.py operations.html
           python scripts/validate_index_html.py sales.html
           python scripts/validate_index_html.py accounting.html
-          python scripts/validate_index_html.py subprocess.html
+
+      - name: Sanity-check subprocess.html structure
+        # validate_index_html.py's stage-section/tabbed-hub check only applies
+        # to the 5 hub pages above -- personnel/forms/subprocess.html use a
+        # different (.term-card) layout, same as html-guard.yml already treats them.
+        run: |
+          python - <<'PY'
+          import sys
+          sys.path.insert(0, "scripts")
+          from validate_index_html import StructureParser
+          p = StructureParser()
+          p.feed(open("subprocess.html", encoding="utf-8").read())
+          if p.errors:
+              for e in p.errors:
+                  print(f"::error file=subprocess.html::{e}")
+              raise SystemExit(f"subprocess.html failed structural validation: {p.errors}")
+          print("subprocess.html structure OK")
+          PY
 
       - name: Commit and push if changed
         run: |
