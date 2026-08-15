@@ -96,12 +96,12 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <body>
 <nav class="topnav">
   <div class="nav-logo">Accounting</div>
+  <a href="#cross-stage" class="nav-link">Cross-Stage</a>
   <a href="#stage-1" class="nav-link">1 &middot; Commercial</a>
   <a href="#stage-2" class="nav-link">2 &middot; Bulk</a>
   <a href="#stage-3" class="nav-link">3 &middot; Dealer</a>
   <a href="#stage-4" class="nav-link">4 &middot; Semi-dealer</a>
   <a href="#stage-5" class="nav-link">5 &middot; Overall</a>
-  <a href="#cross-stage" class="nav-link">Cross-Stage</a>
 </nav>
 
 <div class="header">
@@ -121,6 +121,25 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
   </div>
 </div>
 
+<section class="cross-section" id="cross-stage">
+  <div class="cross-banner" onclick="toggleStage(this)">
+    <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>
+    <div class="stage-info"><div class="stage-title" style="color:#7030A0">CROSS-STAGE GOVERNANCE</div><div class="stage-sub" style="color:#7c3aed">Escalation and audit-trail rules that apply on top of every Accounting approval row above.</div></div>
+    <span class="stage-arrow" style="color:#7030A0">&#9662;</span>
+  </div>
+  <div class="stage-body">
+    <div class="cf-grid proc-grid">
+      <div class="cf-col current"><h5>Current Workflow</h5><ul class="guide-list">
+<li id="cross-gl-0">Any transaction blocked or disputed at its normal approval level escalates through the standard chain (System watch -&gt; Review -&gt; Manager) rather than being resolved informally between the two parties involved.</li>
+<li id="cross-gl-1">Sales Order Control Numbers, once assigned, are permanent and non-editable; a correction is made with a new document, never by editing the original control number.</li>
+<li id="cross-gl-2">The person who initiates a transaction is not the same person who posts it to the GL or reconciles it - segregation of duties applies at every posting step.</li>
+</ul>
+</div>
+      <div class="cf-col future"><h5>Future Workflow</h5><div class="gap-note"><b>Data gap flagged for client confirmation</b>No future-state data recorded yet for Cross-Stage Governance.</div></div>
+    </div>
+  </div>
+</section>
+
 <section class="stage-section" id="stage-1">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">1</span><span class="num-sub">OF 5</span></div>
@@ -129,7 +148,8 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><div class="cf-grid proc-grid">
+  <div class="cf-col current"><h5>Current Workflow</h5><ol class="sop">
 <li id="accounting-0-sop-0">Make the <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> before delivery: check past receivables and dues with the customer. (A5O1.1)</li>
 <li id="accounting-0-sop-1">If the customer has past dues, flag the upcoming order. If past dues are within a passable / supervisor-approved range, approve the upcoming order. If there are no past dues, approve the upcoming order directly. (A5O1.1.1)</li>
 <li id="accounting-0-sop-2">Update and close Receivables: <a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a> collects the signed <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> (DR) and <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> from the Delivery Team. (A5C2.1.1)</li>
@@ -141,6 +161,9 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <li id="accounting-0-sop-8">Payroll Incentive: prepare the incentive in payroll on the 15th and 30th. (A5C5.1)</li>
 <li id="accounting-0-sop-9">Prepare the <a href="forms.html#form-incentive-template" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-incentive-template&#39;);return false" title="Form: Incentive Template">Incentive template</a> for Commercial and Semi-dealer using <a href="forms.html#form-lut-forms" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-lut-forms&#39;);return false" title="Form: LUT forms">LUT forms</a> (2.7kg, 11kg, 50kg) to balance empty and field cylinder data. (A5C5.2)</li>
 </ol>
+</div>
+  <div class="cf-col future"><h5>Future Workflow</h5><ul><li id="accounting-0-procfut-0">Real-time AR aging visible on demand instead of a monthly print cycle.</li><li id="accounting-0-procfut-1">Digital dispute log with status tracking instead of a paper hand-off.</li></ul></div>
+</div>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="accounting-0-gl-0">No <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> is issued before the past-dues check on the customer&#x27;s AR; only a supervisor-approved past-due balance clears an order that has outstanding receivables.</li>
@@ -174,10 +197,14 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><div class="cf-grid proc-grid">
+  <div class="cf-col current"><h5>Current Workflow</h5><ol class="sop">
 <li id="accounting-1-sop-0"><a href="subprocess.html#subprocess-invoicing" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-invoicing&#39;);return false" title="Subprocess: Invoicing">Invoicing</a>, receivables, <a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">bank reconciliation</a>, and payroll incentive steps follow the same procedure as Accounting &gt; Commercial (A5O1-A5C5), per company specification.</li>
 <li id="accounting-1-sop-1">Bulk-specific exceptions to that procedure are referenced but not documented in either source.</li>
 </ol>
+</div>
+  <div class="cf-col future"><h5>Future Workflow</h5><ul><li id="accounting-1-procfut-0">Confirm and document whether per-truck gain computation requires a distinct AR/bank-rec step, then encode it explicitly.</li></ul></div>
+</div>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="accounting-1-gl-0">Accounting &gt; Bulk explicitly inherits the Commercial A5O1-A5C5 procedure; the undocumented exceptions should be confirmed with Accounting before this is finalized, particularly whether per-truck (rather than per-cylinder) reconciliation changes any AR or bank-rec step.</li>
@@ -295,7 +322,8 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><div class="cf-grid proc-grid">
+  <div class="cf-col current"><h5>Current Workflow</h5><ol class="sop">
 <li id="accounting-4-sop-0">Consolidate and check all relevant data on request - bi-monthly or monthly <a href="subprocess.html#subprocess-financial-statements" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-financial-statements&#39;);return false" title="Subprocess: Financial Statements">Financial Statements</a>. (A5A1)</li>
 <li id="accounting-4-sop-1">Produce versatile, multi-format <a href="subprocess.html#subprocess-financial-statements" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-financial-statements&#39;);return false" title="Subprocess: Financial Statements">financial statements</a> and payroll summary; drill into individual summary amounts. (A5A1.1-A5A1.2)</li>
 <li id="accounting-4-sop-2">Generate instant PDF or Excel exports for further analysis; separate data by channel; compare Budget vs Actual. (A5A1.3-A5A1.5)</li>
@@ -305,6 +333,9 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <li id="accounting-4-sop-6">Prepare the Payroll Summary, consolidating all incentive computations and salary data for the period. (A5C5.2)</li>
 <li id="accounting-4-sop-7"><a href="subprocess.html#subprocess-industrial-projects" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-industrial-projects&#39;);return false" title="Subprocess: Industrial Projects">Industrial Projects</a>: track Budget P&amp;L against Actual P&amp;L and timeline. (A5C5.3)</li>
 </ol>
+</div>
+  <div class="cf-col future"><h5>Future Workflow</h5><ul><li id="accounting-4-procfut-0">On-demand PDF/Excel exports with live drill-down (already specified as a target feature), so a mid-month check doesn&#x27;t wait for the scheduled refresh.</li></ul></div>
+</div>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="accounting-4-gl-0">All three <a href="subprocess.html#subprocess-financial-statements" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-financial-statements&#39;);return false" title="Subprocess: Financial Statements">financial statements</a> (P&amp;L, Cash Flow, Balance Sheet) require full entry encoding before the monthly refresh - a partial encode is not printed as final.</li>
@@ -325,22 +356,6 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 </div>
 </div>
     <div class="sources"><b>Sources:</b> Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting &gt; Overall (A5A1, A5C5.1-A5C5.3).</div>
-  </div>
-</section>
-
-<section class="cross-section" id="cross-stage">
-  <div class="cross-banner" onclick="toggleStage(this)">
-    <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>
-    <div class="stage-info"><div class="stage-title" style="color:#7030A0">CROSS-STAGE GOVERNANCE</div><div class="stage-sub" style="color:#7c3aed">Escalation and audit-trail rules that apply on top of every Accounting approval row above.</div></div>
-    <span class="stage-arrow" style="color:#7030A0">&#9662;</span>
-  </div>
-  <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
-<li id="cross-gl-0">Any transaction blocked or disputed at its normal approval level escalates through the standard chain (System watch -&gt; Review -&gt; Manager) rather than being resolved informally between the two parties involved.</li>
-<li id="cross-gl-1">Sales Order Control Numbers, once assigned, are permanent and non-editable; a correction is made with a new document, never by editing the original control number.</li>
-<li id="cross-gl-2">The person who initiates a transaction is not the same person who posts it to the GL or reconciles it - segregation of duties applies at every posting step.</li>
-</ul>
-</div>
   </div>
 </section>
 

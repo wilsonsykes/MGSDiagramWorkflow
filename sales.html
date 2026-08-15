@@ -96,12 +96,12 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <body>
 <nav class="topnav">
   <div class="nav-logo">Sales</div>
+  <a href="#cross-stage" class="nav-link">Cross-Stage</a>
   <a href="#stage-1" class="nav-link">1 &middot; Commercial</a>
   <a href="#stage-2" class="nav-link">2 &middot; Bulk</a>
   <a href="#stage-3" class="nav-link">3 &middot; Dealer</a>
   <a href="#stage-4" class="nav-link">4 &middot; Semi-dealer</a>
   <a href="#stage-5" class="nav-link">5 &middot; Overall</a>
-  <a href="#cross-stage" class="nav-link">Cross-Stage</a>
 </nav>
 
 <div class="header">
@@ -121,6 +121,23 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
   </div>
 </div>
 
+<section class="cross-section" id="cross-stage">
+  <div class="cross-banner" onclick="toggleStage(this)">
+    <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>
+    <div class="stage-info"><div class="stage-title" style="color:#7030A0">CROSS-STAGE GOVERNANCE</div><div class="stage-sub" style="color:#7c3aed">Escalation and pricing-governance rules that apply on top of every Sales approval row above.</div></div>
+    <span class="stage-arrow" style="color:#7030A0">&#9662;</span>
+  </div>
+  <div class="stage-body">
+    <div class="cf-grid proc-grid">
+      <div class="cf-col current"><h5>Current Workflow</h5><ul class="guide-list">
+<li id="cross-gl-0">XXX</li>
+</ul>
+</div>
+      <div class="cf-col future"><h5>Future Workflow</h5><div class="gap-note"><b>Data gap flagged for client confirmation</b>No future-state data recorded yet for Cross-Stage Governance.</div></div>
+    </div>
+  </div>
+</section>
+
 <section class="stage-section" id="stage-1">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">1</span><span class="num-sub">OF 5</span></div>
@@ -129,7 +146,8 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><div class="cf-grid proc-grid">
+  <div class="cf-col current"><h5>Current Workflow</h5><ol class="sop">
 <li id="sales-0-sop-0">Regional Sales Manager checks sales history for upcoming re-orders. Review next week&#x27;s route schedule for upselling opportunities. (S1.1.1)</li>
 <li id="sales-0-sop-1"><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a> 1 calls client for re-orders, or find new client orders. (S1.1.2)</li>
 <li id="sales-0-sop-2"><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a> 1 creates a draft Sales Order for each order. (S1.1.3)</li>
@@ -141,6 +159,9 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <li id="sales-0-sop-8">Regional Sales Manager Evaluate Sales Target vs Actual Sales. (S1.3.4)</li>
 <li id="sales-0-sop-9"><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a> 1 records sales-fulfilment concerns/issues and log Accounting-related notes. (S1.3.5)</li>
 </ol>
+</div>
+  <div class="cf-col future"><h5>Future Workflow</h5><ul><li id="sales-0-procfut-0">Odoo Sales module. It includes continuous workflow with Pick List, <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a>, Daily Price List Matrix and <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a>, <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a>.</li></ul></div>
+</div>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="sales-0-gl-0">Sales Order Control Numbers are non-editable once assigned - a wrong entry is corrected with a new document, never by editing the control number.</li>
@@ -170,9 +191,13 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><div class="cf-grid proc-grid">
+  <div class="cf-col current"><h5>Current Workflow</h5><ol class="sop">
 <li id="sales-1-sop-0">Order intake, pricing, and confirmation follow the same process as Sales &gt; Commercial per company specification (&quot;same as Commercial sales avenue, with exceptions&quot;).</li>
 </ol>
+</div>
+  <div class="cf-col future"><h5>Future Workflow</h5><ul><li id="sales-1-procfut-0">Same treatment as Commercial.</li></ul></div>
+</div>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="sales-1-gl-0">Sales &gt; Bulk inherits Commercial&#x27;s intake/approval flow.</li>
@@ -290,7 +315,8 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><div class="cf-grid proc-grid">
+  <div class="cf-col current"><h5>Current Workflow</h5><ol class="sop">
 <li id="sales-4-sop-0">IT Manager prints and verifies multi-period Sales Performance Reports (SPR) bi-weekly or monthly. (S51.1.1)</li>
 <li id="sales-4-sop-1">SPR fields include sales per kg, total sales, net sales, cost of sales, and Gross Profit Margin per kg and total. (S51.1.2)</li>
 <li id="sales-4-sop-2">Pricing Matrix Process: Regional Sales Manager sets up the <a href="forms.html#form-mgc-lpg-pricing-matrix" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-mgc-lpg-pricing-matrix&#39;);return false" title="Form: MGC LPG Pricing Matrix">MGC LPG Pricing Matrix</a> for decision; <a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a> decides on the matrix for the period, 1-3 times per month in a General Meeting. (S5.1.2.1)</li>
@@ -300,6 +326,9 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <li id="sales-4-sop-6">IT Manager informs CODO, contact centers, marketing, and cashiers. Cascading is channel-owned: Regional Sales Manager and <a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a>1 - Commercial/Bulk clients, <a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a>2 - Semi-dealer clients; AVP Sales - Makati accounts (<a href="personnel.html#personnel-jen" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-jen&#39;);return false" title="Personnel: Jen">Jen</a>); IT Manager - CODO/audit and contact centers/marketing/cashiers. (S5.1.2.5)</li>
 <li id="sales-4-sop-7"><a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a> sets the Sales Quota per client per period; AVP Sales prints and uses it as the working target; <a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a> updates it daily/weekly. (S5.1.2.6)</li>
 </ol>
+</div>
+  <div class="cf-col future"><h5>Future Workflow</h5><ul><li id="sales-4-procfut-0">A single Pricing Matrix dashboard (already partially specified) that shows cascade status per channel instead of relying on the Regional Sales Manager&#x27;s memory of who&#x27;s been notified.</li></ul></div>
+</div>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="sales-4-gl-0">Price changes are decided in the General Meeting by <a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a> - no ad hoc price change cascades without going through this meeting.</li>
@@ -321,20 +350,6 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 </div>
 </div>
     <div class="sources"><b>Sources:</b> Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Sales &gt; Overall (S5A1-S5A3, S5O1-S5C2); Personnel &amp; Forms indexes for named roles.</div>
-  </div>
-</section>
-
-<section class="cross-section" id="cross-stage">
-  <div class="cross-banner" onclick="toggleStage(this)">
-    <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>
-    <div class="stage-info"><div class="stage-title" style="color:#7030A0">CROSS-STAGE GOVERNANCE</div><div class="stage-sub" style="color:#7c3aed">Escalation and pricing-governance rules that apply on top of every Sales approval row above.</div></div>
-    <span class="stage-arrow" style="color:#7030A0">&#9662;</span>
-  </div>
-  <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
-<li id="cross-gl-0">XXX</li>
-</ul>
-</div>
   </div>
 </section>
 

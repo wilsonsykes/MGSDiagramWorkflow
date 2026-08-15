@@ -68,7 +68,8 @@
     }
   };
 
-  /* Build the HTML for one card's mention block */
+  /* Build the HTML for one card's mention block, grouped by tab then split into
+     a Current / Future two-column layout within each tab group. */
   function buildMentionsHTML(allMentions) {
     if (!allMentions.length) {
       return '<div class="xm-empty">Not mentioned in current workflow data.</div>';
@@ -82,31 +83,39 @@
       grouped[m.tabKey].push(m);
     });
 
+    function buildItem(m) {
+      var code = extractCode(m.text);
+      var displayCode = code
+        ? code
+        : (m.text.length > 32 ? m.text.slice(0, 32) + '…' : m.text);
+      var safeTitle = m.text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+      var safeKey = m.tabKey.replace(/'/g, "\\'");
+      var safeAnchor = m.anchor.replace(/'/g, "\\'");
+      return '<div class="xm-item">'
+        + '<a class="xm-link" href="#" title="' + safeTitle + '" '
+        + 'onclick="window.xmGo&&window.xmGo(\'' + safeKey + '\',\'' + safeAnchor + '\');return false">'
+        + '<span class="xm-code">' + displayCode + '</span>'
+        + '</a>'
+        + '<div class="xm-full">' + m.text.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</div>'
+        + '</div>';
+    }
+
     var html = '';
     order.forEach(function (key) {
       var items = grouped[key];
       var label = key.charAt(0).toUpperCase() + key.slice(1);
+      var currentItems = items.filter(function (m) { return m.type === 'current'; });
+      var futureItems = items.filter(function (m) { return m.type === 'future'; });
       html += '<div class="xm-group">';
       html += '<div class="xm-group-lbl">' + label + ' <span class="xm-cnt">(' + items.length + ')</span></div>';
-      items.forEach(function (m) {
-        var code = extractCode(m.text);
-        var displayCode = code
-          ? code
-          : (m.text.length > 32 ? m.text.slice(0, 32) + '…' : m.text);
-        var badge = m.type === 'current' ? 'Current' : 'Future';
-        var bClass = 'xm-badge xm-badge-' + m.type;
-        var safeTitle = m.text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
-        var safeKey = m.tabKey.replace(/'/g, "\\'");
-        var safeAnchor = m.anchor.replace(/'/g, "\\'");
-        html += '<div class="xm-item">'
-          + '<a class="xm-link" href="#" title="' + safeTitle + '" '
-          + 'onclick="window.xmGo&&window.xmGo(\'' + safeKey + '\',\'' + safeAnchor + '\');return false">'
-          + '<span class="xm-code">' + displayCode + '</span>'
-          + '<span class="' + bClass + '">' + badge + '</span>'
-          + '</a>'
-          + '<div class="xm-full">' + m.text.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</div>'
-          + '</div>';
-      });
+      html += '<div class="xm-cf-grid">';
+      html += '<div class="xm-cf-col xm-cf-current"><div class="xm-cf-hdr xm-badge-current">Current</div>'
+        + (currentItems.length ? currentItems.map(buildItem).join('') : '<div class="xm-empty">None</div>')
+        + '</div>';
+      html += '<div class="xm-cf-col xm-cf-future"><div class="xm-cf-hdr xm-badge-future">Future</div>'
+        + (futureItems.length ? futureItems.map(buildItem).join('') : '<div class="xm-empty">None</div>')
+        + '</div>';
+      html += '</div>';
       html += '</div>';
     });
     return html;

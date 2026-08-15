@@ -96,12 +96,12 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <body>
 <nav class="topnav">
   <div class="nav-logo">Operations</div>
+  <a href="#cross-stage" class="nav-link">Cross-Stage</a>
   <a href="#stage-1" class="nav-link">1 &middot; Commercial</a>
   <a href="#stage-2" class="nav-link">2 &middot; Bulk</a>
   <a href="#stage-3" class="nav-link">3 &middot; Dealer</a>
   <a href="#stage-4" class="nav-link">4 &middot; Semi-dealer</a>
   <a href="#stage-5" class="nav-link">5 &middot; Overall</a>
-  <a href="#cross-stage" class="nav-link">Cross-Stage</a>
 </nav>
 
 <div class="header">
@@ -121,6 +121,25 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
   </div>
 </div>
 
+<section class="cross-section" id="cross-stage">
+  <div class="cross-banner" onclick="toggleStage(this)">
+    <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>
+    <div class="stage-info"><div class="stage-title" style="color:#7030A0">CROSS-STAGE GOVERNANCE</div><div class="stage-sub" style="color:#7c3aed">Escalation and traceability rules that apply on top of every Operations approval row above.</div></div>
+    <span class="stage-arrow" style="color:#7030A0">&#9662;</span>
+  </div>
+  <div class="stage-body">
+    <div class="cf-grid proc-grid">
+      <div class="cf-col current"><h5>Current Workflow</h5><ul class="guide-list">
+<li id="cross-gl-0">The 1-3kg residue threshold is fixed company policy; <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> or Helper cannot round outside that band without <a href="personnel.html#personnel-warehouse-supervisor" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-warehouse-supervisor&#39;);return false" title="Personnel: Warehouse Supervisor">Warehouse Supervisor</a> escalation.</li>
+<li id="cross-gl-1">Gains, losses, and incentives are computed only from a matched pair of weigh-in and weigh-out readings. An unmatched reading is held for investigation, never estimated.</li>
+<li id="cross-gl-2">Every cylinder is tracked by serial number and batch number for its full lifecycle, including repaint/retest - a cylinder without a traceable batch number does not re-enter circulation.</li>
+</ul>
+</div>
+      <div class="cf-col future"><h5>Future Workflow</h5><div class="gap-note"><b>Data gap flagged for client confirmation</b>No future-state data recorded yet for Cross-Stage Governance.</div></div>
+    </div>
+  </div>
+</section>
+
 <section class="stage-section" id="stage-1">
   <div class="stage-banner" onclick="toggleStage(this)">
     <div class="stage-num"><span class="num-big">1</span><span class="num-sub">OF 5</span></div>
@@ -129,7 +148,8 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><div class="cf-grid proc-grid">
+  <div class="cf-col current"><h5>Current Workflow</h5><ol class="sop">
 <li id="operations-0-sop-0">Receive the approved Sales Order; client orders 22kg or 50kg cylinder variants. (O1.1.1)</li>
 <li id="operations-0-sop-1">Logistics Officer schedules the delivery - vehicle, capacity, route. (O1.2.1)</li>
 <li id="operations-0-sop-2">XXX generates the <a href="forms.html#form-picklist" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-picklist&#39;);return false" title="Form: Picklist">Picklist</a> and YYY picks the LPG/products. (O1.1.2)</li>
@@ -150,6 +170,9 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <li id="operations-0-sop-17">Industrial Engineer submits Computation Sheet for CEO’s approval (O1.1.7.4)</li>
 <li id="operations-0-sop-18">OIC-Accounting distribute incentives via Payroll to the involved members. (O1.1.7.5)</li>
 </ol>
+</div>
+  <div class="cf-col future"><h5>Future Workflow</h5><ul><li id="operations-0-procfut-0">Odoo Sales Order auto-generates Sales Quotation, <a href="forms.html#form-picklist" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-picklist&#39;);return false" title="Form: Picklist">Picklist</a>, DR. Add the <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a>, Client’s <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a> and Team’s Incentive (also under <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a>) and GL, in one continuous workflow.</li><li id="operations-0-procfut-1">Paper DR and CR with client signature (same as current)</li><li id="operations-0-procfut-2">Gains keyed once in Odoo Sales Order. Auto-computes gains for summary, and team incentive.</li><li id="operations-0-procfut-3">Single-entry GL posting, removing the GSheet/ACCPAC duplicate entry.</li></ul></div>
+</div>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="operations-0-gl-0">The Commercial residue classification threshold is fixed between 1-3kg; deviations are escalated to the <a href="personnel.html#personnel-warehouse-supervisor" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-warehouse-supervisor&#39;);return false" title="Personnel: Warehouse Supervisor">Warehouse Supervisor</a>, not decided ad hoc by the <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">driver</a>.</li>
@@ -183,7 +206,8 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><div class="cf-grid proc-grid">
+  <div class="cf-col current"><h5>Current Workflow</h5><ol class="sop">
 <li id="operations-1-sop-0"><a href="personnel.html#personnel-sales-rep" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-rep&#39;);return false" title="Personnel: Sales Rep">Sales Rep</a> receives the bulk Sales Order; the order must fill the 8-ton truck capacity. (O2.1.1.1)</li>
 <li id="operations-1-sop-1">Logistics Officer assign the lorry/trailer truck and load from the Storage Tank (<a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">stock transfer</a>, tank to truck - no cylinders involved). (O2.1.2.1)</li>
 <li id="operations-1-sop-2">XXX Weigh the loaded truck at the plant truck scale (weigh-out). (O2.1.2.2)</li>
@@ -197,6 +221,9 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <li id="operations-1-sop-10">Industrial Engineer records residue in the Commercial &amp; Bulk LPG Residue Summary Gsheet, per truck. (O2.1.4.2)</li>
 <li id="operations-1-sop-11">Operations Supervisor submits documents to XXX (Accounting); record in Google Sheets and ACCPAC. (O2.1.4.3)</li>
 </ol>
+</div>
+  <div class="cf-col future"><h5>Future Workflow</h5><ul><li id="operations-1-procfut-0">Odoo Inventory stock-transfer module logs tank-to-truck and truck-to-tank movements with digital/hardcopy/summary/individual versions.</li><li id="operations-1-procfut-1">Gains and residue computations summary are automatic from individual transactions.</li><li id="operations-1-procfut-2">Gains per sales order are encoded as <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a>, smooth gains computation.</li><li id="operations-1-procfut-3">Auto-flagged gain/loss variance per truck, no manual comparison.</li></ul></div>
+</div>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="operations-1-gl-0">Bulk orders must fill the 8-ton truck capacity before dispatch is scheduled; a partial load requires Plant Operations Officer approval as a documented exception.</li>
@@ -319,7 +346,8 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
+    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><div class="cf-grid proc-grid">
+  <div class="cf-col current"><h5>Current Workflow</h5><ol class="sop">
 <li id="operations-4-sop-0">Logistics Officer forwards the <a href="forms.html#form-purchase-order" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-purchase-order&#39;);return false" title="Form: Purchase Order">Purchase Order</a> to the Refinery Supplier and schedules the inbound Lorry Truck delivery. (C5.1.1.1)</li>
 <li id="operations-4-sop-1">Plant Operations Officer receives the Lorry Trucks, collects the <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> and <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> from the <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a>, fills out the <a href="forms.html#form-receiving-report" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-receiving-report&#39;);return false" title="Form: Receiving Report">Receiving Report</a> (RR) and unloads contents to the Storage Tank. (C5.1.1.2)</li>
 <li id="operations-4-sop-2">Plant Operations Officer forwards XXX documents to Logistics Officer. (C5.1.1.3)</li>
@@ -334,6 +362,9 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <li id="operations-4-sop-11">Logistics Officer purchases cylinders annually with individual serial numbers. (C5.1.4.2)</li>
 <li id="operations-4-sop-12">Warehouse and Quality Supervisor repaints and counts cylinders, maintains cylinder quality record. (C5.1.4.3)</li>
 </ol>
+</div>
+  <div class="cf-col future"><h5>Future Workflow</h5><ul><li id="operations-4-procfut-0">Gauge readings mobile-encoded, into the Odoo Inventory module.</li><li id="operations-4-procfut-1">A single cylinder-asset register linking serial number, batch, refill history, and lifecycle status.</li><li id="operations-4-procfut-2"><a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">Stock Transfer</a> from Storage Tank to cylinders are mobile-encoded into Odoo Inventory</li><li id="operations-4-procfut-3">Cylinder lifespan tracked in Odoo Manufacturing/Inventory modules.</li><li id="operations-4-procfut-4"><a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a> sequencing tracked manually by staff log sheets.</li></ul></div>
+</div>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="operations-4-gl-0">Storage Tank <a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">stock transfer</a> to cylinders must follow <a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a>; every batch is filled out in <a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a> sequence with Plant Operations Officer approval.</li>
@@ -352,22 +383,6 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
   <div class="cf-col current"><h5>Current — Traditional / Manual</h5><ul><li id="operations-4-cur-0">Gauge readings and RR logged on paper / Google Sheets.</li><li id="operations-4-cur-1"><a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a> sequencing tracked manually by staff log sheets.</li><li id="operations-4-cur-2">Cylinder lifespan tracked in a spreadsheet separate from the refilling records.</li></ul></div>
   <div class="cf-col future"><h5>Future — Target / Automated</h5><ul><li id="operations-4-fut-0">Gauge readings mobile-encoded, into the Odoo Inventory module.</li><li id="operations-4-fut-1">A single cylinder-asset register linking serial number, batch, refill history, and lifecycle status.</li><li id="operations-4-fut-2"><a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">Stock Transfer</a> from Storage Tank to cylinders are mobile-encoded into Odoo Inventory</li><li id="operations-4-fut-3">Cylinder lifespan tracked in Odoo Manufacturing/Inventory modules.</li><li id="operations-4-fut-4"><a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a> sequencing tracked manually by staff log sheets.</li></ul></div>
 </div>
-</div>
-  </div>
-</section>
-
-<section class="cross-section" id="cross-stage">
-  <div class="cross-banner" onclick="toggleStage(this)">
-    <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>
-    <div class="stage-info"><div class="stage-title" style="color:#7030A0">CROSS-STAGE GOVERNANCE</div><div class="stage-sub" style="color:#7c3aed">Escalation and traceability rules that apply on top of every Operations approval row above.</div></div>
-    <span class="stage-arrow" style="color:#7030A0">&#9662;</span>
-  </div>
-  <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
-<li id="cross-gl-0">The 1-3kg residue threshold is fixed company policy; <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> or Helper cannot round outside that band without <a href="personnel.html#personnel-warehouse-supervisor" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-warehouse-supervisor&#39;);return false" title="Personnel: Warehouse Supervisor">Warehouse Supervisor</a> escalation.</li>
-<li id="cross-gl-1">Gains, losses, and incentives are computed only from a matched pair of weigh-in and weigh-out readings. An unmatched reading is held for investigation, never estimated.</li>
-<li id="cross-gl-2">Every cylinder is tracked by serial number and batch number for its full lifecycle, including repaint/retest - a cylinder without a traceable batch number does not re-enter circulation.</li>
-</ul>
 </div>
   </div>
 </section>
