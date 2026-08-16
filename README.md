@@ -47,20 +47,21 @@ Current setup:
 - `gap_note`, `sources`: optional footer text per stage
 - Optional top-level `cross_stage`: `{name, description, guidelines}` rendered as a shared section below all stages
 
-## Editing via Codespaces (pilot)
+## Editing via Codespaces
 
-For **Operations > Commercial** and the **Subprocess** index only, you can now skip editing JSON/HTML directly and instead edit plain tab-separated files in `content/`:
+For every stage of **Operations**, **Sales**, and **Accounting**, plus the **Subprocess** index, you can skip editing JSON/HTML directly and instead edit plain tab-separated files in `content/`:
 
-- `content/stages.tsv` — stage badge, subtitle, gap note, sources (one row)
-- `content/items.tsv` — SOP steps, guidelines, and Current/Future bullets (one row per line item)
+- `content/stages.tsv` — one row per stage: English subtitle, badge, badge label, gap note, sources
+- `content/items.tsv` — SOP steps (paired with a Future Procedures cell, same row) and Operational Guidelines, one row per line item
 - `content/approval_matrix.tsv` — Approval Matrix & Controls rows
 - `content/subprocess.tsv` — every Subprocess index entry
+- `content/personnel.tsv`, `content/forms.tsv` — extracted from the current Personnel/Forms pages, not yet wired to auto-regenerate (see below)
 
-Open this repo in a **GitHub Codespace**, edit the relevant row(s) in these files (any text editor or a CSV/TSV grid extension works — the delimiter is a tab, not a comma, so plain sentences with commas are safe to type), then commit and push. The `Publish Site From Content TSV` GitHub Action (`.github/workflows/publish-from-content.yml`) picks it up automatically, regenerates `02_operations_content.json`, `subprocess.html`, and all four tab pages, validates them, and commits the result back — no local Python needed.
+Open this repo in a **GitHub Codespace**, edit the relevant row(s) in these files (any text editor or a CSV/TSV grid extension works — the delimiter is a tab, not a comma, so plain sentences with commas are safe to type), then commit and push. The `Publish Site From Content TSV` GitHub Action (`.github/workflows/publish-from-content.yml`) picks it up automatically, regenerates `02_operations_content.json`, `03_sales_content.json`, `04_accounting_content.json`, `subprocess.html`, and all four tab pages, validates them, and commits the result back — no local Python needed.
 
 Requires write access to this repo (ask to be added as a collaborator if you don't have it).
 
-This is a pilot covering just these two pieces; the rest of the site (other stages, Sales, Accounting, Main, Personnel, Forms) is still edited the old way for now.
+`content/personnel.tsv` and `content/forms.tsv` exist but aren't hooked into `content_generate.py` yet — editing them currently has no effect on the live site. Personnel and Forms are still edited directly in their HTML for now.
 
 ## GitHub automation
 

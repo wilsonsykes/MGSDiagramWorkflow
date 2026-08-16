@@ -14,25 +14,26 @@
         "Receive the approved Sales Order; client orders 22kg or 50kg cylinder variants. (O1.1.1)",
         "Logistics Officer schedules the delivery - vehicle, capacity, route. (O1.2.1)",
         "XXX generates the Picklist and YYY picks the LPG/products. (O1.1.2)",
-        "XXX generates the Delivery Receipt (DR) - 2 DRs and 2 Credit Notes per delivery. (O1.1.3)",
-        "XXX submits the DR to Accounting to post General Ledger and Inventory entries. (O1.1.4.1)",
-        "Helper collects the Delivery Receipts from XXX in Warehouse (may cover multiple clients on one route). (O1.1.4.2)",
-        "Driver and Helper proceed to client locations. (O1.1.4.3)",
-        "For pickup / no-delivery orders, Warehouse gives the DR to the customer for signature instead. (O1.1.4.4)",
+        "XXX generates the Delivery Receipt (DR) - 2 DRs and 2 Credit Notes per delivery. (O1.1.3.1)",
+        "XXX submits the DR to Accounting to post General Ledger and Inventory entries. (O1.1.3.2)",
+        "XXX encodes the Sales Invoices to ACCPAC (O1.1.3.3)",
+        "Helper collects the Delivery Receipts from XXX in Warehouse (may cover multiple clients on one route). (O1.1.4.1)",
+        "Driver and Helper proceed to client locations. (O1.1.4.2)",
+        "For pickup / no-delivery orders, Warehouse gives the DR to the customer for signature instead. (O1.1.4.3)",
         "In client site, Helper weighs and records the cylinders with the client (Weigh In), then carries them to area. (O1.1.5.1)",
         "Client representative signs the DR, receives the new cylinders, and returns the empty cylinders. (O1.1.5.2)",
-        "Helper weighs the returned cylinders (Weigh Out) in the present of Client Rep, classifies the 1-3kg residue threshold; round up or down. (O1.1.5.3)",
+        "Helper weighs the returned cylinders (Weigh Out) in the presence of Client Rep, classifies the 1-3kg residue threshold; round up or down. (O1.1.5.3)",
         "Helper provides Credit Notes to the Client, with client representative’s countersignature, recording cylinder serial number and weight residue. (O1.1.5.4)",
         "Driver and Helper return to the plant and weighs the empty cylinders, checks the 1-3kg residue threshold again. (O1.1.6.1)",
         "Driver submits the signed DR, signed Credit Notes and other records to YYY Accounting. (O1.1.6.2)",
-        "YYY in Accounting reconciles the General Ledger against the signed Delivery Receipt and Credit Notes. (O1.1.7.1)",
-        "Compute Commercial Gains - compare weigh-in vs weigh-out records from client site and plant. (O1.1.7.2)",
-        "Industrial Engineer and YYY record results in Google Sheets and ACCPAC. (O1.1.7.3)",
+        "OIC-Accounting reconciles the General Ledger against the signed Delivery Receipt and Credit Notes. She encodes entries in the Sales Gsheet. No Sales-Appsheet. (O1.1.7.1)",
+        "Industrial Engineer reconciles Month-End Report (CIMER) daily. (O1.1.7.2)",
+        "Operations Supervisor records gains from CIMER as Inv/Adj in ACCPAC. (O1.1.7.3)",
         "Industrial Engineer submits Computation Sheet for CEO’s approval (O1.1.7.4)",
         "OIC-Accounting distribute incentives via Payroll to the involved members. (O1.1.7.5)"
       ],
       "guidelines": [
-        "The Commercial residue classification threshold is fixed between 1-3kg; deviations are escalated to the Warehouse Supervisor, not decided ad hoc by the driver.",
+        "The Commercial residue classification threshold is fixed between 1-3kg; deviations are escalated to the Senior Plant Supervisor, not decided ad hoc by the driver.",
         "Two DRs and two Credit Notes are mandatory per delivery (client copy + company copy); a delivery without a matching document pair is not closed in the GL.",
         "No cylinder leaves the warehouse without a Picklist form; no GL/Inventory posting is made without a Warehouse-submitted DR.",
         "Incentive Gains are computed only from matched weigh-in/weigh-out pairs - unmatched records are held for investigation, never estimated."
@@ -92,26 +93,34 @@
           ]
         }
       ],
-      "current_future": {
-        "current": [
-          "Paper DR/CR forms filled by hand at warehouse and client site.",
-          "GL reconciled manually against physical DR/CR copies.",
-          "Gains keyed manually - once to Google Sheets, formula and total reviews needed",
-          "Residue judged by the driver/helper at point of delivery."
-        ],
-        "future": [
-          "Odoo Sales Order auto-generates Sales Quotation, Picklist, DR. Add the Invoice, Client’s Credit Notes and Team’s Incentive (also under Credit Notes) and GL, in one continuous workflow.",
-          "Paper DR and CR with client signature (same as current)",
-          "Gains keyed once in Odoo Sales Order. Auto-computes gains for summary, and team incentive.",
-          "Single-entry GL posting, removing the GSheet/ACCPAC duplicate entry."
-        ]
-      }
+      "future_procedures": [
+        "same",
+        "same",
+        "same",
+        "same",
+        "same",
+        "Upon writing Sales Invoice, Accounting Sales Encoder encode Sales Order using Sales-Appsheet-T5. Accounting Sales Encoder checks entry summary in Sales-Appsheet-T4.",
+        "same",
+        "same",
+        "same",
+        "same",
+        "same",
+        "same",
+        "same",
+        "same",
+        "same",
+        "OIC-Accounting reconciles the General Ledger in Sales-Appsheet-T3 against the signed Delivery Receipt and Credit Notes. No encoding needed in T3. (O1.1.7.1)",
+        "Industrial Engineer checks all input data in CIMER-T2. (O1.1.7.2)",
+        "Operations Supervisor records gains from CIMER-T1 as Inv/Adj in ACCPAC. (O1.1.7.3)",
+        "Industrial Engineer submits Gains Summary CIMER-T2.1 for CEO’s approval",
+        ""
+      ],
+      "badge_label": "Confirmed with source data"
     },
     {
       "romaji": "Bulk",
       "english": "Process Order | Delivery | Return to Plant",
       "badge": "pending",
-      "badge_label": "Partially Confirmed",
       "sop_steps": [
         "Sales Rep receives the bulk Sales Order; the order must fill the 8-ton truck capacity. (O2.1.1.1)",
         "Logistics Officer assign the lorry/trailer truck and load from the Storage Tank (stock transfer, tank to truck - no cylinders involved). (O2.1.2.1)",
@@ -165,50 +174,52 @@
           ]
         }
       ],
-      "current_future": {
-        "current": [
-          "Truck-scale readings and Meter/gauge reading logged by hand on paper slips.",
-          "Per-truck gain calculated by comparing two paper slips."
-        ],
-        "future": [
-          "Odoo Inventory stock-transfer module logs tank-to-truck and truck-to-tank movements with digital/hardcopy/summary/individual versions.",
-          "Gains and residue computations summary are automatic from individual transactions.",
-          "Gains per sales order are encoded as Credit Notes, smooth gains computation.",
-          "Auto-flagged gain/loss variance per truck, no manual comparison."
-        ]
-      }
+      "future_procedures": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "badge_label": "Partially Confirmed"
     },
     {
       "romaji": "Dealer",
       "english": "Process Order | Plant Refilling & Swapping | Invoice",
       "badge": "confirmed",
-      "badge_label": "Confirmed with source data",
       "sop_steps": [
         "Dealer client orders 2.5kg, 11kg or 22kg cylinder variants with Sales Assistant 2, and Plant visit scheduled in advance; only confirmed appointments are accommodated. (O3.1.1.1)",
-        "Sales Assistant 2 creates a Sales Order Form noting the delivery/pickup date. (O3.1.1.2)",
-        "Sales Assistant 2 forwards the orders to Credit/Collection Analyst to check for AR dues. (O3.1.1.3)",
+        "Sales Assistant2 creates a Sales Order Form noting the delivery/pickup date. (O3.1.1.2)",
+        "Sales Assistant2 forwards the orders to Credit/Collection Analyst to check for AR dues. (O3.1.1.3)",
         "If with past dues, don’t serve. If with past dues but with CEO approval, good to serve. If without past dues good to serve. (O3.1.1.4)",
         "Dealer arrives with empty cylinders; guard records the vehicle entry and confirms tank classification. (O3.1.2.1.1)",
         "Main Dealers arrive with empty cylinders to fill up 8 tons worth of cylinders. (O3.1.2.1.2)",
         "Checker records cylinder quantities and issues Entry/Exit Slip (EES). (O3.1.2.2)",
         "Cylinders are refilled at the refilling area. (O3.1.2.3)",
-        "Checker encodes the transaction in AppSheet - this is the Refilling Report and the basis of the GRR (General Refilling Report). (O3.1.2.4)",
+        "Checker encodes the transaction in RFR-AppSheet. (O3.1.2.4)",
         "Checker issues Loading/Unloading Truck (LUT) to the Driver. (O3.1.2.5)",
-        "Security verifies the LUT; cylinder quantity must match with LUT before release. (O3.1.2.6)",
+        "Guard verifies the LUT; cylinder quantity must match with LUT before release. (O3.1.2.6)",
         "If quantity does not match, Security flags and informs Plant Operations Officer or Senior Plant Supervisor. (O3.1.2.7)",
-        "Plant Operations Officer reviews and confirms the transactions and records in XXX. (O3.1.3.1)",
-        "Accounting verifies via AppSheet against the Cash Invoice or Credit Invoice. (O3.1.3.2)",
+        "Plant Operations Officer reviews and confirms the transactions in RFR-Appsheet. (O3.1.3.1)",
+        "OIC-Accounting verifies via RFR-AppSheet against the Cash Invoice or Credit Invoice. (O3.1.3.2)",
         "(covers pickup-with-terms, pickup-with-payment, and delivery-with-terms variants (O3.1.3.3)",
-        "Cylinder Swapping: dealer messages Sales Assistant 2 for a swap request. (O3.1.4.1)",
-        "Sales Assistant 2 verifies the customer database provided by the Dealer. Only approved allied brands allowed. O3.1.4.2)",
-        "Sir RY reviews and approves before the swap proceeds. (O3.1.4.3)",
+        "Cylinder Swapping: dealer messages Sales Assistant2 for a swap request. (O3.1.4.1)",
+        "Sales Assistant2 verifies the customer database provided by the Dealer. Only approved allied brands allowed. O3.1.4.2)",
+        "CEO reviews and approves before the swap proceeds. (O3.1.4.3)",
         "Warehouse and Quality Supervisor handles the physical swap and keeps records. (O3.1.4.4)",
-        "XXX keeps a monthly record of swapped cylinders quantity, treatment and disposition. (O3.1.4.5)"
+        "Senior Plant Supervisor keeps a monthly record of swapped cylinders quantity, treatment and disposition. (O3.1.4.5)"
       ],
       "guidelines": [
         "Only confirmed, scheduled appointments are accommodated at the plant - walk-in dealer refills are not processed without a prior booking.",
-        "AppSheet entry and the official receipt must match in quantity before a transaction is released; a mismatch is held at the gate.",
-        "Cylinder swapping is restricted to approved allied brands only and requires Sir RY's approval.",
+        "RFR-AppSheet entry and the official receipt must match in quantity before a transaction is released; a mismatch is held at the gate.",
+        "Cylinder swapping is restricted to approved allied brands only and requires CEO's approval.",
         "Dealers must provide their own customer database for swap request."
       ],
       "approval_matrix": [
@@ -246,24 +257,34 @@
           ]
         }
       ],
-      "current_future": {
-        "current": [
-          "Paper EES/LUT slips at the gate and refilling area.",
-          "Guard radio call to Production to trigger refilling.",
-          "AppSheet is semi-digital but still reconciled by hand against paper receipts.",
-          "Swap approval runs through ad hoc chat screenshots."
-        ],
-        "future": [
-          "One mobile app covers booking -> gate entry -> refill logging -> accounting verification in a single record.",
-          "Swap approvals become a structured digital workflow instead of chat threads, with automatic allied-brand validation."
-        ]
-      }
+      "future_procedures": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "badge_label": "Confirmed with source data"
     },
     {
       "romaji": "Semi-dealer",
       "english": "Process Order | Delivery/Pickup | Collect Payment",
       "badge": "pending",
-      "badge_label": "Partially confirmed",
       "sop_steps": [
         "XXX gets semi-dealer client orders for 11kg or 2.5kg cylinders. (O4.1.1.1)",
         "Sales Rep informs Logistics Officer for delivery. (O4.1.1.2)",
@@ -300,21 +321,23 @@
           ]
         }
       ],
-      "current_future": {
-        "current": [
-          "xxx"
-        ],
-        "future": [
-          "xxx"
-        ]
-      },
+      "future_procedures": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "badge_label": "Partially confirmed",
       "gap_note": "xxx"
     },
     {
       "romaji": "Overall",
       "english": "Purchase Order | Stock Transfer | Refill | Floor Stock",
       "badge": "confirmed",
-      "badge_label": "Confirmed with source data",
       "sop_steps": [
         "Logistics Officer forwards the Purchase Order to the Refinery Supplier and schedules the inbound Lorry Truck delivery. (C5.1.1.1)",
         "Plant Operations Officer receives the Lorry Trucks, collects the Delivery Receipt and Invoice from the Driver, fills out the Receiving Report (RR) and unloads contents to the Storage Tank. (C5.1.1.2)",
@@ -324,7 +347,7 @@
         "Operations Supervisor measures the content volume using a gauge and writes the reading. (C5.1.2.1)",
         "Operations Supervisor logs further daily readings as a separate entry. (C5.1.2.2)",
         "Stock Transfer: Operations Supervisor oversees cylinder refill from the Storage Tank following FIFO. (C5.1.3.1)",
-        "Operations Supervisor tracks refill using AppSheet. (C5.1.3.2)",
+        "Operations Supervisor tracks refill using RFR-AppSheet. (C5.1.3.2)",
         "Operations Supervisor tracks residue of two tanks in two categories, Regular and WIWO, both affecting inventory and billing. (C5.1.3.3)",
         "Pull-out schedules and dates at client sites are tracked against a company Pull-out Calendar. (C5.1.4.1)",
         "Logistics Officer purchases cylinders annually with individual serial numbers. (C5.1.4.2)",
@@ -369,20 +392,22 @@
           ]
         }
       ],
-      "current_future": {
-        "current": [
-          "Gauge readings and RR logged on paper / Google Sheets.",
-          "FIFO sequencing tracked manually by staff log sheets.",
-          "Cylinder lifespan tracked in a spreadsheet separate from the refilling records."
-        ],
-        "future": [
-          "Gauge readings mobile-encoded, into the Odoo Inventory module.",
-          "A single cylinder-asset register linking serial number, batch, refill history, and lifecycle status.",
-          "Stock Transfer from Storage Tank to cylinders are mobile-encoded into Odoo Inventory",
-          "Cylinder lifespan tracked in Odoo Manufacturing/Inventory modules.",
-          "FIFO sequencing tracked manually by staff log sheets."
-        ]
-      }
+      "future_procedures": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "badge_label": "Confirmed with source data"
     }
   ],
   "cross_stage": {

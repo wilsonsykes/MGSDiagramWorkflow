@@ -28,19 +28,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .ctrl-btn{background:#fff;border:1px solid var(--border);color:var(--accent-dark);padding:5px 16px;border-radius:4px;font-size:11px;font-weight:600;font-family:inherit;cursor:pointer;letter-spacing:.4px;transition:all .12s}
 .ctrl-btn:hover{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
 .stage-section,.cross-section{margin:14px 48px 0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow);scroll-margin-top:80px}
-.cross-section{background:#faf5ff;border:1px dashed #d8b4fe}
+.cross-section{background:#f3faf5;border:1px dashed #a8d5b5}
 .stage-banner,.cross-banner{background:linear-gradient(180deg,var(--accent-light) 0%,#c4d3ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;transition:background .2s ease;user-select:none}
 .stage-banner:hover{background:linear-gradient(180deg,#cddcf0 0%,#b8cbe5 100%)}
-.cross-banner{background:linear-gradient(180deg,#f0e6f6 0%,#e0d0ec 100%)}
-.cross-banner:hover{background:linear-gradient(180deg,#e8daf0 0%,#d6c4e6 100%)}
+.cross-banner{background:linear-gradient(180deg,var(--green-light) 0%,#c2ddc9 100%)}
+.cross-banner:hover{background:linear-gradient(180deg,#d5ead9 0%,#b0d4ba 100%)}
 .stage-section.open .stage-banner,.cross-section.open .cross-banner{border-bottom-color:var(--border)}
 .stage-num{width:60px;height:60px;border-radius:12px;background:var(--accent-dark);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;letter-spacing:.5px;font-size:9px;line-height:1.1;text-align:center}
 .num-big{font-size:24px;font-weight:800;line-height:1;margin-bottom:2px}.num-sub{font-size:9px;font-weight:800;letter-spacing:1.2px;opacity:.7}
-.cross-num{background:var(--purple)}
+.cross-num{background:var(--green)}
 .stage-info{flex-shrink:0;min-width:200px}
 .stage-title{font-size:22px;font-weight:800;color:var(--accent-dark);text-transform:uppercase;letter-spacing:-.3px;margin:0}
 .stage-sub{font-size:11px;font-weight:700;color:var(--accent);margin-top:2px;text-transform:uppercase;letter-spacing:1.5px}
 .stage-arrow{font-size:22px;color:var(--accent-dark);font-weight:700;transition:transform .25s ease;flex-shrink:0;margin-left:auto}
+.cross-section .stage-title,.cross-section .stage-arrow{color:var(--green)}
+.cross-section .stage-sub{color:#3d8b52}
 .stage-section.open .stage-arrow,.cross-section.open .stage-arrow{transform:rotate(180deg)}
 .stage-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
 .stage-section.open .stage-body,.cross-section.open .stage-body{max-height:12000px}
@@ -58,7 +60,13 @@ table.matrix th{background:var(--accent-dark);color:#fff;text-align:left;padding
 table.matrix td{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#374151}
 table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 .control-chip{display:inline-block;background:var(--accent-light);color:var(--accent-dark);border:1px solid #BFD6EB;border-radius:5px;padding:1px 7px;font-size:10.5px;margin:1px 4px 1px 0}
-.cf-print-only{display:none}
+.cf-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:2px;table-layout:fixed}
+.cf-table th{background:var(--accent-dark);color:#fff;text-align:left;padding:8px 10px;font-size:10.5px;letter-spacing:.3px}
+.cf-table td{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#374151;font-size:13px;line-height:1.55;word-wrap:break-word}
+.cf-table tr:nth-child(even) td{background:var(--bg-alt)}
+.cf-order{width:34px;text-align:center;color:var(--text-light);font-weight:700}
+.cf-cur{width:36%}
+.cf-fut{width:58%}
 .gap-note{background:var(--red-light);border:1px solid #f0c9c9;color:var(--red);border-radius:8px;padding:12px 16px;font-size:12.5px}
 .gap-note b{display:block;margin-bottom:4px}
 .sources{font-size:11px;color:var(--text-light);padding:12px 28px;background:var(--bg-alt);border-top:1px solid var(--border-light)}
@@ -82,12 +90,11 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
   .stage-arrow{display:none}
   a.xref{color:inherit;text-decoration:none}
   .legend-bar{page-break-after:avoid}
-  .cf-print-only{display:block;page-break-before:always;padding:24px 48px}
-  .cf-print-title{font-size:14px;font-weight:800;color:var(--accent-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
-  .cf-print-table{width:100%;border-collapse:collapse;table-layout:fixed}
-  .cf-print-table th{background:var(--accent-dark);color:#fff;text-align:left;padding:8px 10px;font-size:11px;width:50%}
-  .cf-print-table td{padding:8px 10px;border:1px solid #ccc;vertical-align:top;font-size:11px;line-height:1.5;word-wrap:break-word}
-  .cf-print-table tr:nth-child(even) td{background:#f6f8fb}
+  /* SOP Manual merged into a Current/Future table (doc-section-cf) needs to
+     start on its own page and be allowed to flow across pages -- override the
+     stage-section/doc-section "avoid" rules that would otherwise fight it. */
+  .doc-section-cf{page-break-before:always;page-break-inside:auto}
+  .stage-section:has(.doc-section-cf){page-break-inside:auto}
 }
 @media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.doc-section{padding-left:16px;padding-right:16px}.topnav{gap:12px}.nav-link{font-size:10.5px}}
 </style>
@@ -95,8 +102,8 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <body>
 <nav class="topnav">
   <div class="nav-logo">MGC SOP Portal</div>
-  <a href="#stage-1" class="nav-link">1 &middot; Overview</a>
-  <a href="#cross-stage" class="nav-link">Cross-Stage</a>
+  <a href="#stage-1" class="nav-link">1 &middot; Portal-Wide Governance</a>
+  <a href="#stage-2" class="nav-link">2 &middot; Overview</a>
 </nav>
 
 <div class="header">
@@ -116,9 +123,26 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
   </div>
 </div>
 
-<section class="stage-section" id="stage-1">
+<section class="stage-section cross-section" id="stage-1">
+  <div class="stage-banner cross-banner" onclick="toggleStage(this)">
+    <div class="stage-num cross-num"><span class="num-big">1</span><span class="num-sub">OF 2</span></div>
+    <div class="stage-info"><div class="stage-title">PORTAL-WIDE GOVERNANCE</div><div class="stage-sub">The four cross-cutting policy themes that apply across every department, detailed further inside each stage&#x27;s Operational Guidelines section.</div></div>
+    <span class="stage-arrow">&#9662;</span>
+  </div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="cross-gl-0">Financial Controls &amp; Credit Policy - Accounting &gt; Commercial, Dealer, Semi-dealer.</li>
+<li id="cross-gl-1">Weighing, Residue &amp; Inventory Integrity - Operations &gt; Commercial, Bulk, Overall.</li>
+<li id="cross-gl-2">Approval &amp; Escalation Discipline - Sales &gt; Dealer, Operations &gt; Dealer, Cross-Stage Governance.</li>
+<li id="cross-gl-3">Documentation &amp; Reconciliation - Operations &gt; Commercial, Dealer; Accounting &gt; Semi-dealer.</li>
+</ul>
+</div>
+  </div>
+</section>
+
+<section class="stage-section" id="stage-2">
   <div class="stage-banner" onclick="toggleStage(this)">
-    <div class="stage-num"><span class="num-big">1</span><span class="num-sub">OF 1</span></div>
+    <div class="stage-num"><span class="num-big">2</span><span class="num-sub">OF 2</span></div>
     <div class="stage-info"><div class="stage-title">OVERVIEW</div><div class="stage-sub">How This Portal Works</div></div>
     <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
     <span class="stage-arrow">&#9662;</span>
@@ -154,30 +178,6 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 </div>
   </div>
 </section>
-<div class="cf-print-only" aria-hidden="true">
-  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Overview</h4>
-  <table class="cf-print-table">
-    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
-    <tr><td id="main-0-cur-0">Process knowledge for Operations, Sales, and Accounting lives across separate documents, transcripts, memory, plus different tools (Monday, Google Sheets, ACCPAC, AppSheet, Whatsapp, Telegram).</td><td id="main-0-fut-0">One SOP portal - GitHub-hosted, JSON-driven, and cross-linked to Personnel/Forms/Subprocess - as the single source of truth for how MGC actually runs, with a clear owner for each transaction.</td></tr>
-  </table>
-</div>
-
-<section class="cross-section" id="cross-stage">
-  <div class="cross-banner" onclick="toggleStage(this)">
-    <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>
-    <div class="stage-info"><div class="stage-title" style="color:#7030A0">PORTAL-WIDE GOVERNANCE</div><div class="stage-sub" style="color:#7c3aed">The four cross-cutting policy themes that apply across every department, detailed further inside each stage&#x27;s Operational Guidelines section.</div></div>
-    <span class="stage-arrow" style="color:#7030A0">&#9662;</span>
-  </div>
-  <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
-<li id="cross-gl-0">Financial Controls &amp; Credit Policy - Accounting &gt; Commercial, Dealer, Semi-dealer.</li>
-<li id="cross-gl-1">Weighing, Residue &amp; Inventory Integrity - Operations &gt; Commercial, Bulk, Overall.</li>
-<li id="cross-gl-2">Approval &amp; Escalation Discipline - Sales &gt; Dealer, Operations &gt; Dealer, Cross-Stage Governance.</li>
-<li id="cross-gl-3">Documentation &amp; Reconciliation - Operations &gt; Commercial, Dealer; Accounting &gt; Semi-dealer.</li>
-</ul>
-</div>
-  </div>
-</section>
 
 <div class="metrics-strip">
   <div class="metric"><div class="metric-val">3</div><div class="metric-lbl">SOP Tabs</div><div class="metric-sub">Operations, Sales, Accounting</div></div>
@@ -193,8 +193,36 @@ function toggleStage(el){var sec=el.closest('.stage-section')||el.closest('.cros
 function expandAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.add('open')})}
 function collapseAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.remove('open')})}
 function printShortBond(){var s=document.createElement('style');s.id='psb';s.innerHTML='@page{size:8.5in 14in;margin:0.5in 0.6in}';document.head.appendChild(s);expandAll();window.print();setTimeout(function(){var e=document.getElementById('psb');if(e)e.remove()},1000)}
-function scrollToAnchor(id){var el=document.getElementById(id);if(!el)return;var stage=el.closest('.stage-section')||el.closest('.cross-section');if(stage)stage.classList.add('open');setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='2px solid var(--accent)';setTimeout(function(){el.style.outline=''},1800)},180)}
+function scrollToAnchor(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  var stage=el.closest('.stage-section')||el.closest('.cross-section');
+  var body=stage?stage.querySelector('.stage-body'):null;
+  var wasOpen=!stage||stage.classList.contains('open');
+  if(stage)stage.classList.add('open');
+  function doScroll(){
+    el.scrollIntoView({behavior:'smooth',block:'center'});
+    el.style.outline='2px solid var(--accent)';
+    setTimeout(function(){el.style.outline=''},1800);
+  }
+  // .stage-body's max-height transition is .4s -- scrolling before it
+  // finishes expanding lands on the pre-expansion position, short of the
+  // real target. Wait for transitionend (with a timeout fallback in case it
+  // doesn't fire) instead of guessing a delay.
+  if(!wasOpen&&body){
+    var done=false;
+    function onEnd(e){if(e.target!==body)return;done=true;body.removeEventListener('transitionend',onEnd);doScroll();}
+    body.addEventListener('transitionend',onEnd);
+    setTimeout(function(){if(!done){body.removeEventListener('transitionend',onEnd);doScroll();}},450);
+  }else{
+    doScroll();
+  }
+}
 document.querySelectorAll('.topnav a').forEach(function(link){link.addEventListener('click',function(){var hash=link.getAttribute('href');if(!hash||!hash.startsWith('#'))return;var t=document.querySelector(hash);if(t)t.classList.add('open')});});
+(function(){
+  var hash=window.location.hash.slice(1);
+  if(hash)scrollToAnchor(hash);
+})();
 </script>
 </body>
 </html>

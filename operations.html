@@ -28,19 +28,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .ctrl-btn{background:#fff;border:1px solid var(--border);color:var(--accent-dark);padding:5px 16px;border-radius:4px;font-size:11px;font-weight:600;font-family:inherit;cursor:pointer;letter-spacing:.4px;transition:all .12s}
 .ctrl-btn:hover{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
 .stage-section,.cross-section{margin:14px 48px 0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow);scroll-margin-top:80px}
-.cross-section{background:#faf5ff;border:1px dashed #d8b4fe}
+.cross-section{background:#f3faf5;border:1px dashed #a8d5b5}
 .stage-banner,.cross-banner{background:linear-gradient(180deg,var(--accent-light) 0%,#c4d3ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;transition:background .2s ease;user-select:none}
 .stage-banner:hover{background:linear-gradient(180deg,#cddcf0 0%,#b8cbe5 100%)}
-.cross-banner{background:linear-gradient(180deg,#f0e6f6 0%,#e0d0ec 100%)}
-.cross-banner:hover{background:linear-gradient(180deg,#e8daf0 0%,#d6c4e6 100%)}
+.cross-banner{background:linear-gradient(180deg,var(--green-light) 0%,#c2ddc9 100%)}
+.cross-banner:hover{background:linear-gradient(180deg,#d5ead9 0%,#b0d4ba 100%)}
 .stage-section.open .stage-banner,.cross-section.open .cross-banner{border-bottom-color:var(--border)}
 .stage-num{width:60px;height:60px;border-radius:12px;background:var(--accent-dark);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;letter-spacing:.5px;font-size:9px;line-height:1.1;text-align:center}
 .num-big{font-size:24px;font-weight:800;line-height:1;margin-bottom:2px}.num-sub{font-size:9px;font-weight:800;letter-spacing:1.2px;opacity:.7}
-.cross-num{background:var(--purple)}
+.cross-num{background:var(--green)}
 .stage-info{flex-shrink:0;min-width:200px}
 .stage-title{font-size:22px;font-weight:800;color:var(--accent-dark);text-transform:uppercase;letter-spacing:-.3px;margin:0}
 .stage-sub{font-size:11px;font-weight:700;color:var(--accent);margin-top:2px;text-transform:uppercase;letter-spacing:1.5px}
 .stage-arrow{font-size:22px;color:var(--accent-dark);font-weight:700;transition:transform .25s ease;flex-shrink:0;margin-left:auto}
+.cross-section .stage-title,.cross-section .stage-arrow{color:var(--green)}
+.cross-section .stage-sub{color:#3d8b52}
 .stage-section.open .stage-arrow,.cross-section.open .stage-arrow{transform:rotate(180deg)}
 .stage-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
 .stage-section.open .stage-body,.cross-section.open .stage-body{max-height:12000px}
@@ -58,7 +60,13 @@ table.matrix th{background:var(--accent-dark);color:#fff;text-align:left;padding
 table.matrix td{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#374151}
 table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 .control-chip{display:inline-block;background:var(--accent-light);color:var(--accent-dark);border:1px solid #BFD6EB;border-radius:5px;padding:1px 7px;font-size:10.5px;margin:1px 4px 1px 0}
-.cf-print-only{display:none}
+.cf-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:2px;table-layout:fixed}
+.cf-table th{background:var(--accent-dark);color:#fff;text-align:left;padding:8px 10px;font-size:10.5px;letter-spacing:.3px}
+.cf-table td{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#374151;font-size:13px;line-height:1.55;word-wrap:break-word}
+.cf-table tr:nth-child(even) td{background:var(--bg-alt)}
+.cf-order{width:34px;text-align:center;color:var(--text-light);font-weight:700}
+.cf-cur{width:36%}
+.cf-fut{width:58%}
 .gap-note{background:var(--red-light);border:1px solid #f0c9c9;color:var(--red);border-radius:8px;padding:12px 16px;font-size:12.5px}
 .gap-note b{display:block;margin-bottom:4px}
 .sources{font-size:11px;color:var(--text-light);padding:12px 28px;background:var(--bg-alt);border-top:1px solid var(--border-light)}
@@ -82,12 +90,11 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
   .stage-arrow{display:none}
   a.xref{color:inherit;text-decoration:none}
   .legend-bar{page-break-after:avoid}
-  .cf-print-only{display:block;page-break-before:always;padding:24px 48px}
-  .cf-print-title{font-size:14px;font-weight:800;color:var(--accent-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
-  .cf-print-table{width:100%;border-collapse:collapse;table-layout:fixed}
-  .cf-print-table th{background:var(--accent-dark);color:#fff;text-align:left;padding:8px 10px;font-size:11px;width:50%}
-  .cf-print-table td{padding:8px 10px;border:1px solid #ccc;vertical-align:top;font-size:11px;line-height:1.5;word-wrap:break-word}
-  .cf-print-table tr:nth-child(even) td{background:#f6f8fb}
+  /* SOP Manual merged into a Current/Future table (doc-section-cf) needs to
+     start on its own page and be allowed to flow across pages -- override the
+     stage-section/doc-section "avoid" rules that would otherwise fight it. */
+  .doc-section-cf{page-break-before:always;page-break-inside:auto}
+  .stage-section:has(.doc-section-cf){page-break-inside:auto}
 }
 @media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.doc-section{padding-left:16px;padding-right:16px}.topnav{gap:12px}.nav-link{font-size:10.5px}}
 </style>
@@ -95,12 +102,12 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <body>
 <nav class="topnav">
   <div class="nav-logo">Operations</div>
-  <a href="#stage-1" class="nav-link">1 &middot; Commercial</a>
-  <a href="#stage-2" class="nav-link">2 &middot; Bulk</a>
-  <a href="#stage-3" class="nav-link">3 &middot; Dealer</a>
-  <a href="#stage-4" class="nav-link">4 &middot; Semi-dealer</a>
-  <a href="#stage-5" class="nav-link">5 &middot; Overall</a>
-  <a href="#cross-stage" class="nav-link">Cross-Stage</a>
+  <a href="#stage-1" class="nav-link">1 &middot; Cross-Stage Governance</a>
+  <a href="#stage-2" class="nav-link">2 &middot; Commercial</a>
+  <a href="#stage-3" class="nav-link">3 &middot; Bulk</a>
+  <a href="#stage-4" class="nav-link">4 &middot; Dealer</a>
+  <a href="#stage-5" class="nav-link">5 &middot; Semi-dealer</a>
+  <a href="#stage-6" class="nav-link">6 &middot; Overall</a>
 </nav>
 
 <div class="header">
@@ -120,38 +127,56 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
   </div>
 </div>
 
-<section class="stage-section" id="stage-1">
+<section class="stage-section cross-section" id="stage-1">
+  <div class="stage-banner cross-banner" onclick="toggleStage(this)">
+    <div class="stage-num cross-num"><span class="num-big">1</span><span class="num-sub">OF 6</span></div>
+    <div class="stage-info"><div class="stage-title">CROSS-STAGE GOVERNANCE</div><div class="stage-sub">Escalation and traceability rules that apply on top of every Operations approval row above.</div></div>
+    <span class="stage-arrow">&#9662;</span>
+  </div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="cross-gl-0">The 1-3kg residue threshold is fixed company policy; <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> or Helper cannot round outside that band without <a href="personnel.html#personnel-warehouse-supervisor" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-warehouse-supervisor&#39;);return false" title="Personnel: Warehouse Supervisor">Warehouse Supervisor</a> escalation.</li>
+<li id="cross-gl-1">Gains, losses, and incentives are computed only from a matched pair of weigh-in and weigh-out readings. An unmatched reading is held for investigation, never estimated.</li>
+<li id="cross-gl-2">Every cylinder is tracked by serial number and batch number for its full lifecycle, including repaint/retest - a cylinder without a traceable batch number does not re-enter circulation.</li>
+</ul>
+</div>
+  </div>
+</section>
+
+<section class="stage-section" id="stage-2">
   <div class="stage-banner" onclick="toggleStage(this)">
-    <div class="stage-num"><span class="num-big">1</span><span class="num-sub">OF 5</span></div>
+    <div class="stage-num"><span class="num-big">2</span><span class="num-sub">OF 6</span></div>
     <div class="stage-info"><div class="stage-title">COMMERCIAL</div><div class="stage-sub">Process Order | Delivery | Return to Plant</div></div>
     <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
-<li id="operations-0-sop-0">Receive the approved Sales Order; client orders 22kg or 50kg cylinder variants. (O1.1.1)</li>
-<li id="operations-0-sop-1">Logistics Officer schedules the delivery - vehicle, capacity, route. (O1.2.1)</li>
-<li id="operations-0-sop-2">XXX generates the <a href="forms.html#form-picklist" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-picklist&#39;);return false" title="Form: Picklist">Picklist</a> and YYY picks the LPG/products. (O1.1.2)</li>
-<li id="operations-0-sop-3">XXX generates the <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> (DR) - 2 DRs and 2 <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a> per delivery. (O1.1.3)</li>
-<li id="operations-0-sop-4">XXX submits the DR to Accounting to post <a href="forms.html#form-general-ledger" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-general-ledger&#39;);return false" title="Form: General Ledger">General Ledger</a> and Inventory entries. (O1.1.4.1)</li>
-<li id="operations-0-sop-5">Helper collects the Delivery Receipts from XXX in Warehouse (may cover multiple clients on one route). (O1.1.4.2)</li>
-<li id="operations-0-sop-6"><a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> and Helper proceed to client locations. (O1.1.4.3)</li>
-<li id="operations-0-sop-7">For pickup / no-delivery orders, Warehouse gives the DR to the customer for signature instead. (O1.1.4.4)</li>
-<li id="operations-0-sop-8">In client site, Helper weighs and records the cylinders with the client (Weigh In), then carries them to area. (O1.1.5.1)</li>
-<li id="operations-0-sop-9">Client representative signs the DR, receives the new cylinders, and returns the empty cylinders. (O1.1.5.2)</li>
-<li id="operations-0-sop-10">Helper weighs the returned cylinders (Weigh Out) in the present of Client Rep, classifies the 1-3kg residue threshold; round up or down. (O1.1.5.3)</li>
-<li id="operations-0-sop-11">Helper provides <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a> to the Client, with client representative’s countersignature, recording cylinder serial number and weight residue. (O1.1.5.4)</li>
-<li id="operations-0-sop-12"><a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> and Helper return to the plant and weighs the empty cylinders, checks the 1-3kg residue threshold again. (O1.1.6.1)</li>
-<li id="operations-0-sop-13"><a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> submits the signed DR, signed <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a> and other records to YYY Accounting. (O1.1.6.2)</li>
-<li id="operations-0-sop-14">YYY in Accounting reconciles the <a href="forms.html#form-general-ledger" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-general-ledger&#39;);return false" title="Form: General Ledger">General Ledger</a> against the signed <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> and <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a>. (O1.1.7.1)</li>
-<li id="operations-0-sop-15"><a href="subprocess.html#subprocess-compute-commercial-gains" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-compute-commercial-gains&#39;);return false" title="Subprocess: Compute Commercial Gains">Compute Commercial Gains</a> - compare weigh-in vs weigh-out records from client site and plant. (O1.1.7.2)</li>
-<li id="operations-0-sop-16">Industrial Engineer and YYY record results in Google Sheets and ACCPAC. (O1.1.7.3)</li>
-<li id="operations-0-sop-17">Industrial Engineer submits Computation Sheet for CEO’s approval (O1.1.7.4)</li>
-<li id="operations-0-sop-18">OIC-Accounting distribute incentives via Payroll to the involved members. (O1.1.7.5)</li>
-</ol>
+    <div class="doc-section doc-section-cf"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><table class="cf-table">
+  <tr><th class="cf-order">#</th><th class="cf-cur">Current Procedures</th><th class="cf-fut">Future Procedures</th></tr>
+  <tr><td class="cf-order">1</td><td class="cf-cur" id="operations-0-sop-0">Receive the approved Sales Order; client orders 22kg or 50kg cylinder variants. (O1.1.1)</td><td class="cf-fut">same</td></tr>
+  <tr><td class="cf-order">2</td><td class="cf-cur" id="operations-0-sop-1">Logistics Officer schedules the delivery - vehicle, capacity, route. (O1.2.1)</td><td class="cf-fut">same</td></tr>
+  <tr><td class="cf-order">3</td><td class="cf-cur" id="operations-0-sop-2">XXX generates the <a href="forms.html#form-picklist" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-picklist&#39;);return false" title="Form: Picklist">Picklist</a> and YYY picks the LPG/products. (O1.1.2)</td><td class="cf-fut">same</td></tr>
+  <tr><td class="cf-order">4</td><td class="cf-cur" id="operations-0-sop-3">XXX generates the <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> (DR) - 2 DRs and 2 <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a> per delivery. (O1.1.3.1)</td><td class="cf-fut">same</td></tr>
+  <tr><td class="cf-order">5</td><td class="cf-cur" id="operations-0-sop-4">XXX submits the DR to Accounting to post <a href="forms.html#form-general-ledger" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-general-ledger&#39;);return false" title="Form: General Ledger">General Ledger</a> and Inventory entries. (O1.1.3.2)</td><td class="cf-fut">same</td></tr>
+  <tr><td class="cf-order">6</td><td class="cf-cur" id="operations-0-sop-5">XXX encodes the Sales Invoices to ACCPAC (O1.1.3.3)</td><td class="cf-fut">Upon writing Sales <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a>, Accounting Sales Encoder encode Sales Order using Sales-Appsheet-T5. Accounting Sales Encoder checks entry summary in Sales-Appsheet-T4.</td></tr>
+  <tr><td class="cf-order">7</td><td class="cf-cur" id="operations-0-sop-6">Helper collects the Delivery Receipts from XXX in Warehouse (may cover multiple clients on one route). (O1.1.4.1)</td><td class="cf-fut">same</td></tr>
+  <tr><td class="cf-order">8</td><td class="cf-cur" id="operations-0-sop-7"><a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> and Helper proceed to client locations. (O1.1.4.2)</td><td class="cf-fut">same</td></tr>
+  <tr><td class="cf-order">9</td><td class="cf-cur" id="operations-0-sop-8">For pickup / no-delivery orders, Warehouse gives the DR to the customer for signature instead. (O1.1.4.3)</td><td class="cf-fut">same</td></tr>
+  <tr><td class="cf-order">10</td><td class="cf-cur" id="operations-0-sop-9">In client site, Helper weighs and records the cylinders with the client (Weigh In), then carries them to area. (O1.1.5.1)</td><td class="cf-fut">same</td></tr>
+  <tr><td class="cf-order">11</td><td class="cf-cur" id="operations-0-sop-10">Client representative signs the DR, receives the new cylinders, and returns the empty cylinders. (O1.1.5.2)</td><td class="cf-fut">same</td></tr>
+  <tr><td class="cf-order">12</td><td class="cf-cur" id="operations-0-sop-11">Helper weighs the returned cylinders (Weigh Out) in the presence of Client Rep, classifies the 1-3kg residue threshold; round up or down. (O1.1.5.3)</td><td class="cf-fut">same</td></tr>
+  <tr><td class="cf-order">13</td><td class="cf-cur" id="operations-0-sop-12">Helper provides <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a> to the Client, with client representative’s countersignature, recording cylinder serial number and weight residue. (O1.1.5.4)</td><td class="cf-fut">same</td></tr>
+  <tr><td class="cf-order">14</td><td class="cf-cur" id="operations-0-sop-13"><a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> and Helper return to the plant and weighs the empty cylinders, checks the 1-3kg residue threshold again. (O1.1.6.1)</td><td class="cf-fut">same</td></tr>
+  <tr><td class="cf-order">15</td><td class="cf-cur" id="operations-0-sop-14"><a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> submits the signed DR, signed <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a> and other records to YYY Accounting. (O1.1.6.2)</td><td class="cf-fut">same</td></tr>
+  <tr><td class="cf-order">16</td><td class="cf-cur" id="operations-0-sop-15">OIC-Accounting reconciles the <a href="forms.html#form-general-ledger" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-general-ledger&#39;);return false" title="Form: General Ledger">General Ledger</a> against the signed <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> and <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a>. She encodes entries in the Sales Gsheet. No Sales-Appsheet. (O1.1.7.1)</td><td class="cf-fut">OIC-Accounting reconciles the <a href="forms.html#form-general-ledger" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-general-ledger&#39;);return false" title="Form: General Ledger">General Ledger</a> in Sales-Appsheet-T3 against the signed <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> and <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a>. No encoding needed in T3. (O1.1.7.1)</td></tr>
+  <tr><td class="cf-order">17</td><td class="cf-cur" id="operations-0-sop-16">Industrial Engineer reconciles Month-End Report (CIMER) daily. (O1.1.7.2)</td><td class="cf-fut">Industrial Engineer checks all input data in CIMER-T2. (O1.1.7.2)</td></tr>
+  <tr><td class="cf-order">18</td><td class="cf-cur" id="operations-0-sop-17">Operations Supervisor records gains from CIMER as Inv/Adj in ACCPAC. (O1.1.7.3)</td><td class="cf-fut">Operations Supervisor records gains from CIMER-T1 as Inv/Adj in ACCPAC. (O1.1.7.3)</td></tr>
+  <tr><td class="cf-order">19</td><td class="cf-cur" id="operations-0-sop-18">Industrial Engineer submits Computation Sheet for CEO’s approval (O1.1.7.4)</td><td class="cf-fut">Industrial Engineer submits Gains Summary CIMER-T2.1 for CEO’s approval</td></tr>
+  <tr><td class="cf-order">20</td><td class="cf-cur" id="operations-0-sop-19">OIC-Accounting distribute incentives via Payroll to the involved members. (O1.1.7.5)</td><td class="cf-fut"></td></tr>
+</table>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
-<li id="operations-0-gl-0">The Commercial residue classification threshold is fixed between 1-3kg; deviations are escalated to the <a href="personnel.html#personnel-warehouse-supervisor" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-warehouse-supervisor&#39;);return false" title="Personnel: Warehouse Supervisor">Warehouse Supervisor</a>, not decided ad hoc by the <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">driver</a>.</li>
+<li id="operations-0-gl-0">The Commercial residue classification threshold is fixed between 1-3kg; deviations are escalated to the Senior Plant Supervisor, not decided ad hoc by the <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">driver</a>.</li>
 <li id="operations-0-gl-1">Two DRs and two <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a> are mandatory per delivery (client copy + company copy); a delivery without a matching document pair is not closed in the GL.</li>
 <li id="operations-0-gl-2">No cylinder leaves the warehouse without a <a href="forms.html#form-picklist" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-picklist&#39;);return false" title="Form: Picklist">Picklist</a> form; no GL/Inventory posting is made without a Warehouse-submitted DR.</li>
 <li id="operations-0-gl-3">Incentive Gains are computed only from matched weigh-in/weigh-out pairs - unmatched records are held for investigation, never estimated.</li>
@@ -168,39 +193,30 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 </div>
   </div>
 </section>
-<div class="cf-print-only" aria-hidden="true">
-  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Commercial</h4>
-  <table class="cf-print-table">
-    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
-    <tr><td id="operations-0-cur-0">Paper DR/CR forms filled by hand at warehouse and client site.</td><td id="operations-0-fut-0">Odoo Sales Order auto-generates Sales Quotation, <a href="forms.html#form-picklist" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-picklist&#39;);return false" title="Form: Picklist">Picklist</a>, DR. Add the <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a>, Client’s <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a> and Team’s Incentive (also under <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a>) and GL, in one continuous workflow.</td></tr>
-    <tr><td id="operations-0-cur-1">GL reconciled manually against physical DR/CR copies.</td><td id="operations-0-fut-1">Paper DR and CR with client signature (same as current)</td></tr>
-    <tr><td id="operations-0-cur-2">Gains keyed manually - once to Google Sheets, formula and total reviews needed</td><td id="operations-0-fut-2">Gains keyed once in Odoo Sales Order. Auto-computes gains for summary, and team incentive.</td></tr>
-    <tr><td id="operations-0-cur-3">Residue judged by the <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">driver</a>/helper at point of delivery.</td><td id="operations-0-fut-3">Single-entry GL posting, removing the GSheet/ACCPAC duplicate entry.</td></tr>
-  </table>
-</div>
 
-<section class="stage-section" id="stage-2">
+<section class="stage-section" id="stage-3">
   <div class="stage-banner" onclick="toggleStage(this)">
-    <div class="stage-num"><span class="num-big">2</span><span class="num-sub">OF 5</span></div>
+    <div class="stage-num"><span class="num-big">3</span><span class="num-sub">OF 6</span></div>
     <div class="stage-info"><div class="stage-title">BULK</div><div class="stage-sub">Process Order | Delivery | Return to Plant</div></div>
     <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">Partially Confirmed</span>
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
-<li id="operations-1-sop-0"><a href="personnel.html#personnel-sales-rep" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-rep&#39;);return false" title="Personnel: Sales Rep">Sales Rep</a> receives the bulk Sales Order; the order must fill the 8-ton truck capacity. (O2.1.1.1)</li>
-<li id="operations-1-sop-1">Logistics Officer assign the lorry/trailer truck and load from the Storage Tank (<a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">stock transfer</a>, tank to truck - no cylinders involved). (O2.1.2.1)</li>
-<li id="operations-1-sop-2">XXX Weigh the loaded truck at the plant truck scale (weigh-out). (O2.1.2.2)</li>
-<li id="operations-1-sop-3">XXX Generate loading documents: <a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">Stock Transfer</a> Form, Truck Scale slip, and <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> - issued per lorry load. (O2.1.2.3)</li>
-<li id="operations-1-sop-4">Delivery and Helper deliver the bulk LPG to the industrial or commercial client site. (O2.1.3.1)</li>
-<li id="operations-1-sop-5">At the client site, helper measures the volume delivered using meter/gauge. (O2.1.3.2)</li>
-<li id="operations-1-sop-6">Client receives the bulk LPG and signs the <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a>. (O2.1.3.3)</li>
-<li id="operations-1-sop-7"><a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a>, helper and truck return to the plant and truck is weighed again (weigh-in). (O2.1.3.4)</li>
-<li id="operations-1-sop-8"><a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> returns the signed DR and xxx documents to Operations Supervisor. (O2.1.3.5)</li>
-<li id="operations-1-sop-9">Industrial Engineer computes Bulk Gains per truck - compare weigh-out vs weigh-in; should read the higher figure. (O2.1.4.1)</li>
-<li id="operations-1-sop-10">Industrial Engineer records residue in the Commercial &amp; Bulk LPG Residue Summary Gsheet, per truck. (O2.1.4.2)</li>
-<li id="operations-1-sop-11">Operations Supervisor submits documents to XXX (Accounting); record in Google Sheets and ACCPAC. (O2.1.4.3)</li>
-</ol>
+    <div class="doc-section doc-section-cf"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><table class="cf-table">
+  <tr><th class="cf-order">#</th><th class="cf-cur">Current Procedures</th><th class="cf-fut">Future Procedures</th></tr>
+  <tr><td class="cf-order">1</td><td class="cf-cur" id="operations-1-sop-0"><a href="personnel.html#personnel-sales-rep" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-rep&#39;);return false" title="Personnel: Sales Rep">Sales Rep</a> receives the bulk Sales Order; the order must fill the 8-ton truck capacity. (O2.1.1.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">2</td><td class="cf-cur" id="operations-1-sop-1">Logistics Officer assign the lorry/trailer truck and load from the Storage Tank (<a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">stock transfer</a>, tank to truck - no cylinders involved). (O2.1.2.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">3</td><td class="cf-cur" id="operations-1-sop-2">XXX Weigh the loaded truck at the plant truck scale (weigh-out). (O2.1.2.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">4</td><td class="cf-cur" id="operations-1-sop-3">XXX Generate loading documents: <a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">Stock Transfer</a> Form, Truck Scale slip, and <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> - issued per lorry load. (O2.1.2.3)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">5</td><td class="cf-cur" id="operations-1-sop-4">Delivery and Helper deliver the bulk LPG to the industrial or commercial client site. (O2.1.3.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">6</td><td class="cf-cur" id="operations-1-sop-5">At the client site, helper measures the volume delivered using meter/gauge. (O2.1.3.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">7</td><td class="cf-cur" id="operations-1-sop-6">Client receives the bulk LPG and signs the <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a>. (O2.1.3.3)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">8</td><td class="cf-cur" id="operations-1-sop-7"><a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a>, helper and truck return to the plant and truck is weighed again (weigh-in). (O2.1.3.4)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">9</td><td class="cf-cur" id="operations-1-sop-8"><a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> returns the signed DR and xxx documents to Operations Supervisor. (O2.1.3.5)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">10</td><td class="cf-cur" id="operations-1-sop-9">Industrial Engineer computes Bulk Gains per truck - compare weigh-out vs weigh-in; should read the higher figure. (O2.1.4.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">11</td><td class="cf-cur" id="operations-1-sop-10">Industrial Engineer records residue in the Commercial &amp; Bulk LPG Residue Summary Gsheet, per truck. (O2.1.4.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">12</td><td class="cf-cur" id="operations-1-sop-11">Operations Supervisor submits documents to XXX (Accounting); record in Google Sheets and ACCPAC. (O2.1.4.3)</td><td class="cf-fut"></td></tr>
+</table>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="operations-1-gl-0">Bulk orders must fill the 8-ton truck capacity before dispatch is scheduled; a partial load requires Plant Operations Officer approval as a documented exception.</li>
@@ -217,52 +233,43 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 </div>
   </div>
 </section>
-<div class="cf-print-only" aria-hidden="true">
-  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Bulk</h4>
-  <table class="cf-print-table">
-    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
-    <tr><td id="operations-1-cur-0">Truck-scale readings and Meter/gauge reading logged by hand on paper slips.</td><td id="operations-1-fut-0">Odoo Inventory stock-transfer module logs tank-to-truck and truck-to-tank movements with digital/hardcopy/summary/individual versions.</td></tr>
-    <tr><td id="operations-1-cur-1">Per-truck gain calculated by comparing two paper slips.</td><td id="operations-1-fut-1">Gains and residue computations summary are automatic from individual transactions.</td></tr>
-    <tr><td></td><td id="operations-1-fut-2">Gains per sales order are encoded as <a href="forms.html#form-credit-notes" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-credit-notes&#39;);return false" title="Form: Credit Notes">Credit Notes</a>, smooth gains computation.</td></tr>
-    <tr><td></td><td id="operations-1-fut-3">Auto-flagged gain/loss variance per truck, no manual comparison.</td></tr>
-  </table>
-</div>
 
-<section class="stage-section" id="stage-3">
+<section class="stage-section" id="stage-4">
   <div class="stage-banner" onclick="toggleStage(this)">
-    <div class="stage-num"><span class="num-big">3</span><span class="num-sub">OF 5</span></div>
+    <div class="stage-num"><span class="num-big">4</span><span class="num-sub">OF 6</span></div>
     <div class="stage-info"><div class="stage-title">DEALER</div><div class="stage-sub">Process Order | Plant Refilling &amp; Swapping | Invoice</div></div>
     <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
-<li id="operations-2-sop-0">Dealer client orders 2.5kg, 11kg or 22kg cylinder variants with <a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a> 2, and Plant visit scheduled in advance; only confirmed appointments are accommodated. (O3.1.1.1)</li>
-<li id="operations-2-sop-1"><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a> 2 creates a <a href="forms.html#form-sales-order-form" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-sales-order-form&#39;);return false" title="Form: Sales Order Form">Sales Order Form</a> noting the delivery/pickup date. (O3.1.1.2)</li>
-<li id="operations-2-sop-2"><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a> 2 forwards the orders to Credit/Collection Analyst to check for AR dues. (O3.1.1.3)</li>
-<li id="operations-2-sop-3">If with past dues, don’t serve. If with past dues but with CEO approval, good to serve. If without past dues good to serve. (O3.1.1.4)</li>
-<li id="operations-2-sop-4">Dealer arrives with empty cylinders; <a href="personnel.html#personnel-guard" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-guard&#39;);return false" title="Personnel: Guard">guard</a> records the vehicle entry and confirms tank classification. (O3.1.2.1.1)</li>
-<li id="operations-2-sop-5">Main Dealers arrive with empty cylinders to fill up 8 tons worth of cylinders. (O3.1.2.1.2)</li>
-<li id="operations-2-sop-6">Checker records cylinder quantities and issues <a href="forms.html#form-entry-exit-slip" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-entry-exit-slip&#39;);return false" title="Form: Entry/Exit Slip">Entry/Exit Slip</a> (EES). (O3.1.2.2)</li>
-<li id="operations-2-sop-7">Cylinders are refilled at the refilling area. (O3.1.2.3)</li>
-<li id="operations-2-sop-8">Checker encodes the transaction in AppSheet - this is the Refilling Report and the basis of the <a href="forms.html#form-grr" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-grr&#39;);return false" title="Form: GRR">GRR</a> (General Refilling Report). (O3.1.2.4)</li>
-<li id="operations-2-sop-9">Checker issues Loading/Unloading Truck (LUT) to the <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a>. (O3.1.2.5)</li>
-<li id="operations-2-sop-10">Security verifies the LUT; cylinder quantity must match with LUT before release. (O3.1.2.6)</li>
-<li id="operations-2-sop-11">If quantity does not match, Security flags and informs Plant Operations Officer or Senior Plant Supervisor. (O3.1.2.7)</li>
-<li id="operations-2-sop-12">Plant Operations Officer reviews and confirms the transactions and records in XXX. (O3.1.3.1)</li>
-<li id="operations-2-sop-13">Accounting verifies via AppSheet against the Cash <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> or Credit <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a>. (O3.1.3.2)</li>
-<li id="operations-2-sop-14">(covers pickup-with-terms, pickup-with-payment, and delivery-with-terms variants (O3.1.3.3)</li>
-<li id="operations-2-sop-15">Cylinder Swapping: dealer messages <a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a> 2 for a swap request. (O3.1.4.1)</li>
-<li id="operations-2-sop-16"><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a> 2 verifies the customer database provided by the Dealer. Only approved allied brands allowed. O3.1.4.2)</li>
-<li id="operations-2-sop-17"><a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a> reviews and approves before the swap proceeds. (O3.1.4.3)</li>
-<li id="operations-2-sop-18">Warehouse and Quality Supervisor handles the physical swap and keeps records. (O3.1.4.4)</li>
-<li id="operations-2-sop-19">XXX keeps a monthly record of swapped cylinders quantity, treatment and disposition. (O3.1.4.5)</li>
-</ol>
+    <div class="doc-section doc-section-cf"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><table class="cf-table">
+  <tr><th class="cf-order">#</th><th class="cf-cur">Current Procedures</th><th class="cf-fut">Future Procedures</th></tr>
+  <tr><td class="cf-order">1</td><td class="cf-cur" id="operations-2-sop-0">Dealer client orders 2.5kg, 11kg or 22kg cylinder variants with <a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a> 2, and Plant visit scheduled in advance; only confirmed appointments are accommodated. (O3.1.1.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">2</td><td class="cf-cur" id="operations-2-sop-1"><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a>2 creates a <a href="forms.html#form-sales-order-form" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-sales-order-form&#39;);return false" title="Form: Sales Order Form">Sales Order Form</a> noting the delivery/pickup date. (O3.1.1.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">3</td><td class="cf-cur" id="operations-2-sop-2"><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a>2 forwards the orders to Credit/Collection Analyst to check for AR dues. (O3.1.1.3)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">4</td><td class="cf-cur" id="operations-2-sop-3">If with past dues, don’t serve. If with past dues but with CEO approval, good to serve. If without past dues good to serve. (O3.1.1.4)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">5</td><td class="cf-cur" id="operations-2-sop-4">Dealer arrives with empty cylinders; <a href="personnel.html#personnel-guard" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-guard&#39;);return false" title="Personnel: Guard">guard</a> records the vehicle entry and confirms tank classification. (O3.1.2.1.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">6</td><td class="cf-cur" id="operations-2-sop-5">Main Dealers arrive with empty cylinders to fill up 8 tons worth of cylinders. (O3.1.2.1.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">7</td><td class="cf-cur" id="operations-2-sop-6">Checker records cylinder quantities and issues <a href="forms.html#form-entry-exit-slip" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-entry-exit-slip&#39;);return false" title="Form: Entry/Exit Slip">Entry/Exit Slip</a> (EES). (O3.1.2.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">8</td><td class="cf-cur" id="operations-2-sop-7">Cylinders are refilled at the refilling area. (O3.1.2.3)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">9</td><td class="cf-cur" id="operations-2-sop-8">Checker encodes the transaction in RFR-AppSheet. (O3.1.2.4)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">10</td><td class="cf-cur" id="operations-2-sop-9">Checker issues Loading/Unloading Truck (LUT) to the <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a>. (O3.1.2.5)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">11</td><td class="cf-cur" id="operations-2-sop-10"><a href="personnel.html#personnel-guard" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-guard&#39;);return false" title="Personnel: Guard">Guard</a> verifies the LUT; cylinder quantity must match with LUT before release. (O3.1.2.6)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">12</td><td class="cf-cur" id="operations-2-sop-11">If quantity does not match, Security flags and informs Plant Operations Officer or Senior Plant Supervisor. (O3.1.2.7)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">13</td><td class="cf-cur" id="operations-2-sop-12">Plant Operations Officer reviews and confirms the transactions in RFR-Appsheet. (O3.1.3.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">14</td><td class="cf-cur" id="operations-2-sop-13">OIC-Accounting verifies via RFR-AppSheet against the Cash <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> or Credit <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a>. (O3.1.3.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">15</td><td class="cf-cur" id="operations-2-sop-14">(covers pickup-with-terms, pickup-with-payment, and delivery-with-terms variants (O3.1.3.3)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">16</td><td class="cf-cur" id="operations-2-sop-15">Cylinder Swapping: dealer messages <a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a>2 for a swap request. (O3.1.4.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">17</td><td class="cf-cur" id="operations-2-sop-16"><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a>2 verifies the customer database provided by the Dealer. Only approved allied brands allowed. O3.1.4.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">18</td><td class="cf-cur" id="operations-2-sop-17">CEO reviews and approves before the swap proceeds. (O3.1.4.3)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">19</td><td class="cf-cur" id="operations-2-sop-18">Warehouse and Quality Supervisor handles the physical swap and keeps records. (O3.1.4.4)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">20</td><td class="cf-cur" id="operations-2-sop-19">Senior Plant Supervisor keeps a monthly record of swapped cylinders quantity, treatment and disposition. (O3.1.4.5)</td><td class="cf-fut"></td></tr>
+</table>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="operations-2-gl-0">Only confirmed, scheduled appointments are accommodated at the plant - walk-in dealer refills are not processed without a prior booking.</li>
-<li id="operations-2-gl-1">AppSheet entry and the official receipt must match in quantity before a transaction is released; a mismatch is held at the gate.</li>
-<li id="operations-2-gl-2">Cylinder swapping is restricted to approved allied brands only and requires <a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a>&#x27;s approval.</li>
+<li id="operations-2-gl-1">RFR-AppSheet entry and the official receipt must match in quantity before a transaction is released; a mismatch is held at the gate.</li>
+<li id="operations-2-gl-2">Cylinder swapping is restricted to approved allied brands only and requires CEO&#x27;s approval.</li>
 <li id="operations-2-gl-3">Dealers must provide their own customer database for swap request.</li>
 </ul>
 </div>
@@ -275,35 +282,26 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 </div>
   </div>
 </section>
-<div class="cf-print-only" aria-hidden="true">
-  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Dealer</h4>
-  <table class="cf-print-table">
-    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
-    <tr><td id="operations-2-cur-0">Paper EES/LUT slips at the gate and refilling area.</td><td id="operations-2-fut-0">One mobile app covers booking -&gt; gate entry -&gt; refill logging -&gt; accounting verification in a single record.</td></tr>
-    <tr><td id="operations-2-cur-1"><a href="personnel.html#personnel-guard" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-guard&#39;);return false" title="Personnel: Guard">Guard</a> radio call to Production to trigger refilling.</td><td id="operations-2-fut-1">Swap approvals become a structured digital workflow instead of chat threads, with automatic allied-brand validation.</td></tr>
-    <tr><td id="operations-2-cur-2">AppSheet is semi-digital but still reconciled by hand against paper receipts.</td><td></td></tr>
-    <tr><td id="operations-2-cur-3">Swap approval runs through ad hoc chat screenshots.</td><td></td></tr>
-  </table>
-</div>
 
-<section class="stage-section" id="stage-4">
+<section class="stage-section" id="stage-5">
   <div class="stage-banner" onclick="toggleStage(this)">
-    <div class="stage-num"><span class="num-big">4</span><span class="num-sub">OF 5</span></div>
+    <div class="stage-num"><span class="num-big">5</span><span class="num-sub">OF 6</span></div>
     <div class="stage-info"><div class="stage-title">SEMI-DEALER</div><div class="stage-sub">Process Order | Delivery/Pickup | Collect Payment</div></div>
     <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">Partially confirmed</span>
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
-<li id="operations-3-sop-0">XXX gets semi-dealer client orders for 11kg or 2.5kg cylinders. (O4.1.1.1)</li>
-<li id="operations-3-sop-1"><a href="personnel.html#personnel-sales-rep" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-rep&#39;);return false" title="Personnel: Sales Rep">Sales Rep</a> informs Logistics Officer for delivery. (O4.1.1.2)</li>
-<li id="operations-3-sop-2">Warehouse staff load cylinders for semi-dealer orders with buffer cylinders. (O4.1.2.1)</li>
-<li id="operations-3-sop-3">Checker issues LUT (O4.1.2.2)</li>
-<li id="operations-3-sop-4">Security <a href="personnel.html#personnel-guard" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-guard&#39;);return false" title="Personnel: Guard">guard</a> checks LUT for correct cylinder quantity before truck exits Plant. (O4.1.2.3)</li>
-<li id="operations-3-sop-5">Upon delivery to clients, Helper collects payment via cash/COD at point of delivery or pickup. (O4.1.3.1)</li>
-<li id="operations-3-sop-6">Upon Plant return, Helper returns payments, cash invoices to OIC-Accounting (O4.1.3.2)</li>
-<li id="operations-3-sop-7">OIC-Accounting tallies the Cash Invoices, cash payments and deposits the cash to the bank. (O4.1.3.3)</li>
-</ol>
+    <div class="doc-section doc-section-cf"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><table class="cf-table">
+  <tr><th class="cf-order">#</th><th class="cf-cur">Current Procedures</th><th class="cf-fut">Future Procedures</th></tr>
+  <tr><td class="cf-order">1</td><td class="cf-cur" id="operations-3-sop-0">XXX gets semi-dealer client orders for 11kg or 2.5kg cylinders. (O4.1.1.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">2</td><td class="cf-cur" id="operations-3-sop-1"><a href="personnel.html#personnel-sales-rep" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-rep&#39;);return false" title="Personnel: Sales Rep">Sales Rep</a> informs Logistics Officer for delivery. (O4.1.1.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">3</td><td class="cf-cur" id="operations-3-sop-2">Warehouse staff load cylinders for semi-dealer orders with buffer cylinders. (O4.1.2.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">4</td><td class="cf-cur" id="operations-3-sop-3">Checker issues LUT (O4.1.2.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">5</td><td class="cf-cur" id="operations-3-sop-4">Security <a href="personnel.html#personnel-guard" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-guard&#39;);return false" title="Personnel: Guard">guard</a> checks LUT for correct cylinder quantity before truck exits Plant. (O4.1.2.3)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">6</td><td class="cf-cur" id="operations-3-sop-5">Upon delivery to clients, Helper collects payment via cash/COD at point of delivery or pickup. (O4.1.3.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">7</td><td class="cf-cur" id="operations-3-sop-6">Upon Plant return, Helper returns payments, cash invoices to OIC-Accounting (O4.1.3.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">8</td><td class="cf-cur" id="operations-3-sop-7">OIC-Accounting tallies the Cash Invoices, cash payments and deposits the cash to the bank. (O4.1.3.3)</td><td class="cf-fut"></td></tr>
+</table>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="operations-3-gl-0">Semi-dealer order fulfilment is modeled on the Dealer plant-refilling process</li>
@@ -319,37 +317,31 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
     <div class="doc-section gap-note-wrap"><div class="gap-note"><b>Data gap flagged for client confirmation</b>xxx</div></div>
   </div>
 </section>
-<div class="cf-print-only" aria-hidden="true">
-  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Semi-dealer</h4>
-  <table class="cf-print-table">
-    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
-    <tr><td id="operations-3-cur-0">xxx</td><td id="operations-3-fut-0">xxx</td></tr>
-  </table>
-</div>
 
-<section class="stage-section" id="stage-5">
+<section class="stage-section" id="stage-6">
   <div class="stage-banner" onclick="toggleStage(this)">
-    <div class="stage-num"><span class="num-big">5</span><span class="num-sub">OF 5</span></div>
+    <div class="stage-num cross-num"><span class="num-big">6</span><span class="num-sub">OF 6</span></div>
     <div class="stage-info"><div class="stage-title">OVERALL</div><div class="stage-sub">Purchase Order | Stock Transfer | Refill | Floor Stock</div></div>
     <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
-<li id="operations-4-sop-0">Logistics Officer forwards the <a href="forms.html#form-purchase-order" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-purchase-order&#39;);return false" title="Form: Purchase Order">Purchase Order</a> to the Refinery Supplier and schedules the inbound Lorry Truck delivery. (C5.1.1.1)</li>
-<li id="operations-4-sop-1">Plant Operations Officer receives the Lorry Trucks, collects the <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> and <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> from the <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a>, fills out the <a href="forms.html#form-receiving-report" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-receiving-report&#39;);return false" title="Form: Receiving Report">Receiving Report</a> (RR) and unloads contents to the Storage Tank. (C5.1.1.2)</li>
-<li id="operations-4-sop-2">Plant Operations Officer forwards XXX documents to Logistics Officer. (C5.1.1.3)</li>
-<li id="operations-4-sop-3">Logistics Officer records purchases in ACCPAC. (C5.1.1.4)</li>
-<li id="operations-4-sop-4">Logistics Officer uses prices of past orders for pricing matrix recommendations. (C5.1.1.5)</li>
-<li id="operations-4-sop-5">Operations Supervisor measures the content volume using a gauge and writes the reading. (C5.1.2.1)</li>
-<li id="operations-4-sop-6">Operations Supervisor logs further daily readings as a separate entry. (C5.1.2.2)</li>
-<li id="operations-4-sop-7"><a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">Stock Transfer</a>: Operations Supervisor oversees cylinder refill from the Storage Tank following <a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a>. (C5.1.3.1)</li>
-<li id="operations-4-sop-8">Operations Supervisor tracks refill using AppSheet. (C5.1.3.2)</li>
-<li id="operations-4-sop-9">Operations Supervisor tracks residue of two tanks in two categories, Regular and WIWO, both affecting inventory and billing. (C5.1.3.3)</li>
-<li id="operations-4-sop-10">Pull-out schedules and dates at client sites are tracked against a company Pull-out Calendar. (C5.1.4.1)</li>
-<li id="operations-4-sop-11">Logistics Officer purchases cylinders annually with individual serial numbers. (C5.1.4.2)</li>
-<li id="operations-4-sop-12">Warehouse and Quality Supervisor repaints and counts cylinders, maintains cylinder quality record. (C5.1.4.3)</li>
-</ol>
+    <div class="doc-section doc-section-cf"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><table class="cf-table">
+  <tr><th class="cf-order">#</th><th class="cf-cur">Current Procedures</th><th class="cf-fut">Future Procedures</th></tr>
+  <tr><td class="cf-order">1</td><td class="cf-cur" id="operations-4-sop-0">Logistics Officer forwards the <a href="forms.html#form-purchase-order" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-purchase-order&#39;);return false" title="Form: Purchase Order">Purchase Order</a> to the Refinery Supplier and schedules the inbound Lorry Truck delivery. (C5.1.1.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">2</td><td class="cf-cur" id="operations-4-sop-1">Plant Operations Officer receives the Lorry Trucks, collects the <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> and <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> from the <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a>, fills out the <a href="forms.html#form-receiving-report" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-receiving-report&#39;);return false" title="Form: Receiving Report">Receiving Report</a> (RR) and unloads contents to the Storage Tank. (C5.1.1.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">3</td><td class="cf-cur" id="operations-4-sop-2">Plant Operations Officer forwards XXX documents to Logistics Officer. (C5.1.1.3)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">4</td><td class="cf-cur" id="operations-4-sop-3">Logistics Officer records purchases in ACCPAC. (C5.1.1.4)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">5</td><td class="cf-cur" id="operations-4-sop-4">Logistics Officer uses prices of past orders for pricing matrix recommendations. (C5.1.1.5)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">6</td><td class="cf-cur" id="operations-4-sop-5">Operations Supervisor measures the content volume using a gauge and writes the reading. (C5.1.2.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">7</td><td class="cf-cur" id="operations-4-sop-6">Operations Supervisor logs further daily readings as a separate entry. (C5.1.2.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">8</td><td class="cf-cur" id="operations-4-sop-7"><a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">Stock Transfer</a>: Operations Supervisor oversees cylinder refill from the Storage Tank following <a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a>. (C5.1.3.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">9</td><td class="cf-cur" id="operations-4-sop-8">Operations Supervisor tracks refill using RFR-AppSheet. (C5.1.3.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">10</td><td class="cf-cur" id="operations-4-sop-9">Operations Supervisor tracks residue of two tanks in two categories, Regular and WIWO, both affecting inventory and billing. (C5.1.3.3)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">11</td><td class="cf-cur" id="operations-4-sop-10">Pull-out schedules and dates at client sites are tracked against a company Pull-out Calendar. (C5.1.4.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">12</td><td class="cf-cur" id="operations-4-sop-11">Logistics Officer purchases cylinders annually with individual serial numbers. (C5.1.4.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">13</td><td class="cf-cur" id="operations-4-sop-12">Warehouse and Quality Supervisor repaints and counts cylinders, maintains cylinder quality record. (C5.1.4.3)</td><td class="cf-fut"></td></tr>
+</table>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="operations-4-gl-0">Storage Tank <a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">stock transfer</a> to cylinders must follow <a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a>; every batch is filled out in <a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a> sequence with Plant Operations Officer approval.</li>
@@ -363,33 +355,6 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <tr><td>Storage Tank <a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">stock transfer</a> to cylinders</td><td>FIFO sequence</td><td>Operations Supervisor</td><td>xxx</td><td><b>Plant Operations Officer</b></td><td><span class="control-chip">Tank 1 / Tank 2 gauge log</span><span class="control-chip">FIFO batch order</span></td></tr>
 <tr><td>Cylinder lifecycle (repaint/retest)</td><td>Per DOE lifespan schedule</td><td>Warehouse and Quality Supervisor</td><td>xxx</td><td><b><a href="personnel.html#personnel-plant-manager" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-manager&#39;);return false" title="Personnel: Plant Manager">Plant Manager</a></b></td><td><span class="control-chip">Serial + batch number tracking</span></td></tr>
 </table>
-</div>
-  </div>
-</section>
-<div class="cf-print-only" aria-hidden="true">
-  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Overall</h4>
-  <table class="cf-print-table">
-    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
-    <tr><td id="operations-4-cur-0">Gauge readings and RR logged on paper / Google Sheets.</td><td id="operations-4-fut-0">Gauge readings mobile-encoded, into the Odoo Inventory module.</td></tr>
-    <tr><td id="operations-4-cur-1"><a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a> sequencing tracked manually by staff log sheets.</td><td id="operations-4-fut-1">A single cylinder-asset register linking serial number, batch, refill history, and lifecycle status.</td></tr>
-    <tr><td id="operations-4-cur-2">Cylinder lifespan tracked in a spreadsheet separate from the refilling records.</td><td id="operations-4-fut-2"><a href="subprocess.html#subprocess-stock-transfer" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-stock-transfer&#39;);return false" title="Subprocess: Stock Transfer">Stock Transfer</a> from Storage Tank to cylinders are mobile-encoded into Odoo Inventory</td></tr>
-    <tr><td></td><td id="operations-4-fut-3">Cylinder lifespan tracked in Odoo Manufacturing/Inventory modules.</td></tr>
-    <tr><td></td><td id="operations-4-fut-4"><a href="subprocess.html#subprocess-fifo" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-fifo&#39;);return false" title="Subprocess: FIFO">FIFO</a> sequencing tracked manually by staff log sheets.</td></tr>
-  </table>
-</div>
-
-<section class="cross-section" id="cross-stage">
-  <div class="cross-banner" onclick="toggleStage(this)">
-    <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>
-    <div class="stage-info"><div class="stage-title" style="color:#7030A0">CROSS-STAGE GOVERNANCE</div><div class="stage-sub" style="color:#7c3aed">Escalation and traceability rules that apply on top of every Operations approval row above.</div></div>
-    <span class="stage-arrow" style="color:#7030A0">&#9662;</span>
-  </div>
-  <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
-<li id="cross-gl-0">The 1-3kg residue threshold is fixed company policy; <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> or Helper cannot round outside that band without <a href="personnel.html#personnel-warehouse-supervisor" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-warehouse-supervisor&#39;);return false" title="Personnel: Warehouse Supervisor">Warehouse Supervisor</a> escalation.</li>
-<li id="cross-gl-1">Gains, losses, and incentives are computed only from a matched pair of weigh-in and weigh-out readings. An unmatched reading is held for investigation, never estimated.</li>
-<li id="cross-gl-2">Every cylinder is tracked by serial number and batch number for its full lifecycle, including repaint/retest - a cylinder without a traceable batch number does not re-enter circulation.</li>
-</ul>
 </div>
   </div>
 </section>
@@ -408,8 +373,36 @@ function toggleStage(el){var sec=el.closest('.stage-section')||el.closest('.cros
 function expandAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.add('open')})}
 function collapseAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.remove('open')})}
 function printShortBond(){var s=document.createElement('style');s.id='psb';s.innerHTML='@page{size:8.5in 14in;margin:0.5in 0.6in}';document.head.appendChild(s);expandAll();window.print();setTimeout(function(){var e=document.getElementById('psb');if(e)e.remove()},1000)}
-function scrollToAnchor(id){var el=document.getElementById(id);if(!el)return;var stage=el.closest('.stage-section')||el.closest('.cross-section');if(stage)stage.classList.add('open');setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='2px solid var(--accent)';setTimeout(function(){el.style.outline=''},1800)},180)}
+function scrollToAnchor(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  var stage=el.closest('.stage-section')||el.closest('.cross-section');
+  var body=stage?stage.querySelector('.stage-body'):null;
+  var wasOpen=!stage||stage.classList.contains('open');
+  if(stage)stage.classList.add('open');
+  function doScroll(){
+    el.scrollIntoView({behavior:'smooth',block:'center'});
+    el.style.outline='2px solid var(--accent)';
+    setTimeout(function(){el.style.outline=''},1800);
+  }
+  // .stage-body's max-height transition is .4s -- scrolling before it
+  // finishes expanding lands on the pre-expansion position, short of the
+  // real target. Wait for transitionend (with a timeout fallback in case it
+  // doesn't fire) instead of guessing a delay.
+  if(!wasOpen&&body){
+    var done=false;
+    function onEnd(e){if(e.target!==body)return;done=true;body.removeEventListener('transitionend',onEnd);doScroll();}
+    body.addEventListener('transitionend',onEnd);
+    setTimeout(function(){if(!done){body.removeEventListener('transitionend',onEnd);doScroll();}},450);
+  }else{
+    doScroll();
+  }
+}
 document.querySelectorAll('.topnav a').forEach(function(link){link.addEventListener('click',function(){var hash=link.getAttribute('href');if(!hash||!hash.startsWith('#'))return;var t=document.querySelector(hash);if(t)t.classList.add('open')});});
+(function(){
+  var hash=window.location.hash.slice(1);
+  if(hash)scrollToAnchor(hash);
+})();
 </script>
 </body>
 </html>

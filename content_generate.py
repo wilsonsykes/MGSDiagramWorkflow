@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
 """
-Pilot content pipeline: reads content/*.tsv and regenerates the corresponding
-JSON/HTML source files. Currently covers two pieces only:
-  - subprocess.html                (fully, from content/subprocess.tsv)
-  - 02_operations_content.json     (Operations > Commercial stage only, from
-                                     content/stages.tsv + items.tsv + approval_matrix.tsv)
+Content pipeline: reads content/*.tsv and regenerates the corresponding
+JSON/HTML source files:
+  - subprocess.html, forms.html              (flat term-card lists, from
+                                               subprocess.tsv / forms.tsv)
+  - personnel.html                           (section-grouped term-card list,
+                                               from personnel.tsv)
+  - 02/03/04_*_content.json stages           (every stage listed in
+                                               content/stages.tsv, from
+                                               stages.tsv + items.tsv +
+                                               approval_matrix.tsv)
 
-Everything else in those files (other Operations stages, Personnel, Forms,
-Sales, Accounting, Main) is left untouched. Run with:
+Main is left untouched. Run with:
     python content_generate.py
 """
 import csv
@@ -30,6 +34,15 @@ SUBPROCESS_ALIASES = {
     "Fulfil Sales Order": "subprocess-fulfil-order",
     "Commercial Gains": "subprocess-compute-commercial-gains",
     "Operational Gains": "subprocess-compute-operational-gains",
+}
+PERSONNEL_ALIASES = {
+    "Jefrey": "personnel-jef",
+    "Jabert": "personnel-it-head",
+    "Delivery Helper": "personnel-pahinante",
+}
+FORMS_ALIASES = {
+    "Loading/Unloading Truck Forms (LUT)": "form-lut-forms",
+    "General Refilling Report (GRR)": "form-grr",
 }
 
 
@@ -71,9 +84,14 @@ def build_stage_from_tsv(tab, stage_name):
     def section(name):
         return [r["Text"] for r in items if r["Section"] == name and r["Text"].strip()]
 
-    current_rows = [r for r in items if r["Section"] == "Current"]
-    current_list = [r["Text"] for r in current_rows if r["Text"].strip()]
-    future_list = [r.get("Future", "") for r in current_rows if r.get("Future", "").strip()]
+    # SOP rows carry a paired "Future" cell (Future Procedures) right on the
+    # same row as the current-procedure text, so sop_steps and future_procedures
+    # are always exactly the same length -- one future slot per current step,
+    # blank until someone fills it in via the TSV.
+    sop_pairs = [(r["Text"], r.get("Future", "").strip())
+                 for r in items if r["Section"] == "SOP" and r["Text"].strip()]
+    sop_steps = [t for t, _ in sop_pairs]
+    future_procedures = [f for _, f in sop_pairs]
 
     appr_rows = [r for r in read_tsv(CONTENT_DIR / "approval_matrix.tsv")
                  if r["Tab"] == tab and r["Stage"] == stage_name]
@@ -95,11 +113,13 @@ def build_stage_from_tsv(tab, stage_name):
         "romaji": stage_name,
         "english": meta.get("English", ""),
         "badge": badge,
-        "sop_steps": section("SOP"),
+        "sop_steps": sop_steps,
         "guidelines": section("Guidelines"),
         "approval_matrix": approval_matrix,
-        "current_future": {"current": current_list, "future": future_list},
+        "future_procedures": future_procedures,
     }
+    if meta.get("BadgeLabel"):
+        stage["badge_label"] = meta["BadgeLabel"]
     if meta.get("GapNote"):
         stage["gap_note"] = meta["GapNote"]
     if meta.get("Sources"):
@@ -107,21 +127,36 @@ def build_stage_from_tsv(tab, stage_name):
     return stage
 
 
-def patch_operations_commercial():
-    path = ROOT / "02_operations_content.json"
-    content = load_json(path)
-    new_stage = build_stage_from_tsv("Operations", "Commercial")
-    replaced = False
-    for i, s in enumerate(content["stages"]):
-        if s["romaji"] == "Commercial":
-            content["stages"][i] = new_stage
-            replaced = True
-            break
-    if not replaced:
-        raise SystemExit("Commercial stage not found in 02_operations_content.json")
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(content, f, indent=2, ensure_ascii=False)
-    print(f"patched {path.name}: Commercial stage regenerated from content/*.tsv")
+JSON_FILES = {
+    "Operations": "02_operations_content.json",
+    "Sales": "03_sales_content.json",
+    "Accounting": "04_accounting_content.json",
+}
+
+
+def patch_all_stages():
+    """Patch every stage listed in content/stages.tsv into its tab's JSON
+    file, grouped by Tab so each file is loaded/written once."""
+    stage_rows = read_tsv(CONTENT_DIR / "stages.tsv")
+    by_tab = {}
+    for r in stage_rows:
+        by_tab.setdefault(r["Tab"], []).append(r["Stage"])
+
+    for tab, stage_names in by_tab.items():
+        fname = JSON_FILES.get(tab)
+        if not fname:
+            raise SystemExit(f"No JSON file mapping for Tab {tab!r} in stages.tsv")
+        path = ROOT / fname
+        content = load_json(path)
+        by_romaji = {s["romaji"]: i for i, s in enumerate(content["stages"])}
+        for stage_name in stage_names:
+            new_stage = build_stage_from_tsv(tab, stage_name)
+            if stage_name not in by_romaji:
+                raise SystemExit(f"{stage_name!r} stage not found in {fname}")
+            content["stages"][by_romaji[stage_name]] = new_stage
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump(content, f, indent=2, ensure_ascii=False)
+        print(f"patched {path.name}: {', '.join(stage_names)} regenerated from content/*.tsv")
 
 
 # ---------------- subprocess.html: TSV -> full regeneration ----------------
@@ -141,16 +176,39 @@ def build_refchip_lookup(filename):
     return lookup
 
 
-def regenerate_subprocess_html():
-    rows = read_tsv(CONTENT_DIR / "subprocess.tsv")
+def render_term_card(name, id_prefix, term_tag, chips, all_cross_terms, row, extra_chips_html=''):
+    """One .term-card: bar (name/tag/dept/role/ref-chips) + Field1/Field2 body.
+    Shared by the flat (subprocess/forms) and sectioned (personnel) layouts."""
+    card_id = f'{id_prefix}-{slug(name)}'
+    h = f'  <div class="term-card" id="{card_id}">\n'
+    h += f'    <div class="term-bar" onclick="toggle(this)">\n      <span class="term-name">{esc(name)}</span>\n      <span class="term-tag">{term_tag}</span>\n'
+    h += extra_chips_html
+    if chips:
+        h += f'      {chips}\n'
+    h += '      <span class="term-arrow">&#9662;</span>\n    </div>\n'
+    # Don't let a card's own name link to itself when it appears in its own text.
+    card_cross_terms = [t for t in all_cross_terms if t['term'].lower() != name.lower()]
+    h += '    <div class="term-body"><div class="term-inner">\n'
+    for label_key, value_key in (("Field1Label", "Field1Value"), ("Field2Label", "Field2Value")):
+        label, value = row.get(label_key, ""), row.get(value_key, "")
+        if label and value:
+            h += f'      <div><div class="td-label">{esc(label)}</div><div class="td-value">{link_and_esc(value, card_cross_terms)}</div></div>\n'
+    h += '    </div></div>\n  </div>\n\n'
+    return card_id, h
+
+
+def regenerate_flat_terms_html(filename, tsv_name, term_tag, id_prefix, aliases):
+    """Regenerate a flat (non-sectioned) term-card page: subprocess.html or
+    forms.html, both a single <div class="terms-list" id="terms-list">."""
+    rows = read_tsv(CONTENT_DIR / tsv_name)
     if not rows:
-        print("content/subprocess.tsv not found or empty, skipping subprocess.html")
+        print(f"content/{tsv_name} not found or empty, skipping {filename}")
         return
 
-    old_chips = build_refchip_lookup("subprocess.html")
+    old_chips = build_refchip_lookup(filename)
     all_cross_terms = load_cross_terms(str(TERMS_FILE))
 
-    path = ROOT / "subprocess.html"
+    path = ROOT / filename
     with open(path, encoding="utf-8") as f:
         html_ = f.read()
     head, _, _ = html_.partition('<div class="terms-list" id="terms-list">')
@@ -160,36 +218,72 @@ def regenerate_subprocess_html():
     body = '<div class="terms-list" id="terms-list">\n\n'
     for row in rows:
         name = row["Name"]
-        card_id = f'subprocess-{slug(name)}'
-        alias = SUBPROCESS_ALIASES.get(name)
-        chips = old_chips.get(name, "")
-
+        alias = aliases.get(name)
         if alias:
             body += f'  <a id="{alias}" style="position:relative;top:-90px" aria-hidden="true"></a>\n'
-        body += f'  <div class="term-card" id="{card_id}">\n'
-        body += f'    <div class="term-bar" onclick="toggle(this)">\n      <span class="term-name">{esc(name)}</span>\n      <span class="term-tag">Subprocess</span>\n'
-        if chips:
-            body += f'      {chips}\n'
-        body += '      <span class="term-arrow">&#9662;</span>\n    </div>\n'
-        # Don't let a card's own name link to itself when it appears in its own text.
-        card_cross_terms = [t for t in all_cross_terms if t['term'].lower() != name.lower()]
-
-        body += '    <div class="term-body"><div class="term-inner">\n'
-        for label_key, value_key in (("Field1Label", "Field1Value"), ("Field2Label", "Field2Value")):
-            label, value = row.get(label_key, ""), row.get(value_key, "")
-            if label and value:
-                body += f'      <div><div class="td-label">{esc(label)}</div><div class="td-value">{link_and_esc(value, card_cross_terms)}</div></div>\n'
-        body += '    </div></div>\n  </div>\n\n'
+        _, card_html = render_term_card(name, id_prefix, term_tag, old_chips.get(name, ""), all_cross_terms, row)
+        body += card_html
     body += '</div><!-- /terms-list -->\n\n'
 
     with open(path, "w", encoding="utf-8") as f:
         f.write(head + body + tail)
-    print(f"regenerated {path.name} from content/subprocess.tsv ({len(rows)} entries)")
+    print(f"regenerated {path.name} from content/{tsv_name} ({len(rows)} entries)")
+
+
+def regenerate_personnel_html():
+    """Regenerate personnel.html: grouped into <div class="section-label">...
+    <div class="terms-list">...</div> blocks by content/personnel.tsv's
+    Section column, in the order sections first appear, with an optional
+    dept-chip and role-chip per card."""
+    rows = read_tsv(CONTENT_DIR / "personnel.tsv")
+    if not rows:
+        print("content/personnel.tsv not found or empty, skipping personnel.html")
+        return
+
+    old_chips = build_refchip_lookup("personnel.html")
+    all_cross_terms = load_cross_terms(str(TERMS_FILE))
+
+    path = ROOT / "personnel.html"
+    with open(path, encoding="utf-8") as f:
+        html_ = f.read()
+    head, _, _ = html_.partition('<div class="section-label">')
+    _, _, tail_after = html_.partition('<script>')
+    tail = '<script>' + tail_after
+
+    sections = []
+    for r in rows:
+        if not sections or sections[-1][0] != r["Section"]:
+            sections.append((r["Section"], []))
+        sections[-1][1].append(r)
+
+    body = ''
+    for i, (section_name, section_rows) in enumerate(sections):
+        style = ' style="margin-top:8px"' if i > 0 else ''
+        body += f'<div class="section-label"{style}>{esc(section_name)}</div>\n<div class="terms-list">\n\n'
+        for row in section_rows:
+            name = row["Name"]
+            alias = PERSONNEL_ALIASES.get(name)
+            if alias:
+                body += f'  <a id="{alias}" style="position:relative;top:-90px" aria-hidden="true"></a>\n'
+            extra_chips = ''
+            if row.get("Department"):
+                extra_chips += f'      <span class="dept-chip">{esc(row["Department"])}</span>\n'
+            if row.get("RoleChip"):
+                extra_chips += f'      <span class="role-chip">{esc(row["RoleChip"])}</span>\n'
+            _, card_html = render_term_card(name, "personnel", "Personnel", old_chips.get(name, ""), all_cross_terms, row, extra_chips)
+            body += card_html
+        body += '</div>\n'
+
+    with open(path, "w", encoding="utf-8") as f:
+        f.write(head + body + tail)
+    print(f"regenerated {path.name} from content/personnel.tsv ({len(rows)} entries)")
 
 
 def main():
-    patch_operations_commercial()
-    regenerate_subprocess_html()
+    patch_all_stages()
+    regenerate_flat_terms_html("subprocess.html", "subprocess.tsv", "Subprocess", "subprocess", SUBPROCESS_ALIASES)
+    regenerate_flat_terms_html("forms.html", "forms.tsv", "Form", "form", FORMS_ALIASES)
+    regenerate_personnel_html()
     print("content_generate.py done.")
 
 

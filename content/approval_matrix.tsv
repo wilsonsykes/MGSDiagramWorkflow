@@ -4,3 +4,42 @@ Operations	Commercial	2	Cylinder pick & DR issuance	-	Warehouse Staff	Senior Pla
 Operations	Commercial	3	GL & Inventory posting	-	Warehouse Staff (submits DR)	Operations Supervisor	Operations Supervisor	DR-GL reconciliation
 Operations	Commercial	4	Residue classification	1-3kg variance	Helper (weighs)	Driver	Senior Plant Supervisor (if disputed)	Dual weigh-in/out | Credit Note w/ control #
 Operations	Commercial	5	Incentive computation & payout	-	Industrial Engineer	Industrial Engineer	CEO	Weigh-in=weigh-out match | GSheet
+Operations	Bulk	1	Bulk order load-out	Full 8-ton capacity (exception if partial)	xxx	xxx	Plant Operations Officer	Truck-scale weigh-out | RR + DR + Truck Scale slip set
+Operations	Bulk	2	Client-site volume delivery		Driver	Client (signs DR)	-	Meter/pressure-gauge reading logged
+Operations	Bulk	3	Per-truck gain computation		Industrial Engineer	Acctg Manager	CEO	Weigh-out vs weigh-in match | Residue Summary log
+Operations	Dealer	1	Plant refill scheduling		Sales Assistant 2	Operations Supervisor	Credit/Collection Analyst	Confirmed-appointment-only rule
+Operations	Dealer	2	Cylinder refill & GRR posting		Checker	Plant Operations Officer	Accounting Manager	AppSheet = receipt quantity match | EES / LUT paired documents
+Operations	Dealer	3	Cylinder swap (allied brands only)	Allied-brand list only	Dealer (request)	Warehouse & Quality Supervisor	Sir RY	Photo evidence | Group-chat approval trail | Monthly swap log
+Operations	Semi-dealer	1	Semi-dealer order fulfilment		Sales Assistant	Warehouse Staff / Checker	- (COD, no credit approval needed)	Cash collected before/at release
+Operations	Semi-dealer	2	Semi-dealer order payments		Helper	OIC-Accounting	Accounting Manager	Cash tallies with Cash Invoices
+Operations	Overall	1	Inbound PO & Lorry Truck receiving		Logistics Officer	Plant Operations Officer	CEO	RR filled before unload | DR + Invoice matched to PO
+Operations	Overall	2	Storage Tank stock transfer to cylinders	FIFO sequence	Operations Supervisor	xxx	Plant Operations Officer	Tank 1 / Tank 2 gauge log | FIFO batch order
+Operations	Overall	3	Cylinder lifecycle (repaint/retest)	Per DOE lifespan schedule	Warehouse and Quality Supervisor	xxx	Plant Manager	Serial + batch number tracking
+Sales	Commercial	1	Draft order & upsell review		Sales Assistant 1	Regional Sales Manager	CEO	Sales history check | Route/inventory cross-check
+Sales	Commercial	2	Order confirmation & control numbering		Regional Sales Manager	xxx	Accounting Manager	Non-editable control number
+Sales	Commercial	3	Post-sales reconciliation		Sales Assistant 1	Operations OIC (validates DR)	Regional Sales Manager (consolidates)	monitors sales target hit and actual deliveries
+Sales	Bulk	1	Bulk order intake (inherits Commercial flow)	8-ton truck fill	Sales Assistant 1	Regional Sales Manager	CEO	Same controls as Commercial | Exceptions pending
+Sales	Dealer	1	Dealer order & pricing	Within per-dealer pricing buffer	Sales Assistant 2	Sales Manager	- (within buffer, no separate approval)	Min. 50-cylinder rule | Digital Sales Order/Invoice
+Sales	Dealer	2	Cylinder swap / marketing support / pricing concern		Sales Assistant 2	Warehouse & Quality Supervisor, Senior Plant Supervisor	Sir RY, Sir CDV (for mkting support) Operations Officer logs	Signed swap form | Photo/document requirements
+Sales	Dealer	3	New Dealer Accreditation	Min. 50 cylinders, no territory overlap	Applicant / Sales Assistant 2	DOE liaison	Makati Office	DTI/BIR/Business Permit set | SPA | Processing fee receipt
+Sales	Semi-dealer	1	Semi-dealer order & pricing	SRP, then MPL by volume/zone	Sales Assistant	Sales Manager (validates schedule/terms)	Sales Manager	Portal or call intake | SRP-then-MPL sequence
+Sales	Semi-dealer	2	Delivery line-up & routing		Sales Assistant	Purchaser/Dispatcher	Purchaser/Dispatcher	Route review before dispatch
+Sales	Overall	1	Sales Performance Report		IT Manager	AVP Sales	AVP Sales (prints/verifies)	SPR formula fields | GPM per kg check
+Sales	Overall	2	Pricing Matrix decision		Regional Sales Manager (sets up)	Logistics Officer, Operations Supervisor, Audit log by IT Manager	Sir RY	General Meeting
+Sales	Overall	3	Price cascade to channels		Regional Sales Manager	Cascade through one’s Respective channels	-	Multi-channel cascade checklist
+Sales	Overall	4	Sales Quota setting		Regional Sales Manager	AVP Sales	Sir RY	Daily/weekly update by Sales Assistant
+Accounting	Commercial	1	Invoice issuance (past-dues check)	Supervisor override for passable past dues	Acctg Staff	Acctg Supervisor	Acctg Supervisor (orders with past dues)	AR check before invoice | 3-way flag: none / passable / blocked
+Accounting	Commercial	2	Receivables close-out		Acctg Staff	Acctg Supervisor	Acctg Supervisor	Monthly Aged Receivables print | Write-off/Loss summary
+Accounting	Commercial	3	Bank reconciliation		Acctg Staff	Acctg Supervisor	Acctg Manager	Summary table cross-check
+Accounting	Commercial	4	Payroll incentive (15th/30th)		Acctg Staff	Acctg Supervisor	Acctg Manager	LUT balance required before payout
+Accounting	Bulk	1	Bulk invoicing & receivables (inherits Commercial)		Acctg Staff	Acctg Supervisor	Acctg Supervisor	Same as Commercial | Exceptions pending
+Accounting	Dealer	1	Dealer credit approval (AR/CNC check)	~70% installment / ~30% COD	Acctg Staff (AR)	Sales (Mel - Sales/AR)	Acctg Supervisor	CNC past-dues check | PDC or Promissory Note required
+Accounting	Dealer	2	Charge Invoice issuance		Acctg Staff	Acctg Supervisor	Acctg Supervisor	ACCPAC encoding before client send | Countered hardcopy filed
+Accounting	Dealer	3	Installment tracking & collection		Acctg Staff	Acctg Supervisor	Acctg Manager	Google Sheets due-date tracker | Aged Receivables monthly print
+Accounting	Dealer	4	Dealer dispute resolution		Acctg Staff	Sales (refer to Sales Order)	Acctg Supervisor	Bank reconciliation cross-check
+Accounting	Semi-dealer	1	Cash/charge invoice at loading		Checker	Cashier	- (cash sale)	EES validated | LUT-matched recibo
+Accounting	Semi-dealer	2	Daily cash & LUT balancing	Same-day close	Cashier	Vicky (Acctg)	Vicky	2.7kg/11kg/50kg LUT balance | AppSheet = receipt match
+Accounting	Semi-dealer	3	Bank deposit validation		Cashier	Vicky	Acctg Manager	Cash collection report vs bank deposit
+Accounting	Overall	1	Monthly financial statement close (P&L / CF / BS)		Acctg Staff	Acctg Supervisor	Acctg Manager / Controller	Full entry encoding before refresh | Budget vs Actual comparison
+Accounting	Overall	2	Payroll Summary consolidation		Acctg Staff	Acctg Supervisor	Acctg Manager	Depends on finalized Incentive template
+Accounting	Overall	3	Industrial Projects Budget vs Actual		Project Acctg	Industrial Engineer	Acctg Manager	Budget PNL vs Actual PNL | Timeline tracking

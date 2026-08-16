@@ -10,18 +10,17 @@
       "romaji": "Commercial",
       "english": "Find Client | Serve | Schedule | Repeat Order",
       "badge": "confirmed",
-      "badge_label": "Confirmed with source data",
       "sop_steps": [
         "Regional Sales Manager checks sales history for upcoming re-orders. Review next week's route schedule for upselling opportunities. (S1.1.1)",
-        "Sales Assistant 1 calls client for re-orders, or find new client orders. (S1.1.2)",
-        "Sales Assistant 1 creates a draft Sales Order for each order. (S1.1.3)",
+        "Sales Assistant1 calls client for re-orders, or find new client orders. (S1.1.2)",
+        "Sales Assistant1 creates a draft Sales Order for each order. (S1.1.3)",
         "Regional Sales Manager forwards the Sales Order to Credit and Collection Analyst to see for past dues. (S1.2.1)",
         "If the customer has past dues, flag the upcoming order. If past dues are within a passable / supervisor-approved range, approve the upcoming order. If there are no past dues, approve the upcoming order directly. (S1.2.2)",
         "Order Fulfilment: Operations Supervisor makes Pick List, and Delivery Receipt. See Operations Commercial Procedure (S1.3.1)",
         "Logistics Officer updates the synced Operations Calendar in Monday.com for delivery schedules. (S.1.3.2)",
-        "Sales Assistant 1 assigns and logs notes, activities, and tags for each Sales Order. (S.1.3.3)",
+        "Sales Assistant1 assigns and logs notes, activities, and tags for each Sales Order. (S.1.3.3)",
         "Regional Sales Manager Evaluate Sales Target vs Actual Sales. (S1.3.4)",
-        "Sales Assistant 1 records sales-fulfilment concerns/issues and log Accounting-related notes. (S1.3.5)"
+        "Sales Assistant1 records sales-fulfilment concerns/issues and log Accounting-related notes. (S1.3.5)"
       ],
       "guidelines": [
         "Sales Order Control Numbers are non-editable once assigned - a wrong entry is corrected with a new document, never by editing the control number.",
@@ -60,20 +59,24 @@
           ]
         }
       ],
-      "current_future": {
-        "current": [
-          "xxx"
-        ],
-        "future": [
-          "Odoo Sales module. It includes continuous workflow with Pick List, Delivery Receipt, Daily Price List Matrix and Invoice, Credit Notes."
-        ]
-      }
+      "future_procedures": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "badge_label": "Confirmed with source data"
     },
     {
       "romaji": "Bulk",
       "english": "Find Client | Serve | Schedule | Repeat Order",
       "badge": "pending",
-      "badge_label": "Partially confirmed",
       "sop_steps": [
         "Order intake, pricing, and confirmation follow the same process as Sales > Commercial per company specification (\"same as Commercial sales avenue, with exceptions\")."
       ],
@@ -95,32 +98,27 @@
           ]
         }
       ],
-      "current_future": {
-        "current": [
-          "Bulk sales recorded in Gsheet. Sales Orders are excel or manually produced."
-        ],
-        "future": [
-          "Same treatment as Commercial."
-        ]
-      }
+      "future_procedures": [
+        ""
+      ],
+      "badge_label": "Partially confirmed"
     },
     {
       "romaji": "Dealer",
       "english": "Find Client | Serve | Schedule | Repeat Order",
       "badge": "confirmed",
-      "badge_label": "Confirmed with source data",
       "sop_steps": [
-        "Sales Assistant 2 coordinates the dealers’ Plant Visit dates in advance. (S3.1.1.1)",
-        "Sales Assistant 2 sends schedules and updates through the Viber Dealer Group. (S3.1.1.2)",
+        "Sales Assistant2 coordinates the dealers’ Plant Visit dates in advance. (S3.1.1.1)",
+        "Sales Assistant2 sends schedules and updates through the Viber Dealer Group. (S3.1.1.2)",
         "Security guard verifies dealer identity and authorization; only confirmed appointments are accommodated. (S3.1.2.1)",
         "Dealer brings empty cylinders. See Operations – Dealer procedures. (S3.1.2.2)",
         "XXX Warehouse Staff applies dealer pricing, adjusted within the per-dealer buffer. (S3.1.3.1)",
         "Operations Supervisor sets payment terms - installment with Post-Dated Checks (PDCs), COD, or a pre-approved Promissory Note. (S3.1.3.2)",
         "Accounting Sales Encoder records dealer sales and issues Charge Invoices. (S3.1.3.3)",
-        "Sales Assistant 2 maintains dealer records, runs call-outs and follow-ups, and handles pricing disputes/adjustments. (S3.1.4.1)",
-        "Sales Assistant 2 handles cylinder swapping, marketing support with Sir CDV, and pricing-adjustment requests with Regional Sales Manager. (S3.1.4.2)",
+        "Sales Assistant2 maintains dealer records, runs call-outs and follow-ups, and handles pricing disputes/adjustments. (S3.1.4.1)",
+        "Sales Assistant2 handles cylinder swapping, marketing support with CBTO, and pricing-adjustment requests with Regional Sales Manager. (S3.1.4.2)",
         "New Dealer Accreditation: applicant proposes a business location with no existing dealer coverage. (S3.1.5.1)",
-        "Once Sir RY approves, SA2 secures DTI Registration, Business Permit, and BIR Registration. (S3.1.5.2)",
+        "Once CEO approves, Sales Assistant2 secures DTI Registration, Business Permit, and BIR Registration. (S3.1.5.2)",
         "Submit the dealership application and secure the Supplier's Certificate. (S3.1.5.3)",
         "Complete DOE requirements (Annex G and Annex V5) and execute a Special Power of Attorney (SPA). (S3.1.5.4)",
         "Pay processing fees and submit documents to the Makati Office; coordinate with the DOE liaison for processing. (S3.1.5.5)"
@@ -168,24 +166,29 @@
           ]
         }
       ],
-      "current_future": {
-        "current": [
-          "Swap and pricing-concern approvals still route through ad hoc chat threads rather than a structured workflow.",
-          "Dealer accreditation paperwork is tracked manually across DTI/BIR/DOE filings with no single status view."
-        ],
-        "future": [
-          "Confirm the order - triggers instant Sales/Inventory/Invoice movement on a shared, multi-user dashboard. (S3A2.3-S3A2.4)",
-          "Extend the real-time, multi-user dashboard already covering order/invoice/inventory movement to swap approvals and accreditation status tracking.",
-          "Digital CRM for the new-dealer application process, start to end (already flagged as a target system feature)."
-        ]
-      },
+      "future_procedures": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "badge_label": "Confirmed with source data",
       "sources": "Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Sales > Dealer (S3A1-S3A3); \"MGC LPG Process Manual v2.docx\" - Sales > Dealer (Order Process & Dealer Accreditation)."
     },
     {
       "romaji": "Semi-dealer",
       "english": "Find Client | Serve | Schedule | Repeat Order",
       "badge": "pending",
-      "badge_label": "Partially Confirmed",
       "sop_steps": [
         "Solicit and plan orders against daily and monthly Semi-dealer sales targets. (S4.1.1.1)",
         "Call clients for re-orders and find new client orders; review sales history and next week's route schedule. (S4.1.1.2)",
@@ -225,33 +228,35 @@
           ]
         }
       ],
-      "current_future": {
-        "current": [
-          "Semi-dealer order-to-cash is still carried physically as cash invoice, reconciled same-day.",
-          "Orders for delivery scheduling are encoded and scheduled in Monday.com"
-        ],
-        "future": [
-          "Extend the Commercial/Dealer real-time Sales Module, patterned to Semi-dealer so cash-invoice status is visible before the driver delivers. Add the additional sales in Odoo Sales made by driver during the daily delivery route."
-        ]
-      }
+      "future_procedures": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "badge_label": "Partially Confirmed"
     },
     {
       "romaji": "Overall",
       "english": "Reports | Monitoring | Compliance | Write-Offs",
       "badge": "confirmed",
-      "badge_label": "Confirmed with source data",
       "sop_steps": [
         "IT Manager prints and verifies multi-period Sales Performance Reports (SPR) bi-weekly or monthly. (S51.1.1)",
         "SPR fields include sales per kg, total sales, net sales, cost of sales, and Gross Profit Margin per kg and total. (S51.1.2)",
-        "Pricing Matrix Process: Regional Sales Manager sets up the MGC LPG Pricing Matrix for decision; Sir RY decides on the matrix for the period, 1-3 times per month in a General Meeting. (S5.1.2.1)",
+        "Pricing Matrix Process: Regional Sales Manager sets up the MGC LPG Pricing Matrix for decision; CEO decides on the matrix for the period, 1-3 times per month in a General Meeting. (S5.1.2.1)",
         "Pricing Matrix covers Sales Price, MPL, and Total Cost (Acquisition Cost + Hauling) per kg, by avenue - Commercial through Semi-dealer and semi-dealers - plus MPL volume discounts by radius. (S5.1.2.2)",
         "Regional Sales Manager and IT Manager updates competitor end-user pricing prior to General Meeting (SRP comparison). (S5.1.2.3)",
         "Price Cascade Process: Post-meeting, Regional Sales Manager emails the updated changes; IT Manager records the audit log for the change. (S5.1.2.4)",
         "IT Manager informs CODO, contact centers, marketing, and cashiers. Cascading is channel-owned: Regional Sales Manager and Sales Assistant1 - Commercial/Bulk clients, Sales Assistant2 - Semi-dealer clients; AVP Sales - Makati accounts (Jen); IT Manager - CODO/audit and contact centers/marketing/cashiers. (S5.1.2.5)",
-        "Sir RY sets the Sales Quota per client per period; AVP Sales prints and uses it as the working target; Sales Assistant updates it daily/weekly. (S5.1.2.6)"
+        "CEO sets the Sales Quota per client per period; AVP Sales prints and uses it as the working target; Sales Assistant updates it daily/weekly. (S5.1.2.6)"
       ],
       "guidelines": [
-        "Price changes are decided in the General Meeting by Sir RY - no ad hoc price change cascades without going through this meeting.",
+        "Price changes are decided in the General Meeting by CEO - no ad hoc price change cascades without going through this meeting.",
         "Every price change is audit-logged by the IT Manager, before it cascades to any client-facing channel.",
         "Cascade responsibility is channel-specific, does not overlap."
       ],
@@ -298,15 +303,17 @@
           ]
         }
       ],
-      "current_future": {
-        "current": [
-          "Price cascade is confirmed via email and informal notification to several separate people",
-          "Sales Quota tracking has several Data Output fields"
-        ],
-        "future": [
-          "A single Pricing Matrix dashboard (already partially specified) that shows cascade status per channel instead of relying on the Regional Sales Manager's memory of who's been notified."
-        ]
-      },
+      "future_procedures": [
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "badge_label": "Confirmed with source data",
       "sources": "Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Sales > Overall (S5A1-S5A3, S5O1-S5C2); Personnel & Forms indexes for named roles."
     }
   ],

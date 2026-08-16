@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Personnel Directory</title>
 <style>
 :root{--accent:#1E4E79;--accent-light:#DCEAF5;--accent-dark:#163A5A;--green:#2E6A3D;--green-light:#E3F0E6;--orange:#B96B13;--orange-light:#F9EEDC;--purple:#6F3CC3;--purple-light:#EFE7FB;--teal:#0F766E;--teal-light:#DDF5F2;--bg:#FFFFFF;--bg-alt:#F6F8FB;--border:#D8DEE8;--border-light:#E8ECF2;--text:#142033;--text-mid:#445066;--text-light:#6B7484;--shadow:0 1px 3px rgba(20,32,51,.07),0 1px 2px rgba(20,32,51,.05)}
 *{margin:0;padding:0;box-sizing:border-box}html,body{scroll-behavior:smooth}
@@ -49,7 +48,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 @media(max-width:700px){.term-inner{grid-template-columns:1fr}.topbar-hint{display:none}}
 
 /* Workflow Mentions */
-.xref-mentions{grid-column:1/-1;border-top:1px dashed var(--border);padding-top:10px;margin-top:6px}
+.xref-mentions-cur,.xref-mentions-fut{border-top:1px dashed var(--border);padding-top:10px;margin-top:6px}
 .xm-section-lbl{color:#6F3CC3!important}
 .xm-loading,.xm-empty{font-size:11px;color:var(--text-light);font-style:italic}
 .xm-group{margin-bottom:10px}
@@ -60,26 +59,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .xm-link{display:inline-flex;align-items:center;gap:6px;text-decoration:none;color:inherit;margin-bottom:2px}
 .xm-link:hover .xm-code{text-decoration:underline;opacity:.8}
 .xm-code{font-size:11.5px;font-weight:800;color:var(--accent-dark);font-family:ui-monospace,SFMono-Regular,monospace;white-space:nowrap}
-.xm-badge{font-size:9px;font-weight:700;padding:1px 7px;border-radius:3px;text-transform:uppercase;letter-spacing:.3px;white-space:nowrap}
-.xm-badge-current{background:#e5e7eb;color:#374151}
-.xm-badge-future{background:#dbeafe;color:#1e40af}
 .xm-full{font-size:11px;color:var(--text-light);line-height:1.45;padding-left:2px}
 </style>
 </head>
 <body>
-<div class="topbar">
-  <div class="topbar-logo">MGC Workflow</div>
-  <span class="topbar-badge">Personnel Directory</span>
-  <span class="topbar-hint">Click any card to expand · Names link back from Operations / Sales / Accounting</span>
-</div>
 
 <div class="page-header">
-  <h1>Personnel Directory</h1>
-  <p>Named staff from the company Personnel Table, grouped by department, plus the functional roles (Driver, Checker, Cashier, etc.) still referenced by title rather than by name in the Operations, Sales, and Accounting SOP pages. Click a card to see role, responsibilities, and which workflow tabs mention them.</p>
-</div>
-
-<div class="how-to">
-  <strong>How cross-links work:</strong> When a person's name or role title is highlighted and underlined in an Operations, Sales, or Accounting page, clicking it will switch to this tab and scroll to that entry. To add or remove a name from the link list, edit <code>cross_reference_terms.txt</code> then run <code>python workflow_generate.py</code>.
+   <p>Contains the personnel positions mentioned across the Operations, Sales and Accounting workflow menus. </p>
 </div>
 
 <div class="search-bar">
@@ -89,13 +75,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <div class="section-label">Operations</div>
 <div class="terms-list">
 
-  <div class="term-card" id="personnel-joseph">
+  <div class="term-card" id="personnel-plant-operations-officer-joseph">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Joseph</span>
+      <span class="term-name">Plant Operations Officer (Joseph)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">Operations</span>
       <span class="role-chip">Plant Operations Officer</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -104,9 +89,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="personnel-buding">
+  <div class="term-card" id="personnel-senior-plant-supervisor-buding">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Buding</span>
+      <span class="term-name">Senior Plant Supervisor (Buding)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">Operations</span>
       <span class="role-chip">Senior Plant Supervisor</span>
@@ -114,13 +99,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div>
     <div class="term-body"><div class="term-inner">
       <div><div class="td-label">Position</div><div class="td-value">Senior Plant Supervisor</div></div>
-      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Not yet cross-referenced by name in a specific SOP step — role likely overlaps with the Plant Manager / Warehouse Supervisor functions in Operations.</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Not yet cross-referenced by name in a specific SOP step — role likely overlaps with the <a href="personnel.html#personnel-plant-manager" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-manager&#39;);return false" title="Personnel: Plant Manager">Plant Manager</a> / <a href="personnel.html#personnel-warehouse-supervisor" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-warehouse-supervisor&#39;);return false" title="Personnel: Warehouse Supervisor">Warehouse Supervisor</a> functions in Operations.</div></div>
     </div></div>
   </div>
 
-  <div class="term-card" id="personnel-lexter">
+  <div class="term-card" id="personnel-operations-supervisor-lexter">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Lexter</span>
+      <span class="term-name">Operations Supervisor (Lexter)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">Operations</span>
       <span class="role-chip">Operations Supervisor</span>
@@ -128,17 +113,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div>
     <div class="term-body"><div class="term-inner">
       <div><div class="td-label">Position</div><div class="td-value">Operations Supervisor</div></div>
-      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Not yet cross-referenced by name in a specific SOP step — role likely overlaps with the Warehouse Supervisor / Operations Manager functions in Operations.</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Not yet cross-referenced by name in a specific SOP step — role likely overlaps with the <a href="personnel.html#personnel-warehouse-supervisor" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-warehouse-supervisor&#39;);return false" title="Personnel: Warehouse Supervisor">Warehouse Supervisor</a> / Operations Manager functions in Operations.</div></div>
     </div></div>
   </div>
 
-  <div class="term-card" id="personnel-edmond">
+  <div class="term-card" id="personnel-warehouse-and-quality-supervisor-edmond">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Edmond</span>
+      <span class="term-name">Warehouse and Quality Supervisor (Edmond)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">Operations</span>
       <span class="role-chip">Warehouse and Quality Supervisor</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -147,13 +131,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="personnel-josephine">
+  <div class="term-card" id="personnel-checker-josephine">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Josephine</span>
+      <span class="term-name">Checker (Josephine)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">Operations</span>
       <span class="role-chip">Checker</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -166,13 +149,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <div class="section-label" style="margin-top:8px">Sales</div>
 <div class="terms-list">
 
-  <div class="term-card" id="personnel-mel">
+  <div class="term-card" id="personnel-regional-sales-manager-mel">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Mel</span>
+      <span class="term-name">Regional Sales Manager (Mel)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">Sales</span>
       <span class="role-chip">Regional Sales Manager</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span><span class="ref-chip ref-acg">ACG</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -181,43 +163,40 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="personnel-lou">
+  <div class="term-card" id="personnel-sales-assistant1-lou">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Lou</span>
+      <span class="term-name">Sales Assistant1 (Lou)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">Sales</span>
-      <span class="role-chip">Sales Assistant 1</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="role-chip">Sales Assistant1</span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Position</div><div class="td-value">Sales Assistant 1</div></div>
-      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Sales &gt; Overall — cascades updated pricing to Commercial/Bulk clients alongside Mel.</div></div>
+      <div><div class="td-label">Position</div><div class="td-value"><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a>1</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Sales &gt; Overall — cascades updated pricing to Commercial/Bulk clients alongside <a href="personnel.html#personnel-mel" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-mel&#39;);return false" title="Personnel: Mel">Mel</a>.</div></div>
     </div></div>
   </div>
 
-  <div class="term-card" id="personnel-claire">
+  <div class="term-card" id="personnel-sales-assistant2-claire">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Claire</span>
+      <span class="term-name">Sales Assistant2 (Claire)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">Sales</span>
-      <span class="role-chip">Sales Assistant 2</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="role-chip">Sales Assistant2</span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Position</div><div class="td-value">Sales Assistant 2</div></div>
+      <div><div class="td-label">Position</div><div class="td-value"><a href="personnel.html#personnel-sales-assistant" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sales-assistant&#39;);return false" title="Personnel: Sales Assistant">Sales Assistant</a>2</div></div>
       <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Sales &gt; Dealer — sends schedules via the Viber Dealer Group, maintains dealer records and handles pricing disputes · Sales &gt; Overall — cascades pricing to retail clients.</div></div>
     </div></div>
   </div>
 
-  <div class="term-card" id="personnel-jen">
+  <div class="term-card" id="personnel-avp-sales-jen">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Jen</span>
+      <span class="term-name">AVP - Sales (Jen)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">Sales</span>
       <span class="role-chip">AVP - Sales</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -230,9 +209,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <div class="section-label" style="margin-top:8px">Engineering</div>
 <div class="terms-list">
 
-  <div class="term-card" id="personnel-kenneth">
+  <div class="term-card" id="personnel-senior-plant-engineer-kenneth">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Kenneth</span>
+      <span class="term-name">Senior Plant Engineer (Kenneth)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">Engineering</span>
       <span class="role-chip">Senior Plant Engineer</span>
@@ -244,10 +223,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <a id="personnel-jef" style="position:relative;top:-90px" aria-hidden="true"></a>
-  <div class="term-card" id="personnel-jefrey">
+  <div class="term-card" id="personnel-industrial-engineer-jefrey">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Jefrey</span>
+      <span class="term-name">Industrial Engineer (Jefrey)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">Engineering</span>
       <span class="role-chip">Industrial Engineer</span>
@@ -255,13 +233,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div>
     <div class="term-body"><div class="term-inner">
       <div><div class="td-label">Position</div><div class="td-value">Industrial Engineer</div></div>
-      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Sales &gt; Commercial — monitors gain/loss variance in post-sales reconciliation · Accounting &gt; Overall — reviews Industrial Projects Budget vs Actual.</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Sales &gt; Commercial — monitors gain/loss variance in post-sales reconciliation · Accounting &gt; Overall — reviews <a href="subprocess.html#subprocess-industrial-projects" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-industrial-projects&#39;);return false" title="Subprocess: Industrial Projects">Industrial Projects</a> Budget vs Actual.</div></div>
     </div></div>
   </div>
 
-  <div class="term-card" id="personnel-jerelyn">
+  <div class="term-card" id="personnel-engineering-document-controller-jerelyn">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Jerelyn</span>
+      <span class="term-name">Engineering Document Controller (Jerelyn)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">Engineering</span>
       <span class="role-chip">Engineering Document Controller</span>
@@ -277,13 +255,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <div class="section-label" style="margin-top:8px">Accounting</div>
 <div class="terms-list">
 
-  <div class="term-card" id="personnel-malou">
+  <div class="term-card" id="personnel-accounting-manager-malou">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Malou</span>
+      <span class="term-name">Accounting Manager (Malou)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">Accounting</span>
       <span class="role-chip">Accounting Manager</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-acg">ACG</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -292,13 +269,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="personnel-vicky">
+  <div class="term-card" id="personnel-oic-accounting-vicky">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Vicky</span>
+      <span class="term-name">OIC-Accounting (Vicky)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">Accounting</span>
       <span class="role-chip">OIC-Accounting / Credit &amp; Collection Analyst</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span><span class="ref-chip ref-acg">ACG</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -307,9 +283,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="personnel-anton">
+  <div class="term-card" id="personnel-audit-supervisor-anton">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Anton</span>
+      <span class="term-name">Audit Supervisor (Anton)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">Accounting</span>
       <span class="role-chip">Audit Supervisor</span>
@@ -321,9 +297,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="personnel-richel">
+  <div class="term-card" id="personnel-operations-supervisor-richel">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Richel</span>
+      <span class="term-name">Operations Supervisor (Richel)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">Accounting</span>
       <span class="role-chip">Operations Supervisor</span>
@@ -335,9 +311,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="personnel-juary">
+  <div class="term-card" id="personnel-accounting-sales-encoder-juary">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Juary</span>
+      <span class="term-name">Accounting Sales Encoder (Juary)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">Accounting</span>
       <span class="role-chip">Accounting Sales Encoder</span>
@@ -345,7 +321,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div>
     <div class="term-body"><div class="term-inner">
       <div><div class="td-label">Position</div><div class="td-value">Accounting Sales Encoder</div></div>
-      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Not yet cross-referenced by name in a specific SOP step — role likely overlaps with the &quot;Acctg Staff&quot; function referenced throughout Accounting.</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Not yet cross-referenced by name in a specific SOP step — role likely overlaps with the &quot;<a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a>&quot; function referenced throughout Accounting.</div></div>
     </div></div>
   </div>
 
@@ -353,50 +329,47 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <div class="section-label" style="margin-top:8px">IT</div>
 <div class="terms-list">
 
-  <a id="personnel-it-head" style="position:relative;top:-90px" aria-hidden="true"></a>
-  <div class="term-card" id="personnel-jabert">
+  <div class="term-card" id="personnel-it-manager-jabert">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Jabert</span>
+      <span class="term-name">IT Manager (Jabert)</span>
       <span class="term-tag">Personnel</span>
       <span class="dept-chip">IT</span>
       <span class="role-chip">IT Manager</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
       <div><div class="td-label">Position</div><div class="td-value">IT Manager</div></div>
-      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Sales &gt; Overall — prints the Sales Performance Report as &quot;IT Head&quot;, records the audit log for every pricing change, and cascades pricing to CODO, contact centers, marketing, and cashiers.</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Sales &gt; Overall — prints the <a href="forms.html#form-sales-performance-report" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-sales-performance-report&#39;);return false" title="Form: Sales Performance Report">Sales Performance Report</a> as &quot;<a href="personnel.html#personnel-it-head" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-it-head&#39;);return false" title="Personnel: IT Head">IT Head</a>&quot;, records the audit log for every pricing change, and cascades pricing to CODO, contact centers, marketing, and cashiers.</div></div>
     </div></div>
   </div>
 
 </div>
-<div class="section-label" style="margin-top:8px">Purchase Dispatch</div>
+<div class="section-label" style="margin-top:8px">Purchasing</div>
 <div class="terms-list">
 
-  <div class="term-card" id="personnel-liza">
+  <div class="term-card" id="personnel-logistics-officer-liza">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Liza</span>
+      <span class="term-name">Logistics Officer (Liza)</span>
       <span class="term-tag">Personnel</span>
-      <span class="dept-chip">Purchase Dispatch</span>
+      <span class="dept-chip">Purchasing</span>
       <span class="role-chip">Logistics Officer</span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
       <div><div class="td-label">Position</div><div class="td-value">Logistics Officer</div></div>
-      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Not yet cross-referenced by name in a specific SOP step — role likely overlaps with the &quot;Purchaser/Dispatcher&quot; function referenced in Sales &gt; Retail routing.</div></div>
+      <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Procurement officer responsible for ordering gas stock from the Refinery Supplier and coordinating inbound plant deliveries.	Key Responsibilities	Forwards <a href="forms.html#form-purchase-order" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-purchase-order&#39;);return false" title="Form: Purchase Order">Purchase Order</a> to Refinery Supplier · Schedules Lorry Truck delivery to plant · Coordinates with <a href="personnel.html#personnel-plant-manager" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-plant-manager&#39;);return false" title="Personnel: Plant Manager">Plant Manager</a> for receiving</div></div>
     </div></div>
   </div>
 
 </div>
-<div class="section-label" style="margin-top:8px">Executive </div>
+<div class="section-label" style="margin-top:8px">Executive</div>
 <div class="terms-list">
 
-  <div class="term-card" id="personnel-sir-ry">
+  <div class="term-card" id="personnel-ceo-sir-ry">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Sir RY</span>
+      <span class="term-name">CEO (Sir RY)</span>
       <span class="term-tag">Personnel</span>
       <span class="role-chip">CEO</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span><span class="ref-chip ref-sal">SAL</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -405,12 +378,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div></div>
   </div>
 
-  <div class="term-card" id="personnel-sir-ry">
+  <div class="term-card" id="personnel-cbto-sir-cdv">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Sir CDV</span>
+      <span class="term-name">CBTO (Sir CDV)</span>
       <span class="term-tag">Personnel</span>
-      <span class="role-chip">CTO</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span><span class="ref-chip ref-sal">SAL</span></span>
+      <span class="role-chip">CBTO</span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
@@ -418,7 +390,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <div><div class="td-label">Referenced in Workflow</div><div class="td-value">Technology.</div></div>
     </div></div>
   </div>
-  
 
 </div>
 <div class="section-label" style="margin-top:8px">Functional Roles (referenced by title, not yet named)</div>
@@ -434,7 +405,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div>
     <div class="term-body"><div class="term-inner">
       <div><div class="td-label">Role</div><div class="td-value">Delivery driver responsible for transporting cylinders from the warehouse to client sites and returning empty cylinders to the plant.</div></div>
-      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Receives DR from Warehouse · Drives to client locations with Pahinante · Collects client-signed DR · Weighs empty cylinders on return · Submits signed DR and AR to Accounting</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Receives DR from Warehouse · Drives to client locations with <a href="personnel.html#personnel-pahinante" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-pahinante&#39;);return false" title="Personnel: Pahinante">Pahinante</a> · Collects client-signed DR · Weighs empty cylinders on return · Submits signed DR and AR to Accounting</div></div>
     </div></div>
   </div>
 
@@ -447,7 +418,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Role</div><div class="td-value">Delivery helper who accompanies the Driver on all delivery runs. Physically handles the cylinders at the client site and performs weight recording.</div></div>
+      <div><div class="td-label">Role</div><div class="td-value">Delivery helper who accompanies the <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">Driver</a> on all delivery runs. Physically handles the cylinders at the client site and performs weight recording.</div></div>
       <div><div class="td-label">Key Responsibilities</div><div class="td-value">Weighs cylinders on-site at client location · Records cylinder measurements · Delivers cylinders to client · Collects empty cylinders for return</div></div>
     </div></div>
   </div>
@@ -462,21 +433,17 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div>
     <div class="term-body"><div class="term-inner">
       <div><div class="td-label">Role</div><div class="td-value">Logistics coordinator who reads the Sales Order and schedules all delivery logistics including vehicle assignment, load capacity, and route planning.</div></div>
-      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Reads Sales Order · Schedules delivery vehicle · Assigns driver and load capacity · Plans delivery route · Coordinates pickup schedules</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Reads Sales Order · Schedules delivery vehicle · Assigns <a href="personnel.html#personnel-driver" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-driver&#39;);return false" title="Personnel: Driver">driver</a> and load capacity · Plans delivery route · Coordinates pickup schedules</div></div>
     </div></div>
   </div>
 
-  <div class="term-card" id="personnel-warehouse-supervisor">
+  <div class="term-card" id="personnel-">
     <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Warehouse Supervisor</span>
+      <span class="term-name"></span>
       <span class="term-tag">Personnel</span>
-      <span class="role-chip">Operations — Warehouse</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-ops">OPS</span></span>
       <span class="term-arrow">&#9662;</span>
     </div>
     <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Role</div><div class="td-value">Reviews and disputes residue classification, and reviews commission computation before Operations Manager sign-off.</div></div>
-      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Escalation point for 1-3kg residue disputes · Reviews Picklist/DR/CR pairing · Reviews commission computation</div></div>
     </div></div>
   </div>
 
@@ -504,51 +471,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
     </div>
     <div class="term-body"><div class="term-inner">
       <div><div class="td-label">Role</div><div class="td-value">Collects retail cash at loading, balances the daily cash and LUT, and receives retail cash invoices from the delivery team. Retail source material names this person &quot;Don&quot;; not yet matched to the staff roster.</div></div>
-      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Collects cash/charge invoice at loading · Balances cash vs LUT same-day · Submits cash collection report for bank deposit validation</div></div>
-    </div></div>
-  </div>
-
-  <div class="term-card" id="personnel-sales-assistant">
-    <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Sales Assistant</span>
-      <span class="term-tag">Personnel</span>
-      <span class="role-chip">Sales — Retail/Commercial</span>
-      <span class="term-refs-chips"><span class="ref-chip ref-sal">SAL</span></span>
-      <span class="term-arrow">&#9662;</span>
-    </div>
-    <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Role</div><div class="td-value">General title used for draft-order intake, upsell review, and retail order/pricing across the Sales SOP. Lou and Claire (Sales Assistant 1 and 2 on the roster) carry out this function for their respective channels.</div></div>
-      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Drafts Sales Order · Runs upsell review · Applies pricing sequence (SRP then MPL) · Lines up confirmed orders for dispatch</div></div>
-    </div></div>
-  </div>
-
-  <div class="term-card" id="personnel-logistics-officer">
-    <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Logistics Officer</span>
-      <span class="term-tag">Personnel</span>
-      <span class="role-chip">Procurement</span>
-      <span class="term-arrow">&#9662;</span>
-    </div>
-    <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Role</div><div class="td-value">Procurement officer responsible for ordering gas stock from the Refinery Supplier and coordinating inbound plant deliveries.</div></div>
-      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Forwards Purchase Order to Refinery Supplier · Schedules Lorry Truck delivery to plant · Coordinates with Plant Manager for receiving</div></div>
-    </div></div>
-  </div>
-
-  <div class="term-card" id="personnel-plant-operations-officer">
-    <div class="term-bar" onclick="toggle(this)">
-      <span class="term-name">Plant Operations Officer</span>
-      <span class="term-tag">Personnel</span>
-      <span class="term-arrow">&#9662;</span>
-    </div>
-    <div class="term-body"><div class="term-inner">
-      <div><div class="td-label">Role</div><div class="td-value">Manages plant operations including the receipt of Lorry Truck deliveries, documentation of incoming stock, and oversight of the Storage Tank.</div></div>
-      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Receives Purchased Lorry Trucks · Gets DR and Invoice from delivery team · Fills Receiving Report · Unloads contents to Storage Tank · Oversees Tank 1 and Tank 2</div></div>
+      <div><div class="td-label">Key Responsibilities</div><div class="td-value">Collects cash/charge <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> at loading · Balances cash vs LUT same-day · Submits cash collection report for bank deposit validation</div></div>
     </div></div>
   </div>
 
 </div>
-
 <script>
 function toggle(bar){var card=bar.closest('.term-card');card.classList.toggle('open')}
 
@@ -564,16 +491,29 @@ function filterCards(val){
 function scrollToAnchor(id){
   var el=document.getElementById(id);
   if(!el)return;
+  var wasOpen=el.classList.contains('open');
   el.classList.add('open','xref-highlight');
-  el.scrollIntoView({behavior:'smooth',block:'center'});
-  setTimeout(function(){el.classList.remove('xref-highlight')},2200);
+  var body=el.querySelector('.term-body');
+  function doScroll(){
+    el.scrollIntoView({behavior:'smooth',block:'center'});
+    setTimeout(function(){el.classList.remove('xref-highlight')},2200);
+  }
+  // .term-body's max-height transition is .3s -- scrolling before it finishes
+  // expanding lands short of the real target. Wait for transitionend (with a
+  // timeout fallback in case it doesn't fire) instead of guessing a delay.
+  if(!wasOpen&&body){
+    var done=false;
+    function onEnd(e){if(e.target!==body)return;done=true;body.removeEventListener('transitionend',onEnd);doScroll();}
+    body.addEventListener('transitionend',onEnd);
+    setTimeout(function(){if(!done){body.removeEventListener('transitionend',onEnd);doScroll();}},350);
+  }else{
+    doScroll();
+  }
 }
 
 (function(){
   var hash=window.location.hash.slice(1);
-  if(!hash)return;
-  var el=document.getElementById(hash);
-  if(el){el.classList.add('open');setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'})},120)}
+  if(hash)scrollToAnchor(hash);
 })();
 </script>
 <script src="mentions_loader.js"></script>

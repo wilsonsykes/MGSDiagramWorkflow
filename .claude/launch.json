@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "MGSDiagramWorkflow SOP Portal",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-l", "3060", "."],
+      "port": 3060
+    }
+  ]
+}

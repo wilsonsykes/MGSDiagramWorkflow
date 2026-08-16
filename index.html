@@ -22,7 +22,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .page-tab:hover{transform:translateY(-1px);border-color:var(--accent-dark);background:#fff}
 .page-tab.active{background:var(--accent-dark);color:#fff;border-color:var(--accent-dark);box-shadow:0 8px 18px rgba(30,78,121,.2)}
 .page-tab.main-tab{font-weight:900;text-transform:uppercase;letter-spacing:1px}
-.page-tab.ref-tab{border-color:#b8c9de;font-style:italic}
+.page-tab.ref-tab{border-color:#b8c9de;font-style:italic;padding:8px 14px;font-size:11.5px}
 .tab-caption{padding:0 4px 14px;font-size:13px;color:var(--text-mid)}
 .frame-card{border:1px solid var(--border);border-radius:22px;background:rgba(255,255,255,.97);box-shadow:var(--shadow);overflow:hidden}
 #page-frame{display:block;width:100%;min-height:1200px;border:0;background:#fff}
@@ -87,23 +87,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <body>
 <div class="shell-nav">
   <div class="shell-brand">MGC SOP Portal</div>
-  <div class="shell-version">V.07-14-2026</div>
+  <div class="shell-version">V.08-17-2026</div>
 </div>
 <div class="shell-wrap">
   <header class="shell-header">
-    <div class="shell-kicker">Unified SOP Workspace</div>
-    <h1>Multi-Page SOP Portal</h1>
-    <p>The live site opens as a tabbed SOP workspace. Each of the <strong>Main</strong>, <strong>Operations</strong>, <strong>Sales</strong>, and <strong>Accounting</strong> tabs is organized as an SOP Manual, Operational Guidelines, Approval Matrix &amp; Controls, and Current vs. Future Workflow per stage. The <strong>Subprocess</strong>, <strong>Forms</strong>, and <strong>Personnel</strong> tabs are reference indexes — terms highlighted in Operations, Sales, and Accounting link directly back to entries in these tabs.</p>
+    <div class="shell-kicker">Operational Guidelines</div>
+    <h1>4 Menus, 3 Submenus</h1>
+    <p><strong>Main</strong>, <strong>Operations</strong>, <strong>Sales</strong>, and <strong>Accounting</strong> Menus contain Procedures (SOP), Operational Guidelines, and Approval Matrix &amp; Controls sections. The <strong>Subprocess</strong>, <strong>Personnel</strong>, and <strong>Forms</strong> submenus are reference tables. Terms highlighted in the SOP are consolidated here.</p>
   </header>
 
   <div class="page-tabs" role="tablist" aria-label="SOP page tabs">
-    <button class="page-tab main-tab active" type="button" data-page="main.html" data-key="main" data-caption="Portal overview and cross-cutting governance, powered by <code>main.html</code>.">Main</button>
-    <button class="page-tab ref-tab" type="button" data-page="subprocess.html" data-key="subprocess" data-caption="Subprocess index — all operational subprocesses referenced in the SOPs, powered by <code>subprocess.html</code>.">Subprocess</button>
-    <button class="page-tab ref-tab" type="button" data-page="forms.html" data-key="forms" data-caption="Forms &amp; Documents index — all forms and documents referenced in the SOPs, powered by <code>forms.html</code>.">Forms</button>
-    <button class="page-tab ref-tab" type="button" data-page="personnel.html" data-key="personnel" data-caption="Personnel directory — all staff referenced in the SOPs, powered by <code>personnel.html</code>.">Personnel</button>
-    <button class="page-tab" type="button" data-page="operations.html" data-key="operations" data-caption="Operations SOP powered by <code>operations.html</code>.">Operations</button>
-    <button class="page-tab" type="button" data-page="sales.html" data-key="sales" data-caption="Sales SOP powered by <code>sales.html</code>.">Sales</button>
-    <button class="page-tab" type="button" data-page="accounting.html" data-key="accounting" data-caption="Accounting SOP powered by <code>accounting.html</code>.">Accounting</button>
+    <button class="page-tab main-tab active" type="button" data-page="main.html" data-key="main" data-caption="">Main</button>
+    <button class="page-tab" type="button" data-page="operations.html" data-key="operations" data-caption="">Operations</button>
+    <button class="page-tab" type="button" data-page="sales.html" data-key="sales" data-caption="">Sales</button>
+    <button class="page-tab" type="button" data-page="accounting.html" data-key="accounting" data-caption="">Accounting</button>
+    <button class="page-tab ref-tab" type="button" data-page="subprocess.html" data-key="subprocess" data-caption="">Subprocess</button>
+    <button class="page-tab ref-tab" type="button" data-page="personnel.html" data-key="personnel" data-caption="">Personnel</button>
+    <button class="page-tab ref-tab" type="button" data-page="forms.html" data-key="forms" data-caption="">Forms</button>
   </div>
 
   <div class="tab-caption" id="tab-caption">Portal overview and cross-cutting governance, powered by <code>main.html</code>.</div>
@@ -259,13 +259,18 @@ function openSlidePanel(tabKey,anchorId){
     },200);
   }
   if(alreadyLoaded){
+    // Same page already sitting in the iframe -- changing the hash alone
+    // won't re-run the page's own on-load hash handler, so trigger the
+    // (transition-aware) scroll explicitly.
     scrollWhenReady();
   } else {
+    // Fresh load: the target page's own on-load script already reads
+    // location.hash and calls its own transition-aware scrollToAnchor.
+    // Calling it again here from a 'load' handler would race that first
+    // call -- by the time this one fires, .open is already set so it skips
+    // waiting for the expand transition and can land on a stale position,
+    // overriding the correct scroll. Let the page handle it alone.
     slideFrame.dataset.loadedPage=tab.dataset.page;
-    slideFrame.addEventListener('load',function handler(){
-      slideFrame.removeEventListener('load',handler);
-      scrollWhenReady();
-    });
     slideFrame.src=targetSrc;
   }
 }

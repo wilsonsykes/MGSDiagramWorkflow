@@ -28,19 +28,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .ctrl-btn{background:#fff;border:1px solid var(--border);color:var(--accent-dark);padding:5px 16px;border-radius:4px;font-size:11px;font-weight:600;font-family:inherit;cursor:pointer;letter-spacing:.4px;transition:all .12s}
 .ctrl-btn:hover{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}
 .stage-section,.cross-section{margin:14px 48px 0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow);scroll-margin-top:80px}
-.cross-section{background:#faf5ff;border:1px dashed #d8b4fe}
+.cross-section{background:#f3faf5;border:1px dashed #a8d5b5}
 .stage-banner,.cross-banner{background:linear-gradient(180deg,var(--accent-light) 0%,#c4d3ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;transition:background .2s ease;user-select:none}
 .stage-banner:hover{background:linear-gradient(180deg,#cddcf0 0%,#b8cbe5 100%)}
-.cross-banner{background:linear-gradient(180deg,#f0e6f6 0%,#e0d0ec 100%)}
-.cross-banner:hover{background:linear-gradient(180deg,#e8daf0 0%,#d6c4e6 100%)}
+.cross-banner{background:linear-gradient(180deg,var(--green-light) 0%,#c2ddc9 100%)}
+.cross-banner:hover{background:linear-gradient(180deg,#d5ead9 0%,#b0d4ba 100%)}
 .stage-section.open .stage-banner,.cross-section.open .cross-banner{border-bottom-color:var(--border)}
 .stage-num{width:60px;height:60px;border-radius:12px;background:var(--accent-dark);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;letter-spacing:.5px;font-size:9px;line-height:1.1;text-align:center}
 .num-big{font-size:24px;font-weight:800;line-height:1;margin-bottom:2px}.num-sub{font-size:9px;font-weight:800;letter-spacing:1.2px;opacity:.7}
-.cross-num{background:var(--purple)}
+.cross-num{background:var(--green)}
 .stage-info{flex-shrink:0;min-width:200px}
 .stage-title{font-size:22px;font-weight:800;color:var(--accent-dark);text-transform:uppercase;letter-spacing:-.3px;margin:0}
 .stage-sub{font-size:11px;font-weight:700;color:var(--accent);margin-top:2px;text-transform:uppercase;letter-spacing:1.5px}
 .stage-arrow{font-size:22px;color:var(--accent-dark);font-weight:700;transition:transform .25s ease;flex-shrink:0;margin-left:auto}
+.cross-section .stage-title,.cross-section .stage-arrow{color:var(--green)}
+.cross-section .stage-sub{color:#3d8b52}
 .stage-section.open .stage-arrow,.cross-section.open .stage-arrow{transform:rotate(180deg)}
 .stage-body{max-height:0;overflow:hidden;transition:max-height .4s ease}
 .stage-section.open .stage-body,.cross-section.open .stage-body{max-height:12000px}
@@ -58,7 +60,13 @@ table.matrix th{background:var(--accent-dark);color:#fff;text-align:left;padding
 table.matrix td{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#374151}
 table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 .control-chip{display:inline-block;background:var(--accent-light);color:var(--accent-dark);border:1px solid #BFD6EB;border-radius:5px;padding:1px 7px;font-size:10.5px;margin:1px 4px 1px 0}
-.cf-print-only{display:none}
+.cf-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:2px;table-layout:fixed}
+.cf-table th{background:var(--accent-dark);color:#fff;text-align:left;padding:8px 10px;font-size:10.5px;letter-spacing:.3px}
+.cf-table td{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#374151;font-size:13px;line-height:1.55;word-wrap:break-word}
+.cf-table tr:nth-child(even) td{background:var(--bg-alt)}
+.cf-order{width:34px;text-align:center;color:var(--text-light);font-weight:700}
+.cf-cur{width:36%}
+.cf-fut{width:58%}
 .gap-note{background:var(--red-light);border:1px solid #f0c9c9;color:var(--red);border-radius:8px;padding:12px 16px;font-size:12.5px}
 .gap-note b{display:block;margin-bottom:4px}
 .sources{font-size:11px;color:var(--text-light);padding:12px 28px;background:var(--bg-alt);border-top:1px solid var(--border-light)}
@@ -82,12 +90,11 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
   .stage-arrow{display:none}
   a.xref{color:inherit;text-decoration:none}
   .legend-bar{page-break-after:avoid}
-  .cf-print-only{display:block;page-break-before:always;padding:24px 48px}
-  .cf-print-title{font-size:14px;font-weight:800;color:var(--accent-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}
-  .cf-print-table{width:100%;border-collapse:collapse;table-layout:fixed}
-  .cf-print-table th{background:var(--accent-dark);color:#fff;text-align:left;padding:8px 10px;font-size:11px;width:50%}
-  .cf-print-table td{padding:8px 10px;border:1px solid #ccc;vertical-align:top;font-size:11px;line-height:1.5;word-wrap:break-word}
-  .cf-print-table tr:nth-child(even) td{background:#f6f8fb}
+  /* SOP Manual merged into a Current/Future table (doc-section-cf) needs to
+     start on its own page and be allowed to flow across pages -- override the
+     stage-section/doc-section "avoid" rules that would otherwise fight it. */
+  .doc-section-cf{page-break-before:always;page-break-inside:auto}
+  .stage-section:has(.doc-section-cf){page-break-inside:auto}
 }
 @media(max-width:900px){.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}.doc-section{padding-left:16px;padding-right:16px}.topnav{gap:12px}.nav-link{font-size:10.5px}}
 </style>
@@ -95,12 +102,12 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 <body>
 <nav class="topnav">
   <div class="nav-logo">Accounting</div>
-  <a href="#stage-1" class="nav-link">1 &middot; Commercial</a>
-  <a href="#stage-2" class="nav-link">2 &middot; Bulk</a>
-  <a href="#stage-3" class="nav-link">3 &middot; Dealer</a>
-  <a href="#stage-4" class="nav-link">4 &middot; Semi-dealer</a>
-  <a href="#stage-5" class="nav-link">5 &middot; Overall</a>
-  <a href="#cross-stage" class="nav-link">Cross-Stage</a>
+  <a href="#stage-1" class="nav-link">1 &middot; Cross-Stage Governance</a>
+  <a href="#stage-2" class="nav-link">2 &middot; Commercial</a>
+  <a href="#stage-3" class="nav-link">3 &middot; Bulk</a>
+  <a href="#stage-4" class="nav-link">4 &middot; Dealer</a>
+  <a href="#stage-5" class="nav-link">5 &middot; Semi-dealer</a>
+  <a href="#stage-6" class="nav-link">6 &middot; Overall</a>
 </nav>
 
 <div class="header">
@@ -120,26 +127,43 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
   </div>
 </div>
 
-<section class="stage-section" id="stage-1">
+<section class="stage-section cross-section" id="stage-1">
+  <div class="stage-banner cross-banner" onclick="toggleStage(this)">
+    <div class="stage-num cross-num"><span class="num-big">1</span><span class="num-sub">OF 6</span></div>
+    <div class="stage-info"><div class="stage-title">CROSS-STAGE GOVERNANCE</div><div class="stage-sub">Escalation and audit-trail rules that apply on top of every Accounting approval row above.</div></div>
+    <span class="stage-arrow">&#9662;</span>
+  </div>
+  <div class="stage-body">
+    <div class="doc-section"><h4><span class="n">1</span>Operational Guidelines</h4><ul class="guide-list">
+<li id="cross-gl-0">Any transaction blocked or disputed at its normal approval level escalates through the standard chain (System watch -&gt; Review -&gt; Manager) rather than being resolved informally between the two parties involved.</li>
+<li id="cross-gl-1">Sales Order Control Numbers, once assigned, are permanent and non-editable; a correction is made with a new document, never by editing the original control number.</li>
+<li id="cross-gl-2">The person who initiates a transaction is not the same person who posts it to the GL or reconciles it - segregation of duties applies at every posting step.</li>
+</ul>
+</div>
+  </div>
+</section>
+
+<section class="stage-section" id="stage-2">
   <div class="stage-banner" onclick="toggleStage(this)">
-    <div class="stage-num"><span class="num-big">1</span><span class="num-sub">OF 5</span></div>
+    <div class="stage-num"><span class="num-big">2</span><span class="num-sub">OF 6</span></div>
     <div class="stage-info"><div class="stage-title">COMMERCIAL</div><div class="stage-sub">Collection | Balance | Bank Recon</div></div>
     <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
-<li id="accounting-0-sop-0">Make the <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> before delivery: check past receivables and dues with the customer. (A5O1.1)</li>
-<li id="accounting-0-sop-1">If the customer has past dues, flag the upcoming order. If past dues are within a passable / supervisor-approved range, approve the upcoming order. If there are no past dues, approve the upcoming order directly. (A5O1.1.1)</li>
-<li id="accounting-0-sop-2">Update and close Receivables: <a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a> collects the signed <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> (DR) and <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> from the Delivery Team. (A5C2.1.1)</li>
-<li id="accounting-0-sop-3">Check the monthly summary table of invoices for collection. (A5C2.1.2)</li>
-<li id="accounting-0-sop-4">Print the summary of <a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a>. (A5C2.1.3)</li>
-<li id="accounting-0-sop-5">Check and print the summary of Write-off / Loss Accounts. (A5C2.1.4)</li>
-<li id="accounting-0-sop-6"><a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">Bank Reconciliation</a>: update and check the summary table of amounts for <a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">bank reconciliation</a>. (A5C3.1)</li>
-<li id="accounting-0-sop-7">Resolve customer disputes: refer to the Sales Order; submit the paper to a superior if unresolved. (A5C4.1-A5C4.2)</li>
-<li id="accounting-0-sop-8">Payroll Incentive: prepare the incentive in payroll on the 15th and 30th. (A5C5.1)</li>
-<li id="accounting-0-sop-9">Prepare the <a href="forms.html#form-incentive-template" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-incentive-template&#39;);return false" title="Form: Incentive Template">Incentive template</a> for Commercial and Semi-dealer using <a href="forms.html#form-lut-forms" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-lut-forms&#39;);return false" title="Form: LUT forms">LUT forms</a> (2.7kg, 11kg, 50kg) to balance empty and field cylinder data. (A5C5.2)</li>
-</ol>
+    <div class="doc-section doc-section-cf"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><table class="cf-table">
+  <tr><th class="cf-order">#</th><th class="cf-cur">Current Procedures</th><th class="cf-fut">Future Procedures</th></tr>
+  <tr><td class="cf-order">1</td><td class="cf-cur" id="accounting-0-sop-0">Make the <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> before delivery: check past receivables and dues with the customer. (A5O1.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">2</td><td class="cf-cur" id="accounting-0-sop-1">If the customer has past dues, flag the upcoming order. If past dues are within a passable / supervisor-approved range, approve the upcoming order. If there are no past dues, approve the upcoming order directly. (A5O1.1.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">3</td><td class="cf-cur" id="accounting-0-sop-2">Update and close Receivables: <a href="personnel.html#personnel-acctg-staff" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-acctg-staff&#39;);return false" title="Personnel: Acctg Staff">Acctg Staff</a> collects the signed <a href="forms.html#form-delivery-receipt" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-delivery-receipt&#39;);return false" title="Form: Delivery Receipt">Delivery Receipt</a> (DR) and <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> from the Delivery Team. (A5C2.1.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">4</td><td class="cf-cur" id="accounting-0-sop-3">Check the monthly summary table of invoices for collection. (A5C2.1.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">5</td><td class="cf-cur" id="accounting-0-sop-4">Print the summary of <a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a>. (A5C2.1.3)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">6</td><td class="cf-cur" id="accounting-0-sop-5">Check and print the summary of Write-off / Loss Accounts. (A5C2.1.4)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">7</td><td class="cf-cur" id="accounting-0-sop-6"><a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">Bank Reconciliation</a>: update and check the summary table of amounts for <a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">bank reconciliation</a>. (A5C3.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">8</td><td class="cf-cur" id="accounting-0-sop-7">Resolve customer disputes: refer to the Sales Order; submit the paper to a superior if unresolved. (A5C4.1-A5C4.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">9</td><td class="cf-cur" id="accounting-0-sop-8">Payroll Incentive: prepare the incentive in payroll on the 15th and 30th. (A5C5.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">10</td><td class="cf-cur" id="accounting-0-sop-9">Prepare the <a href="forms.html#form-incentive-template" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-incentive-template&#39;);return false" title="Form: Incentive Template">Incentive template</a> for Commercial and Semi-dealer using <a href="forms.html#form-lut-forms" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-lut-forms&#39;);return false" title="Form: LUT forms">LUT forms</a> (2.7kg, 11kg, 50kg) to balance empty and field cylinder data. (A5C5.2)</td><td class="cf-fut"></td></tr>
+</table>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="accounting-0-gl-0">No <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> is issued before the past-dues check on the customer&#x27;s AR; only a supervisor-approved past-due balance clears an order that has outstanding receivables.</li>
@@ -159,27 +183,20 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
     <div class="sources"><b>Sources:</b> Merged from Process Systemization Portal draft + source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting &gt; Commercial (A5O1-A5C5).</div>
   </div>
 </section>
-<div class="cf-print-only" aria-hidden="true">
-  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Commercial</h4>
-  <table class="cf-print-table">
-    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
-    <tr><td id="accounting-0-cur-0"><a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a> and Write-off summaries are printed, not dashboarded - a stale figure is possible between print runs.</td><td id="accounting-0-fut-0">Real-time AR aging visible on demand instead of a monthly print cycle.</td></tr>
-    <tr><td id="accounting-0-cur-1">Dispute resolution travels as a physical paper submission to a superior.</td><td id="accounting-0-fut-1">Digital dispute log with status tracking instead of a paper hand-off.</td></tr>
-  </table>
-</div>
 
-<section class="stage-section" id="stage-2">
+<section class="stage-section" id="stage-3">
   <div class="stage-banner" onclick="toggleStage(this)">
-    <div class="stage-num"><span class="num-big">2</span><span class="num-sub">OF 5</span></div>
+    <div class="stage-num"><span class="num-big">3</span><span class="num-sub">OF 6</span></div>
     <div class="stage-info"><div class="stage-title">BULK</div><div class="stage-sub">Collection | Balance | Bank Recon</div></div>
     <span class="badge" style="background:#F9EEDC;color:#B96B13;border:1px solid #E9CDA8">Partially confirmed - see gap note</span>
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
-<li id="accounting-1-sop-0"><a href="subprocess.html#subprocess-invoicing" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-invoicing&#39;);return false" title="Subprocess: Invoicing">Invoicing</a>, receivables, <a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">bank reconciliation</a>, and payroll incentive steps follow the same procedure as Accounting &gt; Commercial (A5O1-A5C5), per company specification.</li>
-<li id="accounting-1-sop-1">Bulk-specific exceptions to that procedure are referenced but not documented in either source.</li>
-</ol>
+    <div class="doc-section doc-section-cf"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><table class="cf-table">
+  <tr><th class="cf-order">#</th><th class="cf-cur">Current Procedures</th><th class="cf-fut">Future Procedures</th></tr>
+  <tr><td class="cf-order">1</td><td class="cf-cur" id="accounting-1-sop-0"><a href="subprocess.html#subprocess-invoicing" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-invoicing&#39;);return false" title="Subprocess: Invoicing">Invoicing</a>, receivables, <a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">bank reconciliation</a>, and payroll incentive steps follow the same procedure as Accounting &gt; Commercial (A5O1-A5C5), per company specification.</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">2</td><td class="cf-cur" id="accounting-1-sop-1">Bulk-specific exceptions to that procedure are referenced but not documented in either source.</td><td class="cf-fut"></td></tr>
+</table>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="accounting-1-gl-0">Accounting &gt; Bulk explicitly inherits the Commercial A5O1-A5C5 procedure; the undocumented exceptions should be confirmed with Accounting before this is finalized, particularly whether per-truck (rather than per-cylinder) reconciliation changes any AR or bank-rec step.</li>
@@ -194,35 +211,29 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
     <div class="sources"><b>Sources:</b> Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting &gt; Bulk (placeholder). No corresponding section in &quot;MGC LPG Process Manual v2.docx&quot;.</div>
   </div>
 </section>
-<div class="cf-print-only" aria-hidden="true">
-  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Bulk</h4>
-  <table class="cf-print-table">
-    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
-    <tr><td id="accounting-1-cur-0">Bulk accounting handled as an unexceptioned copy of Commercial; per-truck reconciliation differences (Operations &gt; Bulk) are not reflected in the accounting procedure.</td><td id="accounting-1-fut-0">Confirm and document whether per-truck gain computation requires a distinct AR/bank-rec step, then encode it explicitly.</td></tr>
-  </table>
-</div>
 
-<section class="stage-section" id="stage-3">
+<section class="stage-section" id="stage-4">
   <div class="stage-banner" onclick="toggleStage(this)">
-    <div class="stage-num"><span class="num-big">3</span><span class="num-sub">OF 5</span></div>
+    <div class="stage-num"><span class="num-big">4</span><span class="num-sub">OF 6</span></div>
     <div class="stage-info"><div class="stage-title">DEALER</div><div class="stage-sub">Collection (Charge/Installment/PDC) | Balance | Bank Recon</div></div>
     <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
-<li id="accounting-2-sop-0">Before approving the order, verify the dealer&#x27;s AR with CNC - check past dues and other factors first.</li>
-<li id="accounting-2-sop-1">Confirm the payment type: about 70% of dealers are on installment, about 30% are COD.</li>
-<li id="accounting-2-sop-2">For installment, collect <a href="forms.html#form-post-dated-checks" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-post-dated-checks&#39;);return false" title="Form: Post-Dated Checks">Post-Dated Checks</a> (PDCs) as payment security.</li>
-<li id="accounting-2-sop-3">If the dealer cannot issue PDCs, have them execute a <a href="forms.html#form-promissory-note" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-promissory-note&#39;);return false" title="Form: Promissory Note">Promissory Note</a> instead.</li>
-<li id="accounting-2-sop-4">Track the installment schedule in Google Sheets (due dates and payment completion dates).</li>
-<li id="accounting-2-sop-5">Issue the Charge <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> on terms and encode it in ACCPAC before sending to the client.</li>
-<li id="accounting-2-sop-6">File the countered hardcopy <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a>; CNC accounts stay at CNC and a messenger brings them to the client.</li>
-<li id="accounting-2-sop-7">Update and close receivables; check the monthly summary of invoices for collection.</li>
-<li id="accounting-2-sop-8">Print the <a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a> summary and check write-off/loss accounts.</li>
-<li id="accounting-2-sop-9">Perform <a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">bank reconciliation</a> and resolve dealer disputes (refer back to the Sales Order).</li>
-<li id="accounting-2-sop-10">Apply dealer pricing from the MGC Pricing Matrix (per-channel buffer and per-dealer adjustment).</li>
-</ol>
+    <div class="doc-section doc-section-cf"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><table class="cf-table">
+  <tr><th class="cf-order">#</th><th class="cf-cur">Current Procedures</th><th class="cf-fut">Future Procedures</th></tr>
+  <tr><td class="cf-order">1</td><td class="cf-cur" id="accounting-2-sop-0">Before approving the order, verify the dealer&#x27;s AR with CNC - check past dues and other factors first.</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">2</td><td class="cf-cur" id="accounting-2-sop-1">Confirm the payment type: about 70% of dealers are on installment, about 30% are COD.</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">3</td><td class="cf-cur" id="accounting-2-sop-2">For installment, collect <a href="forms.html#form-post-dated-checks" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-post-dated-checks&#39;);return false" title="Form: Post-Dated Checks">Post-Dated Checks</a> (PDCs) as payment security.</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">4</td><td class="cf-cur" id="accounting-2-sop-3">If the dealer cannot issue PDCs, have them execute a <a href="forms.html#form-promissory-note" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-promissory-note&#39;);return false" title="Form: Promissory Note">Promissory Note</a> instead.</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">5</td><td class="cf-cur" id="accounting-2-sop-4">Track the installment schedule in Google Sheets (due dates and payment completion dates).</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">6</td><td class="cf-cur" id="accounting-2-sop-5">Issue the Charge <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">Invoice</a> on terms and encode it in ACCPAC before sending to the client.</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">7</td><td class="cf-cur" id="accounting-2-sop-6">File the countered hardcopy <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a>; CNC accounts stay at CNC and a messenger brings them to the client.</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">8</td><td class="cf-cur" id="accounting-2-sop-7">Update and close receivables; check the monthly summary of invoices for collection.</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">9</td><td class="cf-cur" id="accounting-2-sop-8">Print the <a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a> summary and check write-off/loss accounts.</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">10</td><td class="cf-cur" id="accounting-2-sop-9">Perform <a href="subprocess.html#subprocess-bank-reconciliation" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-bank-reconciliation&#39;);return false" title="Subprocess: Bank Reconciliation">bank reconciliation</a> and resolve dealer disputes (refer back to the Sales Order).</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">11</td><td class="cf-cur" id="accounting-2-sop-10">Apply dealer pricing from the MGC Pricing Matrix (per-channel buffer and per-dealer adjustment).</td><td class="cf-fut"></td></tr>
+</table>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="accounting-2-gl-0">Dealer AR is checked against CNC before any order is approved - this runs even for dealers presumed current, not only for flagged accounts.</li>
@@ -242,38 +253,31 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
     <div class="sources"><b>Sources:</b> &quot;MGC LPG Process Manual v2.docx&quot; - Accounting &gt; Dealer (invoicing notes, dealer payment terms, Commercial accounting card cross-reference).</div>
   </div>
 </section>
-<div class="cf-print-only" aria-hidden="true">
-  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Dealer</h4>
-  <table class="cf-print-table">
-    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
-    <tr><td id="accounting-2-cur-0">Installment due dates tracked in a standalone Google Sheet, separate from ACCPAC and from the <a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a> print.</td><td id="accounting-2-fut-0">A single AR system linking PDC/<a href="forms.html#form-promissory-note" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-promissory-note&#39;);return false" title="Form: Promissory Note">Promissory Note</a> status, installment due dates, and ACCPAC <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> status, so a missed due date raises a flag automatically instead of waiting for the monthly <a href="forms.html#form-aged-receivables" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-aged-receivables&#39;);return false" title="Form: Aged Receivables">Aged Receivables</a> print.</td></tr>
-    <tr><td id="accounting-2-cur-1">CNC accounts couriered physically by messenger rather than transmitted digitally.</td><td></td></tr>
-  </table>
-</div>
 
-<section class="stage-section" id="stage-4">
+<section class="stage-section" id="stage-5">
   <div class="stage-banner" onclick="toggleStage(this)">
-    <div class="stage-num"><span class="num-big">4</span><span class="num-sub">OF 5</span></div>
+    <div class="stage-num"><span class="num-big">5</span><span class="num-sub">OF 6</span></div>
     <div class="stage-info"><div class="stage-title">SEMI-DEALER</div><div class="stage-sub">Collection (Cash/COD) | Balance | Bank Recon</div></div>
     <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
-<li id="accounting-3-sop-0">Issue the <a href="forms.html#form-entry-exit-slip" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-entry-exit-slip&#39;);return false" title="Form: Entry/Exit Slip">entry/exit slip</a> (EES) to the customer, encode it, and have the <a href="personnel.html#personnel-guard" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-guard&#39;);return false" title="Personnel: Guard">guard</a> validate the tank classification.</li>
-<li id="accounting-3-sop-1">After loading, the checker goes to Accounting; issue the <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a> a cash/charge <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> or DR.</li>
-<li id="accounting-3-sop-2"><a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">Cashier</a> collects the cash; the receipt (recibo) must match the empty and filled cylinders (the LUT contents).</li>
-<li id="accounting-3-sop-3">Checker encodes in AppSheet (= Refilling Report); AppSheet and the receipt must match (basis of the <a href="forms.html#form-grr" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-grr&#39;);return false" title="Form: GRR">GRR</a>).</li>
-<li id="accounting-3-sop-4">Forward Semi-dealer cash invoices straight to the <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a> at Plant Accounting; collect cash and documents by 4-5pm.</li>
-<li id="accounting-3-sop-5">Balance sales and the LUT within the same day (2.7kg, 11kg, 50kg must be indicated and balance).</li>
-<li id="accounting-3-sop-6">Audit cash sales, collections, and returns from advances.</li>
-<li id="accounting-3-sop-7">Validate the cash collection report from the <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a> and check the deposit balancing at the bank.</li>
-<li id="accounting-3-sop-8">Prepare the payroll incentive (15th and 30th) using <a href="forms.html#form-lut-forms" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-lut-forms&#39;);return false" title="Form: LUT forms">LUT forms</a> to balance empty and field cylinders.</li>
-</ol>
+    <div class="doc-section doc-section-cf"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><table class="cf-table">
+  <tr><th class="cf-order">#</th><th class="cf-cur">Current Procedures</th><th class="cf-fut">Future Procedures</th></tr>
+  <tr><td class="cf-order">1</td><td class="cf-cur" id="accounting-3-sop-0">Issue the <a href="forms.html#form-entry-exit-slip" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-entry-exit-slip&#39;);return false" title="Form: Entry/Exit Slip">entry/exit slip</a> (EES) to the customer, encode it, and have the <a href="personnel.html#personnel-guard" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-guard&#39;);return false" title="Personnel: Guard">guard</a> validate the tank classification.</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">2</td><td class="cf-cur" id="accounting-3-sop-1">After loading, the checker goes to Accounting; issue the <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a> a cash/charge <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> or DR.</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">3</td><td class="cf-cur" id="accounting-3-sop-2"><a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">Cashier</a> collects the cash; the receipt (recibo) must match the empty and filled cylinders (the LUT contents).</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">4</td><td class="cf-cur" id="accounting-3-sop-3">Checker encodes in RFR-AppSheet; RFR-AppSheet and the receipt must match (basis of the <a href="forms.html#form-grr" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-grr&#39;);return false" title="Form: GRR">GRR</a>).</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">5</td><td class="cf-cur" id="accounting-3-sop-4">Forward Semi-dealer cash invoices straight to the <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a> at Plant Accounting; collect cash and documents by 4-5pm.</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">6</td><td class="cf-cur" id="accounting-3-sop-5">Balance sales and the LUT within the same day (2.7kg, 11kg, 50kg must be indicated and balance).</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">7</td><td class="cf-cur" id="accounting-3-sop-6">Audit cash sales, collections, and returns from advances.</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">8</td><td class="cf-cur" id="accounting-3-sop-7">Validate the cash collection report from the <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a> and check the deposit balancing at the bank.</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">9</td><td class="cf-cur" id="accounting-3-sop-8">Prepare the payroll incentive (15th and 30th) using <a href="forms.html#form-lut-forms" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-lut-forms&#39;);return false" title="Form: LUT forms">LUT forms</a> to balance empty and field cylinders.</td><td class="cf-fut"></td></tr>
+</table>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="accounting-3-gl-0">The recibo must match empty and filled cylinder counts (LUT contents) before cash is considered collected - a mismatch holds the transaction rather than being resolved by adjusting the receipt after the fact.</li>
-<li id="accounting-3-gl-1">AppSheet entry and the physical receipt must match in quantity, mirroring the same rule used in Operations &gt; Dealer refilling.</li>
+<li id="accounting-3-gl-1">RFR-AppSheet entry and the physical receipt must match in quantity, mirroring the same rule used in Operations &gt; Dealer refilling.</li>
 <li id="accounting-3-gl-2">Sales and the LUT are balanced same-day, not at month-end - this is a daily close, not a periodic one.</li>
 <li id="accounting-3-gl-3">Cash and documents are due to the Plant Accounting <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a> by 4-5pm; a late submission is an exception to flag, not a routine occurrence.</li>
 </ul>
@@ -288,33 +292,26 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
     <div class="sources"><b>Sources:</b> &quot;MGC LPG Process Manual v2.docx&quot; - Accounting &gt; Semi-dealer (plant-accounting duties, Commercial accounting card A5C cross-reference).</div>
   </div>
 </section>
-<div class="cf-print-only" aria-hidden="true">
-  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Semi-dealer</h4>
-  <table class="cf-print-table">
-    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
-    <tr><td id="accounting-3-cur-0">Cash and documents are physically collected by a fixed 4-5pm cutoff, creating a hard daily bottleneck at the plant <a href="personnel.html#personnel-cashier" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-cashier&#39;);return false" title="Personnel: Cashier">cashier</a>.</td><td id="accounting-3-fut-0">Automatic same-day LUT/AppSheet/receipt three-way match, flagging mismatches before the 4-5pm cutoff instead of during the manual audit.</td></tr>
-    <tr><td id="accounting-3-cur-1">LUT balancing is done same-day but by hand against the AppSheet entry rather than system-matched.</td><td></td></tr>
-  </table>
-</div>
 
-<section class="stage-section" id="stage-5">
+<section class="stage-section" id="stage-6">
   <div class="stage-banner" onclick="toggleStage(this)">
-    <div class="stage-num"><span class="num-big">5</span><span class="num-sub">OF 5</span></div>
+    <div class="stage-num cross-num"><span class="num-big">6</span><span class="num-sub">OF 6</span></div>
     <div class="stage-info"><div class="stage-title">OVERALL</div><div class="stage-sub">Monitoring | Updates | Reports</div></div>
     <span class="badge" style="background:#E3F0E6;color:#2E6A3D;border:1px solid #B7D8C4">Confirmed with source data</span>
     <span class="stage-arrow">&#9662;</span>
   </div>
   <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><ol class="sop">
-<li id="accounting-4-sop-0">Consolidate and check all relevant data on request - bi-monthly or monthly <a href="subprocess.html#subprocess-financial-statements" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-financial-statements&#39;);return false" title="Subprocess: Financial Statements">Financial Statements</a>. (A5A1)</li>
-<li id="accounting-4-sop-1">Produce versatile, multi-format <a href="subprocess.html#subprocess-financial-statements" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-financial-statements&#39;);return false" title="Subprocess: Financial Statements">financial statements</a> and payroll summary; drill into individual summary amounts. (A5A1.1-A5A1.2)</li>
-<li id="accounting-4-sop-2">Generate instant PDF or Excel exports for further analysis; separate data by channel; compare Budget vs Actual. (A5A1.3-A5A1.5)</li>
-<li id="accounting-4-sop-3">Profit and Loss Statement: ensure all entries are encoded, refresh the P&amp;L table, and print the monthly P&amp;L Statement. (A5C5.1.1)</li>
-<li id="accounting-4-sop-4">Cash Flow Statement: ensure all entries are encoded, refresh the Cash Flow table, and print the monthly CF Statement. (A5C5.1.2)</li>
-<li id="accounting-4-sop-5">Balance Sheet: ensure all entries are encoded, refresh the Balance Sheet table, and print the monthly BS Statement. (A5C5.1.3)</li>
-<li id="accounting-4-sop-6">Prepare the Payroll Summary, consolidating all incentive computations and salary data for the period. (A5C5.2)</li>
-<li id="accounting-4-sop-7"><a href="subprocess.html#subprocess-industrial-projects" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-industrial-projects&#39;);return false" title="Subprocess: Industrial Projects">Industrial Projects</a>: track Budget P&amp;L against Actual P&amp;L and timeline. (A5C5.3)</li>
-</ol>
+    <div class="doc-section doc-section-cf"><h4><span class="n">1</span>SOP Manual — Step-by-Step Procedure</h4><table class="cf-table">
+  <tr><th class="cf-order">#</th><th class="cf-cur">Current Procedures</th><th class="cf-fut">Future Procedures</th></tr>
+  <tr><td class="cf-order">1</td><td class="cf-cur" id="accounting-4-sop-0">Consolidate and check all relevant data on request - bi-monthly or monthly <a href="subprocess.html#subprocess-financial-statements" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-financial-statements&#39;);return false" title="Subprocess: Financial Statements">Financial Statements</a>. (A5A1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">2</td><td class="cf-cur" id="accounting-4-sop-1">Produce versatile, multi-format <a href="subprocess.html#subprocess-financial-statements" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-financial-statements&#39;);return false" title="Subprocess: Financial Statements">financial statements</a> and payroll summary; drill into individual summary amounts. (A5A1.1-A5A1.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">3</td><td class="cf-cur" id="accounting-4-sop-2">Generate instant PDF or Excel exports for further analysis; separate data by channel; compare Budget vs Actual. (A5A1.3-A5A1.5)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">4</td><td class="cf-cur" id="accounting-4-sop-3">Profit and Loss Statement: ensure all entries are encoded, refresh the P&amp;L table, and print the monthly P&amp;L Statement. (A5C5.1.1)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">5</td><td class="cf-cur" id="accounting-4-sop-4">Cash Flow Statement: ensure all entries are encoded, refresh the Cash Flow table, and print the monthly CF Statement. (A5C5.1.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">6</td><td class="cf-cur" id="accounting-4-sop-5">Balance Sheet: ensure all entries are encoded, refresh the Balance Sheet table, and print the monthly BS Statement. (A5C5.1.3)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">7</td><td class="cf-cur" id="accounting-4-sop-6">Prepare the Payroll Summary, consolidating all incentive computations and salary data for the period. (A5C5.2)</td><td class="cf-fut"></td></tr>
+  <tr><td class="cf-order">8</td><td class="cf-cur" id="accounting-4-sop-7"><a href="subprocess.html#subprocess-industrial-projects" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-industrial-projects&#39;);return false" title="Subprocess: Industrial Projects">Industrial Projects</a>: track Budget P&amp;L against Actual P&amp;L and timeline. (A5C5.3)</td><td class="cf-fut"></td></tr>
+</table>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
 <li id="accounting-4-gl-0">All three <a href="subprocess.html#subprocess-financial-statements" class="xref xref-subprocess" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;subprocess&#39;,&#39;subprocess-financial-statements&#39;);return false" title="Subprocess: Financial Statements">financial statements</a> (P&amp;L, Cash Flow, Balance Sheet) require full entry encoding before the monthly refresh - a partial encode is not printed as final.</li>
@@ -332,29 +329,6 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
     <div class="sources"><b>Sources:</b> Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting &gt; Overall (A5A1, A5C5.1-A5C5.3).</div>
   </div>
 </section>
-<div class="cf-print-only" aria-hidden="true">
-  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; Overall</h4>
-  <table class="cf-print-table">
-    <tr><th>Current — Traditional / Manual</th><th>Future — Target / Automated</th></tr>
-    <tr><td id="accounting-4-cur-0">Statements are printed monthly rather than continuously available; drill-down exists but the base refresh is still a manual, scheduled step.</td><td id="accounting-4-fut-0">On-demand PDF/Excel exports with live drill-down (already specified as a target feature), so a mid-month check doesn&#x27;t wait for the scheduled refresh.</td></tr>
-  </table>
-</div>
-
-<section class="cross-section" id="cross-stage">
-  <div class="cross-banner" onclick="toggleStage(this)">
-    <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>
-    <div class="stage-info"><div class="stage-title" style="color:#7030A0">CROSS-STAGE GOVERNANCE</div><div class="stage-sub" style="color:#7c3aed">Escalation and audit-trail rules that apply on top of every Accounting approval row above.</div></div>
-    <span class="stage-arrow" style="color:#7030A0">&#9662;</span>
-  </div>
-  <div class="stage-body">
-    <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
-<li id="cross-gl-0">Any transaction blocked or disputed at its normal approval level escalates through the standard chain (System watch -&gt; Review -&gt; Manager) rather than being resolved informally between the two parties involved.</li>
-<li id="cross-gl-1">Sales Order Control Numbers, once assigned, are permanent and non-editable; a correction is made with a new document, never by editing the original control number.</li>
-<li id="cross-gl-2">The person who initiates a transaction is not the same person who posts it to the GL or reconciles it - segregation of duties applies at every posting step.</li>
-</ul>
-</div>
-  </div>
-</section>
 
 <div class="metrics-strip">
   <div class="metric"><div class="metric-val">5</div><div class="metric-lbl">Stages</div><div class="metric-sub">Commercial, Bulk, Dealer, Semi-dealer, Overall</div></div>
@@ -370,8 +344,36 @@ function toggleStage(el){var sec=el.closest('.stage-section')||el.closest('.cros
 function expandAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.add('open')})}
 function collapseAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.remove('open')})}
 function printShortBond(){var s=document.createElement('style');s.id='psb';s.innerHTML='@page{size:8.5in 14in;margin:0.5in 0.6in}';document.head.appendChild(s);expandAll();window.print();setTimeout(function(){var e=document.getElementById('psb');if(e)e.remove()},1000)}
-function scrollToAnchor(id){var el=document.getElementById(id);if(!el)return;var stage=el.closest('.stage-section')||el.closest('.cross-section');if(stage)stage.classList.add('open');setTimeout(function(){el.scrollIntoView({behavior:'smooth',block:'center'});el.style.outline='2px solid var(--accent)';setTimeout(function(){el.style.outline=''},1800)},180)}
+function scrollToAnchor(id){
+  var el=document.getElementById(id);
+  if(!el)return;
+  var stage=el.closest('.stage-section')||el.closest('.cross-section');
+  var body=stage?stage.querySelector('.stage-body'):null;
+  var wasOpen=!stage||stage.classList.contains('open');
+  if(stage)stage.classList.add('open');
+  function doScroll(){
+    el.scrollIntoView({behavior:'smooth',block:'center'});
+    el.style.outline='2px solid var(--accent)';
+    setTimeout(function(){el.style.outline=''},1800);
+  }
+  // .stage-body's max-height transition is .4s -- scrolling before it
+  // finishes expanding lands on the pre-expansion position, short of the
+  // real target. Wait for transitionend (with a timeout fallback in case it
+  // doesn't fire) instead of guessing a delay.
+  if(!wasOpen&&body){
+    var done=false;
+    function onEnd(e){if(e.target!==body)return;done=true;body.removeEventListener('transitionend',onEnd);doScroll();}
+    body.addEventListener('transitionend',onEnd);
+    setTimeout(function(){if(!done){body.removeEventListener('transitionend',onEnd);doScroll();}},450);
+  }else{
+    doScroll();
+  }
+}
 document.querySelectorAll('.topnav a').forEach(function(link){link.addEventListener('click',function(){var hash=link.getAttribute('href');if(!hash||!hash.startsWith('#'))return;var t=document.querySelector(hash);if(t)t.classList.add('open')});});
+(function(){
+  var hash=window.location.hash.slice(1);
+  if(hash)scrollToAnchor(hash);
+})();
 </script>
 </body>
 </html>

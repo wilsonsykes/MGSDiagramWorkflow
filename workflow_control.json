@@ -61,8 +61,8 @@
     "approval": "Approval Matrix &amp; Controls"
   },
   "approval_matrix_columns": ["Transaction / Decision", "Threshold", "Initiator", "Reviewer", "Approver", "Control Activity"],
-  "current_label": "Current — Traditional / Manual",
-  "future_label": "Future — Target / Automated",
+  "current_label": "Current Procedures",
+  "future_label": "Future Procedures",
   "expand_all_label": "Expand All",
   "collapse_all_label": "Collapse All",
   "print_label": "Print",

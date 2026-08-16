@@ -141,6 +141,26 @@ def render_sop(steps, cross_terms, id_prefix):
     return h
 
 
+def render_sop_with_future(steps, future, cross_terms, id_prefix, current_label, future_label):
+    """SOP Manual as a Current Procedures / Future Procedures table, shown on
+    screen and reused as-is for print (a page break is forced before this
+    section in print CSS via the doc-section-cf class). Each row keeps the
+    same #{id_prefix}-sop-{i} anchor id render_sop used -- the Future cell in
+    that row has no id of its own, it shares the row's Current anchor, so a
+    cross-reference link or Workflow Mention from either column lands on the
+    exact same row/hyperlink."""
+    steps = steps or []
+    future = future or []
+    h = '<table class="cf-table">\n'
+    h += f'  <tr><th class="cf-order">#</th><th class="cf-cur">{esc(current_label)}</th><th class="cf-fut">{esc(future_label)}</th></tr>\n'
+    for i, step in enumerate(steps):
+        fut = future[i] if i < len(future) else ''
+        fut_html = link_and_esc(fut, cross_terms) if fut else ''
+        h += f'  <tr><td class="cf-order">{i + 1}</td><td class="cf-cur" id="{id_prefix}-sop-{i}">{link_and_esc(step, cross_terms)}</td><td class="cf-fut">{fut_html}</td></tr>\n'
+    h += '</table>\n'
+    return h
+
+
 def render_guidelines(items, cross_terms, id_prefix):
     h = '<ul class="guide-list">\n'
     for i, item in enumerate(items or []):
@@ -168,49 +188,47 @@ def render_approval_matrix(rows, columns, cross_terms):
     return h
 
 
-def render_current_future_print(cf, cross_terms, id_prefix, current_label, future_label, stage_title):
-    """Print-only Current/Future comparison: rows sit side by side so the
-    printed page can be read/compared left-to-right. Not shown on screen."""
-    current = cf.get('current', []) if cf else []
-    future = cf.get('future', []) if cf else []
-    if not current and not future:
-        return ''
-    h = f'<div class="cf-print-only" aria-hidden="true">\n'
-    h += f'  <h4 class="cf-print-title">Current vs. Future Workflow &mdash; {esc(stage_title)}</h4>\n'
-    h += f'  <table class="cf-print-table">\n    <tr><th>{esc(current_label)}</th><th>{esc(future_label)}</th></tr>\n'
-    for i in range(max(len(current), len(future))):
-        cur_item = current[i] if i < len(current) else ''
-        fut_item = future[i] if i < len(future) else ''
-        cur_id = f' id="{id_prefix}-cur-{i}"' if cur_item else ''
-        fut_id = f' id="{id_prefix}-fut-{i}"' if fut_item else ''
-        h += f'    <tr><td{cur_id}>{link_and_esc(cur_item, cross_terms)}</td><td{fut_id}>{link_and_esc(fut_item, cross_terms)}</td></tr>\n'
-    h += '  </table>\n</div>\n'
-    return h
-
-
-def render_stage(stage, control, cross_terms, page_key, si, total):
+def render_stage(stage, control, cross_terms, page_key, si, display_num, display_total):
     colors = control.get('colors', {})
     labels = control.get('section_labels', {})
     matrix_cols = control.get('approval_matrix_columns',
                                ["Transaction / Decision", "Threshold", "Initiator", "Reviewer", "Approver", "Control Activity"])
-    current_label = control.get('current_label', 'Current — Traditional / Manual')
-    future_label = control.get('future_label', 'Future — Target / Automated')
+    current_label = control.get('current_label', 'Current Procedures')
+    future_label = control.get('future_label', 'Future Procedures')
 
-    i = si + 1
+    # id_prefix stays tied to si (index in the JSON stages array) regardless of
+    # display position, since mentions_loader.js derives its anchor ids the
+    # same way -- only display_num/display_total (which account for Cross-Stage
+    # now occupying slot 1) affect what's shown and the section's own id.
     id_prefix = f'{page_key}-{si}'
     badge = stage.get('badge', 'confirmed')
     default_label = 'Confirmed with source data' if badge == 'confirmed' else 'Partially confirmed — see gap note'
     badge_label = stage.get('badge_label', default_label)
+    # Overall bookends the pipeline alongside Cross-Stage Governance -- shares
+    # its green number badge instead of the default blue.
+    num_class = 'stage-num cross-num' if stage.get('romaji') == 'Overall' else 'stage-num'
 
-    h = f'<section class="stage-section" id="stage-{i}">\n'
+    h = f'<section class="stage-section" id="stage-{display_num}">\n'
     h += f'  <div class="stage-banner" onclick="toggleStage(this)">\n'
-    h += f'    <div class="stage-num"><span class="num-big">{i}</span><span class="num-sub">OF {total}</span></div>\n'
+    h += f'    <div class="{num_class}"><span class="num-big">{display_num}</span><span class="num-sub">OF {display_total}</span></div>\n'
     h += f'    <div class="stage-info"><div class="stage-title">{esc(stage.get("romaji", "").upper())}</div><div class="stage-sub">{esc(stage.get("english", ""))}</div></div>\n'
     h += f'    <span class="badge" style="{get_badge_style(badge, colors)}">{esc(badge_label)}</span>\n'
     h += '    <span class="stage-arrow">&#9662;</span>\n  </div>\n'
     h += '  <div class="stage-body">\n'
 
-    h += f'    <div class="doc-section"><h4><span class="n">1</span>{labels.get("sop", "SOP Manual")}</h4>{render_sop(stage.get("sop_steps"), cross_terms, id_prefix)}</div>\n'
+    future_procedures = stage.get("future_procedures")
+    if future_procedures is not None:
+        # The SOP Manual section IS the "Current Procedures" column -- shown on
+        # screen and reused unchanged for print (page-break-before via
+        # doc-section-cf), so there's no separate print-only appendix for
+        # stages that have been migrated to the TSV pipeline.
+        sop_html = render_sop_with_future(stage.get("sop_steps"), future_procedures, cross_terms, id_prefix, current_label, future_label)
+        sop_section_class = "doc-section doc-section-cf"
+    else:
+        sop_html = render_sop(stage.get("sop_steps"), cross_terms, id_prefix)
+        sop_section_class = "doc-section"
+
+    h += f'    <div class="{sop_section_class}"><h4><span class="n">1</span>{labels.get("sop", "SOP Manual")}</h4>{sop_html}</div>\n'
     h += f'    <div class="doc-section"><h4><span class="n">2</span>{labels.get("guidelines", "Operational Guidelines")}</h4>{render_guidelines(stage.get("guidelines"), cross_terms, id_prefix)}</div>\n'
     h += f'    <div class="doc-section"><h4><span class="n">3</span>{labels.get("approval", "Approval Matrix &amp; Controls")}</h4>{render_approval_matrix(stage.get("approval_matrix"), matrix_cols, cross_terms)}</div>\n'
 
@@ -219,23 +237,24 @@ def render_stage(stage, control, cross_terms, page_key, si, total):
     if stage.get('sources'):
         h += f'    <div class="sources"><b>Sources:</b> {esc(stage["sources"])}</div>\n'
 
-    h += '  </div>\n</section>\n'
-    # Print-only Current/Future comparison lives OUTSIDE the stage-section so its
-    # forced page-break-before isn't fought by the section's page-break-inside:avoid.
-    h += render_current_future_print(stage.get("current_future"), cross_terms, id_prefix, current_label, future_label, stage.get("romaji", ""))
-    h += '\n'
+    h += '  </div>\n</section>\n\n'
     return h
 
 
-def render_cross_stage(cross, control, cross_terms):
+def render_cross_stage(cross, control, cross_terms, display_num, display_total):
     if not cross:
         return ''
     labels = control.get('section_labels', {})
-    h = '<section class="cross-section" id="cross-stage">\n  <div class="cross-banner" onclick="toggleStage(this)">\n'
-    h += '    <div class="stage-num cross-num"><span class="num-big">&infin;</span></div>\n'
-    h += f'    <div class="stage-info"><div class="stage-title" style="color:#7030A0">{esc(cross.get("name", "").upper())}</div><div class="stage-sub" style="color:#7c3aed">{esc(cross.get("description", ""))}</div></div>\n'
-    h += '    <span class="stage-arrow" style="color:#7030A0">&#9662;</span>\n  </div>\n  <div class="stage-body">\n'
-    h += f'    <div class="doc-section"><h4><span class="n">2</span>{labels.get("guidelines", "Operational Guidelines")}</h4>{render_guidelines(cross.get("guidelines"), cross_terms, "cross")}</div>\n'
+    # Cross-Stage Governance sits at the front of the numbered flow (slot 1)
+    # rather than as a separate un-numbered appendix -- same stage-section
+    # shell as a regular stage, with the cross-section/cross-banner/cross-num
+    # modifier classes carrying its green identity (see CSS).
+    h = f'<section class="stage-section cross-section" id="stage-{display_num}">\n'
+    h += '  <div class="stage-banner cross-banner" onclick="toggleStage(this)">\n'
+    h += f'    <div class="stage-num cross-num"><span class="num-big">{display_num}</span><span class="num-sub">OF {display_total}</span></div>\n'
+    h += f'    <div class="stage-info"><div class="stage-title">{esc(cross.get("name", "").upper())}</div><div class="stage-sub">{esc(cross.get("description", ""))}</div></div>\n'
+    h += '    <span class="stage-arrow">&#9662;</span>\n  </div>\n  <div class="stage-body">\n'
+    h += f'    <div class="doc-section"><h4><span class="n">1</span>{labels.get("guidelines", "Operational Guidelines")}</h4>{render_guidelines(cross.get("guidelines"), cross_terms, "cross")}</div>\n'
     h += '  </div>\n</section>\n\n'
     return h
 
@@ -282,19 +301,21 @@ body{{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica 
 .ctrl-btn{{background:#fff;border:1px solid var(--border);color:var(--accent-dark);padding:5px 16px;border-radius:4px;font-size:11px;font-weight:600;font-family:inherit;cursor:pointer;letter-spacing:.4px;transition:all .12s}}
 .ctrl-btn:hover{{background:var(--accent-light);border-color:var(--accent);color:var(--accent)}}
 .stage-section,.cross-section{{margin:14px 48px 0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:#fff;box-shadow:var(--shadow);scroll-margin-top:80px}}
-.cross-section{{background:#faf5ff;border:1px dashed #d8b4fe}}
+.cross-section{{background:#f3faf5;border:1px dashed #a8d5b5}}
 .stage-banner,.cross-banner{{background:linear-gradient(180deg,var(--accent-light) 0%,#c4d3ec 100%);padding:22px 28px;border-bottom:1px solid transparent;display:flex;align-items:center;gap:20px;flex-wrap:wrap;cursor:pointer;transition:background .2s ease;user-select:none}}
 .stage-banner:hover{{background:linear-gradient(180deg,#cddcf0 0%,#b8cbe5 100%)}}
-.cross-banner{{background:linear-gradient(180deg,#f0e6f6 0%,#e0d0ec 100%)}}
-.cross-banner:hover{{background:linear-gradient(180deg,#e8daf0 0%,#d6c4e6 100%)}}
+.cross-banner{{background:linear-gradient(180deg,var(--green-light) 0%,#c2ddc9 100%)}}
+.cross-banner:hover{{background:linear-gradient(180deg,#d5ead9 0%,#b0d4ba 100%)}}
 .stage-section.open .stage-banner,.cross-section.open .cross-banner{{border-bottom-color:var(--border)}}
 .stage-num{{width:60px;height:60px;border-radius:12px;background:var(--accent-dark);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;letter-spacing:.5px;font-size:9px;line-height:1.1;text-align:center}}
 .num-big{{font-size:24px;font-weight:800;line-height:1;margin-bottom:2px}}.num-sub{{font-size:9px;font-weight:800;letter-spacing:1.2px;opacity:.7}}
-.cross-num{{background:var(--purple)}}
+.cross-num{{background:var(--green)}}
 .stage-info{{flex-shrink:0;min-width:200px}}
 .stage-title{{font-size:22px;font-weight:800;color:var(--accent-dark);text-transform:uppercase;letter-spacing:-.3px;margin:0}}
 .stage-sub{{font-size:11px;font-weight:700;color:var(--accent);margin-top:2px;text-transform:uppercase;letter-spacing:1.5px}}
 .stage-arrow{{font-size:22px;color:var(--accent-dark);font-weight:700;transition:transform .25s ease;flex-shrink:0;margin-left:auto}}
+.cross-section .stage-title,.cross-section .stage-arrow{{color:var(--green)}}
+.cross-section .stage-sub{{color:#3d8b52}}
 .stage-section.open .stage-arrow,.cross-section.open .stage-arrow{{transform:rotate(180deg)}}
 .stage-body{{max-height:0;overflow:hidden;transition:max-height .4s ease}}
 .stage-section.open .stage-body,.cross-section.open .stage-body{{max-height:12000px}}
@@ -312,7 +333,13 @@ table.matrix th{{background:var(--accent-dark);color:#fff;text-align:left;paddin
 table.matrix td{{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#374151}}
 table.matrix tr:nth-child(even) td{{background:var(--bg-alt)}}
 .control-chip{{display:inline-block;background:var(--accent-light);color:var(--accent-dark);border:1px solid #BFD6EB;border-radius:5px;padding:1px 7px;font-size:10.5px;margin:1px 4px 1px 0}}
-.cf-print-only{{display:none}}
+.cf-table{{width:100%;border-collapse:collapse;font-size:12px;margin-top:2px;table-layout:fixed}}
+.cf-table th{{background:var(--accent-dark);color:#fff;text-align:left;padding:8px 10px;font-size:10.5px;letter-spacing:.3px}}
+.cf-table td{{padding:8px 10px;border-bottom:1px solid var(--border-light);vertical-align:top;color:#374151;font-size:13px;line-height:1.55;word-wrap:break-word}}
+.cf-table tr:nth-child(even) td{{background:var(--bg-alt)}}
+.cf-order{{width:34px;text-align:center;color:var(--text-light);font-weight:700}}
+.cf-cur{{width:36%}}
+.cf-fut{{width:58%}}
 .gap-note{{background:var(--red-light);border:1px solid #f0c9c9;color:var(--red);border-radius:8px;padding:12px 16px;font-size:12.5px}}
 .gap-note b{{display:block;margin-bottom:4px}}
 .sources{{font-size:11px;color:var(--text-light);padding:12px 28px;background:var(--bg-alt);border-top:1px solid var(--border-light)}}
@@ -336,12 +363,11 @@ table.matrix tr:nth-child(even) td{{background:var(--bg-alt)}}
   .stage-arrow{{display:none}}
   a.xref{{color:inherit;text-decoration:none}}
   .legend-bar{{page-break-after:avoid}}
-  .cf-print-only{{display:block;page-break-before:always;padding:24px 48px}}
-  .cf-print-title{{font-size:14px;font-weight:800;color:var(--accent-dark);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px}}
-  .cf-print-table{{width:100%;border-collapse:collapse;table-layout:fixed}}
-  .cf-print-table th{{background:var(--accent-dark);color:#fff;text-align:left;padding:8px 10px;font-size:11px;width:50%}}
-  .cf-print-table td{{padding:8px 10px;border:1px solid #ccc;vertical-align:top;font-size:11px;line-height:1.5;word-wrap:break-word}}
-  .cf-print-table tr:nth-child(even) td{{background:#f6f8fb}}
+  /* SOP Manual merged into a Current/Future table (doc-section-cf) needs to
+     start on its own page and be allowed to flow across pages -- override the
+     stage-section/doc-section "avoid" rules that would otherwise fight it. */
+  .doc-section-cf{{page-break-before:always;page-break-inside:auto}}
+  .stage-section:has(.doc-section-cf){{page-break-inside:auto}}
 }}
 @media(max-width:900px){{.header,.legend-bar,.stage-section,.cross-section,.metrics-strip{{margin-left:12px;margin-right:12px;padding-left:16px;padding-right:16px}}.doc-section{{padding-left:16px;padding-right:16px}}.topnav{{gap:12px}}.nav-link{{font-size:10.5px}}}}
 </style>
@@ -349,12 +375,20 @@ table.matrix tr:nth-child(even) td{{background:var(--bg-alt)}}
 <body>
 '''
 
+    # Cross-Stage Governance leads the numbered flow as slot 1 (green, like
+    # Overall which bookends it at the end), so every following stage shifts
+    # by one and the "OF N" total grows by one when cross-stage content exists.
+    display_total = len(stages) + (1 if cross else 0)
+
     out += '<nav class="topnav">\n'
     out += f'  <div class="nav-logo">{esc(header.get("logo", "SOP"))}</div>\n'
-    for i, stage in enumerate(stages, 1):
-        out += f'  <a href="#stage-{i}" class="nav-link">{i} &middot; {esc(stage.get("romaji", ""))}</a>\n'
+    nav_num = 1
     if cross:
-        out += '  <a href="#cross-stage" class="nav-link">Cross-Stage</a>\n'
+        out += f'  <a href="#stage-1" class="nav-link">1 &middot; {esc(cross.get("name", "Cross-Stage"))}</a>\n'
+        nav_num = 2
+    for stage in stages:
+        out += f'  <a href="#stage-{nav_num}" class="nav-link">{nav_num} &middot; {esc(stage.get("romaji", ""))}</a>\n'
+        nav_num += 1
     out += '</nav>\n\n'
 
     out += f'<div class="header">\n  <div class="header-top"><div class="header-logo">{esc(header.get("logo", ""))}</div><span class="header-kanji">{esc(header.get("kanji", ""))}</span></div>\n'
@@ -367,10 +401,10 @@ table.matrix tr:nth-child(even) td{{background:var(--bg-alt)}}
     out += '  <div class="ctrl-btns">\n    <button class="ctrl-btn" onclick="expandAll()">Expand All</button>\n    <button class="ctrl-btn" onclick="collapseAll()">Collapse All</button>\n'
     out += '    <button class="ctrl-btn" onclick="printShortBond()">&#128424; Print</button>\n  </div>\n</div>\n\n'
 
+    out += render_cross_stage(cross, control, cross_terms, 1, display_total)
     for si, stage in enumerate(stages):
-        out += render_stage(stage, control, cross_terms, page_key, si, len(stages))
-
-    out += render_cross_stage(cross, control, cross_terms)
+        display_num = si + 2 if cross else si + 1
+        out += render_stage(stage, control, cross_terms, page_key, si, display_num, display_total)
 
     if metrics:
         out += '<div class="metrics-strip">\n'
@@ -384,8 +418,36 @@ function toggleStage(el){{var sec=el.closest('.stage-section')||el.closest('.cro
 function expandAll(){{document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){{s.classList.add('open')}})}}
 function collapseAll(){{document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){{s.classList.remove('open')}})}}
 function printShortBond(){{var s=document.createElement('style');s.id='psb';s.innerHTML='@page{{size:{print_size};margin:{print_margin}}}';document.head.appendChild(s);expandAll();window.print();setTimeout(function(){{var e=document.getElementById('psb');if(e)e.remove()}},1000)}}
-function scrollToAnchor(id){{var el=document.getElementById(id);if(!el)return;var stage=el.closest('.stage-section')||el.closest('.cross-section');if(stage)stage.classList.add('open');setTimeout(function(){{el.scrollIntoView({{behavior:'smooth',block:'center'}});el.style.outline='2px solid var(--accent)';setTimeout(function(){{el.style.outline=''}},1800)}},180)}}
+function scrollToAnchor(id){{
+  var el=document.getElementById(id);
+  if(!el)return;
+  var stage=el.closest('.stage-section')||el.closest('.cross-section');
+  var body=stage?stage.querySelector('.stage-body'):null;
+  var wasOpen=!stage||stage.classList.contains('open');
+  if(stage)stage.classList.add('open');
+  function doScroll(){{
+    el.scrollIntoView({{behavior:'smooth',block:'center'}});
+    el.style.outline='2px solid var(--accent)';
+    setTimeout(function(){{el.style.outline=''}},1800);
+  }}
+  // .stage-body's max-height transition is .4s -- scrolling before it
+  // finishes expanding lands on the pre-expansion position, short of the
+  // real target. Wait for transitionend (with a timeout fallback in case it
+  // doesn't fire) instead of guessing a delay.
+  if(!wasOpen&&body){{
+    var done=false;
+    function onEnd(e){{if(e.target!==body)return;done=true;body.removeEventListener('transitionend',onEnd);doScroll();}}
+    body.addEventListener('transitionend',onEnd);
+    setTimeout(function(){{if(!done){{body.removeEventListener('transitionend',onEnd);doScroll();}}}},450);
+  }}else{{
+    doScroll();
+  }}
+}}
 document.querySelectorAll('.topnav a').forEach(function(link){{link.addEventListener('click',function(){{var hash=link.getAttribute('href');if(!hash||!hash.startsWith('#'))return;var t=document.querySelector(hash);if(t)t.classList.add('open')}});}});
+(function(){{
+  var hash=window.location.hash.slice(1);
+  if(hash)scrollToAnchor(hash);
+}})();
 </script>
 </body>
 </html>'''

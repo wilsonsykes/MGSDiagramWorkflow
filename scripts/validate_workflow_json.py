@@ -100,6 +100,19 @@ def validate_current_future(cf: Any, path: str, errors: list[ValidationError], f
                 ensure_non_empty_str(errors, item, f"{path}.{key}[{i}]", file)
 
 
+def validate_future_procedures(fp: Any, sop_len: int, path: str, errors: list[ValidationError], file: Path) -> None:
+    # One future-procedure slot per current SOP step, row for row -- blank
+    # entries are allowed (not yet filled in), but the count must match exactly.
+    if not expect_type(errors, fp, list, path, file):
+        return
+    if len(fp) != sop_len:
+        errors.append(ValidationError(
+            f"{path} must have exactly {sop_len} entries (one per sop_steps entry), got {len(fp)}", file))
+    for i, item in enumerate(fp):
+        if not isinstance(item, str):
+            errors.append(ValidationError(f"{path}[{i}] must be a string", file))
+
+
 def validate_stage(stage: Any, path: str, errors: list[ValidationError], file: Path) -> None:
     if not expect_type(errors, stage, dict, path, file):
         return
@@ -128,7 +141,11 @@ def validate_stage(stage: Any, path: str, errors: list[ValidationError], file: P
         for i, row in enumerate(stage["approval_matrix"]):
             validate_approval_matrix_row(row, f"{path}.approval_matrix[{i}]", errors, file)
 
-    validate_current_future(stage.get("current_future"), f"{path}.current_future", errors, file)
+    if "current_future" in stage:
+        validate_current_future(stage.get("current_future"), f"{path}.current_future", errors, file)
+    if "future_procedures" in stage:
+        sop_len = len(stage.get("sop_steps") or [])
+        validate_future_procedures(stage.get("future_procedures"), sop_len, f"{path}.future_procedures", errors, file)
 
     if "gap_note" in stage:
         ensure_non_empty_str(errors, stage.get("gap_note"), f"{path}.gap_note", file)

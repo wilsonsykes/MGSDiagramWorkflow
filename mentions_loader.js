@@ -49,11 +49,17 @@
     stages.forEach(function (stage, si) {
       idPrefix = sourceKey + '-' + si;
       var stageLabel = stage.romaji || ('Stage ' + (si + 1));
-      scanList(stage.sop_steps, 'current', 'sop', stageLabel + ' · SOP Manual');
+      scanList(stage.sop_steps, 'current', 'sop', stageLabel + ' · SOP Manual (Current Procedures)');
       scanList(stage.guidelines, 'current', 'gl', stageLabel + ' · Operational Guidelines');
-      // Current/Future workflow bullets are print-only (no on-screen section as
-      // of the Current/Future redesign), so they're intentionally not scanned
-      // here -- a Workflow Mentions link should always land somewhere visible.
+      // future_procedures (TSV-migrated stages) shares the row's "sop" anchor
+      // with its paired current step -- same table row, same hyperlink target
+      // -- so a Future mention jumps to the exact same spot a Current mention
+      // for that row would. The badge/type label still reads "Future" (vs.
+      // "Current") since that comes from `kind`, not the anchor tag. Stages
+      // not yet migrated only have the old print-only current_future bullets,
+      // which stay unscanned since a Workflow Mentions link should always
+      // land somewhere visible.
+      scanList(stage.future_procedures, 'future', 'sop', stageLabel + ' · SOP Manual (Future Procedures)');
     });
 
     return results;
@@ -68,16 +74,14 @@
     }
   };
 
-  /* Build the HTML for one card's mention block */
-  function buildMentionsHTML(allMentions) {
-    if (!allMentions.length) {
-      return '<div class="xm-empty">Not mentioned in current workflow data.</div>';
+  /* Group a list of same-type mentions by source tab and render them */
+  function buildGroupedList(mentions, emptyMsg) {
+    if (!mentions.length) {
+      return '<div class="xm-empty">' + emptyMsg + '</div>';
     }
-
-    /* Group by source tab */
     var order = [];
     var grouped = {};
-    allMentions.forEach(function (m) {
+    mentions.forEach(function (m) {
       if (!grouped[m.tabKey]) { grouped[m.tabKey] = []; order.push(m.tabKey); }
       grouped[m.tabKey].push(m);
     });
@@ -93,8 +97,6 @@
         var displayCode = code
           ? code
           : (m.text.length > 32 ? m.text.slice(0, 32) + '…' : m.text);
-        var badge = m.type === 'current' ? 'Current' : 'Future';
-        var bClass = 'xm-badge xm-badge-' + m.type;
         var safeTitle = m.text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
         var safeKey = m.tabKey.replace(/'/g, "\\'");
         var safeAnchor = m.anchor.replace(/'/g, "\\'");
@@ -102,7 +104,6 @@
           + '<a class="xm-link" href="#" title="' + safeTitle + '" '
           + 'onclick="window.xmGo&&window.xmGo(\'' + safeKey + '\',\'' + safeAnchor + '\');return false">'
           + '<span class="xm-code">' + displayCode + '</span>'
-          + '<span class="' + bClass + '">' + badge + '</span>'
           + '</a>'
           + '<div class="xm-full">' + m.text.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</div>'
           + '</div>';
@@ -112,19 +113,24 @@
     return html;
   }
 
-  /* Main: inject mentions into every .term-card */
+  /* Main: inject Current Procedures / Future Procedures columns into every .term-card */
   var cards = Array.prototype.slice.call(document.querySelectorAll('.term-card'));
   if (!cards.length) return;
 
-  /* Inject loading placeholders */
+  /* Inject loading placeholders -- two columns, same grid row, sitting
+     alongside Field1/Field2 the same way the SOP Manual's Current/Future
+     table sits side by side. */
   cards.forEach(function (card) {
     var inner = card.querySelector('.term-inner');
     if (!inner) return;
-    var div = document.createElement('div');
-    div.className = 'xref-mentions td-group';
-    div.innerHTML = '<div class="td-label xm-section-lbl">Workflow Mentions</div>'
-      + '<div class="xm-loading">Loading…</div>';
-    inner.appendChild(div);
+    var cur = document.createElement('div');
+    cur.className = 'xref-mentions-cur';
+    cur.innerHTML = '<div class="td-label xm-section-lbl">Current Procedures</div><div class="xm-loading">Loading…</div>';
+    var fut = document.createElement('div');
+    fut.className = 'xref-mentions-fut';
+    fut.innerHTML = '<div class="td-label xm-section-lbl">Future Procedures</div><div class="xm-loading">Loading…</div>';
+    inner.appendChild(cur);
+    inner.appendChild(fut);
   });
 
   /* Fetch all workflow JSONs */
@@ -136,17 +142,44 @@
     cards.forEach(function (card) {
       var nameEl = card.querySelector('.term-name');
       if (!nameEl) return;
-      var term = nameEl.textContent.trim();
+      var name = nameEl.textContent.trim();
+      // Personnel cards also carry a role-chip (their position/title) --
+      // SOP text very often refers to staff by role ("Logistics Officer
+      // schedules the delivery") rather than by first name, so match on
+      // both and merge the results.
+      var roleEl = card.querySelector('.role-chip');
+      var role = roleEl ? roleEl.textContent.trim() : '';
+      var terms = [name];
+      if (role && role.toLowerCase() !== name.toLowerCase()) terms.push(role);
 
       var allMentions = [];
       results.forEach(function (r) {
-        allMentions = allMentions.concat(findMentions(term, r.key, r.data));
+        terms.forEach(function (term) {
+          allMentions = allMentions.concat(findMentions(term, r.key, r.data));
+        });
       });
+      // A line could contain both the name and the role (rare, but
+      // possible) -- de-dupe so it doesn't show up twice.
+      var seen = {};
+      allMentions = allMentions.filter(function (m) {
+        var key = m.tabKey + '|' + m.anchor + '|' + m.type;
+        if (seen[key]) return false;
+        seen[key] = true;
+        return true;
+      });
+      var current = allMentions.filter(function (m) { return m.type === 'current'; });
+      var future = allMentions.filter(function (m) { return m.type === 'future'; });
 
-      var mentionsDiv = card.querySelector('.xref-mentions');
-      if (!mentionsDiv) return;
-      var loadingEl = mentionsDiv.querySelector('.xm-loading');
-      if (loadingEl) loadingEl.outerHTML = buildMentionsHTML(allMentions);
+      var curDiv = card.querySelector('.xref-mentions-cur');
+      if (curDiv) {
+        curDiv.innerHTML = '<div class="td-label xm-section-lbl">Current Procedures</div>'
+          + buildGroupedList(current, 'Not mentioned in current procedures.');
+      }
+      var futDiv = card.querySelector('.xref-mentions-fut');
+      if (futDiv) {
+        futDiv.innerHTML = '<div class="td-label xm-section-lbl">Future Procedures</div>'
+          + buildGroupedList(future, 'No future procedure recorded yet.');
+      }
     });
   });
 })();
