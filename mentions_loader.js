@@ -86,29 +86,10 @@
       grouped[m.tabKey].push(m);
     });
 
-    function buildItem(m) {
-      var code = extractCode(m.text);
-      var displayCode = code
-        ? code
-        : (m.text.length > 32 ? m.text.slice(0, 32) + '…' : m.text);
-      var safeTitle = m.text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
-      var safeKey = m.tabKey.replace(/'/g, "\\'");
-      var safeAnchor = m.anchor.replace(/'/g, "\\'");
-      return '<div class="xm-item">'
-        + '<a class="xm-link" href="#" title="' + safeTitle + '" '
-        + 'onclick="window.xmGo&&window.xmGo(\'' + safeKey + '\',\'' + safeAnchor + '\');return false">'
-        + '<span class="xm-code">' + displayCode + '</span>'
-        + '</a>'
-        + '<div class="xm-full">' + m.text.replace(/&/g, '&amp;').replace(/</g, '&lt;') + '</div>'
-        + '</div>';
-    }
-
     var html = '';
     order.forEach(function (key) {
       var items = grouped[key];
       var label = key.charAt(0).toUpperCase() + key.slice(1);
-      var currentItems = items.filter(function (m) { return m.type === 'current'; });
-      var futureItems = items.filter(function (m) { return m.type === 'future'; });
       html += '<div class="xm-group">';
       html += '<div class="xm-group-lbl">' + label + ' <span class="xm-cnt">(' + items.length + ')</span></div>';
       items.forEach(function (m) {

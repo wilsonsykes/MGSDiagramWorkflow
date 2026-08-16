@@ -26,12 +26,6 @@ _CAT_MAP = {
     'personnel':  ('personnel',  'personnel.html'),
 }
 
-# Pages where the Cross-Stage Governance section is reordered to the front,
-# and where the Procedures (SOP Manual) section gains a Future column.
-PROC_PAGES = ('operations', 'sales', 'accounting')
-# Stages that get the Procedures Future column (Dealer / Semi-dealer excluded per spec).
-PROC_FUTURE_STAGES = {'Commercial', 'Bulk', 'Overall'}
-
 
 def load_cross_terms(path):
     """Load cross-reference terms from cross_reference_terms.txt."""
