@@ -92,10 +92,16 @@ def link_and_esc(text, cross_terms):
         esc_term  = htmlmod.escape(t['term'])
         # Use &#39; for single quotes and avoid curly braces to keep the
         # attribute value safe for Python's HTMLParser (used by HTML Guard).
+        # xrefGo (defined in every generated page's own <script>, see
+        # render_html) opens the slide panel when a parent shell is present
+        # and otherwise falls back to a normal same-tab navigation -- unlike
+        # the old inline `window.parent.activateTabById&&...;return false`,
+        # which cancelled the click's default navigation unconditionally, so
+        # the link did nothing at all whenever the page was viewed outside
+        # index.html's iframe (no window.parent.activateTabById to catch it).
         return (
             f'<a href="{page}#{anchor_id}" class="xref xref-{cat}" '
-            f'onclick="window.parent.activateTabById'
-            f'&amp;&amp;window.parent.activateTabById(&#39;{tab_key}&#39;,&#39;{anchor_id}&#39;);return false" '
+            f'onclick="xrefGo(&#39;{tab_key}&#39;,&#39;{anchor_id}&#39;,&#39;{page}&#39;);return false" '
             f'title="{cat.capitalize()}: {esc_term}">'
             f'{matched}</a>'
         )
@@ -418,6 +424,10 @@ function toggleStage(el){{var sec=el.closest('.stage-section')||el.closest('.cro
 function expandAll(){{document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){{s.classList.add('open')}})}}
 function collapseAll(){{document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){{s.classList.remove('open')}})}}
 function printShortBond(){{var s=document.createElement('style');s.id='psb';s.innerHTML='@page{{size:{print_size};margin:{print_margin}}}';document.head.appendChild(s);expandAll();window.print();setTimeout(function(){{var e=document.getElementById('psb');if(e)e.remove()}},1000)}}
+function xrefGo(tabKey,anchorId,page){{
+  if(window.parent&&typeof window.parent.activateTabById==='function'){{window.parent.activateTabById(tabKey,anchorId)}}
+  else{{window.location.href=page+'#'+anchorId}}
+}}
 function scrollToAnchor(id){{
   var el=document.getElementById(id);
   if(!el)return;

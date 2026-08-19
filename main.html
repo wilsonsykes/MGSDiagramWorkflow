@@ -163,7 +163,7 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 </ol>
 </div>
     <div class="doc-section"><h4><span class="n">2</span>Operational Guidelines</h4><ul class="guide-list">
-<li id="main-0-gl-0">Financial Controls &amp; Credit Policy: no <a href="forms.html#form-invoice" class="xref xref-form" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;forms&#39;,&#39;form-invoice&#39;);return false" title="Form: Invoice">invoice</a> or plant release proceeds on an account with unresolved past dues unless a supervisor has explicitly approved a passable balance.</li>
+<li id="main-0-gl-0">Financial Controls &amp; Credit Policy: no <a href="forms.html#form-invoice" class="xref xref-form" onclick="xrefGo(&#39;forms&#39;,&#39;form-invoice&#39;,&#39;forms.html&#39;);return false" title="Form: Invoice">invoice</a> or plant release proceeds on an account with unresolved past dues unless a supervisor has explicitly approved a passable balance.</li>
 <li id="main-0-gl-1">Weighing, Residue &amp; Inventory Integrity: gains, losses, and incentives are computed only from a matched pair of weigh-in and weigh-out readings; an unmatched reading is held for investigation, never estimated.</li>
 <li id="main-0-gl-2">Approval &amp; Escalation Discipline: any transaction blocked or disputed at its normal approval level escalates through the standard chain rather than being resolved informally between the two parties involved.</li>
 <li id="main-0-gl-3">Documentation &amp; Reconciliation: the person who initiates a transaction is not the same person who posts it to the GL or reconciles it - segregation of duties applies at every posting step.</li>
@@ -171,7 +171,7 @@ table.matrix tr:nth-child(even) td{background:var(--bg-alt)}
 </div>
     <div class="doc-section"><h4><span class="n">3</span>Approval Matrix &amp; Controls</h4><table class="matrix">
 <tr><th>Transaction / Decision</th><th>Threshold</th><th>Initiator</th><th>Reviewer</th><th>Approver</th><th>Control Activity</th></tr>
-<tr><td>Overall pricing decision</td><td>1-3x per month, General Meeting</td><td>Regional Sales Manager (sets up matrix)</td><td>-</td><td><b><a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="window.parent.activateTabById&amp;&amp;window.parent.activateTabById(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;);return false" title="Personnel: Sir RY">Sir RY</a></b></td><td><span class="control-chip">Audit log by IT Head</span><span class="control-chip">Channel cascade checklist</span></td></tr>
+<tr><td>Overall pricing decision</td><td>1-3x per month, General Meeting</td><td>Regional Sales Manager (sets up matrix)</td><td>-</td><td><b><a href="personnel.html#personnel-sir-ry" class="xref xref-personnel" onclick="xrefGo(&#39;personnel&#39;,&#39;personnel-sir-ry&#39;,&#39;personnel.html&#39;);return false" title="Personnel: Sir RY">Sir RY</a></b></td><td><span class="control-chip">Audit log by IT Head</span><span class="control-chip">Channel cascade checklist</span></td></tr>
 <tr><td>Cross-department dispute escalation</td><td>-</td><td>Any stage owner</td><td>Supervisor / Manager</td><td><b>Department Manager</b></td><td><span class="control-chip">System watch -&gt; Review -&gt; Manager chain</span></td></tr>
 </table>
 </div>
@@ -192,6 +192,10 @@ function toggleStage(el){var sec=el.closest('.stage-section')||el.closest('.cros
 function expandAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.add('open')})}
 function collapseAll(){document.querySelectorAll('.stage-section,.cross-section').forEach(function(s){s.classList.remove('open')})}
 function printShortBond(){var s=document.createElement('style');s.id='psb';s.innerHTML='@page{size:8.5in 14in;margin:0.5in 0.6in}';document.head.appendChild(s);expandAll();window.print();setTimeout(function(){var e=document.getElementById('psb');if(e)e.remove()},1000)}
+function xrefGo(tabKey,anchorId,page){
+  if(window.parent&&typeof window.parent.activateTabById==='function'){window.parent.activateTabById(tabKey,anchorId)}
+  else{window.location.href=page+'#'+anchorId}
+}
 function scrollToAnchor(id){
   var el=document.getElementById(id);
   if(!el)return;
