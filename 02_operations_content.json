@@ -7,6 +7,33 @@
   },
   "stages": [
     {
+      "romaji": "Overview",
+      "english": "Residue Summary | Gains Review | Traceability | Escalation",
+      "badge": "pending",
+      "sop_steps": [
+        "Operations Supervisor consolidates the Commercial, Bulk, and Dealer weigh-in/weigh-out logs into a weekly Residue & Gains Summary. (Sample)",
+        "Industrial Engineer reviews CIMER output across all channels and flags any unmatched weigh-in/weigh-out pair for investigation before it is included in the gains computation. (Sample)",
+        "Plant Operations Officer reviews cylinder serial and batch traceability records monthly, confirming no cylinder without a traceable batch number has re-entered circulation. (Sample)",
+        "Senior Plant Supervisor escalates any residue reading outside the 1-3kg threshold to Operations management for review before it is booked. (Sample)",
+        "Operations Supervisor and Industrial Engineer present the consolidated Operations performance summary at the monthly Operations review meeting. (Sample)"
+      ],
+      "guidelines": [
+        "The 1-3kg residue threshold is fixed company policy; Driver or Helper cannot round outside that band without Warehouse Supervisor escalation.",
+        "Gains, losses, and incentives are computed only from a matched pair of weigh-in and weigh-out readings. An unmatched reading is held for investigation, never estimated.",
+        "Every cylinder is tracked by serial number and batch number for its full lifecycle, including repaint/retest - a cylinder without a traceable batch number does not re-enter circulation."
+      ],
+      "approval_matrix": [],
+      "future_procedures": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "badge_label": "Newly added — pending confirmation",
+      "gap_note": "Sample SOP steps; Overview badge/label pending client confirmation. The three Guidelines below carry over unchanged from the former Cross-Stage Governance section for this tab."
+    },
+    {
       "romaji": "Commercial",
       "english": "Process Order | Delivery | Return to Plant",
       "badge": "confirmed",
@@ -110,10 +137,10 @@
         "same",
         "same",
         "OIC-Accounting reconciles the General Ledger in Sales-Appsheet-T3 against the signed Delivery Receipt and Credit Notes. No encoding needed in T3. (O1.1.7.1)",
-        "Industrial Engineer checks all input data in CIMER-T2. (O1.1.7.2)",
+        "Industrial Engineer reviews and reconciles all input data in CIMER-T2. (O1.1.7.2)",
         "Operations Supervisor records gains from CIMER-T1 as Inv/Adj in ACCPAC. (O1.1.7.3)",
         "Industrial Engineer submits Gains Summary CIMER-T2.1 for CEO’s approval",
-        ""
+        "same"
       ],
       "badge_label": "Confirmed with source data"
     },
@@ -126,14 +153,15 @@
         "Logistics Officer assign the lorry/trailer truck and load from the Storage Tank (stock transfer, tank to truck - no cylinders involved). (O2.1.2.1)",
         "XXX Weigh the loaded truck at the plant truck scale (weigh-out). (O2.1.2.2)",
         "XXX Generate loading documents: Stock Transfer Form, Truck Scale slip, and Delivery Receipt - issued per lorry load. (O2.1.2.3)",
+        "OIC-Accounting encodes the Bulk sales entries into Gsheet (Bulk Sales V) (O2.1.2.4)",
         "Delivery and Helper deliver the bulk LPG to the industrial or commercial client site. (O2.1.3.1)",
         "At the client site, helper measures the volume delivered using meter/gauge. (O2.1.3.2)",
         "Client receives the bulk LPG and signs the Delivery Receipt. (O2.1.3.3)",
         "Driver, helper and truck return to the plant and truck is weighed again (weigh-in). (O2.1.3.4)",
         "Driver returns the signed DR and xxx documents to Operations Supervisor. (O2.1.3.5)",
-        "Industrial Engineer computes Bulk Gains per truck - compare weigh-out vs weigh-in; should read the higher figure. (O2.1.4.1)",
+        "Industrial Engineer computes Bulk Gains per truck in CIMER. - compare weigh-out vs weigh-in; should read the higher figure. (O2.1.4.1)",
         "Industrial Engineer records residue in the Commercial & Bulk LPG Residue Summary Gsheet, per truck. (O2.1.4.2)",
-        "Operations Supervisor submits documents to XXX (Accounting); record in Google Sheets and ACCPAC. (O2.1.4.3)"
+        "Operations Supervisor submits documents to Accounting Sales Encoder; Accounting Sales Encoder encodes data in ACCPAC. (O2.1.4.3)"
       ],
       "guidelines": [
         "Bulk orders must fill the 8-ton truck capacity before dispatch is scheduled; a partial load requires Plant Operations Officer approval as a documented exception.",
@@ -175,18 +203,19 @@
         }
       ],
       "future_procedures": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        "same",
+        "same",
+        "same",
+        "same",
+        "OIC-Accounting encodes bulk sales in the Sales-Apsheet-T5.",
+        "same",
+        "same",
+        "same",
+        "same",
+        "same",
+        "Industrial Engineer reviews and reconciles all input data in CIMER-T2.",
+        "Industrial Engineer reviews and reconciles all input data in CIMER-T2.",
+        "Operations Supervisor submits documents to Accounting Sales Encoder; Accounting Sales Encoder encodes summarized Cimer-T1 totals as Order Entries O/E in ACCPAC."
       ],
       "badge_label": "Partially Confirmed"
     },
@@ -195,18 +224,18 @@
       "english": "Process Order | Plant Refilling & Swapping | Invoice",
       "badge": "confirmed",
       "sop_steps": [
-        "Dealer client orders 2.5kg, 11kg or 22kg cylinder variants with Sales Assistant 2, and Plant visit scheduled in advance; only confirmed appointments are accommodated. (O3.1.1.1)",
+        "Dealer client orders 2.5kg, 11kg or 22kg cylinder variants with Sales Assistant2, and Plant visit scheduled in advance; only confirmed appointments are accommodated. (O3.1.1.1)",
         "Sales Assistant2 creates a Sales Order Form noting the delivery/pickup date. (O3.1.1.2)",
         "Sales Assistant2 forwards the orders to Credit/Collection Analyst to check for AR dues. (O3.1.1.3)",
-        "If with past dues, don’t serve. If with past dues but with CEO approval, good to serve. If without past dues good to serve. (O3.1.1.4)",
+        "If with past dues, don’t serve. If with past dues but with CEO approval, good to serve. If without past dues, good to serve. (O3.1.1.4)",
         "Dealer arrives with empty cylinders; guard records the vehicle entry and confirms tank classification. (O3.1.2.1.1)",
         "Main Dealers arrive with empty cylinders to fill up 8 tons worth of cylinders. (O3.1.2.1.2)",
         "Checker records cylinder quantities and issues Entry/Exit Slip (EES). (O3.1.2.2)",
         "Cylinders are refilled at the refilling area. (O3.1.2.3)",
         "Checker encodes the transaction in RFR-AppSheet. (O3.1.2.4)",
-        "Checker issues Loading/Unloading Truck (LUT) to the Driver. (O3.1.2.5)",
-        "Guard verifies the LUT; cylinder quantity must match with LUT before release. (O3.1.2.6)",
-        "If quantity does not match, Security flags and informs Plant Operations Officer or Senior Plant Supervisor. (O3.1.2.7)",
+        "Checker issues Loading/Unloading Ticket (LUT) to the Driver. (O3.1.2.5)",
+        "Guard verifies the LUT; cylinder quantity must match with LUT before release. (O3.1.2.6) same",
+        "If quantity does not match, Guard flags and calls to inform Plant Operations Officer or Senior Plant Supervisor. (O3.1.2.7)",
         "Plant Operations Officer reviews and confirms the transactions in RFR-Appsheet. (O3.1.3.1)",
         "OIC-Accounting verifies via RFR-AppSheet against the Cash Invoice or Credit Invoice. (O3.1.3.2)",
         "(covers pickup-with-terms, pickup-with-payment, and delivery-with-terms variants (O3.1.3.3)",
@@ -258,26 +287,26 @@
         }
       ],
       "future_procedures": [
+        "same",
+        "same",
+        "s",
+        "same, use T4 Invoices Summary Table to check receivable dues.",
+        "same",
+        "same",
+        "same",
+        "same",
+        "same",
+        "same",
         "",
+        "same",
+        "same",
+        "same",
         "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        "same.",
+        "same",
+        "same",
+        "same",
+        "same"
       ],
       "badge_label": "Confirmed with source data"
     },
@@ -286,13 +315,13 @@
       "english": "Process Order | Delivery/Pickup | Collect Payment",
       "badge": "pending",
       "sop_steps": [
-        "XXX gets semi-dealer client orders for 11kg or 2.5kg cylinders. (O4.1.1.1)",
-        "Sales Rep informs Logistics Officer for delivery. (O4.1.1.2)",
+        "Sales Assistant2 gets semi-dealer client orders for 11kg or 2.5kg cylinders. (O4.1.1.1)",
+        "Sales Assistant2 informs Logistics Officer for delivery. (O4.1.1.2)",
         "Warehouse staff load cylinders for semi-dealer orders with buffer cylinders. (O4.1.2.1)",
-        "Checker issues LUT (O4.1.2.2)",
+        "Checker issues Loading/Unloading Ticket (LUT). (O4.1.2.2)",
         "Security guard checks LUT for correct cylinder quantity before truck exits Plant. (O4.1.2.3)",
         "Upon delivery to clients, Helper collects payment via cash/COD at point of delivery or pickup. (O4.1.3.1)",
-        "Upon Plant return, Helper returns payments, cash invoices to OIC-Accounting (O4.1.3.2)",
+        "Upon Plant return, Helper returns payments and cash invoices to OIC-Accounting. (O4.1.3.2)",
         "OIC-Accounting tallies the Cash Invoices, cash payments and deposits the cash to the bank. (O4.1.3.3)"
       ],
       "guidelines": [
@@ -322,14 +351,14 @@
         }
       ],
       "future_procedures": [
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
+        "same",
+        "same",
+        "same",
+        "same",
+        "same",
+        "same",
+        "same",
+        "same"
       ],
       "badge_label": "Partially confirmed",
       "gap_note": "xxx"
@@ -410,15 +439,6 @@
       "badge_label": "Confirmed with source data"
     }
   ],
-  "cross_stage": {
-    "name": "Cross-Stage Governance",
-    "description": "Escalation and traceability rules that apply on top of every Operations approval row above.",
-    "guidelines": [
-      "The 1-3kg residue threshold is fixed company policy; Driver or Helper cannot round outside that band without Warehouse Supervisor escalation.",
-      "Gains, losses, and incentives are computed only from a matched pair of weigh-in and weigh-out readings. An unmatched reading is held for investigation, never estimated.",
-      "Every cylinder is tracked by serial number and batch number for its full lifecycle, including repaint/retest - a cylinder without a traceable batch number does not re-enter circulation."
-    ]
-  },
   "metrics": [
     {
       "value": "5",

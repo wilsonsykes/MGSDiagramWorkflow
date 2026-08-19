@@ -1,14 +1,17 @@
 Tab	Stage	English	Badge	BadgeLabel	GapNote	Sources
-Operations	Commercial	Process Order | Delivery | Return to Plant	confirmed	Confirmed with source data		
+Operations	Overview	Residue Summary | Gains Review | Traceability | Escalation	pending	Newly added — pending confirmation	Sample SOP steps; Overview badge/label pending client confirmation. The three Guidelines below carry over unchanged from the former Cross-Stage Governance section for this tab.
+Operations	Commercial	Process Order | Delivery | Return to Plant	confirmed	Confirmed with source data
 Operations	Bulk	Process Order | Delivery | Return to Plant	pending	Partially Confirmed		
 Operations	Dealer	Process Order | Plant Refilling & Swapping | Invoice	confirmed	Confirmed with source data		
 Operations	Semi-dealer	Process Order | Delivery/Pickup | Collect Payment	pending	Partially confirmed	xxx	
 Operations	Overall	Purchase Order | Stock Transfer | Refill | Floor Stock	confirmed	Confirmed with source data		
-Sales	Commercial	Find Client | Serve | Schedule | Repeat Order	confirmed	Confirmed with source data		
+Sales	Overview	Reports | Pricing Matrix | Price Cascade | Quota	pending	Newly added — pending confirmation
+Sales	Commercial	Find Client | Serve | Schedule | Repeat Order	confirmed	Confirmed with source data
 Sales	Bulk	Find Client | Serve | Schedule | Repeat Order	pending	Partially confirmed		
 Sales	Dealer	Find Client | Serve | Schedule | Repeat Order	confirmed	Confirmed with source data		"Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Sales > Dealer (S3A1-S3A3); ""MGC LPG Process Manual v2.docx"" - Sales > Dealer (Order Process & Dealer Accreditation)."
 Sales	Semi-dealer	Find Client | Serve | Schedule | Repeat Order	pending	Partially Confirmed		
 Sales	Overall	Reports | Monitoring | Compliance | Write-Offs	confirmed	Confirmed with source data		Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Sales > Overall (S5A1-S5A3, S5O1-S5C2); Personnel & Forms indexes for named roles.
+Accounting	Overview	Consolidated Reporting | Escalation | Segregation of Duties	pending	Newly added — pending confirmation	Sample SOP steps; Overview badge/label pending client confirmation. The three Guidelines below carry over unchanged from the former Cross-Stage Governance section for this tab.
 Accounting	Commercial	Collection | Balance | Bank Recon	confirmed	Confirmed with source data		Merged from Process Systemization Portal draft + source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting > Commercial (A5O1-A5C5).
 Accounting	Bulk	Collection | Balance | Bank Recon	pending	Partially confirmed - see gap note	"The source site flags this stage as ""Same as Acctg Commercial A5O1-A5C5"" plus ""Exceptions"", but the exceptions field is blank, and the process manual does not cover Accounting > Bulk separately. Recommend confirming with Accounting whether Bulk's per-truck (not per-cylinder) fulfilment changes any receivables or reconciliation step."	"Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting > Bulk (placeholder). No corresponding section in ""MGC LPG Process Manual v2.docx""."
 Accounting	Dealer	Collection (Charge/Installment/PDC) | Balance | Bank Recon	confirmed	Confirmed with source data		"""MGC LPG Process Manual v2.docx"" - Accounting > Dealer (invoicing notes, dealer payment terms, Commercial accounting card cross-reference)."

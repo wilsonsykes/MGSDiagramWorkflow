@@ -7,6 +7,33 @@
   },
   "stages": [
     {
+      "romaji": "Overview",
+      "english": "Consolidated Reporting | Escalation | Segregation of Duties",
+      "badge": "pending",
+      "sop_steps": [
+        "OIC-Accounting consolidates channel-level receivables and reconciliation summaries into a weekly Accounting Overview report. ",
+        "Finance reviews the consolidated Aged Receivables and Write-off/Loss summary across Commercial, Dealer, and Semi-dealer channels monthly.",
+        "Escalated disputes and control exceptions logged during the period are compiled into a summary for the monthly Accounting review meeting.",
+        "CEO reviews and signs off on any escalated dispute or control exception raised during the period.",
+        "OIC-Accounting confirms segregation of duties is intact for the period - the initiator of a transaction is never its own GL poster or reconciler."
+      ],
+      "guidelines": [
+        "Any transaction blocked or disputed at its normal approval level escalates through the standard chain (System watch -> Review -> Manager) rather than being resolved informally between the two parties involved.",
+        "Sales Order Control Numbers, once assigned, are permanent and non-editable; a correction is made with a new document, never by editing the original control number.",
+        "The person who initiates a transaction is not the same person who posts it to the GL or reconciles it - segregation of duties applies at every posting step."
+      ],
+      "approval_matrix": [],
+      "future_procedures": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "badge_label": "Newly added — pending confirmation",
+      "gap_note": "Sample SOP steps; Overview badge/label pending client confirmation. The three Guidelines below carry over unchanged from the former Cross-Stage Governance section for this tab."
+    },
+    {
       "romaji": "Commercial",
       "english": "Collection | Balance | Bank Recon",
       "badge": "confirmed",
@@ -339,15 +366,6 @@
       "sources": "Source site (wilsonsykes.github.io/MGSDiagramWorkflow) - Accounting > Overall (A5A1, A5C5.1-A5C5.3)."
     }
   ],
-  "cross_stage": {
-    "name": "Cross-Stage Governance",
-    "description": "Escalation and audit-trail rules that apply on top of every Accounting approval row above.",
-    "guidelines": [
-      "Any transaction blocked or disputed at its normal approval level escalates through the standard chain (System watch -> Review -> Manager) rather than being resolved informally between the two parties involved.",
-      "Sales Order Control Numbers, once assigned, are permanent and non-editable; a correction is made with a new document, never by editing the original control number.",
-      "The person who initiates a transaction is not the same person who posts it to the GL or reconciles it - segregation of duties applies at every posting step."
-    ]
-  },
   "metrics": [
     {
       "value": "5",
