@@ -79,17 +79,25 @@ def build_stage_from_tsv(tab, stage_name):
 
     items = [r for r in read_tsv(CONTENT_DIR / "items.tsv")
               if r["Tab"] == tab and r["Stage"] == stage_name]
+    if not items:
+        # No items.tsv rows yet for this stage -- returning None (rather than
+        # an empty-content stage) tells the caller to leave whatever is
+        # already in the JSON alone, so a stage that hasn't been migrated to
+        # the TSV pipeline yet doesn't get silently wiped out.
+        return None
     items.sort(key=lambda r: int(r["Order"]))
 
     def section(name):
-        return [r["Text"] for r in items if r["Section"] == name and r["Text"].strip()]
+        return [r["Text"] for r in items if r["Section"] == name and (r["Text"] or "").strip()]
 
     # SOP rows carry a paired "Future" cell (Future Procedures) right on the
     # same row as the current-procedure text, so sop_steps and future_procedures
     # are always exactly the same length -- one future slot per current step,
-    # blank until someone fills it in via the TSV.
-    sop_pairs = [(r["Text"], r.get("Future", "").strip())
-                 for r in items if r["Section"] == "SOP" and r["Text"].strip()]
+    # blank until someone fills it in via the TSV. A row shorter than the
+    # header (no trailing tab for a blank Future cell) makes csv.DictReader
+    # leave "Future" as None rather than "" -- `or ""` guards that.
+    sop_pairs = [(r["Text"], (r.get("Future") or "").strip())
+                 for r in items if r["Section"] == "SOP" and (r["Text"] or "").strip()]
     sop_steps = [t for t, _ in sop_pairs]
     future_procedures = [f for _, f in sop_pairs]
 
@@ -149,14 +157,22 @@ def patch_all_stages():
         path = ROOT / fname
         content = load_json(path)
         by_romaji = {s["romaji"]: i for i, s in enumerate(content["stages"])}
+        patched, skipped = [], []
         for stage_name in stage_names:
-            new_stage = build_stage_from_tsv(tab, stage_name)
             if stage_name not in by_romaji:
                 raise SystemExit(f"{stage_name!r} stage not found in {fname}")
+            new_stage = build_stage_from_tsv(tab, stage_name)
+            if new_stage is None:
+                skipped.append(stage_name)
+                continue
             content["stages"][by_romaji[stage_name]] = new_stage
+            patched.append(stage_name)
         with open(path, "w", encoding="utf-8") as f:
             json.dump(content, f, indent=2, ensure_ascii=False)
-        print(f"patched {path.name}: {', '.join(stage_names)} regenerated from content/*.tsv")
+        if patched:
+            print(f"patched {path.name}: {', '.join(patched)} regenerated from content/*.tsv")
+        if skipped:
+            print(f"  (skipped, no items.tsv rows yet -- left as-is: {', '.join(skipped)})")
 
 
 # ---------------- subprocess.html: TSV -> full regeneration ----------------

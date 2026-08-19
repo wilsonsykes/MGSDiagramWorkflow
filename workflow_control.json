@@ -47,8 +47,7 @@
   },
   "legend_items": [
     { "color": "{green}", "label": "Confirmed with source data" },
-    { "color": "{orange}", "label": "Partially confirmed — see gap note" },
-    { "color": "{purple}", "label": "Cross-Stage Governance" }
+    { "color": "{orange}", "label": "Partially confirmed — see gap note" }
   ],
   "sections": {
     "show_cross_stage": true,
