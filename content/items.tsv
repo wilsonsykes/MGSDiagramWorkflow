@@ -12,38 +12,34 @@ Operations	Commercial	SOP	2	Logistics Officer schedules the delivery - vehicle, 
 Operations	Commercial	SOP	3	XXX generates the Picklist and YYY picks the LPG/products. (O1.1.2)	same
 Operations	Commercial	SOP	4	XXX generates the Delivery Receipt (DR) - 2 DRs and 2 Credit Notes per delivery. (O1.1.3.1)	same		
 Operations	Commercial	SOP	5	XXX submits the DR to Accounting to post General Ledger and Inventory entries. (O1.1.3.2)	same
-Operations	Commercial	SOP	6	XXX encodes the Sales Invoices to ACCPAC (O1.1.3.3)	Upon writing Sales Invoice, Accounting Sales Encoder encode Sales Order using Sales-Appsheet-T5. Accounting Sales Encoder checks entry summary in Sales-Appsheet-T4.
+Operations	Commercial	SOP	6	XXX encodes the Sales Invoices to ACCPAC (O1.1.3.3)	Upon writing Sales Invoice, Accounting Sales Encoder encodes Sales Order in T5.2 Cylinder Sales. Accounting Sales Encoder checks sales entry summary in T5.1 Cylinder Sales.
 Operations	Commercial	SOP	7	Helper collects the Delivery Receipts from XXX in Warehouse (may cover multiple clients on one route). (O1.1.4.1)	same	
 Operations	Commercial	SOP	8	Driver and Helper proceed to client locations. (O1.1.4.2)	same
 Operations	Commercial	SOP	9	For pickup / no-delivery orders, Warehouse gives the DR to the customer for signature instead. (O1.1.4.3)	same
 Operations	Commercial	SOP	10	In client site, Helper weighs and records the cylinders with the client (Weigh In), then carries them to area. (O1.1.5.1)	same	
-Operations	Commercial	SOP	11	Client representative signs the DR, receives the new cylinders, and returns the empty cylinders. (O1.1.5.2)	same
+Operations	Commercial	SOP	11	Client representative signs the Delivery Receipt, receives the new cylinders, and returns the empty cylinders. (O1.1.5.2)	same
 Operations	Commercial	SOP	12	Helper weighs the returned cylinders (Weigh Out) in the presence of Client Rep, classifies the 1-3kg residue threshold; round up or down. (O1.1.5.3)	same	
 Operations	Commercial	SOP	13	Helper provides Credit Notes to the Client, with client representative’s countersignature, recording cylinder serial number and weight residue. (O1.1.5.4)	same	
 Operations	Commercial	SOP	13	Driver and Helper return to the plant and weighs the empty cylinders, checks the 1-3kg residue threshold again. (O1.1.6.1)	same	
-Operations	Commercial	SOP	14	Driver submits the signed DR, signed Credit Notes and other records to YYY Accounting. (O1.1.6.2)	same
-Operations	Commercial	SOP	15	OIC-Accounting reconciles the General Ledger against the signed Delivery Receipt and Credit Notes. She encodes entries in the Sales Gsheet. No Sales-Appsheet. (O1.1.7.1)	OIC-Accounting reconciles the General Ledger in Sales-Appsheet-T3 against the signed Delivery Receipt and Credit Notes. No encoding needed in T3. (O1.1.7.1) 		
-Operations	Commercial	SOP	16	Industrial Engineer reconciles Month-End Report (CIMER) daily. (O1.1.7.2)	Industrial Engineer reviews and reconciles all input data in CIMER-T2. (O1.1.7.2) 		
-Operations	Commercial	SOP	17	Operations Supervisor records gains from CIMER as Inv/Adj in ACCPAC. (O1.1.7.3)	Operations Supervisor records gains from CIMER-T1 as Inv/Adj in ACCPAC. (O1.1.7.3)
-Operations	Commercial	SOP	18	Industrial Engineer submits Computation Sheet for CEO’s approval (O1.1.7.4)	Industrial Engineer submits Gains Summary CIMER-T2.1 for CEO’s approval	
-Operations	Commercial	SOP	19	OIC-Accounting distribute incentives via Payroll to the involved members. (O1.1.7.5)	same
+Operations	Commercial	SOP	14	Driver submits the signed DR, signed Credit Notes and other records to OIC-Accounting. (O1.1.6.2)	same
+Operations	Commercial	SOP	15	OIC-Accounting reconciles the General Ledger against the signed Delivery Receipt and Credit Notes. She encodes entries in the Cylinder Sales Gsheet. (O1.1.7.1)	OIC-Accounting reconciles the General Ledger in T4.2 Invoices Ledger against the signed Delivery Receipt and Credit Notes. (O1.1.7.1) 		
 Operations	Commercial	Guidelines	1	The Commercial residue classification threshold is fixed between 1-3kg; deviations are escalated to the Senior Plant Supervisor, not decided ad hoc by the driver.	
 Operations	Commercial	Guidelines	2	Two DRs and two Credit Notes are mandatory per delivery (client copy + company copy); a delivery without a matching document pair is not closed in the GL.	
 Operations	Commercial	Guidelines	3	No cylinder leaves the warehouse without a Picklist form; no GL/Inventory posting is made without a Warehouse-submitted DR.	
 Operations	Commercial	Guidelines	4	Incentive Gains are computed only from matched weigh-in/weigh-out pairs - unmatched records are held for investigation, never estimated.
 Operations	Bulk	SOP	1	Sales Rep receives the bulk Sales Order; the order must fill the 8-ton truck capacity. (O2.1.1.1)	same
 Operations	Bulk	SOP	2	Logistics Officer assign the lorry/trailer truck and load from the Storage Tank (stock transfer, tank to truck - no cylinders involved). (O2.1.2.1)	same
-Operations	Bulk	SOP	3	XXX Weigh the loaded truck at the plant truck scale (weigh-out). (O2.1.2.2)	same
+Operations	Bulk	SOP	3	Third-party provider weighs the loaded truck at the plant truck scale (weigh-out). (O2.1.2.2)	same
 Operations	Bulk	SOP	4	XXX Generate loading documents: Stock Transfer Form, Truck Scale slip, and Delivery Receipt - issued per lorry load. (O2.1.2.3)	same	
-Operations	Bulk	SOP	5	OIC-Accounting encodes the Bulk sales entries into Gsheet (Bulk Sales V) (O2.1.2.4)	OIC-Accounting encodes bulk sales in the Sales-Apsheet-T5.
-Operations	Bulk	SOP	6	Delivery and Helper deliver the bulk LPG to the industrial or commercial client site. (O2.1.3.1)	same
+Operations	Bulk	SOP	5	OIC-Accounting encodes the Bulk sales entries into Bulk Sales V (O2.1.2.4)	OIC-Accounting encodes bulk sales in the T5.2 & T5.1 Bulk Sales.
+Operations	Bulk	SOP	6	Delivery and Helper deliver the bulk LPG via Lorry to the client site. (O2.1.3.1)	same
 Operations	Bulk	SOP	7	At the client site, helper measures the volume delivered using meter/gauge. (O2.1.3.2)	same
 Operations	Bulk	SOP	8	Client receives the bulk LPG and signs the Delivery Receipt. (O2.1.3.3)	same
-Operations	Bulk	SOP	9	Driver, helper and truck return to the plant and truck is weighed again (weigh-in). (O2.1.3.4)	same	
-Operations	Bulk	SOP	10	Driver returns the signed DR and xxx documents to Operations Supervisor. (O2.1.3.5)	same
-Operations	Bulk	SOP	11	Industrial Engineer computes Bulk Gains per truck in CIMER. - compare weigh-out vs weigh-in; should read the higher figure. (O2.1.4.1)	Industrial Engineer reviews and reconciles all input data in CIMER-T2.	
-Operations	Bulk	SOP	12	Industrial Engineer records residue in the Commercial & Bulk LPG Residue Summary Gsheet, per truck. (O2.1.4.2)	Industrial Engineer reviews and reconciles all input data in CIMER-T2.	
-Operations	Bulk	SOP	13	Operations Supervisor submits documents to Accounting Sales Encoder; Accounting Sales Encoder encodes data in ACCPAC. (O2.1.4.3)	Operations Supervisor submits documents to Accounting Sales Encoder; Accounting Sales Encoder encodes summarized Cimer-T1 totals as Order Entries O/E in ACCPAC.		
+Operations	Bulk	SOP	9	Driver, helper and truck return to the plant with empty Lorry. (O2.1.3.4)	same	
+Operations	Bulk	SOP	10	Driver returns the signed DR and xxx documents to OIC-Accounting (O2.1.3.5)	same
+Operations	Bulk	SOP	11	Senior Plant Supervisor computes Bulk Gains per lorry via Receiving Report and Commercial & Bulk LPG Residue Summary Gsheet. (O2.1.4.1)	Senior Plant Supervisor encodes gain in T5.2 Gains.	
+Operations	Bulk	SOP	12	Industrial Engineer reviews residue in the Inventory Month-End Report Gsheet. (O2.1.4.2)	Industrial Engineer reviews and reconciles all input data in T3 Inventory Month-End Report.	
+Operations	Bulk	SOP	13	Operations Supervisor submits documents to Accounting Sales Encoder; Accounting Sales Encoder encodes data in ACCPAC. (O2.1.4.3)	Senior Plant Supervisor submits documents to Accounting Sales Encoder; Accounting Sales Encoder encodes summarized T2 Final Ledger totals as Order Entries O/E in ACCPAC.		
 Operations	Bulk	Guidelines	1	Bulk orders must fill the 8-ton truck capacity before dispatch is scheduled; a partial load requires Plant Operations Officer approval as a documented exception.	
 Operations	Bulk	Guidelines	2	Bulk order uses truck-scale (plant) + meter/pressure-gauge (client) measurement and truck weigh-in/out; both readings are logged before the trip is closed.	
 Operations	Bulk	Guidelines	3	Per-truck gain is computed only once both weigh-out and weigh-in are on file - a truck missing either reading stays open, it is not estimated.	
@@ -93,7 +89,11 @@ Operations	Overall	SOP	9	Operations Supervisor tracks refill using RFR-AppSheet.
 Operations	Overall	SOP	10	Operations Supervisor tracks residue of two tanks in two categories, Regular and WIWO, both affecting inventory and billing. (C5.1.3.3)	
 Operations	Overall	SOP	11	Pull-out schedules and dates at client sites are tracked against a company Pull-out Calendar. (C5.1.4.1)	
 Operations	Overall	SOP	12	Logistics Officer purchases cylinders annually with individual serial numbers. (C5.1.4.2)	
-Operations	Overall	SOP	13	Warehouse and Quality Supervisor repaints and counts cylinders, maintains cylinder quality record. (C5.1.4.3)	
+Operations	Overall	SOP	13	Warehouse and Quality Supervisor repaints and counts cylinders, maintains cylinder quality record. (C5.1.4.3)
+Operations	Overall	SOP	14	Industrial Engineer reconciles Inventory Month-End Report (CIMER) daily. (O1.1.7.2)	Industrial Engineer reviews and reconciles all input data in T3.1 Inventory Month-End Report. (O1.1.7.2) 		
+Operations	Overall	SOP	15	Operations Supervisor records gains from CIMER as Inv/Adj in ACCPAC. (O1.1.7.3)	Operations Supervisor records gains from CIMER-T1 as Inv/Adj in ACCPAC. (O1.1.7.3)
+Operations	Overall	SOP	16	Industrial Engineer submits Computation Sheet for CEO’s approval (O1.1.7.4)	Industrial Engineer submits Gains Summary CIMER-T2.1 for CEO’s approval	
+Operations	Overall	SOP	17	OIC-Accounting distribute incentives via Payroll to the involved members. (O1.1.7.5)	same	
 Operations	Overall	Guidelines	1	Storage Tank stock transfer to cylinders must follow FIFO; every batch is filled out in FIFO sequence with Plant Operations Officer approval.	
 Operations	Overall	Guidelines	2	Any quantity variance discovered after the Receiving Report is logged as a separate exception entry, not folded silently into the original RR figure.	
 Operations	Overall	Guidelines	3	Cylinder serials and batch numbers are tracked for their full lifespan (purchase through repaint/retest cycles); a cylinder without a traceable batch number does not re-enter circulation.

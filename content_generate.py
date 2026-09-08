@@ -246,23 +246,30 @@ def regenerate_flat_terms_html(filename, tsv_name, term_tag, id_prefix, aliases)
     print(f"regenerated {path.name} from content/{tsv_name} ({len(rows)} entries)")
 
 
-def regenerate_personnel_html():
-    """Regenerate personnel.html: grouped into <div class="section-label">...
-    <div class="terms-list">...</div> blocks by content/personnel.tsv's
-    Section column, in the order sections first appear, with an optional
-    dept-chip and role-chip per card."""
-    rows = read_tsv(CONTENT_DIR / "personnel.tsv")
+def regenerate_sectioned_terms_html(filename, tsv_name, term_tag, id_prefix, aliases, chip_fields=()):
+    """Regenerate a section-grouped term-card page: repeating
+    <div class="section-label">...</div><div class="terms-list">...</div>
+    blocks, split by the TSV's Section column, in the order sections first
+    appear. chip_fields is a list of (column_name, css_class) pairs for
+    optional extra inline chips per card (e.g. Personnel's Department/Role).
+    Shared by personnel.html and forms.html."""
+    rows = read_tsv(CONTENT_DIR / tsv_name)
     if not rows:
-        print("content/personnel.tsv not found or empty, skipping personnel.html")
+        print(f"content/{tsv_name} not found or empty, skipping {filename}")
         return
 
-    old_chips = build_refchip_lookup("personnel.html")
+    old_chips = build_refchip_lookup(filename)
     all_cross_terms = load_cross_terms(str(TERMS_FILE))
 
-    path = ROOT / "personnel.html"
+    path = ROOT / filename
     with open(path, encoding="utf-8") as f:
         html_ = f.read()
-    head, _, _ = html_.partition('<div class="section-label">')
+    # A page not yet converted to sections has no section-label marker yet --
+    # fall back to the flat terms-list marker so the first conversion works.
+    if '<div class="section-label">' in html_:
+        head, _, _ = html_.partition('<div class="section-label">')
+    else:
+        head, _, _ = html_.partition('<div class="terms-list" id="terms-list">')
     _, _, tail_after = html_.partition('<script>')
     tail = '<script>' + tail_after
 
@@ -278,28 +285,28 @@ def regenerate_personnel_html():
         body += f'<div class="section-label"{style}>{esc(section_name)}</div>\n<div class="terms-list">\n\n'
         for row in section_rows:
             name = row["Name"]
-            alias = PERSONNEL_ALIASES.get(name)
+            alias = aliases.get(name)
             if alias:
                 body += f'  <a id="{alias}" style="position:relative;top:-90px" aria-hidden="true"></a>\n'
             extra_chips = ''
-            if row.get("Department"):
-                extra_chips += f'      <span class="dept-chip">{esc(row["Department"])}</span>\n'
-            if row.get("RoleChip"):
-                extra_chips += f'      <span class="role-chip">{esc(row["RoleChip"])}</span>\n'
-            _, card_html = render_term_card(name, "personnel", "Personnel", old_chips.get(name, ""), all_cross_terms, row, extra_chips)
+            for col, css_class in chip_fields:
+                if row.get(col):
+                    extra_chips += f'      <span class="{css_class}">{esc(row[col])}</span>\n'
+            _, card_html = render_term_card(name, id_prefix, term_tag, old_chips.get(name, ""), all_cross_terms, row, extra_chips)
             body += card_html
         body += '</div>\n'
 
     with open(path, "w", encoding="utf-8") as f:
         f.write(head + body + tail)
-    print(f"regenerated {path.name} from content/personnel.tsv ({len(rows)} entries)")
+    print(f"regenerated {path.name} from content/{tsv_name} ({len(rows)} entries)")
 
 
 def main():
     patch_all_stages()
     regenerate_flat_terms_html("subprocess.html", "subprocess.tsv", "Subprocess", "subprocess", SUBPROCESS_ALIASES)
-    regenerate_flat_terms_html("forms.html", "forms.tsv", "Form", "form", FORMS_ALIASES)
-    regenerate_personnel_html()
+    regenerate_sectioned_terms_html("forms.html", "forms.tsv", "Form", "form", FORMS_ALIASES)
+    regenerate_sectioned_terms_html("personnel.html", "personnel.tsv", "Personnel", "personnel", PERSONNEL_ALIASES,
+                                     chip_fields=(("Department", "dept-chip"), ("RoleChip", "role-chip")))
     print("content_generate.py done.")
 
 

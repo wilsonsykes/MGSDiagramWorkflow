@@ -48,16 +48,12 @@
         "Driver and Helper proceed to client locations. (O1.1.4.2)",
         "For pickup / no-delivery orders, Warehouse gives the DR to the customer for signature instead. (O1.1.4.3)",
         "In client site, Helper weighs and records the cylinders with the client (Weigh In), then carries them to area. (O1.1.5.1)",
-        "Client representative signs the DR, receives the new cylinders, and returns the empty cylinders. (O1.1.5.2)",
+        "Client representative signs the Delivery Receipt, receives the new cylinders, and returns the empty cylinders. (O1.1.5.2)",
         "Helper weighs the returned cylinders (Weigh Out) in the presence of Client Rep, classifies the 1-3kg residue threshold; round up or down. (O1.1.5.3)",
         "Helper provides Credit Notes to the Client, with client representative’s countersignature, recording cylinder serial number and weight residue. (O1.1.5.4)",
         "Driver and Helper return to the plant and weighs the empty cylinders, checks the 1-3kg residue threshold again. (O1.1.6.1)",
-        "Driver submits the signed DR, signed Credit Notes and other records to YYY Accounting. (O1.1.6.2)",
-        "OIC-Accounting reconciles the General Ledger against the signed Delivery Receipt and Credit Notes. She encodes entries in the Sales Gsheet. No Sales-Appsheet. (O1.1.7.1)",
-        "Industrial Engineer reconciles Month-End Report (CIMER) daily. (O1.1.7.2)",
-        "Operations Supervisor records gains from CIMER as Inv/Adj in ACCPAC. (O1.1.7.3)",
-        "Industrial Engineer submits Computation Sheet for CEO’s approval (O1.1.7.4)",
-        "OIC-Accounting distribute incentives via Payroll to the involved members. (O1.1.7.5)"
+        "Driver submits the signed DR, signed Credit Notes and other records to OIC-Accounting. (O1.1.6.2)",
+        "OIC-Accounting reconciles the General Ledger against the signed Delivery Receipt and Credit Notes. She encodes entries in the Cylinder Sales Gsheet. (O1.1.7.1)"
       ],
       "guidelines": [
         "The Commercial residue classification threshold is fixed between 1-3kg; deviations are escalated to the Senior Plant Supervisor, not decided ad hoc by the driver.",
@@ -126,7 +122,7 @@
         "same",
         "same",
         "same",
-        "Upon writing Sales Invoice, Accounting Sales Encoder encode Sales Order using Sales-Appsheet-T5. Accounting Sales Encoder checks entry summary in Sales-Appsheet-T4.",
+        "Upon writing Sales Invoice, Accounting Sales Encoder encodes Sales Order in T5.2 Cylinder Sales. Accounting Sales Encoder checks sales entry summary in T5.1 Cylinder Sales.",
         "same",
         "same",
         "same",
@@ -136,11 +132,7 @@
         "same",
         "same",
         "same",
-        "OIC-Accounting reconciles the General Ledger in Sales-Appsheet-T3 against the signed Delivery Receipt and Credit Notes. No encoding needed in T3. (O1.1.7.1)",
-        "Industrial Engineer reviews and reconciles all input data in CIMER-T2. (O1.1.7.2)",
-        "Operations Supervisor records gains from CIMER-T1 as Inv/Adj in ACCPAC. (O1.1.7.3)",
-        "Industrial Engineer submits Gains Summary CIMER-T2.1 for CEO’s approval",
-        "same"
+        "OIC-Accounting reconciles the General Ledger in T4.2 Invoices Ledger against the signed Delivery Receipt and Credit Notes. (O1.1.7.1)"
       ],
       "badge_label": "Confirmed with source data"
     },
@@ -151,16 +143,16 @@
       "sop_steps": [
         "Sales Rep receives the bulk Sales Order; the order must fill the 8-ton truck capacity. (O2.1.1.1)",
         "Logistics Officer assign the lorry/trailer truck and load from the Storage Tank (stock transfer, tank to truck - no cylinders involved). (O2.1.2.1)",
-        "XXX Weigh the loaded truck at the plant truck scale (weigh-out). (O2.1.2.2)",
+        "Third-party provider weighs the loaded truck at the plant truck scale (weigh-out). (O2.1.2.2)",
         "XXX Generate loading documents: Stock Transfer Form, Truck Scale slip, and Delivery Receipt - issued per lorry load. (O2.1.2.3)",
-        "OIC-Accounting encodes the Bulk sales entries into Gsheet (Bulk Sales V) (O2.1.2.4)",
-        "Delivery and Helper deliver the bulk LPG to the industrial or commercial client site. (O2.1.3.1)",
+        "OIC-Accounting encodes the Bulk sales entries into Bulk Sales V (O2.1.2.4)",
+        "Delivery and Helper deliver the bulk LPG via Lorry to the client site. (O2.1.3.1)",
         "At the client site, helper measures the volume delivered using meter/gauge. (O2.1.3.2)",
         "Client receives the bulk LPG and signs the Delivery Receipt. (O2.1.3.3)",
-        "Driver, helper and truck return to the plant and truck is weighed again (weigh-in). (O2.1.3.4)",
-        "Driver returns the signed DR and xxx documents to Operations Supervisor. (O2.1.3.5)",
-        "Industrial Engineer computes Bulk Gains per truck in CIMER. - compare weigh-out vs weigh-in; should read the higher figure. (O2.1.4.1)",
-        "Industrial Engineer records residue in the Commercial & Bulk LPG Residue Summary Gsheet, per truck. (O2.1.4.2)",
+        "Driver, helper and truck return to the plant with empty Lorry. (O2.1.3.4)",
+        "Driver returns the signed DR and xxx documents to OIC-Accounting (O2.1.3.5)",
+        "Senior Plant Supervisor computes Bulk Gains per lorry via Receiving Report and Commercial & Bulk LPG Residue Summary Gsheet. (O2.1.4.1)",
+        "Industrial Engineer reviews residue in the Inventory Month-End Report Gsheet. (O2.1.4.2)",
         "Operations Supervisor submits documents to Accounting Sales Encoder; Accounting Sales Encoder encodes data in ACCPAC. (O2.1.4.3)"
       ],
       "guidelines": [
@@ -207,15 +199,15 @@
         "same",
         "same",
         "same",
-        "OIC-Accounting encodes bulk sales in the Sales-Apsheet-T5.",
+        "OIC-Accounting encodes bulk sales in the T5.2 & T5.1 Bulk Sales.",
         "same",
         "same",
         "same",
         "same",
         "same",
-        "Industrial Engineer reviews and reconciles all input data in CIMER-T2.",
-        "Industrial Engineer reviews and reconciles all input data in CIMER-T2.",
-        "Operations Supervisor submits documents to Accounting Sales Encoder; Accounting Sales Encoder encodes summarized Cimer-T1 totals as Order Entries O/E in ACCPAC."
+        "Senior Plant Supervisor encodes gain in T5.2 Gains.",
+        "Industrial Engineer reviews and reconciles all input data in T3 Inventory Month-End Report.",
+        "Senior Plant Supervisor submits documents to Accounting Sales Encoder; Accounting Sales Encoder encodes summarized T2 Final Ledger totals as Order Entries O/E in ACCPAC."
       ],
       "badge_label": "Partially Confirmed"
     },
@@ -380,7 +372,11 @@
         "Operations Supervisor tracks residue of two tanks in two categories, Regular and WIWO, both affecting inventory and billing. (C5.1.3.3)",
         "Pull-out schedules and dates at client sites are tracked against a company Pull-out Calendar. (C5.1.4.1)",
         "Logistics Officer purchases cylinders annually with individual serial numbers. (C5.1.4.2)",
-        "Warehouse and Quality Supervisor repaints and counts cylinders, maintains cylinder quality record. (C5.1.4.3)"
+        "Warehouse and Quality Supervisor repaints and counts cylinders, maintains cylinder quality record. (C5.1.4.3)",
+        "Industrial Engineer reconciles Inventory Month-End Report (CIMER) daily. (O1.1.7.2)",
+        "Operations Supervisor records gains from CIMER as Inv/Adj in ACCPAC. (O1.1.7.3)",
+        "Industrial Engineer submits Computation Sheet for CEO’s approval (O1.1.7.4)",
+        "OIC-Accounting distribute incentives via Payroll to the involved members. (O1.1.7.5)"
       ],
       "guidelines": [
         "Storage Tank stock transfer to cylinders must follow FIFO; every batch is filled out in FIFO sequence with Plant Operations Officer approval.",
@@ -434,7 +430,11 @@
         "",
         "",
         "",
-        ""
+        "",
+        "Industrial Engineer reviews and reconciles all input data in T3.1 Inventory Month-End Report. (O1.1.7.2)",
+        "Operations Supervisor records gains from CIMER-T1 as Inv/Adj in ACCPAC. (O1.1.7.3)",
+        "Industrial Engineer submits Gains Summary CIMER-T2.1 for CEO’s approval",
+        "same"
       ],
       "badge_label": "Confirmed with source data"
     }

@@ -135,9 +135,10 @@ def validate_stage(stage: Any, path: str, errors: list[ValidationError], file: P
         for i, item in enumerate(stage["guidelines"]):
             ensure_non_empty_str(errors, item, f"{path}.guidelines[{i}]", file)
 
+    # Unlike sop_steps/guidelines, an empty approval_matrix is valid -- an
+    # overview/governance-style stage can legitimately have no per-transaction
+    # approval chain to define.
     if expect_type(errors, stage.get("approval_matrix"), list, f"{path}.approval_matrix", file):
-        if not stage["approval_matrix"]:
-            errors.append(ValidationError(f"{path}.approval_matrix must not be empty", file))
         for i, row in enumerate(stage["approval_matrix"]):
             validate_approval_matrix_row(row, f"{path}.approval_matrix[{i}]", errors, file)
 
