@@ -63,7 +63,7 @@
       ],
       "approval_matrix": [
         {
-          "transaction": "Sales Order -> delivery scheduling",
+          "transaction": "Sales Order -> Delivery Scheduling",
           "threshold": "Commercial client’s past AR dues",
           "initiator": "Sales Rep",
           "reviewer": "Logistics Officer",
