@@ -16,7 +16,7 @@ T5-Appsheet Capture & Data Table	T5.2 & T5.1 Bulk Sales	Description	Encode and C
 T5-Appsheet Capture & Data Table	T5.2 & T5.1 Cylinder Sales	Description	xxx
 T5-Appsheet Capture & Data Table	T5.2 & T5.1 Appsheet Capture & Data Table
 T5-Appsheet Capture & Data Table	T5.2 & T5.1 Purchases	Description	Appsheet for encoding and summarizing Purchase Orders. This will extract the real-time approval matrix process currently done in ACCPAC.	Usage	
-T5-Appsheet Capture & Data Table	T5.2 & T5.1 Tank Readings	Description	Appsheet for encoding and summarizing daily physical inventory (DPI). This will extract the real-time approval matrix process currently done in ACCPAC.	Usage	
+T5-Appsheet Capture & Data Table	T5.2 & T5.1 Tank Readings	Description	Appsheet for encoding and summarizing daily physical inventory (DPI). This will extract the real-time approval matrix process currently done in ACCPAC.	Usage  Current Procedures The Operations Supervisor takes the tank reading daily. The readings are recorded manually on paper and then sent to the GC Telegram group for monitoring. 
 T5-Appsheet Capture & Data Table	T5.2 & T5.1 Floor Stock Count	Description	xxx
 T5-Appsheet Capture & Data Table	T5.2 & T5.1 Adjustments & Returns	Description	xxx
 T5-Appsheet Capture & Data Table	T5.2 & T5.1 Invoices	Description	xxx
