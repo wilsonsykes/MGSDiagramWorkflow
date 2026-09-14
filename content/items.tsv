@@ -1,5 +1,5 @@
 Tab	Stage	Section	Order	Text	Future
-Operations	Overview	SOP	1	Operations Supervisor consolidates the Commercial, Bulk, and Dealer weigh-in/weigh-out logs into a weekly Residue & Gains Summary. (Sample)
+Operations	Overview	SOP	1	Operations Supervisor consolidates the Commercial, Bulk, and Dealer weigh-in/weigh-out logs into a weekly Residue & Gains Summary. (Sample)  1.	Generalized appsheet pulling directly from each channel's weigh-in/weigh-out system, generating the Residue & Gains Summary in real time instead of weekly, with the Supervisor reviewing/approving rather than compiling.
 Operations	Overview	SOP	2	Industrial Engineer reviews CIMER output across all channels and flags any unmatched weigh-in/weigh-out pair for investigation before it is included in the gains computation. (Sample)
 Operations	Overview	SOP	3	Plant Operations Officer reviews cylinder serial and batch traceability records monthly, confirming no cylinder without a traceable batch number has re-entered circulation. (Sample)
 Operations	Overview	SOP	4	Senior Plant Supervisor escalates any residue reading outside the 1-3kg threshold to Operations management for review before it is booked. (Sample)
