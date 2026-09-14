@@ -17,6 +17,12 @@ Operations	Semi-dealer	2	Semi-dealer order payments		Helper	OIC-Accounting	Accou
 Operations	Overall	1	Inbound PO & Lorry Truck receiving		Logistics Officer	Plant Operations Officer	CEO	RR filled before unload | DR + Invoice matched to PO
 Operations	Overall	2	Storage Tank stock transfer to cylinders	FIFO sequence	Operations Supervisor	xxx	Plant Operations Officer	Tank 1 / Tank 2 gauge log | FIFO batch order
 Operations	Overall	3	Cylinder lifecycle (repaint/retest)	Per DOE lifespan schedule	Warehouse and Quality Supervisor	xxx	Plant Manager	Serial + batch number tracking
+Sales	Overview	1	SPR generation & verification	Bi-monthly or monthly, all channels	IT Manager	Regional Sales Manager	—	Report printed/verified against ACCPAC (soon T1 Sales Summary) before use in pricing decisions
+Sales	Overview	2	MGC LPG Pricing Matrix setup	1–3x per month, per General Meeting	Regional Sales Manager	—	CEO	Matrix presented for decision in General Meeting; no price stands without CEO sign-off
+Sales	Overview	3	Competitor/SRP pricing update	Prior to each General Meeting	Regional Sales Manager & IT Manager	—	—	End-user pricing comparison prepared as input to CEO's pricing decision
+Sales	Overview	4	Price change audit log	Any approved price change	IT Manager	—	—	Change logged before cascading to any client-facing channel (mandatory per Guideline #2)
+Sales	Overview	5	Price Cascade to channels	Post-meeting, per channel	Regional Sales Manager	IT Manager (audit)	—	Channel-owned cascade — Commercial/Bulk (Sales Asst. 1), Semi-dealer (Sales Asst. 2), Makati accounts (AVP Sales), CODO/marketing/cashiers (IT Manager); no cross-channel overlap
+Sales	Overview	6	Sales Quota setting	Per client, per period	CEO	AVP Sales	—	AVP prints/uses as working target; Sales Assistant updates daily/weekly
 Sales	Commercial	1	Draft order & upsell review		Sales Assistant 1	Regional Sales Manager	CEO	Sales history check | Route/inventory cross-check
 Sales	Commercial	2	Order confirmation & control numbering		Regional Sales Manager	xxx	Accounting Manager	Non-editable control number
 Sales	Commercial	3	Post-sales reconciliation		Sales Assistant 1	Operations OIC (validates DR)	Regional Sales Manager (consolidates)	monitors sales target hit and actual deliveries
