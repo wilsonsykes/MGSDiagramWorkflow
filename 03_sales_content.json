@@ -25,7 +25,68 @@
         "Every price change is audit-logged by the IT Manager, before it cascades to any client-facing channel.",
         "Cascade responsibility is channel-specific, does not overlap."
       ],
-      "approval_matrix": [],
+      "approval_matrix": [
+        {
+          "transaction": "SPR generation & verification",
+          "threshold": "Bi-monthly or monthly, all channels",
+          "initiator": "IT Manager",
+          "reviewer": "Regional Sales Manager",
+          "approver": "—",
+          "controls": [
+            "Report printed/verified against ACCPAC (soon T1 Sales Summary) before use in pricing decisions"
+          ]
+        },
+        {
+          "transaction": "MGC LPG Pricing Matrix setup",
+          "threshold": "1–3x per month, per General Meeting",
+          "initiator": "Regional Sales Manager",
+          "reviewer": "—",
+          "approver": "CEO",
+          "controls": [
+            "Matrix presented for decision in General Meeting; no price stands without CEO sign-off"
+          ]
+        },
+        {
+          "transaction": "Competitor/SRP pricing update",
+          "threshold": "Prior to each General Meeting",
+          "initiator": "Regional Sales Manager & IT Manager",
+          "reviewer": "—",
+          "approver": "—",
+          "controls": [
+            "End-user pricing comparison prepared as input to CEO's pricing decision"
+          ]
+        },
+        {
+          "transaction": "Price change audit log",
+          "threshold": "Any approved price change",
+          "initiator": "IT Manager",
+          "reviewer": "—",
+          "approver": "—",
+          "controls": [
+            "Change logged before cascading to any client-facing channel (mandatory per Guideline #2)"
+          ]
+        },
+        {
+          "transaction": "Price Cascade to channels",
+          "threshold": "Post-meeting, per channel",
+          "initiator": "Regional Sales Manager",
+          "reviewer": "IT Manager (audit)",
+          "approver": "—",
+          "controls": [
+            "Channel-owned cascade — Commercial/Bulk (Sales Asst. 1), Semi-dealer (Sales Asst. 2), Makati accounts (AVP Sales), CODO/marketing/cashiers (IT Manager); no cross-channel overlap"
+          ]
+        },
+        {
+          "transaction": "Sales Quota setting",
+          "threshold": "Per client, per period",
+          "initiator": "CEO",
+          "reviewer": "AVP Sales",
+          "approver": "—",
+          "controls": [
+            "AVP prints/uses as working target; Sales Assistant updates daily/weekly"
+          ]
+        }
+      ],
       "future_procedures": [
         "same, and data source is now T1 Sales Summary.",
         "same",
