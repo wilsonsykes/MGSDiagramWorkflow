@@ -22,7 +22,18 @@
         "Gains, losses, and incentives are computed only from a matched pair of weigh-in and weigh-out readings. An unmatched reading is held for investigation, never estimated.",
         "Every cylinder is tracked by serial number and batch number for its full lifecycle, including repaint/retest - a cylinder without a traceable batch number does not re-enter circulation."
       ],
-      "approval_matrix": [],
+      "approval_matrix": [
+        {
+          "transaction": "Residue reading outside band",
+          "threshold": "Below 1kg or above 3kg",
+          "initiator": "Driver / Helper",
+          "reviewer": "Warehouse Supervisor",
+          "approver": "Senior Plant Supervisor",
+          "controls": [
+            "Reading held, escalated before booking"
+          ]
+        }
+      ],
       "future_procedures": [
         "",
         "",
