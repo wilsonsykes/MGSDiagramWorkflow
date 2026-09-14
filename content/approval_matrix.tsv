@@ -1,5 +1,6 @@
 Tab	Stage	Order	Transaction	Threshold	Initiator	Reviewer	Approver	Controls
 Operations	Overview	1	Residue reading outside band	Below 1kg or above 3kg	Driver / Helper	Warehouse Supervisor	Senior Plant Supervisor	Reading held, escalated before booking
+Operations	Overview	1 Unmatched weigh-in/weigh-out pair    Industrial Engineer  Operations Supervisor  Held from gains computation pending investigation
 Operations	Commercial	1	Sales Order -> Delivery Scheduling	Commercial client’s past AR dues	Sales Rep	Logistics Officer	Logistics Officer	Route/qty order check
 Operations	Commercial	2	Cylinder pick & DR issuance	-	Warehouse Staff	Senior Plant Supervisor	Senior Plant Supervisor	Picklist match | 2 DR / 2 Credit Notes rule
 Operations	Commercial	3	GL & Inventory posting	-	Warehouse Staff (submits DR)	Operations Supervisor	Operations Supervisor	DR-GL reconciliation
