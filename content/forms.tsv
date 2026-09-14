@@ -24,9 +24,8 @@ T4-Normal Ledgers	T4.2 Invoices Ledger
 T4-Normal Ledgers	T4.2 Daily Readings & DPI Ledger
 T4-Normal Ledgers	T4.2 Movements Ledger
 T4-Normal Ledgers	T4.1 Reconciliation Table
-T3-Summary Reports	T3.2 Movements Summary	Current Procedures  All information and transactions for each movement are consolidated in a Google Sheet through the designated form.	Future Procedures	The Movements Summary will consolidate all movement transactions into one centralized view. The information will be updated in real time, ensuring that complete and up-to-date records are readily available for review, monitoring, and reconciliation.
-T3-Summary Reports	T3.2 Transfers Summary  Current Procedures  All transfer transactions are recorded and summarized through AppSheet for monitoring and historical reference. The Operations Supervisor oversees the recording and monitoring of transfers.  Future Procedures The Transfers Summary will consolidate all transfer transactions into one centralized view. Information will be updated in real time, ensuring that complete and up-to-date records are readily available for review, monitoring, reconciliation, and historical reference.
-T3-Summary Reports	T3.2 Readings Summary
+T3-Summary Reports	T3.2 Movements Summary	Current Procedures	All information and transactions for each movement are consolidated in a Google Sheet through the designated form.	Future Procedures	The Movements Summary will consolidate all movement transactions into one centralized view. The information will be updated in real time, ensuring that complete and up-to-date records are readily available for review, monitoring, and reconciliation.
+T3-Summary Reports	T3.2 Transfers Summary	Current Procedures	All transfer transactions are recorded and summarized through AppSheet for monitoring and historical reference. The Operations Supervisor oversees the recording and monitoring of transfers.	Future Procedures	The Transfers Summary will consolidate all transfer transactions into one centralized view. Information will be updated in real time, ensuring that complete and up-to-date records are readily available for review, monitoring, reconciliation, and historical reference.
 T3-Summary Reports	T3.1 Inventory Month-End Report
 T2-Final Ledgers	
 T2-Final Ledgers	
