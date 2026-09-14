@@ -32,6 +32,16 @@
           "controls": [
             "Reading held, escalated before booking"
           ]
+        },
+        {
+          "transaction": "Unmatched weigh-in/weigh-out pair",
+          "threshold": "-",
+          "initiator": "-",
+          "reviewer": "Industrial Engineer",
+          "approver": "Operations Supervisor",
+          "controls": [
+            "Held from gains computation pending investigation"
+          ]
         }
       ],
       "future_procedures": [
