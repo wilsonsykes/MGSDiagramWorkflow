@@ -11,10 +11,10 @@
       "english": "Consolidated Reporting | Escalation | Segregation of Duties",
       "badge": "pending",
       "sop_steps": [
-        "OIC-Accounting consolidates channel-level receivables and reconciliation summaries into a weekly Accounting Overview report. ",
-        "Finance reviews the consolidated Aged Receivables and Write-off/Loss summary across Commercial, Dealer, and Semi-dealer channels monthly.",
-        "Escalated disputes and control exceptions logged during the period are compiled into a summary for the monthly Accounting review meeting.",
-        "CEO reviews and signs off on any escalated dispute or control exception raised during the period.",
+        "OIC-Accounting consolidates channel-level receivables and reconciliation summaries into a weekly Accounting Overview report.  1",
+        "Finance reviews the consolidated Aged Receivables and Write-off/Loss summary across Commercial, Dealer, and Semi-dealer channels monthly.  2 The system will automatically group outstanding receivables based on how long they have been unpaid. It will also flag accounts that may need to be written off based on company rules. Finance will review only the flagged items instead of checking the entire report.",
+        "Escalated disputes and control exceptions logged during the period are compiled into a summary for the monthly Accounting review meeting.  3 Every issue or escalation will automatically be recorded in the system when it is raised. The system will track the issue from **Watch → Review → Manager**, creating an ongoing list of exceptions without the need to manually prepare a report before meetings.",
+        "CEO reviews and signs off on any escalated dispute or control exception raised during the period.  ",
         "OIC-Accounting confirms segregation of duties is intact for the period - the initiator of a transaction is never its own GL poster or reconciler."
       ],
       "guidelines": [
@@ -24,7 +24,7 @@
       ],
       "approval_matrix": [],
       "future_procedures": [
-        "",
+        "The system will automatically collect information from each channel and show it in a live summary. Instead of preparing the Accounting Overview weekly, it will always be updated. The OIC-Accounting will only review and verify the information instead of manually compiling it.",
         "",
         "",
         "",
