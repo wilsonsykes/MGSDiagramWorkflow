@@ -1,0 +1,232 @@
+Tab	Stage	Section	Order	Text	Future
+Operations	Overview	SOP	1	Operations Supervisor consolidates the Commercial, Bulk, and Dealer weigh-in/weigh-out logs into a weekly Residue & Gains Summary. (Sample)  1.	Generalized appsheet pulling directly from each channel's weigh-in/weigh-out system, generating the Residue & Gains Summary in real time instead of weekly, with the Supervisor reviewing/approving rather than compiling.
+Operations	Overview	SOP	2	Industrial Engineer reviews CIMER output across all channels and flags any unmatched weigh-in/weigh-out pair for investigation before it is included in the gains computation. (Sample)
+Operations	Overview	SOP	3	Plant Operations Officer reviews cylinder serial and batch traceability records monthly, confirming no cylinder without a traceable batch number has re-entered circulation. (Sample)  Replace the monthly manual checking with automatic, continuous checking — each time a cylinder is transferred, it is scanned. The system will automatically prevent it from being used again if there is no valid batch number. The Officer only needs to check the exceptions or flagged cases. 
+Operations	Overview	SOP	4	Senior Plant Supervisor escalates any residue reading outside the 1-3kg threshold to Operations management for review before it is booked. (Sample)
+Operations	Overview	SOP	5	Operations Supervisor and Industrial Engineer present the consolidated Operations performance summary at the monthly Operations review meeting. (Sample)
+Operations	Overview	Guidelines	1	The 1-3kg residue threshold is fixed company policy; Driver or Helper cannot round outside that band without Warehouse Supervisor escalation.
+Operations	Overview	Guidelines	2	Gains, losses, and incentives are computed only from a matched pair of weigh-in and weigh-out readings. An unmatched reading is held for investigation, never estimated.
+Operations	Overview	Guidelines	3	Every cylinder is tracked by serial number and batch number for its full lifecycle, including repaint/retest - a cylinder without a traceable batch number does not re-enter circulation.
+Operations	Commercial	SOP	1	Receive the approved Sales Order; client orders 22kg or 50kg cylinder variants. (O1.1.1)	same	
+Operations	Commercial	SOP	2	Logistics Officer schedules the delivery - vehicle, capacity, route. (O1.2.1)	same
+Operations	Commercial	SOP	3	XXX generates the Picklist and YYY picks the LPG/products. (O1.1.2)	same
+Operations	Commercial	SOP	4	XXX generates the Delivery Receipt (DR) - 2 DRs and 2 Credit Notes per delivery. (O1.1.3.1)	same		
+Operations	Commercial	SOP	5	XXX submits the DR to Accounting to post General Ledger and Inventory entries. (O1.1.3.2)	same
+Operations	Commercial	SOP	6	XXX encodes the Sales Invoices to ACCPAC (O1.1.3.3)	Upon writing Sales Invoice, Accounting Sales Encoder encodes Sales Order in T5.2 Cylinder Sales. Accounting Sales Encoder checks sales entry summary in T5.1 Cylinder Sales.
+Operations	Commercial	SOP	7	Helper collects the Delivery Receipts from XXX in Warehouse (may cover multiple clients on one route). (O1.1.4.1)	same	
+Operations	Commercial	SOP	8	Driver and Helper proceed to client locations. (O1.1.4.2)	same
+Operations	Commercial	SOP	9	For pickup / no-delivery orders, Warehouse gives the DR to the customer for signature instead. (O1.1.4.3)	same
+Operations	Commercial	SOP	10	In client site, Helper weighs and records the cylinders with the client (Weigh In), then carries them to area. (O1.1.5.1)	same	
+Operations	Commercial	SOP	11	Client representative signs the Delivery Receipt, receives the new cylinders, and returns the empty cylinders. (O1.1.5.2)	same
+Operations	Commercial	SOP	12	Helper weighs the returned cylinders (Weigh Out) in the presence of Client Rep, classifies the 1-3kg residue threshold; round up or down. (O1.1.5.3)	same	
+Operations	Commercial	SOP	13	Helper provides Credit Notes to the Client, with client representative’s countersignature, recording cylinder serial number and weight residue. (O1.1.5.4)	same	
+Operations	Commercial	SOP	13	Driver and Helper return to the plant and weighs the empty cylinders, checks the 1-3kg residue threshold again. (O1.1.6.1)	same	
+Operations	Commercial	SOP	14	Driver submits the signed DR, signed Credit Notes and other records to OIC-Accounting. (O1.1.6.2)	same
+Operations	Commercial	SOP	15	OIC-Accounting reconciles the General Ledger against the signed Delivery Receipt and Credit Notes. She encodes entries in the Cylinder Sales Gsheet. (O1.1.7.1)	OIC-Accounting reconciles the General Ledger in T4.2 Invoices Ledger against the signed Delivery Receipt and Credit Notes. (O1.1.7.1) 		
+Operations	Commercial	Guidelines	1	The Commercial residue classification threshold is fixed between 1-3kg; deviations are escalated to the Senior Plant Supervisor, not decided ad hoc by the driver.	
+Operations	Commercial	Guidelines	2	Two DRs and two Credit Notes are mandatory per delivery (client copy + company copy); a delivery without a matching document pair is not closed in the GL.	
+Operations	Commercial	Guidelines	3	No cylinder leaves the warehouse without a Picklist form; no GL/Inventory posting is made without a Warehouse-submitted DR.	
+Operations	Commercial	Guidelines	4	Incentive Gains are computed only from matched weigh-in/weigh-out pairs - unmatched records are held for investigation, never estimated.
+Operations	Bulk	SOP	1	Sales Rep receives the bulk Sales Order; the order must fill the 8-ton truck capacity. (O2.1.1.1)	same
+Operations	Bulk	SOP	2	Logistics Officer assign the lorry/trailer truck and load from the Storage Tank (stock transfer, tank to truck - no cylinders involved). (O2.1.2.1)	same
+Operations	Bulk	SOP	3	Third-party provider weighs the loaded truck at the plant truck scale (weigh-out). (O2.1.2.2)	same
+Operations	Bulk	SOP	4	XXX Generate loading documents: Stock Transfer Form, Truck Scale slip, and Delivery Receipt - issued per lorry load. (O2.1.2.3)	same	
+Operations	Bulk	SOP	5	OIC-Accounting encodes the Bulk sales entries into Bulk Sales V (O2.1.2.4)	OIC-Accounting encodes bulk sales in the T5.2 & T5.1 Bulk Sales.
+Operations	Bulk	SOP	6	Delivery and Helper deliver the bulk LPG via Lorry to the client site. (O2.1.3.1)	same
+Operations	Bulk	SOP	7	At the client site, helper measures the volume delivered using meter/gauge. (O2.1.3.2)	same
+Operations	Bulk	SOP	8	Client receives the bulk LPG and signs the Delivery Receipt. (O2.1.3.3)	same
+Operations	Bulk	SOP	9	Driver, helper and truck return to the plant with empty Lorry. (O2.1.3.4)	same	
+Operations	Bulk	SOP	10	Driver returns the signed DR and xxx documents to OIC-Accounting (O2.1.3.5)	same
+Operations	Bulk	SOP	11	Senior Plant Supervisor computes Bulk Gains per lorry via Receiving Report and Commercial & Bulk LPG Residue Summary Gsheet. (O2.1.4.1)	Senior Plant Supervisor encodes gain in T5.2 Gains.	
+Operations	Bulk	SOP	12	Industrial Engineer reviews residue in the Inventory Month-End Report Gsheet. (O2.1.4.2)	Industrial Engineer reviews and reconciles all input data in T3 Inventory Month-End Report.	
+Operations	Bulk	SOP	13	Operations Supervisor submits documents to Accounting Sales Encoder; Accounting Sales Encoder encodes data in ACCPAC. (O2.1.4.3)	Senior Plant Supervisor submits documents to Accounting Sales Encoder; Accounting Sales Encoder encodes summarized T2 Final Ledger totals as Order Entries O/E in ACCPAC.		
+Operations	Bulk	Guidelines	1	Bulk orders must fill the 8-ton truck capacity before dispatch is scheduled; a partial load requires Plant Operations Officer approval as a documented exception.	
+Operations	Bulk	Guidelines	2	Bulk order uses truck-scale (plant) + meter/pressure-gauge (client) measurement and truck weigh-in/out; both readings are logged before the trip is closed.	
+Operations	Bulk	Guidelines	3	Per-truck gain is computed only once both weigh-out and weigh-in are on file - a truck missing either reading stays open, it is not estimated.	
+Operations	Dealer	SOP	1	Dealer client orders 2.5kg, 11kg or 22kg cylinder variants with Sales Assistant2, and Plant visit scheduled in advance; only confirmed appointments are accommodated. (O3.1.1.1)	same	
+Operations	Dealer	SOP	2	Sales Assistant2 creates a Sales Order Form noting the delivery/pickup date. (O3.1.1.2)	same
+Operations	Dealer	SOP	3	Sales Assistant2 forwards the orders to Credit/Collection Analyst to check for AR dues. (O3.1.1.3)	s
+Operations	Dealer	SOP	4	If with past dues, don’t serve. If with past dues but with CEO approval, good to serve. If without past dues, good to serve. (O3.1.1.4)	same, use T4 Invoices Summary Table to check receivable dues.
+Operations	Dealer	SOP	5	Dealer arrives with empty cylinders; guard records the vehicle entry and confirms tank classification. (O3.1.2.1.1)	same
+Operations	Dealer	SOP	6	Main Dealers arrive with empty cylinders to fill up 8 tons worth of cylinders. (O3.1.2.1.2)	same
+Operations	Dealer	SOP	7	Checker records cylinder quantities and issues Entry/Exit Slip (EES). (O3.1.2.2)	same
+Operations	Dealer	SOP	8	Cylinders are refilled at the refilling area. (O3.1.2.3)	same
+Operations	Dealer	SOP	9	Checker encodes the transaction in RFR-AppSheet. (O3.1.2.4)	same
+Operations	Dealer	SOP	10	Checker issues Loading/Unloading Ticket (LUT) to the Driver. (O3.1.2.5)	same
+Operations	Dealer	SOP	11	Guard verifies the LUT; cylinder quantity must match with LUT before release. (O3.1.2.6) same	
+Operations	Dealer	SOP	12	If quantity does not match, Guard flags and calls to inform Plant Operations Officer or Senior Plant Supervisor. (O3.1.2.7)	same	
+Operations	Dealer	SOP	13	Plant Operations Officer reviews and confirms the transactions in RFR-Appsheet. (O3.1.3.1)	same
+Operations	Dealer	SOP	14	OIC-Accounting verifies via RFR-AppSheet against the Cash Invoice or Credit Invoice. (O3.1.3.2)	same 
+Operations	Dealer	SOP	15	(covers pickup-with-terms, pickup-with-payment, and delivery-with-terms variants (O3.1.3.3)	
+Operations	Dealer	SOP	16	Cylinder Swapping: dealer messages Sales Assistant2 for a swap request. (O3.1.4.1)	same.	
+Operations	Dealer	SOP	17	Sales Assistant2 verifies the customer database provided by the Dealer. Only approved allied brands allowed. O3.1.4.2)	same
+Operations	Dealer	SOP	18	CEO reviews and approves before the swap proceeds. (O3.1.4.3)	same
+Operations	Dealer	SOP	19	Warehouse and Quality Supervisor handles the physical swap and keeps records. (O3.1.4.4)	same
+Operations	Dealer	SOP	20	Senior Plant Supervisor keeps a monthly record of swapped cylinders quantity, treatment and disposition. (O3.1.4.5)	same	
+Operations	Dealer	Guidelines	1	Only confirmed, scheduled appointments are accommodated at the plant - walk-in dealer refills are not processed without a prior booking.	same	
+Operations	Dealer	Guidelines	2	RFR-AppSheet entry and the official receipt must match in quantity before a transaction is released; a mismatch is held at the gate.	same
+Operations	Dealer	Guidelines	3	Cylinder swapping is restricted to approved allied brands only and requires CEO's approval.	same
+Operations	Dealer	Guidelines	4	Dealers must provide their own customer database for swap request.	same
+Operations	Semi-dealer	SOP	1	Sales Assistant2 gets semi-dealer client orders for 11kg or 2.5kg cylinders. (O4.1.1.1)	same	
+Operations	Semi-dealer	SOP	2	Sales Assistant2 informs Logistics Officer for delivery. (O4.1.1.2)	same
+Operations	Semi-dealer	SOP	3	Warehouse staff load cylinders for semi-dealer orders with buffer cylinders. (O4.1.2.1)	same
+Operations	Semi-dealer	SOP	4	Checker issues Loading/Unloading Ticket (LUT). (O4.1.2.2)	same
+Operations	Semi-dealer	SOP	5	Security guard checks LUT for correct cylinder quantity before truck exits Plant. (O4.1.2.3)	same	
+Operations	Semi-dealer	SOP	6	Upon delivery to clients, Helper collects payment via cash/COD at point of delivery or pickup. (O4.1.3.1)	same	
+Operations	Semi-dealer	SOP	7	Upon Plant return, Helper returns payments and cash invoices to OIC-Accounting. (O4.1.3.2)	same
+Operations	Semi-dealer	SOP	8	OIC-Accounting tallies the Cash Invoices, cash payments and deposits the cash to the bank. (O4.1.3.3)	same	
+Operations	Semi-dealer	Guidelines	1	Semi-dealer order fulfilment is modeled on the Dealer plant-refilling process	
+Operations	Semi-dealer	Guidelines	2	Semi-dealer is COD by default; credit/terms sales are the exception. What is the current process of extending/approving credit terms?	
+Operations	Overall	SOP	1	Logistics Officer forwards the Purchase Order to the Refinery Supplier and schedules the inbound Lorry Truck delivery. (C5.1.1.1)	
+Operations	Overall	SOP	2	Plant Operations Officer receives the Lorry Trucks, collects the Delivery Receipt and Invoice from the Driver, fills out the Receiving Report (RR) and unloads contents to the Storage Tank. (C5.1.1.2)	
+Operations	Overall	SOP	3	Plant Operations Officer forwards XXX documents to Logistics Officer. (C5.1.1.3)	
+Operations	Overall	SOP	4	Logistics Officer records purchases in ACCPAC. (C5.1.1.4)	
+Operations	Overall	SOP	5	Logistics Officer uses prices of past orders for pricing matrix recommendations. (C5.1.1.5)	
+Operations	Overall	SOP	6	Operations Supervisor measures the content volume using a gauge and writes the reading. (C5.1.2.1)	
+Operations	Overall	SOP	7	Operations Supervisor logs further daily readings as a separate entry. (C5.1.2.2)	
+Operations	Overall	SOP	8	Stock Transfer: Operations Supervisor oversees cylinder refill from the Storage Tank following FIFO. (C5.1.3.1)	
+Operations	Overall	SOP	9	Operations Supervisor tracks refill using RFR-AppSheet. (C5.1.3.2)	
+Operations	Overall	SOP	10	Operations Supervisor tracks residue of two tanks in two categories, Regular and WIWO, both affecting inventory and billing. (C5.1.3.3)	
+Operations	Overall	SOP	11	Pull-out schedules and dates at client sites are tracked against a company Pull-out Calendar. (C5.1.4.1)	
+Operations	Overall	SOP	12	Logistics Officer purchases cylinders annually with individual serial numbers. (C5.1.4.2)	
+Operations	Overall	SOP	13	Warehouse and Quality Supervisor repaints and counts cylinders, maintains cylinder quality record. (C5.1.4.3)
+Operations	Overall	SOP	14	Industrial Engineer reconciles Inventory Month-End Report (CIMER) daily. (O1.1.7.2)	Industrial Engineer reviews and reconciles all input data in T3.1 Inventory Month-End Report. (O1.1.7.2) 		
+Operations	Overall	SOP	15	Operations Supervisor records gains from CIMER as Inv/Adj in ACCPAC. (O1.1.7.3)	Operations Supervisor records gains from CIMER-T1 as Inv/Adj in ACCPAC. (O1.1.7.3)
+Operations	Overall	SOP	16	Industrial Engineer submits Computation Sheet for CEO’s approval (O1.1.7.4)	Industrial Engineer submits Gains Summary CIMER-T2.1 for CEO’s approval	
+Operations	Overall	SOP	17	OIC-Accounting distribute incentives via Payroll to the involved members. (O1.1.7.5)	same	
+Operations	Overall	Guidelines	1	Storage Tank stock transfer to cylinders must follow FIFO; every batch is filled out in FIFO sequence with Plant Operations Officer approval.	
+Operations	Overall	Guidelines	2	Any quantity variance discovered after the Receiving Report is logged as a separate exception entry, not folded silently into the original RR figure.	
+Operations	Overall	Guidelines	3	Cylinder serials and batch numbers are tracked for their full lifespan (purchase through repaint/retest cycles); a cylinder without a traceable batch number does not re-enter circulation.
+Sales	Overview	SOP	1	IT Manager prints and verifies multi-period Sales Performance Reports (SPR) bi-monthly or monthly from ACCPAC. (S51.1.1)	same, and data source is now T1 Sales Summary.	
+Sales	Overview	SOP	2	SPR fields include sales per kg, total sales, net sales, cost of sales, and Gross Profit Margin per kg and total. (S51.1.2)	same
+Sales	Overview	SOP	3	Pricing Matrix Process: Regional Sales Manager sets up the MGC LPG Pricing Matrix for decision; CEO decides on the matrix for the period, 1-3 times per month in a General Meeting. (S5.1.2.1)	same
+Sales	Overview	SOP	4	Pricing Matrix covers Sales Price, MPL, and Total Cost (Acquisition Cost + Hauling) per kg, by avenue - Commercial through Semi-dealer and semi-dealers - plus MPL volume discounts by radius.	same(S5.1.2.2)	
+Sales	Overview	SOP	5	Regional Sales Manager and IT Manager updates competitor end-user pricing prior to General Meeting (SRP comparison). (S5.1.2.3)	same
+Sales	Overview	SOP	6	Price Cascade Process: Post-meeting, Regional Sales Manager emails the updated changes; IT Manager records the audit log for the change. (S5.1.2.4)	same	
+Sales	Overview	SOP	7	IT Manager informs CODO, contact centers, marketing, and cashiers. Cascading is channel-owned: Regional Sales Manager and Sales Assistant1 - Commercial/Bulk clients, Sales Assistant2 - Semi-dealer clients; AVP Sales - Makati accounts (Jen); IT Manager - CODO/audit and contact centers/marketing/cashiers. (S5.1.2.5)	same	
+Sales	Overview	SOP	8	CEO sets the Sales Quota per client per period; AVP Sales prints and uses it as the working target; Sales Assistant updates it daily/weekly. (S5.1.2.6)	same	
+Sales	Overview	Guidelines	1	Price changes are decided in the General Meeting by CEO - no ad hoc price change cascades without going through this meeting.	
+Sales	Overview	Guidelines	2	Every price change is audit-logged by the IT Manager, before it cascades to any client-facing channel.	
+Sales	Overview	Guidelines	3	Cascade responsibility is channel-specific, does not overlap.	
+Sales	Commercial	SOP	1	Regional Sales Manager checks sales history for upcoming re-orders. Review next week's route schedule for upselling opportunities. (S1.1.1)	Regional Sales Manager checks the T4-Sales Summary and T4 Receivables Summary.	
+Sales	Commercial	SOP	2	Sales Assistant1 calls client for re-orders, or find new client orders. (S1.1.2)	same	
+Sales	Commercial	SOP	3	Sales Assistant1 creates a draft Sales Order for each order. (S1.1.3)	same
+Sales	Commercial	SOP	4	Regional Sales Manager forwards the Sales Order to Credit and Collection Analyst to see for past dues. (S1.2.1)	same, then Regional Sales Manager checks the T4 Receivables Summary.
+Sales	Commercial	SOP	5	If the customer has past dues, flag the upcoming order. If past dues are within a passable / supervisor-approved range, approve the upcoming order. If there are no past dues, approve the upcoming order directly. (S1.2.2)	same
+Sales	Commercial	SOP	6	Order Fulfilment: Operations Supervisor makes Pick List, and Delivery Receipt. See Operations Commercial Procedure (S1.3.1)	same	
+Sales	Commercial	SOP	7	Logistics Officer updates the synced Operations Calendar in Monday.com for delivery schedules. (S.1.3.2)	same	
+Sales	Commercial	SOP	8	Sales Assistant1 assigns and logs notes, activities, and tags for each Sales Order. (S.1.3.3)	same
+Sales	Commercial	SOP	9	Regional Sales Manager Evaluate Sales Target vs Actual Sales. (S1.3.4)	same
+Sales	Commercial	SOP	10	Sales Assistant1 records sales-fulfilment concerns/issues and log Accounting-related notes. (S1.3.5)	same
+Sales	Commercial	Guidelines	1	Sales Order Control Numbers are non-editable once assigned - a wrong entry is corrected with a new document, never by editing the control number.	
+Sales	Commercial	Guidelines	2	The upsell review happens before the order is finalized, as a scheduled step in the flow, not an optional add-on afterward.	
+Sales	Bulk	SOP	1	"Order intake, pricing, and confirmation follow the same process as Sales > Commercial per company specification ("same as Commercial sales avenue, with exceptions"). 	same	
+Sales	Bulk	Guidelines	1	Sales > Bulk inherits Commercial's intake/approval flow.	
+Sales	Bulk	Guidelines	2	Orders are sized to fill bulk lorry capacity (8-ton truck) rather than cylinder - see Operations > Bulk for the fulfilment side.	
+Sales	Bulk	Guidelines	3	Bulk-specific pricing and exception handling are recommended by the Regional Sales Manager and approved by the CEO.	
+Sales	Dealer	SOP	1	Sales Assistant2 coordinates the dealers’ Plant Visit dates in advance. (S3.1.1.1)	same
+Sales	Dealer	SOP	2	Sales Assistant2 sends schedules and updates through the Viber Dealer Group. (S3.1.1.2)	same	
+Sales	Dealer	SOP	3	Guard verifies dealer identity and authorization; only confirmed appointments are accommodated. (S3.1.2.1)	same	
+Sales	Dealer	SOP	4	Dealer brings empty cylinders. See Operations – Dealer procedures. (S3.1.2.2)	same
+Sales	Dealer	SOP	5	XXX Warehouse Staff applies dealer pricing, adjusted within the per-dealer buffer. (S3.1.3.1)	same
+Sales	Dealer	SOP	6	Operations Supervisor sets payment terms - installment with Post-Dated Checks (PDCs), COD, or a pre-approved Promissory Note. (S3.1.3.2)	same	
+Sales	Dealer	SOP	7	Accounting Sales Encoder records dealer sales and issues Charge Invoices. (S3.1.3.3)	Accounting Sales Encoder issues Charge Invocies and records dealer sales in T5.2 Dealer Sales. 	
+Sales	Dealer	SOP	8	Sales Assistant2 maintains dealer records, runs call-outs and follow-ups, and handles pricing disputes/adjustments. (S3.1.4.1)	same
+Sales	Dealer	SOP	9	Sales Assistant2 handles cylinder swapping, marketing support with CBTO, and pricing-adjustment requests with Regional Sales Manager. (S3.1.4.2)	same	
+Sales	Dealer	SOP	10	New Dealer Accreditation: applicant proposes a business location with no existing dealer coverage. (S3.1.5.1)	same
+Sales	Dealer	SOP	11	Once CEO approves, Sales Assistant2 secures DTI Registration, Business Permit, and BIR Registration. (S3.1.5.2)	same
+Sales	Dealer	SOP	12	Submit the dealership application and secure the Supplier's Certificate. (S3.1.5.3)	same
+Sales	Dealer	SOP	13	Complete DOE requirements (Annex G and Annex V5) and execute a Special Power of Attorney (SPA). (S3.1.5.4)	same
+Sales	Dealer	SOP	14	Pay processing fees and submit documents to the Makati Office; coordinate with the DOE liaison for processing. (S3.1.5.5)	same	
+Sales	Dealer	Guidelines	1	Two groups of dealers – Truck Pickup and Deliver and Plant Pickup	
+Sales	Dealer	Guidelines	2	Only confirmed, scheduled dealer appointments are accommodated - see plant-refilling rule in Operations > Dealer.	
+Sales	Dealer	Guidelines	3	New dealers must maintain a minimum of 50 LPG cylinders; MGC may process DOE/permit requirements on the applicant's behalf, or the applicant may self-file.	
+Sales	Dealer	Guidelines	4	Cylinder swapping, marketing support, and new pricing adjustments all route through the same five-step approval chain ending in Plant Operations Officer sign-off - no skipping to a later approver.	
+Sales	Dealer	Guidelines	5	Dealer pricing is adjusted only within the per-dealer price discount-distance buffer defined in the MGC Pricing Matrix.	
+Sales	Semi-dealer	SOP	1	Solicit and plan orders against daily and monthly Semi-dealer sales targets. (S4.1.1.1)	same
+Sales	Semi-dealer	SOP	2	Call clients for re-orders and find new client orders; review sales history and next week's route schedule. (S4.1.1.2)	same	
+Sales	Semi-dealer	SOP	3	Semi-dealer clients buy smaller quantities, mainly 11kg and 2.5kg, on a Semi-dealer scale. (S4.1.1.3)	same	
+Sales	Semi-dealer	SOP	4	Apply pricing: offer SRP first, then the Minimum Price List (MPL) with volume discounts (3-5, 6-10 units) and distance-zone pricing (0-30km, 30.1-40km, 41-60km). (S4.1.2.1)	same	
+Sales	Semi-dealer	SOP	5	Semi-dealer customers may submit a portal order (with discount); Sales Assistant 2 approves against schedule and payment terms, Regional Sales Manager validates. (S4.1.2.2)	same
+Sales	Semi-dealer	SOP	6	Fulfil: Sales Assistant2 lines up confirmed Sales Orders in Monday.com; Logistics Officer reviews the lined-up orders and routes. (S4.1.3.1)	same
+Sales	Semi-dealer	SOP	7	Delivery driver carries Cash Invoice for COD. Driver brings additional buffer cylinders for extra sales. (S4.1.3.2)	same
+Sales	Semi-dealer	SOP	8	Upon Driver return, Driver returns issued Cash Invoices and cash to OIC-Accounting. (S4.1.3.3)	same
+Sales	Semi-dealer	SOP	9	Post-sales: log concerns, evaluate sales target vs actual, and sync with the Operations calendar. (S4.1.3.4)	same	
+Sales	Semi-dealer	Guidelines	1	Semi-dealer pricing always follows SRP first, then falls to the Minimum Price List with volume/zone discounts - MPL is the floor, not the opening offer.	
+Sales	Semi-dealer	Guidelines	2	Cash Invoice Control Numbers are non-editable, the same rule as Commercial.	
+Sales	Semi-dealer	Guidelines	3	Semi-dealer is COD/cash-invoice by default; the delivery team physically carries the cash invoice and reconciles it same-day with OIC-Accounting.	
+Sales	Overall	SOP	1	IT Manager prints and verifies multi-period Sales Performance Reports (SPR) bi-weekly or monthly. (S51.1.1)	same
+Sales	Overall	SOP	2	SPR fields include sales per kg, total sales, net sales, cost of sales, and Gross Profit Margin per kg and total. (S51.1.2)	
+Sales	Overall	SOP	3	Pricing Matrix Process: Regional Sales Manager sets up the MGC LPG Pricing Matrix for decision; CEO decides on the matrix for the period, 1-3 times per month in a General Meeting. (S5.1.2.1)	
+Sales	Overall	SOP	4	Pricing Matrix covers Sales Price, MPL, and Total Cost (Acquisition Cost + Hauling) per kg, by avenue - Commercial through Semi-dealer and semi-dealers - plus MPL volume discounts by radius. (S5.1.2.2)	
+Sales	Overall	SOP	5	Regional Sales Manager and IT Manager updates competitor end-user pricing prior to General Meeting (SRP comparison). (S5.1.2.3)	
+Sales	Overall	SOP	6	Price Cascade Process: Post-meeting, Regional Sales Manager emails the updated changes; IT Manager records the audit log for the change. (S5.1.2.4)	
+Sales	Overall	SOP	7	IT Manager informs CODO, contact centers, marketing, and cashiers. Cascading is channel-owned: Regional Sales Manager and Sales Assistant1 - Commercial/Bulk clients, Sales Assistant2 - Semi-dealer clients; AVP Sales - Makati accounts (Jen); IT Manager - CODO/audit and contact centers/marketing/cashiers. (S5.1.2.5)	
+Sales	Overall	SOP	8	CEO sets the Sales Quota per client per period; AVP Sales prints and uses it as the working target; Sales Assistant updates it daily/weekly. (S5.1.2.6)	
+Sales	Overall	Guidelines	1	Price changes are decided in the General Meeting by CEO - no ad hoc price change cascades without going through this meeting.	
+Sales	Overall	Guidelines	2	Every price change is audit-logged by the IT Manager, before it cascades to any client-facing channel.	
+Sales	Overall	Guidelines	3	Cascade responsibility is channel-specific, does not overlap.	
+Accounting	Overview	SOP	1	OIC-Accounting consolidates channel-level receivables and reconciliation summaries into a weekly Accounting Overview report.  1	The system will automatically collect information from each channel and show it in a live summary. Instead of preparing the Accounting Overview weekly, it will always be updated. The OIC-Accounting will only review and verify the information instead of manually compiling it.
+Accounting	Overview	SOP	2	Finance reviews the consolidated Aged Receivables and Write-off/Loss summary across Commercial, Dealer, and Semi-dealer channels monthly.  2 The system will automatically group outstanding receivables based on how long they have been unpaid. It will also flag accounts that may need to be written off based on company rules. Finance will review only the flagged items instead of checking the entire report.
+Accounting	Overview	SOP	3	Escalated disputes and control exceptions logged during the period are compiled into a summary for the monthly Accounting review meeting.  3 Every issue or escalation will automatically be recorded in the system when it is raised. The system will track the issue from **Watch → Review → Manager**, creating an ongoing list of exceptions without the need to manually prepare a report before meetings.
+Accounting	Overview	SOP	4	CEO reviews and signs off on any escalated dispute or control exception raised during the period.  
+Accounting	Overview	SOP	5	OIC-Accounting confirms segregation of duties is intact for the period - the initiator of a transaction is never its own GL poster or reconciler.
+Accounting	Overview	Guidelines	1	Any transaction blocked or disputed at its normal approval level escalates through the standard chain (System watch -> Review -> Manager) rather than being resolved informally between the two parties involved.
+Accounting	Overview	Guidelines	2	Sales Order Control Numbers, once assigned, are permanent and non-editable; a correction is made with a new document, never by editing the original control number.
+Accounting	Overview	Guidelines	3	The person who initiates a transaction is not the same person who posts it to the GL or reconciles it - segregation of duties applies at every posting step.
+Accounting	Commercial	SOP	1	Make the Invoice before delivery: check past receivables and dues with the customer. (A5O1.1)	
+Accounting	Commercial	SOP	2	If the customer has past dues, flag the upcoming order. If past dues are within a passable / supervisor-approved range, approve the upcoming order. If there are no past dues, approve the upcoming order directly. (A5O1.1.1)	
+Accounting	Commercial	SOP	3	Update and close Receivables: Acctg Staff collects the signed Delivery Receipt (DR) and Invoice from the Delivery Team. (A5C2.1.1)	
+Accounting	Commercial	SOP	4	Check the monthly summary table of invoices for collection. (A5C2.1.2)	
+Accounting	Commercial	SOP	5	Print the summary of Aged Receivables. (A5C2.1.3)	
+Accounting	Commercial	SOP	6	Check and print the summary of Write-off / Loss Accounts. (A5C2.1.4)	
+Accounting	Commercial	SOP	7	Bank Reconciliation: update and check the summary table of amounts for bank reconciliation. (A5C3.1)	
+Accounting	Commercial	SOP	8	Resolve customer disputes: refer to the Sales Order; submit the paper to a superior if unresolved. (A5C4.1-A5C4.2)	
+Accounting	Commercial	SOP	9	Payroll Incentive: prepare the incentive in payroll on the 15th and 30th. (A5C5.1)	
+Accounting	Commercial	SOP	10	Prepare the Incentive template for Commercial and Semi-dealer using LUT forms (2.7kg, 11kg, 50kg) to balance empty and field cylinder data. (A5C5.2)	
+Accounting	Commercial	Guidelines	1	No invoice is issued before the past-dues check on the customer's AR; only a supervisor-approved past-due balance clears an order that has outstanding receivables.	
+Accounting	Commercial	Guidelines	2	Aged Receivables and Write-off/Loss summaries are printed monthly without exception, whether or not there's a specific collection issue that period.	
+Accounting	Commercial	Guidelines	3	Unresolved customer disputes are escalated by referring back to the original Sales Order and submitting to a superior - not settled informally at the collection desk.	
+Accounting	Commercial	Guidelines	4	Payroll incentives are computed only after LUT forms balance empty vs field cylinders; incentives are not paid out ahead of that balance check.	
+Accounting	Bulk	SOP	1	Invoicing, receivables, bank reconciliation, and payroll incentive steps follow the same procedure as Accounting > Commercial (A5O1-A5C5), per company specification.	
+Accounting	Bulk	SOP	2	Bulk-specific exceptions to that procedure are referenced but not documented in either source.	
+Accounting	Bulk	Guidelines	1	Accounting > Bulk explicitly inherits the Commercial A5O1-A5C5 procedure; the undocumented exceptions should be confirmed with Accounting before this is finalized, particularly whether per-truck (rather than per-cylinder) reconciliation changes any AR or bank-rec step.	
+Accounting	Dealer	SOP	1	Before approving the order, verify the dealer's AR with CNC - check past dues and other factors first.	
+Accounting	Dealer	SOP	2	Confirm the payment type: about 70% of dealers are on installment, about 30% are COD.	
+Accounting	Dealer	SOP	3	For installment, collect Post-Dated Checks (PDCs) as payment security.	
+Accounting	Dealer	SOP	4	If the dealer cannot issue PDCs, have them execute a Promissory Note instead.	
+Accounting	Dealer	SOP	5	Track the installment schedule in Google Sheets (due dates and payment completion dates).	
+Accounting	Dealer	SOP	6	Issue the Charge Invoice on terms and encode it in ACCPAC before sending to the client.	
+Accounting	Dealer	SOP	7	File the countered hardcopy invoice; CNC accounts stay at CNC and a messenger brings them to the client.	
+Accounting	Dealer	SOP	8	Update and close receivables; check the monthly summary of invoices for collection.	
+Accounting	Dealer	SOP	9	Print the Aged Receivables summary and check write-off/loss accounts.	
+Accounting	Dealer	SOP	10	Perform bank reconciliation and resolve dealer disputes (refer back to the Sales Order).	
+Accounting	Dealer	SOP	11	Apply dealer pricing from the MGC Pricing Matrix (per-channel buffer and per-dealer adjustment).	
+Accounting	Dealer	Guidelines	1	Dealer AR is checked against CNC before any order is approved - this runs even for dealers presumed current, not only for flagged accounts.	
+Accounting	Dealer	Guidelines	2	A dealer without PDCs is not simply denied credit - a Promissory Note is the required fallback before COD is enforced.	
+Accounting	Dealer	Guidelines	3	Installment schedules are tracked in a dedicated Google Sheet with due dates and completion dates; a missed due date should surface there, not only get noticed at the monthly Aged Receivables review.	
+Accounting	Dealer	Guidelines	4	CNC-held accounts are physically couriered by messenger, matching the CNC filing convention already in place.	
+Accounting	Semi-dealer	SOP	1	Issue the entry/exit slip (EES) to the customer, encode it, and have the guard validate the tank classification.	
+Accounting	Semi-dealer	SOP	2	After loading, the checker goes to Accounting; issue the cashier a cash/charge invoice or DR.	
+Accounting	Semi-dealer	SOP	3	Cashier collects the cash; the receipt (recibo) must match the empty and filled cylinders (the LUT contents).	
+Accounting	Semi-dealer	SOP	4	Checker encodes in RFR-AppSheet; RFR-AppSheet and the receipt must match (basis of the GRR).	
+Accounting	Semi-dealer	SOP	5	Forward Semi-dealer cash invoices straight to the cashier at Plant Accounting; collect cash and documents by 4-5pm.	
+Accounting	Semi-dealer	SOP	6	Balance sales and the LUT within the same day (2.7kg, 11kg, 50kg must be indicated and balance).	
+Accounting	Semi-dealer	SOP	7	Audit cash sales, collections, and returns from advances.	
+Accounting	Semi-dealer	SOP	8	Validate the cash collection report from the cashier and check the deposit balancing at the bank.	
+Accounting	Semi-dealer	SOP	9	Prepare the payroll incentive (15th and 30th) using LUT forms to balance empty and field cylinders.	
+Accounting	Semi-dealer	Guidelines	1	The recibo must match empty and filled cylinder counts (LUT contents) before cash is considered collected - a mismatch holds the transaction rather than being resolved by adjusting the receipt after the fact.	
+Accounting	Semi-dealer	Guidelines	2	RFR-AppSheet entry and the physical receipt must match in quantity, mirroring the same rule used in Operations > Dealer refilling.	
+Accounting	Semi-dealer	Guidelines	3	Sales and the LUT are balanced same-day, not at month-end - this is a daily close, not a periodic one.	
+Accounting	Semi-dealer	Guidelines	4	Cash and documents are due to the Plant Accounting cashier by 4-5pm; a late submission is an exception to flag, not a routine occurrence.	
+Accounting	Overall	SOP	1	Consolidate and check all relevant data on request - bi-monthly or monthly Financial Statements. (A5A1)	
+Accounting	Overall	SOP	2	Produce versatile, multi-format financial statements and payroll summary; drill into individual summary amounts. (A5A1.1-A5A1.2)	
+Accounting	Overall	SOP	3	Generate instant PDF or Excel exports for further analysis; separate data by channel; compare Budget vs Actual. (A5A1.3-A5A1.5)	
+Accounting	Overall	SOP	4	Profit and Loss Statement: ensure all entries are encoded, refresh the P&L table, and print the monthly P&L Statement. (A5C5.1.1)	
+Accounting	Overall	SOP	5	Cash Flow Statement: ensure all entries are encoded, refresh the Cash Flow table, and print the monthly CF Statement. (A5C5.1.2)	
+Accounting	Overall	SOP	6	Balance Sheet: ensure all entries are encoded, refresh the Balance Sheet table, and print the monthly BS Statement. (A5C5.1.3)	
+Accounting	Overall	SOP	7	Prepare the Payroll Summary, consolidating all incentive computations and salary data for the period. (A5C5.2)	
+Accounting	Overall	SOP	8	Industrial Projects: track Budget P&L against Actual P&L and timeline. (A5C5.3)	
+Accounting	Overall	Guidelines	1	All three financial statements (P&L, Cash Flow, Balance Sheet) require full entry encoding before the monthly refresh - a partial encode is not printed as final.	
+Accounting	Overall	Guidelines	2	Industrial Projects are tracked with a Budget P&L set at project start, compared against Actual P&L throughout - variance review is continuous, not just at project close.	
+Accounting	Overall	Guidelines	3	The Payroll Summary is only finalized after the Incentive template (LUT-balanced, see Commercial/Semi-dealer) is complete for the period.

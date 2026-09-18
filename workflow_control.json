@@ -47,8 +47,7 @@
   },
   "legend_items": [
     { "color": "{green}", "label": "Confirmed with source data" },
-    { "color": "{orange}", "label": "Partially confirmed — see gap note" },
-    { "color": "{purple}", "label": "Cross-Stage Governance" }
+    { "color": "{orange}", "label": "Partially confirmed — see gap note" }
   ],
   "sections": {
     "show_cross_stage": true,
@@ -58,12 +57,11 @@
   "section_labels": {
     "sop": "SOP Manual — Step-by-Step Procedure",
     "guidelines": "Operational Guidelines",
-    "approval": "Approval Matrix &amp; Controls",
-    "current_future": "Current vs. Future Workflow"
+    "approval": "Approval Matrix &amp; Controls"
   },
   "approval_matrix_columns": ["Transaction / Decision", "Threshold", "Initiator", "Reviewer", "Approver", "Control Activity"],
-  "current_label": "Current — Traditional / Manual",
-  "future_label": "Future — Target / Automated",
+  "current_label": "Current Procedures",
+  "future_label": "Future Procedures",
   "expand_all_label": "Expand All",
   "collapse_all_label": "Collapse All",
   "print_label": "Print",

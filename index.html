@@ -22,11 +22,22 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 .page-tab:hover{transform:translateY(-1px);border-color:var(--accent-dark);background:#fff}
 .page-tab.active{background:var(--accent-dark);color:#fff;border-color:var(--accent-dark);box-shadow:0 8px 18px rgba(30,78,121,.2)}
 .page-tab.main-tab{font-weight:900;text-transform:uppercase;letter-spacing:1px}
-.page-tab.ref-tab{border-color:#b8c9de;font-style:italic}
+.page-tab.ref-tab{border-color:#b8c9de;font-style:italic;padding:8px 14px;font-size:11.5px}
 .tab-caption{padding:0 4px 14px;font-size:13px;color:var(--text-mid)}
 .frame-card{border:1px solid var(--border);border-radius:22px;background:rgba(255,255,255,.97);box-shadow:var(--shadow);overflow:hidden}
 #page-frame{display:block;width:100%;min-height:1200px;border:0;background:#fff}
-@media(max-width:900px){.shell-nav{padding:12px 16px;align-items:flex-start;flex-direction:column}.shell-wrap{padding:20px 12px 28px}.shell-header h1{font-size:28px}.page-tab{width:100%;justify-content:center}.shell-version{font-size:11px}}
+
+/* ── Sliding Reference Panel ── */
+#slide-overlay{position:fixed;inset:0;background:rgba(15,23,42,.28);z-index:390;opacity:0;pointer-events:none;transition:opacity .28s ease}
+#slide-overlay.open{opacity:1;pointer-events:auto}
+#slide-panel{position:fixed;top:0;right:0;width:50vw;height:100vh;background:#fff;box-shadow:-10px 0 34px rgba(15,23,42,.2);z-index:400;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .32s cubic-bezier(.4,0,.2,1)}
+#slide-panel.open{transform:translateX(0)}
+.slide-hdr{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--border-light);background:var(--surface-soft);flex-shrink:0}
+.slide-title{font-size:12px;font-weight:900;color:var(--accent-dark);text-transform:uppercase;letter-spacing:.7px}
+#slide-close{background:none;border:none;cursor:pointer;font-size:19px;color:var(--text-mid);line-height:1;padding:4px 9px;border-radius:7px;transition:background .15s}
+#slide-close:hover{background:var(--border-light);color:var(--text)}
+#slide-frame{flex:1;border:0;width:100%;background:#fff}
+@media(max-width:900px){#slide-panel{width:100vw}.shell-nav{padding:12px 16px;align-items:flex-start;flex-direction:column}.shell-wrap{padding:20px 12px 28px}.shell-header h1{font-size:28px}.page-tab{width:100%;justify-content:center}.shell-version{font-size:11px}}
 
 /* ── Log Notes Panel ── */
 #ln-toggle{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:200;background:var(--accent-dark);color:#fff;border:none;padding:12px 7px;border-radius:8px 0 0 8px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px;box-shadow:-2px 0 10px rgba(15,23,42,.16);transition:background .18s}
@@ -76,23 +87,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
 <body>
 <div class="shell-nav">
   <div class="shell-brand">MGC SOP Portal</div>
-  <div class="shell-version">V.07-14-2026</div>
+  <div class="shell-version">V.08-31-2026</div>
 </div>
 <div class="shell-wrap">
   <header class="shell-header">
-    <div class="shell-kicker">Unified SOP Workspace</div>
-    <h1>Multi-Page SOP Portal</h1>
-    <p>The live site opens as a tabbed SOP workspace. Each of the <strong>Main</strong>, <strong>Operations</strong>, <strong>Sales</strong>, and <strong>Accounting</strong> tabs is organized as an SOP Manual, Operational Guidelines, Approval Matrix &amp; Controls, and Current vs. Future Workflow per stage. The <strong>Subprocess</strong>, <strong>Forms</strong>, and <strong>Personnel</strong> tabs are reference indexes — terms highlighted in Operations, Sales, and Accounting link directly back to entries in these tabs.</p>
+    <div class="shell-kicker">Operational Guidelines</div>
+    <h1>4 Menus, 3 Submenus</h1>
+    <p><strong>Main</strong>, <strong>Operations</strong>, <strong>Sales</strong>, and <strong>Accounting</strong> Menus contain Procedures (SOP), Operational Guidelines, and Approval Matrix &amp; Controls sections. The <strong>Subprocess</strong>, <strong>Personnel</strong>, and <strong>Forms</strong> submenus are reference tables. Terms highlighted in the SOP are consolidated here.</p>
   </header>
 
   <div class="page-tabs" role="tablist" aria-label="SOP page tabs">
-    <button class="page-tab main-tab active" type="button" data-page="main.html" data-key="main" data-caption="Portal overview and cross-cutting governance, powered by <code>main.html</code>.">Main</button>
-    <button class="page-tab ref-tab" type="button" data-page="subprocess.html" data-key="subprocess" data-caption="Subprocess index — all operational subprocesses referenced in the SOPs, powered by <code>subprocess.html</code>.">Subprocess</button>
-    <button class="page-tab ref-tab" type="button" data-page="forms.html" data-key="forms" data-caption="Forms &amp; Documents index — all forms and documents referenced in the SOPs, powered by <code>forms.html</code>.">Forms</button>
-    <button class="page-tab ref-tab" type="button" data-page="personnel.html" data-key="personnel" data-caption="Personnel directory — all staff referenced in the SOPs, powered by <code>personnel.html</code>.">Personnel</button>
-    <button class="page-tab" type="button" data-page="operations.html" data-key="operations" data-caption="Operations SOP powered by <code>operations.html</code>.">Operations</button>
-    <button class="page-tab" type="button" data-page="sales.html" data-key="sales" data-caption="Sales SOP powered by <code>sales.html</code>.">Sales</button>
-    <button class="page-tab" type="button" data-page="accounting.html" data-key="accounting" data-caption="Accounting SOP powered by <code>accounting.html</code>.">Accounting</button>
+    <button class="page-tab main-tab active" type="button" data-page="main.html" data-key="main" data-caption="">Main</button>
+    <button class="page-tab" type="button" data-page="operations.html" data-key="operations" data-caption="">Operations</button>
+    <button class="page-tab" type="button" data-page="sales.html" data-key="sales" data-caption="">Sales</button>
+    <button class="page-tab" type="button" data-page="accounting.html" data-key="accounting" data-caption="">Accounting</button>
+    <button class="page-tab ref-tab" type="button" data-page="subprocess.html" data-key="subprocess" data-caption="">Subprocess</button>
+    <button class="page-tab ref-tab" type="button" data-page="personnel.html" data-key="personnel" data-caption="">Personnel</button>
+    <button class="page-tab ref-tab" type="button" data-page="forms.html" data-key="forms" data-caption="">Forms</button>
   </div>
 
   <div class="tab-caption" id="tab-caption">Portal overview and cross-cutting governance, powered by <code>main.html</code>.</div>
@@ -100,6 +111,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica N
   <div class="frame-card">
     <iframe id="page-frame" title="Workflow page" src="main.html" loading="eager"></iframe>
   </div>
+</div>
+
+<!-- ── Sliding Reference Panel ── -->
+<div id="slide-overlay"></div>
+<div id="slide-panel" role="complementary" aria-label="Reference detail">
+  <div class="slide-hdr">
+    <span id="slide-title" class="slide-title"></span>
+    <button id="slide-close" aria-label="Close">✕</button>
+  </div>
+  <iframe id="slide-frame" title="Reference detail"></iframe>
 </div>
 
 <!-- ── Log Notes Toggle ── -->
@@ -206,25 +227,65 @@ function activateTab(tab,updateHash){
   pageFrame.src=tab.dataset.page;
   caption.innerHTML=tab.dataset.caption;
   if(updateHash!==false){window.location.hash=tab.dataset.key}
+  if(typeof closeSlidePanel==='function')closeSlidePanel();
 }
 
-function activateTabById(tabKey,anchorId){
+/* ── Sliding Reference Panel ── */
+var slideOverlay=document.getElementById('slide-overlay');
+var slidePanel=document.getElementById('slide-panel');
+var slideFrame=document.getElementById('slide-frame');
+var slideTitle=document.getElementById('slide-title');
+var slideCloseBtn=document.getElementById('slide-close');
+var SLIDE_TITLES={subprocess:'Subprocess',forms:'Forms & Documents',personnel:'Personnel',main:'Main',operations:'Operations',sales:'Sales',accounting:'Accounting'};
+
+function openSlidePanel(tabKey,anchorId){
   var tab=pageLookup[tabKey];
   if(!tab)return;
-  activateTab(tab,true);
-  pageFrame.addEventListener('load',function handler(){
-    pageFrame.removeEventListener('load',handler);
+  slideTitle.textContent=SLIDE_TITLES[tabKey]||tabKey;
+  slidePanel.classList.add('open');
+  slideOverlay.classList.add('open');
+  var targetSrc=tab.dataset.page+(anchorId?('#'+anchorId):'');
+  var alreadyLoaded=slideFrame.dataset.loadedPage===tab.dataset.page;
+  function scrollWhenReady(){
     setTimeout(function(){
       try{
-        var cw=pageFrame.contentWindow;
-        if(cw&&cw.scrollToAnchor){cw.scrollToAnchor(anchorId)}
-        else{
-          var el=pageFrame.contentDocument.getElementById(anchorId);
+        var cw=slideFrame.contentWindow;
+        if(anchorId&&cw&&cw.scrollToAnchor){cw.scrollToAnchor(anchorId)}
+        else if(anchorId){
+          var el=slideFrame.contentDocument.getElementById(anchorId);
           if(el){el.scrollIntoView({behavior:'smooth',block:'center'})}
         }
       }catch(e){}
-    },250);
-  });
+    },200);
+  }
+  if(alreadyLoaded){
+    // Same page already sitting in the iframe -- changing the hash alone
+    // won't re-run the page's own on-load hash handler, so trigger the
+    // (transition-aware) scroll explicitly.
+    scrollWhenReady();
+  } else {
+    // Fresh load: the target page's own on-load script already reads
+    // location.hash and calls its own transition-aware scrollToAnchor.
+    // Calling it again here from a 'load' handler would race that first
+    // call -- by the time this one fires, .open is already set so it skips
+    // waiting for the expand transition and can land on a stale position,
+    // overriding the correct scroll. Let the page handle it alone.
+    slideFrame.dataset.loadedPage=tab.dataset.page;
+    slideFrame.src=targetSrc;
+  }
+}
+
+function closeSlidePanel(){
+  slidePanel.classList.remove('open');
+  slideOverlay.classList.remove('open');
+}
+
+slideCloseBtn.addEventListener('click',closeSlidePanel);
+slideOverlay.addEventListener('click',closeSlidePanel);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeSlidePanel()});
+
+function activateTabById(tabKey,anchorId){
+  openSlidePanel(tabKey,anchorId);
 }
 
 pageFrame.addEventListener('load',function(){resizeFrame();setTimeout(resizeFrame,150);setTimeout(resizeFrame,600)});
